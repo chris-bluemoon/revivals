@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:unearthed/screens/home/home.dart';
+import 'package:unearthed/theme.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MaterialApp(
+    theme: primaryTheme,
+    home: const Home(),
+  ));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+// sandbox
+class Sandbox extends StatelessWidget {
+  const Sandbox({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      theme: ThemeData(fontFamily: 'Lovelo'),
-      home: const Scaffold(
-        body: Center(
-          child: Text('unearthed'),
-          // child: Text('unearthed', style: TextStyle(fontFamily: 'Lovelo') ),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sandbox'),
+        backgroundColor: Colors.grey,
       ),
+      body: const Text('sandbox')
     );
   }
 }
+

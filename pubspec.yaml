@@ -22,3 +22,7 @@ flutter:
       - family: Lovelo
         fonts:
           - asset: assets/fonts/lovelo_black.otf
+
+  assets:
+      - assets/logos/
+      - assets/img/dresses/
