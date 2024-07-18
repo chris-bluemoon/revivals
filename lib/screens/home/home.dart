@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/logos/unearthed_collections.png',
+                    'assets/logos/unearthed_collections.png', 
                     // fit: BoxFit.contain,
                     height: 300,
                                     ),
@@ -26,15 +26,20 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: dresses.length,
-                itemBuilder: (_, index) {
-                  return DressCard(dresses[index]);
-                }))
-          ],)
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.5),
+          itemBuilder: (_, index) => DressCard(dresses[index]),
+          itemCount: dresses.length,
+        )
+        // child: Column(
+        //   children: [
+        //     Expanded(
+        //       child: ListView.builder(
+        //         itemCount: dresses.length,
+        //         itemBuilder: (_, index) {
+        //           return DressCard(dresses[index]);
+        //         }))
+        //   ],)
       )
     );
 
