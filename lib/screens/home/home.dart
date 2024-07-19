@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/screens/home/dress_card.dart';
+import 'package:unearthed/screens/new_arrivals/new_arrivals.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,37 +9,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/logos/unearthed_collections.png', 
-                    // fit: BoxFit.contain,
-                    height: 300,
-                                    ),
-                ]),
-      ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.5),
-          itemBuilder: (_, index) => DressCard(dresses[index]),
-          itemCount: dresses.length,
-        )
-        // child: Column(
-        //   children: [
-        //     Expanded(
-        //       child: ListView.builder(
-        //         itemCount: dresses.length,
-        //         itemBuilder: (_, index) {
-        //           return DressCard(dresses[index]);
-        //         }))
-        //   ],)
-      )
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          IconButton(
+            icon: Icon(Icons.add_box),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NewArrivals()),
+              );
+            },
+          ),
+        ],)
     );
 
   }

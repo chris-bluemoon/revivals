@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static Color primaryColor = const Color.fromRGBO(162, 29, 19, 1);
   static Color primaryAccent = const Color.fromRGBO(120, 14, 14, 1);
-  static Color secondaryColor = Color.fromARGB(255, 255, 255, 255);
-  static Color secondaryAccent = Color.fromARGB(255, 255, 255, 255);
-  static Color titleColor = Color.fromARGB(255, 0, 0, 0);
-  static Color textColor = Color.fromARGB(255, 0, 0, 0);
+  static Color secondaryColor = const Color.fromARGB(255, 255, 255, 255);
+  static Color secondaryAccent = const Color.fromARGB(255, 255, 255, 255);
+  static Color titleColor = const Color.fromARGB(255, 0, 0, 0);
+  static Color textColor = const Color.fromARGB(255, 0, 0, 0);
   static Color successColor = const Color.fromRGBO(9, 149, 110, 1);
   static Color highlightColor = const Color.fromRGBO(212, 172, 13, 1);
 }

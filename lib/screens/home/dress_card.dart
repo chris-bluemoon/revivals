@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/theme.dart';
 
 // ignore: must_be_immutable
 class DressCard extends StatelessWidget {

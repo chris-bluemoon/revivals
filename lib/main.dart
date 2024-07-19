@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/home/home.dart';
+import 'package:unearthed/screens/main_page.dart';
 import 'package:unearthed/theme.dart';
 
 void main() {
   runApp(MaterialApp(
     theme: primaryTheme,
-    home: const Home(),
+    home: HomePage(),
   ));
 }
 
