@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 import 'package:flutter/material.dart';
+import 'package:unearthed/screens/home/home_page_card.dart';
 import 'package:unearthed/screens/new_arrivals/new_arrivals.dart';
 
 class Home extends StatefulWidget {
@@ -31,7 +32,7 @@ class _HomeState extends State<Home> {
                     currentIndex = index;
                   });
                               },
-              height: 400.0,
+              height: 300.0,
               autoPlay: true),
             items: items.map((i) {
               return Builder(
@@ -64,35 +65,28 @@ class _HomeState extends State<Home> {
     // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
   ),
           ),
-          IconButton(
-            onPressed: () => Navigator.pushNamed(context, '/new_arrivals'),
-            icon: Icon(Icons.abc)
+          Container(
+            padding: EdgeInsets.all(30),
+            child: IconButton(
+              onPressed: () => Navigator.pushNamed(context, '/new_arrivals'),
+              icon: Icon(Icons.abc)
+            ),
           ),
         Expanded(
           child: ListView(
             // This next line does the trick.
             scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              Container(
-                width: 160,
-                color: Colors.red,
-              ),
-              Container(
-                width: 160,
-                color: Colors.blue,
-              ),
-              Container(
-                width: 160,
-                color: Colors.green,
-              ),
-              Container(
-                width: 160,
-                color: Colors.yellow,
-              ),
-              Container(
-                width: 160,
-                color: Colors.orange,
-              ),
+            children: const <Widget>[
+              HomePageCard(),
+              SizedBox(width: 20),
+              HomePageCard(),
+              SizedBox(width: 20),
+              HomePageCard(),
+              SizedBox(width: 20),
+              HomePageCard(),
+              SizedBox(width: 20),
+              HomePageCard(),
+              SizedBox(width: 20),
             ],
           ),
         ),
