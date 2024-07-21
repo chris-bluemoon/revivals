@@ -30,8 +30,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/logos/unearthed_collections.png', 
-                 height: 300,
+                'assets/logos/unearthed_logo_2.png', 
+                // 'assets/logos/unearthed_collections.png', 
+                 height: 200,
                                     ),
               ]),
       ),

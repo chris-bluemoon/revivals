@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/new_arrivals/new_arrivals.dart';
@@ -12,6 +13,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+ List items = [1,2];
+ int currentIndex = 0;
+
  CarouselController buttonCarouselController = CarouselController(); 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +26,14 @@ class _HomeState extends State<Home> {
           CarouselSlider(
             carouselController: buttonCarouselController,
             options: CarouselOptions(
+                              onPageChanged: (index, reason) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                              },
               height: 400.0,
               autoPlay: true),
-            items: [1,2].map((i) {
+            items: items.map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
@@ -45,10 +55,14 @@ class _HomeState extends State<Home> {
             //   );
             //   log('Just pushed NewArrivals');
             // }
-          TextButton(
-            onPressed: () => buttonCarouselController.nextPage(
-              duration: Duration(milliseconds: 300), curve: Curves.linear),
-              child: Text('→'),
+          DotsIndicator(
+            dotsCount: items.length,
+            position: currentIndex.toDouble(),
+              decorator: const DotsDecorator(
+    colors: [Colors.grey, Colors.grey],
+    activeColor: Colors.black,
+    // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
+  ),
           ),
           IconButton(
             onPressed: () => Navigator.pushNamed(context, '/new_arrivals'),

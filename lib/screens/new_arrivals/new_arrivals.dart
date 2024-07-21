@@ -14,27 +14,53 @@ class _NewArrivalsState extends State<NewArrivals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-                actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.shopping_cart),
-            tooltip: 'Open shopping cart',
+            appBar: AppBar(
+        title: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                  Image.asset(
+                 'assets/logos/unearthed_logo_2.png',
+                  fit: BoxFit.contain,
+                  height: 200,
+              ),
+            ],
+
+          ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
             onPressed: () {
-              // handle the press
+              Navigator.pop(context);
             },
           ),
+        actions: [
+          IconButton(onPressed: () => {
+           Navigator.of(context).popUntil((route) => route.isFirst) 
+          }, 
+            icon: Icon(Icons.close)),
         ],
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // TODO: Title image Not quite centered
-          mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                'assets/logos/unearthed_collections.png', 
-                 height: 300,
-                                    ),
-              ]),
       ),
+      // appBar: AppBar(
+      //           actions: <Widget>[
+      //     IconButton(
+      //       icon: const Icon(Icons.close),
+      //       onPressed: () {
+      //         // handle the press
+      //       },
+      //     ),
+      //   ],
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     // TODO: Title image Not quite centered
+      //     mainAxisSize: MainAxisSize.min,
+      //       children: [
+      //         Image.asset(
+      //           'assets/logos/unearthed_collections.png', 
+      //            height: 300,
+      //                               ),
+      //         ]),
+      // ),
       body: Container(
         color: Colors.white,
         child: GridView.builder(
