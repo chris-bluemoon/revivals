@@ -15,8 +15,19 @@ class _NewArrivalsState extends State<NewArrivals> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+                actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            tooltip: 'Open shopping cart',
+            onPressed: () {
+              // handle the press
+            },
+          ),
+        ],
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          // TODO: Title image Not quite centered
+          mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
                 'assets/logos/unearthed_collections.png', 

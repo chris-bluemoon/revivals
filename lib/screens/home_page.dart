@@ -24,7 +24,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // centerTitle: true,
         title: Row(
+          // TODO: Image is not centered in appbar with back arrow
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
