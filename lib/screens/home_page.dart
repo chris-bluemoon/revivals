@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/browse.dart';
 import 'package:unearthed/screens/home/home.dart';
@@ -32,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               ]),
       ),
 
-      // body: _pageOptions[selectedBottomIcon],
+      body: _pages[_pageIndex],
       // body: Navigator(
       //   onGenerateRoute: (settings) {
       //     Widget page = Home();
@@ -40,7 +42,15 @@ class _HomePageState extends State<HomePage> {
       //     return MaterialPageRoute(builder: (_) => Home());
       //   },
       // ),
-      body: _pages[_pageIndex],
+      // body: _pages[_pageIndex],
+      // body: Navigator(
+      //   onGenerateRoute: (settings) {
+      //     Widget page = Browse();
+      //     log('Settings settings.name: ${settings.name.toString()}');
+      //     if (settings.name == '/profile') page = Profile();
+      //     return MaterialPageRoute(builder: (_) => page);
+      //   },
+      // ),
 
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
