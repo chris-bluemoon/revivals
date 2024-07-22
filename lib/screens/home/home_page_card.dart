@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class HomePageCard extends StatelessWidget {
   const HomePageCard({super.key});
@@ -19,7 +20,7 @@ class HomePageCard extends StatelessWidget {
           color: Colors.blue,
           child: Center(child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 60),
-            child: Text('CARD'),
+            child: StyledHeading('CARD'),
           ),),
       )),
     );

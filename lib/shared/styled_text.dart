@@ -10,6 +10,7 @@ class StyledText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(text, style: GoogleFonts.openSans(
       textStyle: Theme.of(context).textTheme.bodyMedium,
+      color: Colors.black, 
     ));
   }
 }

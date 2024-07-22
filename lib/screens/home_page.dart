@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/browse.dart';
 import 'package:unearthed/screens/home/home.dart';
 import 'package:unearthed/screens/profile/profile.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,22 +39,6 @@ class _HomePageState extends State<HomePage> {
       ),
 
       body: _pages[_pageIndex],
-      // body: Navigator(
-      //   onGenerateRoute: (settings) {
-      //     Widget page = Home();
-      //     if (settings.name == 'Profile') page = Profile();
-      //     return MaterialPageRoute(builder: (_) => Home());
-      //   },
-      // ),
-      // body: _pages[_pageIndex],
-      // body: Navigator(
-      //   onGenerateRoute: (settings) {
-      //     Widget page = Browse();
-      //     log('Settings settings.name: ${settings.name.toString()}');
-      //     if (settings.name == '/profile') page = Profile();
-      //     return MaterialPageRoute(builder: (_) => page);
-      //   },
-      // ),
 
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
