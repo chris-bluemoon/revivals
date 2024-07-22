@@ -11,14 +11,17 @@ class HomePageCard extends StatelessWidget {
     //   child: const Card(
     //   ),
     // );
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 50), 
-      child: Card(
-        color: Colors.blue,
-        child: Center(child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 60),
-          child: Text('CARD'),
-        ),),
-    ));
+    return Container(
+      height: 10,
+      child: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 10), 
+        child: Card(
+          color: Colors.blue,
+          child: Center(child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 60),
+            child: Text('CARD'),
+          ),),
+      )),
+    );
   }
 }

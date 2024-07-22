@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:unearthed/screens/home/home_page_card.dart';
 import 'package:unearthed/screens/new_arrivals/new_arrivals.dart';
 
@@ -21,7 +22,7 @@ class _HomeState extends State<Home> {
  CarouselController buttonCarouselController = CarouselController(); 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
       child: Column(
         children: [
           CarouselSlider(
@@ -60,19 +61,34 @@ class _HomeState extends State<Home> {
             dotsCount: items.length,
             position: currentIndex.toDouble(),
               decorator: const DotsDecorator(
-    colors: [Colors.grey, Colors.grey],
-    activeColor: Colors.black,
-    // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
-  ),
+          colors: [Colors.grey, Colors.grey],
+          activeColor: Colors.black,
+          // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
+        ),
           ),
           Container(
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.symmetric(vertical: 100),
             child: IconButton(
               onPressed: () => Navigator.pushNamed(context, '/new_arrivals'),
               icon: Icon(Icons.abc)
             ),
           ),
-        Expanded(
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 100),
+            child: IconButton(
+              onPressed: () => Navigator.pushNamed(context, '/new_arrivals'),
+              icon: Icon(Icons.abc)
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 100),
+            child: IconButton(
+              onPressed: () => Navigator.pushNamed(context, '/new_arrivals'),
+              icon: Icon(Icons.abc)
+            ),
+          ),
+        SizedBox(
+          height: 100,
           child: ListView(
             // This next line does the trick.
             scrollDirection: Axis.horizontal,
@@ -90,6 +106,18 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
+        // Container(
+        //   child: Text('CHRIS',),
+        // ),
+        // Container(
+        //   child: Text('CHRIS',),
+        // ),
+        // Container(
+        //   child: Text('CHRIS',),
+        // ),
+        // Container(
+        //   child: Text('CHRIS',),
+        // ),
         ],
         
         
