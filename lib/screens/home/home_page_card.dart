@@ -6,12 +6,6 @@ class HomePageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return SizedBox(
-    //   width: 300,
-    //   height: 100,
-    //   child: const Card(
-    //   ),
-    // );
     return Container(
       height: 10,
       child: const Padding(

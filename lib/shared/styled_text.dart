@@ -37,7 +37,7 @@ class StyledHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text.toUpperCase(), style: GoogleFonts.openSans(
+    return Text(text, style: GoogleFonts.openSans(
       textStyle: Theme.of(context).textTheme.headlineMedium
     ));
   }
@@ -50,8 +50,47 @@ class StyledTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text.toUpperCase(), style: GoogleFonts.openSans(
+    return Text(text, style: GoogleFonts.playfair(
       textStyle: Theme.of(context).textTheme.titleMedium
+    ));
+  }
+}
+
+class StyledText2 extends StatelessWidget {
+  const StyledText2(this.text, {super.key});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text, style: GoogleFonts.playfair(
+      textStyle: Theme.of(context).textTheme.bodyMedium,
+    ));
+  }
+}
+
+class StyledHeading2 extends StatelessWidget {
+  const StyledHeading2(this.text, {super.key});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text, style: GoogleFonts.playfair(
+      textStyle: Theme.of(context).textTheme.headlineMedium
+    ));
+  }
+}
+
+class StyledTitle2 extends StatelessWidget {
+  const StyledTitle2(this.text, {super.key});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text, style: GoogleFonts.playfair(
+      textStyle: Theme.of(context).textTheme.titleLarge
     ));
   }
 }

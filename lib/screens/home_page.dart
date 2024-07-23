@@ -1,10 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/browse/browse.dart';
 import 'package:unearthed/screens/home/home.dart';
-import 'package:unearthed/screens/profile/profile.dart';
-import 'package:unearthed/shared/styled_text.dart';
 
 class HomePage extends StatefulWidget {
   @override

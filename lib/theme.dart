@@ -49,6 +49,13 @@ ThemeData primaryTheme = ThemeData(
       fontWeight: FontWeight.bold,
       letterSpacing: 2,
     ),
+    titleLarge: TextStyle(
+      color: AppColors.titleColor, 
+      fontSize: 36, 
+      fontWeight: FontWeight.bold,
+      letterSpacing: 2,
+    ),
+    
   ),
 
 );
