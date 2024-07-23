@@ -3,7 +3,9 @@ import 'package:dots_indicator/dots_indicator.dart';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
+import 'package:unearthed/screens/home/new_arrivals_home_widget.dart';
 import 'package:unearthed/screens/home/offer_home_widget.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,6 +23,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
           // Display first column object, the carousel
@@ -46,27 +49,37 @@ class _HomeState extends State<Home> {
 
           // Display dot indicators for carousel
 
-          DotsIndicator(
-            dotsCount: items.length,
-            position: currentIndex.toDouble(),
-            decorator: const DotsDecorator(
-              colors: [Colors.grey, Colors.grey],
-              activeColor: Colors.black,
-              // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
+          Center(
+            child: DotsIndicator(
+              dotsCount: items.length,
+              position: currentIndex.toDouble(),
+              decorator: const DotsDecorator(
+                colors: [Colors.grey, Colors.grey],
+                activeColor: Colors.black,
+                // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
+              ),
             ),
           ),
 
           // Now display the first home page widget, for now a simple icon button
 
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 100),
-            child: IconButton(
-                onPressed: () => Navigator.pushNamed(context, '/new_arrivals'),
-                icon: const Icon(Icons.abc)),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.only(left: 12.0),
+            child: StyledBody('NEW RENTALS'),
           ),
+          const NewArrivalsHomeWidget(),
+
 
           // A sixed box now follows which contrains the horizontal listview, otherwise we get a renderflex error
 
+
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.only(left: 12.0),
+            child: StyledBody('HELP CENTRE'),
+          ),
+          SizedBox(height: 10),
           SizedBox(
             height: 100,
             child: ListView(
@@ -74,15 +87,17 @@ class _HomeState extends State<Home> {
               scrollDirection: Axis.horizontal,
               children: const <Widget>[
                 SizedBox(width: 4),
-                HomePageBottomCard(),
-                HomePageBottomCard(),
-                HomePageBottomCard(),
-                HomePageBottomCard(),
-                HomePageBottomCard(),
+                HomePageBottomCard('Our Hygiene Policy'),
+                HomePageBottomCard('Our Hygiene'),
+                HomePageBottomCard('General FAQ'),
+                HomePageBottomCard('What Is Unearthed Collections'),
+                HomePageBottomCard('How It Works'),
+                HomePageBottomCard('Sizing Guide FAQ'),
                 SizedBox(width: 4),
               ],
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );

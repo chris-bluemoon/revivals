@@ -2,21 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class HomePageBottomCard extends StatelessWidget {
-  const HomePageBottomCard({super.key});
+  const HomePageBottomCard(this.text, {super.key});
+ 
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 10,
-      child: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 10), 
-        child: Card(
-          color: Colors.blue,
-          child: Center(child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 60),
-            child: StyledHeading('CARD'),
-          ),),
-      )),
+      // height: 120,
+      width: 150,
+      child: Card(
+        color: Colors.blue,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(child: Text(
+            text, 
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 16))),
+          // child: Center(child: StyledHeading(text)),
+        ),
+            ),
     );
   }
 }
