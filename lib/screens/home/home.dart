@@ -2,9 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/home/home_page_card.dart';
-import 'package:unearthed/screens/home/offer_widget.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:unearthed/screens/home/home_page_bottom_card.dart';
+import 'package:unearthed/screens/home/offer_home_widget.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,7 +24,7 @@ class _HomeState extends State<Home> {
         children: [
 
           // Display first column object, the carousel
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           CarouselSlider(
             carouselController: buttonCarouselController,
             options: CarouselOptions(
@@ -39,22 +38,7 @@ class _HomeState extends State<Home> {
             items: items.map((i) {
               return Builder(
                 builder: (BuildContext context) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(color: Colors.white),
-                      // child: StyledHeading('text $i'));
-                      child: Stack(
-                        children: [
-                          Image.asset('assets/img/backgrounds/carousel_image_1.jpg'),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: const OfferWidget(),
-                          ),
-                        ],)
-                      // child: Image.asset('assets/img/dresses/LEXI_Dione_Dress.webp'),
-                      // child: Image.asset('assets/img/backgrounds/carousel_image_1.jpg'),
-                  );
+                  return const OfferWidget();
                 },
               );
             }).toList(),
@@ -75,10 +59,10 @@ class _HomeState extends State<Home> {
           // Now display the first home page widget, for now a simple icon button
 
           Container(
-            padding: EdgeInsets.symmetric(vertical: 100),
+            padding: const EdgeInsets.symmetric(vertical: 100),
             child: IconButton(
                 onPressed: () => Navigator.pushNamed(context, '/new_arrivals'),
-                icon: Icon(Icons.abc)),
+                icon: const Icon(Icons.abc)),
           ),
 
           // A sixed box now follows which contrains the horizontal listview, otherwise we get a renderflex error
@@ -90,11 +74,11 @@ class _HomeState extends State<Home> {
               scrollDirection: Axis.horizontal,
               children: const <Widget>[
                 SizedBox(width: 4),
-                HomePageCard(),
-                HomePageCard(),
-                HomePageCard(),
-                HomePageCard(),
-                HomePageCard(),
+                HomePageBottomCard(),
+                HomePageBottomCard(),
+                HomePageBottomCard(),
+                HomePageBottomCard(),
+                HomePageBottomCard(),
                 SizedBox(width: 4),
               ],
             ),

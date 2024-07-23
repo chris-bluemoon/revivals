@@ -35,6 +35,7 @@ ThemeData primaryTheme = ThemeData(
     bodyMedium: TextStyle(
       color: AppColors.textColor,
       fontSize: 12,
+      fontWeight: FontWeight.bold, 
       letterSpacing: 1,
     ),
     headlineMedium: TextStyle(

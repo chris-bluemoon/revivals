@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
-class HomePageCard extends StatelessWidget {
-  const HomePageCard({super.key});
+class HomePageBottomCard extends StatelessWidget {
+  const HomePageBottomCard({super.key});
 
   @override
   Widget build(BuildContext context) {

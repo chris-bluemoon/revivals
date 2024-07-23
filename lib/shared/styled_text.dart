@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class StyledText extends StatelessWidget {
-  const StyledText(this.text, {super.key});
+class StyledBody extends StatelessWidget {
+  const StyledBody(this.text, {super.key});
 
   final String text;
 
@@ -15,9 +15,8 @@ class StyledText extends StatelessWidget {
   }
 }
 
-
-class StyledTextStrikeout extends StatelessWidget {
-  const StyledTextStrikeout(this.text, {super.key});
+class StyledBodyStrikeout extends StatelessWidget {
+  const StyledBodyStrikeout(this.text, {super.key});
 
   final String text;
 
@@ -50,14 +49,14 @@ class StyledTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: GoogleFonts.playfair(
+    return Text(text, style: GoogleFonts.openSans(
       textStyle: Theme.of(context).textTheme.titleMedium
     ));
   }
 }
 
-class StyledText2 extends StatelessWidget {
-  const StyledText2(this.text, {super.key});
+class StyledBodyPlayFair extends StatelessWidget {
+  const StyledBodyPlayFair(this.text, {super.key});
 
   final String text;
 
@@ -69,8 +68,8 @@ class StyledText2 extends StatelessWidget {
   }
 }
 
-class StyledHeading2 extends StatelessWidget {
-  const StyledHeading2(this.text, {super.key});
+class StyledHeadingPlayFair extends StatelessWidget {
+  const StyledHeadingPlayFair(this.text, {super.key});
 
   final String text;
 
@@ -82,8 +81,8 @@ class StyledHeading2 extends StatelessWidget {
   }
 }
 
-class StyledTitle2 extends StatelessWidget {
-  const StyledTitle2(this.text, {super.key});
+class StyledTitlePlayFair extends StatelessWidget {
+  const StyledTitlePlayFair(this.text, {super.key});
 
   final String text;
 
