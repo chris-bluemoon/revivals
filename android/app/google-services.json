@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91177261843",
+    "project_id": "unearthed-collections-47157",
+    "storage_bucket": "unearthed-collections-47157.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91177261843:android:fd6e5a474a1e6ebb0318e6",
+        "android_client_info": {
+          "package_name": "com.example.unearthed"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL4DWtcSrkcQZkNzgP2GapJJDfJNhyeAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

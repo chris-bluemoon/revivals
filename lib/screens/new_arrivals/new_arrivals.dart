@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/screens/home/dress_card.dart';
+import 'package:unearthed/screens/new_arrivals/dress_card.dart';
+import 'package:provider/provider.dart';
+import 'package:unearthed/services/dress_store.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
 
 class NewArrivals extends StatefulWidget {
   const NewArrivals({super.key});
@@ -10,35 +15,45 @@ class NewArrivals extends StatefulWidget {
 }
 
 class _NewArrivalsState extends State<NewArrivals> {
-  
+  void handleSubmit() {
+    Provider.of<DressStore>(context, listen: false).addDress(Dress(
+        id: uuid.v4(),
+        name: 'Sheena',
+        brand: 'LEXI',
+        size: 0,
+        rentPrice: 0,
+        rrp: 0,
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(
+      appBar: AppBar(
         title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                  Image.asset(
-                 'assets/logos/unearthed_logo_2.png',
-                  fit: BoxFit.contain,
-                  height: 200,
-              ),
-            ],
-
-          ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/logos/unearthed_logo_2.png',
+              fit: BoxFit.contain,
+              height: 200,
+            ),
+          ],
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
-          IconButton(onPressed: () => {
-           Navigator.of(context).popUntil((route) => route.isFirst) 
-          }, 
-            icon: Icon(Icons.close)),
+          IconButton(
+              onPressed: () =>
+                  {Navigator.of(context).popUntil((route) => route.isFirst)},
+              icon: Icon(Icons.close)),
         ],
       ),
       // appBar: AppBar(
@@ -56,21 +71,36 @@ class _NewArrivalsState extends State<NewArrivals> {
       //     mainAxisSize: MainAxisSize.min,
       //       children: [
       //         Image.asset(
-      //           'assets/logos/unearthed_collections.png', 
+      //           'assets/logos/unearthed_collections.png',
       //            height: 300,
       //                               ),
       //         ]),
       // ),
       body: Container(
-        color: Colors.white,
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.5),
-          itemBuilder: (_, index) => DressCard(dresses[index]),
-          itemCount: dresses.length,
-        )
-      ),
+          color: Colors.white,
+          child: Column(
+            children: [
+              Consumer<DressStore>(
+                  // child not required
+                  builder: (context, value, child) {
+                return Expanded(
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 0.5),
+                    itemBuilder: (_, index) => DressCard(value.dresses[index]),
+                    itemCount: value.dresses.length,
+                  ),
+                );
+              }),
+              TextButton(
+                onPressed: () {
+                  handleSubmit();
+                },
+                child: const Text('ADD'),
+              )
+            ],
+          )),
     );
-
-
   }
 }

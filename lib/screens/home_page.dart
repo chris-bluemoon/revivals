@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/home/home.dart';
+import 'package:unearthed/services/dress_store.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,6 +9,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  @override
+  void initState() {
+    Provider.of<DressStore>(context, listen: false)
+      .fetchDressesOnce();
+
+    super.initState();
+  }
+
   int _pageIndex = 0;
 
   final _pages = [

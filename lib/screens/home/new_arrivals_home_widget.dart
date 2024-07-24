@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/shared/styled_text.dart';
+import 'package:unearthed/screens/new_arrivals/new_arrivals.dart';
+import 'package:unearthed/services/dress_store.dart';
+import 'package:unearthed/models/dress.dart';
+import 'package:provider/provider.dart';
 
 class NewArrivalsHomeWidget extends StatelessWidget {
   const NewArrivalsHomeWidget({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +16,14 @@ class NewArrivalsHomeWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Stack(
         children: [
-          Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
+          GestureDetector(
+            child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const NewArrivals())));
+            }
+          ),
           const Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
