@@ -8,7 +8,7 @@ class HomePageBottomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       // height: 120,
       width: 150,
       child: Card(

@@ -50,24 +50,39 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
+        unselectedLabelStyle: TextStyle(fontSize: 10.0),
+        selectedLabelStyle: TextStyle(fontSize: 10.0),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: Icon(Icons.home_outlined, size: 18.0),
+            ),
+            label: 'HOME',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book),
-            label: 'Browse',
+            icon: Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: Icon(Icons.menu_book_outlined, size: 18.0),
+            ),
+            label: 'BROWSE',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favourites',
+            icon: Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: Icon(Icons.favorite_border, size: 18.0),
+            ),
+            label: 'FAVOURITES',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
+            icon: Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: Icon(Icons.account_circle_outlined, size: 18.0),
+            ),
+            label: 'PROFILE'
           ),
         ],
+        // selectedLabelStyle: TextStyle(color: Colors.blue,fontSize: 14),
         currentIndex: _pageIndex,
         onTap: (int index) {
           setState(

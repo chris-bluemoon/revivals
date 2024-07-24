@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/screens/new_arrivals/dress_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/services/dress_store.dart';
+import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
@@ -17,14 +20,13 @@ class NewArrivals extends StatefulWidget {
 class _NewArrivalsState extends State<NewArrivals> {
   void handleSubmit() {
     Provider.of<DressStore>(context, listen: false).addDress(Dress(
-        id: uuid.v4(),
-        name: 'Sheena',
-        brand: 'LEXI',
-        size: 0,
-        rentPrice: 0,
-        rrp: 0,
-      )
-    );
+      id: uuid.v4(),
+      name: 'Sheena',
+      brand: 'LEXI',
+      size: 0,
+      rentPrice: 0,
+      rrp: 0,
+    ));
   }
 
   @override
@@ -88,7 +90,13 @@ class _NewArrivalsState extends State<NewArrivals> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
-                    itemBuilder: (_, index) => DressCard(value.dresses[index]),
+                    itemBuilder: (_, index) => GestureDetector(
+                        child: DressCard(value.dresses[index]),
+                        onTap: () {
+                          log('Tapped ${value.dresses[index].name}');
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(value.dresses[index]))));
+
+                        }),
                     itemCount: value.dresses.length,
                   ),
                 );

@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.only(left: 12.0),
             child: StyledBody('HELP CENTRE'),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SizedBox(
             height: 100,
             child: ListView(
@@ -88,7 +88,6 @@ class _HomeState extends State<Home> {
               children: const <Widget>[
                 SizedBox(width: 4),
                 HomePageBottomCard('Our Hygiene Policy'),
-                HomePageBottomCard('Our Hygiene'),
                 HomePageBottomCard('General FAQ'),
                 HomePageBottomCard('What Is Unearthed Collections'),
                 HomePageBottomCard('How It Works'),

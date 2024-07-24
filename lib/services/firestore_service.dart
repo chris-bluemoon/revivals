@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unearthed/models/dress.dart';
 
@@ -19,7 +17,6 @@ class FirestoreService {
 
   // get dress once
   static Future<QuerySnapshot<Dress>> getDressesOnce() {
-    log('Getting dress once');
     return ref.get();
   }
 

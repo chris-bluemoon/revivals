@@ -27,7 +27,6 @@ class DressStore extends ChangeNotifier {
 
   // add character
   void addDress(Dress dress) async {
-    log('Adding dress');
     await FirestoreService.addDress(dress);
 
     _dresses.add(dress);
@@ -36,10 +35,8 @@ class DressStore extends ChangeNotifier {
 
     // initially fetch dresses
   void fetchDressesOnce() async {
-    log('Dresses list size is ${_dresses.length}');
     if (dresses.length == 0) {
       final snapshot = await FirestoreService.getDressesOnce();
-      log('Getting dresses once from Firestore');
       for (var doc in snapshot.docs) {
         _dresses.add(doc.data());
       }
