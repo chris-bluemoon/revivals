@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     Provider.of<DressStore>(context, listen: false)
       .fetchDressesOnce();
 
+    getCurrentUser();
     super.initState();
   }
 
@@ -37,13 +38,22 @@ class _HomePageState extends State<HomePage> {
     Profile(),
   ];
 
-Future getCurrentUser() async {
-// User? _user = await FirebaseAuth.instance.currentUser;
+Future<dynamic> getCurrentUser() async {
+    User? _user = await FirebaseAuth.instance.currentUser;
 // Firebase.Auth.FirebaseUser user = auth.CurrentUser;
-User? asda = FirebaseAuth.instance.currentUser;
-log('asda: ${asda.toString()}');
-return asda;
-}
+    // User? asda = FirebaseAuth.instance.currentUser;
+    if (_user != null) {
+      log('asda: ${_user.displayName}');
+      loggedIn = true;
+    } else {
+      log('Not logged in');
+      loggedIn = false;
+    }
+    ;
+    return _user;
+    // return asda;
+  }
+
 // final User user = auth.currentUser;
 // if (_user.displayName == null) 
 // log("User: ${_user.displayName ?? "None"}");
@@ -109,17 +119,12 @@ return asda;
         onTap: (int index) {
           setState(
             () {
+              getCurrentUser();
               if (index == 3 && loggedIn == false) {
-                String dis = getCurrentUser().toString();
-                log(dis);
-                getCurrentUser().toString() != 'null'
-      ? log('User logged in ${getCurrentUser().toString()}')
-      : log('User not logged in');
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
-                // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const SignUp())));
-              } else {
-                _pageIndex = index;
-            }
+                // _pageIndex = index;
+              }
+              _pageIndex = index;
             },
           );
         },

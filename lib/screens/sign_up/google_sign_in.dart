@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'dart:developer';
 
 class GoogleSignInScreen extends StatefulWidget {
   const GoogleSignInScreen({Key? key}) : super(key: key);
@@ -33,8 +34,9 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                           ),
                           onPressed: () async {
                             userCredential.value = await signInWithGoogle();
-                            if (userCredential.value != null)
-                              print(userCredential.value.user!.email);
+                            if (userCredential.value != null) {
+                              log(userCredential.value.user!.email);
+                            }
                           },
                         ),
                       ),
@@ -93,6 +95,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
     } on Exception catch (e) {
       // TODO
       print('exception->$e');
+      log('exception->$e');
     }
   }
 
