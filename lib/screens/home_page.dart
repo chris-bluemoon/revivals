@@ -39,17 +39,16 @@ class _HomePageState extends State<HomePage> {
   ];
 
 Future<dynamic> getCurrentUser() async {
-    User? _user = await FirebaseAuth.instance.currentUser;
+User? _user = await FirebaseAuth.instance.currentUser;
 // Firebase.Auth.FirebaseUser user = auth.CurrentUser;
     // User? asda = FirebaseAuth.instance.currentUser;
-    if (_user != null) {
+    if(_user != null) {
       log('asda: ${_user.displayName}');
       loggedIn = true;
     } else {
       log('Not logged in');
       loggedIn = false;
-    }
-    ;
+    };
     return _user;
     // return asda;
   }
@@ -120,11 +119,11 @@ Future<dynamic> getCurrentUser() async {
           setState(
             () {
               getCurrentUser();
+              _pageIndex = index;
               if (index == 3 && loggedIn == false) {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
-                // _pageIndex = index;
+                _pageIndex = 0;
               }
-              _pageIndex = index;
             },
           );
         },
