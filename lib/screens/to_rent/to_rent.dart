@@ -5,6 +5,7 @@ import 'package:unearthed/main.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/screens/new_arrivals/dress_card.dart';
 import 'package:provider/provider.dart';
+import 'package:unearthed/screens/to_rent/rent_this.dart';
 import 'package:unearthed/services/dress_store.dart';
 import 'package:uuid/uuid.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -42,6 +43,8 @@ class _NewArrivalsState extends State<ToRent> {
     //   rrp: 0,
     // ));
     log('Renting dress ${widget.dress.name}');
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress))));
+
   }
 
   
@@ -125,7 +128,9 @@ class _NewArrivalsState extends State<ToRent> {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      handleSubmit();
+                    },
                     child: const Text('BUY PRELOVED', style: TextStyle(color: Colors.black)),
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -138,7 +143,9 @@ class _NewArrivalsState extends State<ToRent> {
                 SizedBox(width: 5),
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      handleSubmit();
+                    },
                     child: const Text('RENT THIS', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,
