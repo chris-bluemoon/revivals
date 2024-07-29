@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
+import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/models/dress_renter.dart';
@@ -30,16 +31,16 @@ class _RentThisState extends State<RentThis> {
   bool bothDatesSelected = false;
   bool showConfirm = false;
 
-  void handleSubmit(int renterId, int dressId, String startDate, String endDate, int price) {
-    Provider.of<DressStore>(context, listen: false).addDressRenter(DressRenter(
-      id: uuid.v4(),
-      renterId: '0',
-      dressId: '0',
-      startDate: startDate,
-      endDate: endDate,
-      price: 0,
-    ));
-  }
+  // void handleSubmit(String renterId, String dressId, String startDate, String endDate, int price) {
+  //   Provider.of<DressStore>(context, listen: false).addDressRenter(DressRenter(
+  //     id: uuid.v4(),
+  //     renterId: renterId,
+  //     dressId: dressId,
+  //     startDate: startDate,
+  //     endDate: endDate,
+  //     price: 0,
+  //   ));
+  // }
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     // TODO: implement your code here
@@ -116,8 +117,10 @@ class _RentThisState extends State<RentThis> {
           if (showConfirm) ElevatedButton(
             child: ConfirmRentWidget(widget.dress),
             onPressed: () {
-              log('Selected start date of: $startDate');
-              handleSubmit(1, 1, '${startDate}', '${startDate}', 0);
+                String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
+                // log('Selected start date of: $startDate');
+                // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
             },
           ),
         ],

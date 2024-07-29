@@ -41,7 +41,12 @@ class DressStore extends ChangeNotifier {
   void addRenter(Renter renter) async {
     await FirestoreService.addRenter(renter);
     _renters.add(renter);
+    log(_renters.toString());
     notifyListeners();
+  }
+
+  void addRenterAppOnly(Renter renter) {
+    _renters.add(renter);
   }
   // add dressRenter
   void addDressRenter(DressRenter dressRenter) async {

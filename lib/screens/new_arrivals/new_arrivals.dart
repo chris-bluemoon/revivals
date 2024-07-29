@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:uuid/uuid.dart';
+import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 
 var uuid = const Uuid();
 
@@ -93,8 +94,13 @@ class _NewArrivalsState extends State<NewArrivals> {
                     itemBuilder: (_, index) => GestureDetector(
                         child: DressCard(value.dresses[index]),
                         onTap: () {
-                          log('Tapped ${value.dresses[index].name}');
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(value.dresses[index]))));
+                          if (Provider.of<DressStore>(context, listen: false).renters.length == 0) {
+                            log('Not logged in, cannot rent, redirecting');
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (GoogleSignInScreen())));
+                          } else {
+                            log('About to rent ${value.dresses[index].name}');
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(value.dresses[index]))));
+                          }
 
                         }),
                     itemCount: value.dresses.length,

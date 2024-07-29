@@ -7,6 +7,7 @@ import 'package:unearthed/screens/sign_up/sign_up.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/profile/profile.dart';
 import 'package:provider/provider.dart';
+import 'package:unearthed/models/renter.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -45,6 +46,14 @@ User? _user = await FirebaseAuth.instance.currentUser;
     if(_user != null) {
       log('asda: ${_user.displayName}');
       loggedIn = true;
+      Provider.of<DressStore>(context, listen: false).addRenterAppOnly(Renter(
+        id: uuid.v4(),
+        email: _user.email!,
+        name: _user.displayName!,
+        size: 0,
+        address: 'Thailand',
+        phoneNum: 0,
+    ));
     } else {
       log('Not logged in');
       loggedIn = false;
