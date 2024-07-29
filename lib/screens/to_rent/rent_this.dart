@@ -62,10 +62,11 @@ class _RentThisState extends State<RentThis> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StyledTitle(widget.dress.name.toUpperCase()),
+            // StyledTitle(widget.dress.name.toUpperCase()),
+            StyledTitle('Select Dates'),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,
@@ -85,7 +86,7 @@ class _RentThisState extends State<RentThis> {
           IconButton(
               onPressed: () =>
                 {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.share)),
+              icon: const Icon(Icons.close)),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0),
@@ -99,12 +100,16 @@ class _RentThisState extends State<RentThis> {
         children: [
           Container(
             child: SfDateRangePicker(
+              // maxDate: DateTime(2024, 8, 1),
+              // enableMultiView: true,
+              navigationDirection: DateRangePickerNavigationDirection.vertical,
               backgroundColor: Colors.white,
               selectionColor: Colors.black,
               headerStyle: DateRangePickerHeaderStyle(backgroundColor: Colors.white),
               onSelectionChanged: _onSelectionChanged,
-              selectionTextStyle: const TextStyle(backgroundColor: Colors.blue),
+              // selectionTextStyle: const TextStyle(backgroundColor: Colors.blue),
               selectionMode: DateRangePickerSelectionMode.range,
+              
               // rangeSelectionColor: Colors.green,
             ),
           ),
