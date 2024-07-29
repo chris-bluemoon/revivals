@@ -24,7 +24,8 @@ class StyledBodyStrikeout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(text, style: GoogleFonts.openSans(
       textStyle: Theme.of(context).textTheme.bodyMedium,
-      decoration: TextDecoration.lineThrough
+      decoration: TextDecoration.lineThrough,
+      decorationColor: Colors.black, decorationThickness: 4.0
     ));
   }
 }

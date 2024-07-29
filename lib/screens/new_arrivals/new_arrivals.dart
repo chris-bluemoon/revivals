@@ -25,8 +25,8 @@ class _NewArrivalsState extends State<NewArrivals> {
       name: 'Sheena',
       brand: 'LEXI',
       size: 0,
-      rentPrice: 0,
-      rrp: 0,
+      rentPrice: 3500,
+      rrp: 55000
     ));
   }
 

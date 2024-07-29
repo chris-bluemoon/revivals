@@ -7,7 +7,6 @@ import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/models/dress_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/screens/summary/congrats.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
@@ -15,31 +14,8 @@ import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class Summary extends StatefulWidget {
-  const Summary(this.email, this.dress, this.startDate, this.endDate, {super.key});
-
-
-  final String email;
-  final Dress dress;
-  final String startDate;
-  final String endDate;
-
-  @override
-  State<Summary> createState() => _SummaryState();
-}
-
-class _SummaryState extends State<Summary> {
-  
-  void handleSubmit(String renterId, String dressId, String startDate, String endDate, int price) {
-    Provider.of<DressStore>(context, listen: false).addDressRenter(DressRenter(
-      id: uuid.v4(),
-      renterId: renterId,
-      dressId: dressId,
-      startDate: startDate,
-      endDate: endDate,
-      price: 0,
-    ));
-  }
+class Congrats extends StatelessWidget {
+  const Congrats({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +25,7 @@ class _SummaryState extends State<Summary> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // StyledTitle(widget.dress.name.toUpperCase()),
-            StyledTitle('Summary'),
+            // StyledTitle('Congrats'),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,
@@ -81,15 +57,14 @@ class _SummaryState extends State<Summary> {
       ),
       body: Column(
         children: [
-        Text(widget.startDate),
-        Text(widget.endDate),
-        Text(widget.dress.name),
-        Text(widget.email),
-        ElevatedButton(
-            child: Text('Confirm'),
+          SizedBox(height: 200),
+          Center(child:
+          Text('CONGRATULATIONS')
+          ),
+          ElevatedButton(
+            child: Text('Click to go Home'),
             onPressed: () {
-                handleSubmit(widget.email, widget.dress.id, widget.startDate, widget.endDate, widget.dress.rentPrice);
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Congrats())));
+                Navigator.of(context).popUntil((route) => route.isFirst);
             },
           ),
 

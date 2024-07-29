@@ -11,7 +11,6 @@ class Dress {
           this.isRented = false,
           this.startDate = '01-01-99',
           this.rentDays = 0, 
-          this.renteeId = 0, 
         }); 
 
     String id;
@@ -23,7 +22,6 @@ class Dress {
     bool isRented;
     String startDate;
     int rentDays; 
-    int renteeId; 
 
   // dress to firestore (map)
   Map<String, dynamic> toFirestore() {
@@ -36,7 +34,6 @@ class Dress {
       'isRented': false,
       'startDate': startDate,
       'rentDays': rentDays,
-      'renteeId': renteeId,
     };
   }
 
@@ -60,7 +57,6 @@ class Dress {
       isRented: data['isRented'],
       startDate: data['startDate'],
       rentDays: data['rentDays'],
-      renteeId: data['renteeId']
     );
 
     return dress;
