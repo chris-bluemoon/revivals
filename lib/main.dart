@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/home_page.dart';
-import 'package:unearthed/services/dress_store.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/theme.dart';
 import 'package:provider/provider.dart';
 

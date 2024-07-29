@@ -1,47 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Dress {
+class Renter {
   
-  Dress({required this.id, 
+  Renter({required this.id, 
+          required this.email, 
           required this.name, 
-          required this.brand, 
           required this.size, 
-          required this.rentPrice, 
-          required this.rrp,
-          this.isRented = false,
-          this.startDate = '01-01-99',
-          this.rentDays = 0, 
-          this.renteeId = 0, 
+          required this.address, 
+          required this.phoneNum,
         }); 
 
     String id;
+    String email;
     String name;
-    String brand;
     int size;
-    int rentPrice;
-    int rrp;
-    bool isRented;
-    String startDate;
-    int rentDays; 
-    int renteeId; 
+    String address;
+    int phoneNum;
 
   // dress to firestore (map)
   Map<String, dynamic> toFirestore() {
     return {
+      'email': email,
       'name': name,
-      'brand': brand,
       'size': size,
-      'rentPrice': rentPrice,
-      'rrp': rrp,
-      'isRented': false,
-      'startDate': startDate,
-      'rentDays': rentDays,
-      'renteeId': renteeId,
+      'address': address,
+      'phoneNum': phoneNum,
     };
   }
 
   // character from firestore
-  factory Dress.fromFirestore(
+  factory Renter.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) {
@@ -50,20 +38,16 @@ class Dress {
     final data = snapshot.data()!;
 
     // make character instance
-    Dress dress = Dress(
+    Renter renter = Renter(
       id: snapshot.id,
+      email: data['email'],
       name: data['name'],
-      brand: data['brand'],
       size: data['size'],
-      rentPrice: data['rentPrice'],
-      rrp: data['rrp'],
-      isRented: data['isRented'],
-      startDate: data['startDate'],
-      rentDays: data['rentDays'],
-      renteeId: data['renteeId']
+      address: data['address'],
+      phoneNum: data['phoneNum'],
     );
 
-    return dress;
+    return renter;
   } 
   
   

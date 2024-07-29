@@ -1,22 +1,61 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/renter.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
 
 
-class RentThis extends StatelessWidget {
+class RentThis extends StatefulWidget {
   RentThis(this.dress, {super.key});
   
   final Dress dress;
 
-  String startDate = '';
+  @override
+  State<RentThis> createState() => _RentThisState();
+}
+
+class _RentThisState extends State<RentThis> {
+  DateTime? startDate;
+  DateTime? endDate;
+  bool bothDatesSelected = false;
+  bool showConfirm = false;
+
+  void handleSubmit(int renterId, int dressId, String startDate, String endDate, int price) {
+    Provider.of<DressStore>(context, listen: false).addDressRenter(DressRenter(
+      id: uuid.v4(),
+      renterId: '0',
+      dressId: '0',
+      startDate: startDate,
+      endDate: endDate,
+      price: 0,
+    ));
+  }
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     // TODO: implement your code here
-    log(args.value.toString());
-    startDate = args.value.toString();
+    startDate = args.value.startDate;
+    endDate = args.value.endDate;
+    if (endDate != null) {
+      setState(() {
+        bothDatesSelected = true;
+        showConfirm = true;
+      });
+    } else {
+      setState(() {
+        bothDatesSelected = false;
+        showConfirm = false;
+      });
+    }
   }
 
   @override
@@ -26,7 +65,7 @@ class RentThis extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StyledTitle(dress.name.toUpperCase()),
+            StyledTitle(widget.dress.name.toUpperCase()),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,
@@ -69,11 +108,11 @@ class RentThis extends StatelessWidget {
               // rangeSelectionColor: Colors.green,
             ),
           ),
-          ElevatedButton(
-            child: const Text('Enabled'),
+          if (showConfirm) ElevatedButton(
+            child: ConfirmRentWidget(widget.dress),
             onPressed: () {
               log('Selected start date of: $startDate');
-              log('S');
+              handleSubmit(1, 1, '${startDate}', '${startDate}', 0);
             },
           ),
         ],

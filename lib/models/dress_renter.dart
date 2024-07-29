@@ -1,47 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Dress {
+class DressRenter {
   
-  Dress({required this.id, 
-          required this.name, 
-          required this.brand, 
-          required this.size, 
-          required this.rentPrice, 
-          required this.rrp,
-          this.isRented = false,
-          this.startDate = '01-01-99',
-          this.rentDays = 0, 
-          this.renteeId = 0, 
+  DressRenter({required this.id, 
+          required this.renterId, 
+          required this.dressId, 
+          required this.startDate, 
+          required this.endDate, 
+          required this.price,
         }); 
 
     String id;
-    String name;
-    String brand;
-    int size;
-    int rentPrice;
-    int rrp;
-    bool isRented;
+    String renterId;
+    String dressId;
     String startDate;
-    int rentDays; 
-    int renteeId; 
+    String endDate;
+    int price;
 
   // dress to firestore (map)
   Map<String, dynamic> toFirestore() {
     return {
-      'name': name,
-      'brand': brand,
-      'size': size,
-      'rentPrice': rentPrice,
-      'rrp': rrp,
-      'isRented': false,
+      'renterId': renterId,
+      'dressId': dressId,
       'startDate': startDate,
-      'rentDays': rentDays,
-      'renteeId': renteeId,
+      'endDate': endDate,
+      'price': price,
     };
   }
 
-  // character from firestore
-  factory Dress.fromFirestore(
+  // DressRenter from firestore
+  factory DressRenter.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) {
@@ -50,20 +38,16 @@ class Dress {
     final data = snapshot.data()!;
 
     // make character instance
-    Dress dress = Dress(
+    DressRenter dressRenter = DressRenter(
       id: snapshot.id,
-      name: data['name'],
-      brand: data['brand'],
-      size: data['size'],
-      rentPrice: data['rentPrice'],
-      rrp: data['rrp'],
-      isRented: data['isRented'],
+      renterId: data['renterId'],
+      dressId: data['dressId'],
       startDate: data['startDate'],
-      rentDays: data['rentDays'],
-      renteeId: data['renteeId']
+      endDate: data['endDate'],
+      price: data['price'],
     );
 
-    return dress;
+    return dressRenter;
   } 
   
   

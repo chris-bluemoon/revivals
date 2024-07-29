@@ -2,6 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'dart:developer';
+import 'package:unearthed/services/class_store.dart';
+import 'package:provider/provider.dart';
+import 'package:unearthed/models/renter.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid();
 
 class GoogleSignInScreen extends StatefulWidget {
   const GoogleSignInScreen({Key? key}) : super(key: key);
@@ -12,6 +18,19 @@ class GoogleSignInScreen extends StatefulWidget {
 
 class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
   ValueNotifier userCredential = ValueNotifier('');
+
+
+  void handleSubmit(String email, String name) {
+    log('Adding renter');
+    Provider.of<DressStore>(context, listen: false).addRenter(Renter(
+      id: uuid.v4(),
+      email: email,
+      name: name,
+      size: 0,
+      address: 'Bangkok',
+      phoneNum: 0,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +55,9 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                             userCredential.value = await signInWithGoogle();
                             if (userCredential.value != null) {
                               log(userCredential.value.user!.email);
+                              log(userCredential.value.user!.displayName);
+                              handleSubmit(userCredential.value.user!.email,
+                                          userCredential.value.user!.displayName);
                             }
                           },
                         ),

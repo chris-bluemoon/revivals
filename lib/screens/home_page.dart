@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/home/home.dart';
-import 'package:unearthed/services/dress_store.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/sign_up/sign_up.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/profile/profile.dart';

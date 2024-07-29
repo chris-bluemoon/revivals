@@ -6,7 +6,7 @@ import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/screens/new_arrivals/dress_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/to_rent/rent_this.dart';
-import 'package:unearthed/services/dress_store.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:uuid/uuid.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
@@ -32,21 +32,6 @@ class ToRent extends StatefulWidget {
 }
 
 class _NewArrivalsState extends State<ToRent> {
-  
-  void handleSubmit() {
-    // Provider.of<DressStore>(context, listen: false).addDress(Dress(
-    //   id: uuid.v4(),
-    //   name: 'Sheena',
-    //   brand: 'LEXI',
-    //   size: 0,
-    //   rentPrice: 0,
-    //   rrp: 0,
-    // ));
-    log('Renting dress ${widget.dress.name}');
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress))));
-
-  }
-
   
 
   @override
@@ -129,7 +114,6 @@ class _NewArrivalsState extends State<ToRent> {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      handleSubmit();
                     },
                     child: const Text('BUY PRELOVED', style: TextStyle(color: Colors.black)),
                       style: OutlinedButton.styleFrom(
@@ -144,7 +128,7 @@ class _NewArrivalsState extends State<ToRent> {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      handleSubmit();
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress)))); 
                     },
                     child: const Text('RENT THIS', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(

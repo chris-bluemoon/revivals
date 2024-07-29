@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/screens/new_arrivals/new_arrivals.dart';
-import 'package:unearthed/services/dress_store.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:provider/provider.dart';
 

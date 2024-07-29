@@ -1,2 +1,4 @@
-// Global variables
-bool loggedIn = false;
+class MyGlobalVariables {
+  static String userId = '123';
+}
+

@@ -2,11 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/renter.dart';
+import 'package:unearthed/models/dress_renter.dart';
 import 'package:unearthed/services/firestore_service.dart';
 
 class DressStore extends ChangeNotifier {
 
   final List<Dress> _dresses = [];
+  final List<Renter> _renters = [];
+  final List<DressRenter> _dressRenters = [];
   // final List<Dress> _dresses = [
   //   Dress(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
   //   Dress(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
@@ -18,6 +22,8 @@ class DressStore extends ChangeNotifier {
   // ];
 
   get dresses => _dresses;
+  get renters => _renters;
+  get dressRenters => _dressRenters;
 
   // add dress
   // void addCharacter(Dress dress) {
@@ -28,8 +34,19 @@ class DressStore extends ChangeNotifier {
   // add character
   void addDress(Dress dress) async {
     await FirestoreService.addDress(dress);
-
     _dresses.add(dress);
+    notifyListeners();
+  }
+
+  void addRenter(Renter renter) async {
+    await FirestoreService.addRenter(renter);
+    _renters.add(renter);
+    notifyListeners();
+  }
+  // add dressRenter
+  void addDressRenter(DressRenter dressRenter) async {
+    await FirestoreService.addDressRenter(dressRenter);
+    _dressRenters.add(dressRenter);
     notifyListeners();
   }
 
@@ -44,5 +61,14 @@ class DressStore extends ChangeNotifier {
       notifyListeners();
     }
   }
+  void fetchDressRentersOnce() async {
+    if (dressRenters.length == 0) {
+      final snapshot = await FirestoreService.getDressRentersOnce();
+      for (var doc in snapshot.docs) {
+        _dressRenters.add(doc.data());
+      }
 
+      notifyListeners();
+    }
+  }
 }

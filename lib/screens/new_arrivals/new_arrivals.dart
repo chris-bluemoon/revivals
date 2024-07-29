@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/screens/new_arrivals/dress_card.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/services/dress_store.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:uuid/uuid.dart';
 
