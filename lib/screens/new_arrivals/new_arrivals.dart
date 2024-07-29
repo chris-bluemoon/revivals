@@ -20,14 +20,19 @@ class NewArrivals extends StatefulWidget {
 
 class _NewArrivalsState extends State<NewArrivals> {
   void handleSubmit() {
-    Provider.of<DressStore>(context, listen: false).addDress(Dress(
-      id: uuid.v4(),
-      name: 'Sheena',
-      brand: 'LEXI',
-      size: 0,
-      rentPrice: 3500,
-      rrp: 55000
+    for (var i = 0; i < myDresses.length; i++) {
+      log(myDresses[i].name);
+      Provider.of<DressStore>(context, listen: false).addDress(Dress(
+        id: uuid.v4(),
+        name: myDresses[i].name,
+        brand: myDresses[i].brand,
+        colour: myDresses[i].colour,
+        size: myDresses[i].size,
+        rentPrice: myDresses[i].rentPrice,
+        rrp: myDresses[i].rrp,
+        description: myDresses[i].description
     ));
+    }
   }
 
   @override
@@ -110,6 +115,7 @@ class _NewArrivalsState extends State<NewArrivals> {
               TextButton(
                 onPressed: () {
                   handleSubmit();
+                  // addDressesAll();
                 },
                 child: const Text('ADD'),
               )

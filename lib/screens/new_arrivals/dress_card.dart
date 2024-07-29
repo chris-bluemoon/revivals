@@ -9,10 +9,12 @@ class DressCard extends StatelessWidget {
   final Dress dress;
   late String imageName;
   late String dressName;
+  late String brandName;
 
   String setDressImage() {
-    dressName = dress.name.replaceAll(RegExp(' '), '_');
-    imageName = '${dress.brand}_${dressName}_Dress.webp';
+    dressName = dress.name.replaceAll(RegExp(' +'), '_');
+    brandName = dress.brand.replaceAll(RegExp(' +'), '_');
+    imageName = '${brandName}_${dressName}_Dress.png';
     return imageName;
   }
 

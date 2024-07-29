@@ -86,10 +86,6 @@ class _NewArrivalsState extends State<ToRent> {
                       padding: const EdgeInsets.all(8.0),
                       child: Image.asset('assets/img/dresses/${widget.setDressImage()}'),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset('assets/img/dresses/${widget.setDressImage()}'),
-                    ),
                   ],
                 )
               ]
