@@ -14,7 +14,7 @@ class DressCard extends StatelessWidget {
   String setDressImage() {
     dressName = dress.name.replaceAll(RegExp(' +'), '_');
     brandName = dress.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${dressName}_Dress.png';
+    imageName = '${brandName}_${dressName}_Dress_1.jpg';
     return imageName;
   }
 
@@ -27,7 +27,7 @@ class DressCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: Image.asset('assets/img/dresses/${setDressImage()}')),
+            Expanded(child: Image.asset('assets/img/new_dresses/${setDressImage()}')),
             // Expanded(child: Image.asset('assets/img/dresses/$imageName')),
             // Expanded(child: Image.asset('assets/img/dresses/test.png')),
             StyledHeading(dress.name),

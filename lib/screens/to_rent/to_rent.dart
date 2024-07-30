@@ -80,9 +80,9 @@ class _NewArrivalsState extends State<ToRent> {
                   scrollDirection: Axis.horizontal,
                   children: const <Widget>[
                     SizedBox(width: 4),
-                    Image(image: AssetImage('assets/img/dresses/AJE_Mathilde_Dress_1.jpeg')),
+                    Image(image: AssetImage('assets/img/new_dresses/AJE_Violette_Dress_1.jpg')),
                     SizedBox(width: 4),
-                    Image(image: AssetImage('assets/img/dresses/AJE_Mathilde_Dress_2.jpeg')),
+                    Image(image: AssetImage('assets/img/new_dresses/AJE_Violette_Dress_2.jpg')),
                     SizedBox(width: 4),
                   ],
                 ),
