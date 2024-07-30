@@ -30,7 +30,10 @@ class _NewArrivalsState extends State<NewArrivals> {
         size: myDresses[i].size,
         rentPrice: myDresses[i].rentPrice,
         rrp: myDresses[i].rrp,
-        description: myDresses[i].description
+        description: myDresses[i].description,
+        bust: myDresses[i].bust,
+        waist: myDresses[i].waist,
+        hips: myDresses[i].hips,
     ));
     }
   }

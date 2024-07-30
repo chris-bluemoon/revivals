@@ -6,9 +6,12 @@ import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/screens/new_arrivals/dress_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/to_rent/rent_this.dart';
+import 'package:unearthed/screens/to_rent/dress_widget.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:uuid/uuid.dart';
 import 'package:unearthed/shared/styled_text.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 
 var uuid = const Uuid();
 
@@ -33,6 +36,10 @@ class ToRent extends StatefulWidget {
 
 class _NewArrivalsState extends State<ToRent> {
   
+  List items = [1, 2];
+  int currentIndex = 0;
+
+  CarouselController buttonCarouselController = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -73,20 +80,36 @@ class _NewArrivalsState extends State<ToRent> {
       ),
       body: Column(
         children: [
-          SizedBox(
-                height: 400,
-                child: ListView(
-                  // This next line does the trick.
-                  scrollDirection: Axis.horizontal,
-                  children: const <Widget>[
-                    SizedBox(width: 4),
-                    Image(image: AssetImage('assets/img/new_dresses/AJE_Violette_Dress_1.jpg')),
-                    SizedBox(width: 4),
-                    Image(image: AssetImage('assets/img/new_dresses/AJE_Violette_Dress_2.jpg')),
-                    SizedBox(width: 4),
-                  ],
-                ),
+          SizedBox(height:10),
+                    CarouselSlider(
+            carouselController: buttonCarouselController,
+            options: CarouselOptions(
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+                height: 450,
+                autoPlay: true),
+            items: items.map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return DressWidget(dress: widget.dress, dressNumber: i);
+                },
+              );
+            }).toList(),
+          ),
+                    Center(
+            child: DotsIndicator(
+              dotsCount: items.length,
+              position: currentIndex.toDouble(),
+              decorator: const DotsDecorator(
+                colors: [Colors.grey, Colors.grey],
+                activeColor: Colors.black,
+                // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
               ),
+            ),
+          ),
           Text('DESCRIPTION HERE'),
         ],
       ),

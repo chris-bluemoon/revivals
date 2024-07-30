@@ -22,7 +22,7 @@ class OfferWidget extends StatelessWidget {
                               children: [
                                 StyledHeadingPlayFair('Limited Time Offer'),
                                 StyledTitlePlayFair('90\$ OFF'),
-                                SizedBox(height: 20),
+                                SizedBox(height: 21),
                                 StyledBody('Enjoy 6 new styles'),
                                 StyledBody('every month'),
                                 SizedBox(height: 10),
