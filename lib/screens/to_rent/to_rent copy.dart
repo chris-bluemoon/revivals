@@ -71,24 +71,26 @@ class _NewArrivalsState extends State<ToRent> {
           )
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(
-                height: 400,
-                child: ListView(
-                  // This next line does the trick.
-                  scrollDirection: Axis.horizontal,
-                  children: const <Widget>[
-                    SizedBox(width: 4),
-                    Image(image: AssetImage('assets/img/dresses/AJE_Mathilde_Dress_1.jpeg')),
-                    SizedBox(width: 4),
-                    Image(image: AssetImage('assets/img/dresses/AJE_Mathilde_Dress_2.jpeg')),
-                    SizedBox(width: 4),
+      body: SingleChildScrollView(
+        child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset('assets/img/dresses/${widget.setDressImage()}'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset('assets/img/dresses/${widget.setDressImage()}'),
+                    ),
                   ],
-                ),
-              ),
-          Text('DESCRIPTION HERE'),
-        ],
+                )
+              ]
+            )
+          ),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
