@@ -3,57 +3,57 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 List<Dress> myDresses = [
-Dress(id: '-', name: 'Imory', brand: 'BARDOT', colour: 'Biege-Nude', size: 8, rentPrice: 2500, rrp: 16000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Carmelita', brand: 'HOUSE OF CB', colour: 'Biege-Nude', size: 6, rentPrice: 900, rrp: 8500, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Laetitia', brand: 'HOUSE OF CB', colour: 'Biege-Nude', size: 8, rentPrice: 900, rrp: 7500, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Rafaela', brand: 'HOUSE OF CB', colour: 'Biege-Nude', size: 6, rentPrice: 1600, rrp: 10000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Riley', brand: 'LEXI', colour: 'Biege-Nude', size: 8, rentPrice: 1500, rrp: 11000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Cartellina', brand: 'BARDOT', colour: 'Black', size: 8, rentPrice: 1200, rrp: 16000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Hayden', brand: 'BARDOT', colour: 'Black', size: 8, rentPrice: 900, rrp: 5500, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Ira', brand: 'BARDOT', colour: 'Black', size: 8, rentPrice: 1200, rrp: 9200, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Wyatt', brand: 'BARDOT', colour: 'Black', size: 8, rentPrice: 2500, rrp: 16000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Elinor', brand: 'ELIYA', colour: 'Black', size: 8, rentPrice: 3200, rrp: 14000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Flavia', brand: 'LEXI', colour: 'Black', size: 6, rentPrice: 1000, rrp: 8000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Maya', brand: 'LEXI', colour: 'Black', size: 8, rentPrice: 2500, rrp: 16000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Violette', brand: 'AJE', colour: 'Blue', size: 8, rentPrice: 3000, rrp: 19000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Delfina', brand: 'ALC', colour: 'Blue', size: 8, rentPrice: 2300, rrp: 25300, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Georgette', brand: 'HOUSE OF CB', colour: 'Blue', size: 6, rentPrice: 1500, rrp: 9000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Imogen', brand: 'HOUSE OF CB', colour: 'Blue', size: 8, rentPrice: 1000, rrp: 8300, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Salome', brand: 'HOUSE OF CB', colour: 'Blue', size: 8, rentPrice: 1200, rrp: 8300, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Isadora', brand: 'LEXI', colour: 'Blue', size: 6, rentPrice: 800, rrp: 6500, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Polkadot', brand: 'ZIMMERMANN', colour: 'Blue', size: 8, rentPrice: 2900, rrp: 62000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Paradiso', brand: 'AJE', colour: 'Floral Print', size: 4, rentPrice: 3500, rrp: 29000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Olea', brand: 'BARDOT', colour: 'Floral Print', size: 6, rentPrice: 700, rrp: 6000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Francesca', brand: 'ELIYA', colour: 'Floral Print', size: 6, rentPrice: 3000, rrp: 13000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Carmen', brand: 'HOUSE OF CB', colour: 'Floral Print', size: 6, rentPrice: 900, rrp: 7000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Sheena', brand: 'LEXI', colour: 'Floral Print', size: 6, rentPrice: 1200, rrp: 9000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Lola', brand: 'NADINE MERABI', colour: 'Floral Print', size: 8, rentPrice: 2100, rrp: 23000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Aribella', brand: 'REFORMATION', colour: 'Floral Print', size: 8, rentPrice: 1200, rrp: 11000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Anais', brand: 'ROCOCO SAND', colour: 'Floral Print', size: 8, rentPrice: 2200, rrp: 20000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: 'Lamour', brand: 'SELKIE', colour: 'Floral Print', size: 6, rentPrice: 1800, rrp: 9500, description: 'Description', bust: '', waist: '', hips: ''),
+Dress(id: '-', name: 'Imory', brand: 'BARDOT', colour: 'Biege-Nude', size: 8, rentPrice: 2500, rrp: 16000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Carmelita', brand: 'HOUSE OF CB', colour: 'Biege-Nude', size: 6, rentPrice: 900, rrp: 8500, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Laetitia', brand: 'HOUSE OF CB', colour: 'Biege-Nude', size: 8, rentPrice: 900, rrp: 7500, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Rafaela', brand: 'HOUSE OF CB', colour: 'Biege-Nude', size: 6, rentPrice: 1600, rrp: 10000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Riley', brand: 'LEXI', colour: 'Biege-Nude', size: 8, rentPrice: 1500, rrp: 11000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Cartellina', brand: 'BARDOT', colour: 'Black', size: 8, rentPrice: 1200, rrp: 16000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Hayden', brand: 'BARDOT', colour: 'Black', size: 8, rentPrice: 900, rrp: 5500, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Ira', brand: 'BARDOT', colour: 'Black', size: 8, rentPrice: 1200, rrp: 9200, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Wyatt', brand: 'BARDOT', colour: 'Black', size: 8, rentPrice: 2500, rrp: 16000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Elinor', brand: 'ELIYA', colour: 'Black', size: 8, rentPrice: 3200, rrp: 14000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Flavia', brand: 'LEXI', colour: 'Black', size: 6, rentPrice: 1000, rrp: 8000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Maya', brand: 'LEXI', colour: 'Black', size: 8, rentPrice: 2500, rrp: 16000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Violette', brand: 'AJE', colour: 'Blue', size: 8, rentPrice: 3000, rrp: 19000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Delfina', brand: 'ALC', colour: 'Blue', size: 8, rentPrice: 2300, rrp: 25300, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Georgette', brand: 'HOUSE OF CB', colour: 'Blue', size: 6, rentPrice: 1500, rrp: 9000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Imogen', brand: 'HOUSE OF CB', colour: 'Blue', size: 8, rentPrice: 1000, rrp: 8300, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Salome', brand: 'HOUSE OF CB', colour: 'Blue', size: 8, rentPrice: 1200, rrp: 8300, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Isadora', brand: 'LEXI', colour: 'Blue', size: 6, rentPrice: 800, rrp: 6500, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Polkadot', brand: 'ZIMMERMANN', colour: 'Blue', size: 8, rentPrice: 2900, rrp: 62000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Paradiso', brand: 'AJE', colour: 'Floral Print', size: 4, rentPrice: 3500, rrp: 29000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Olea', brand: 'BARDOT', colour: 'Floral Print', size: 6, rentPrice: 700, rrp: 6000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Francesca', brand: 'ELIYA', colour: 'Floral Print', size: 6, rentPrice: 3000, rrp: 13000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Carmen', brand: 'HOUSE OF CB', colour: 'Floral Print', size: 6, rentPrice: 900, rrp: 7000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Sheena', brand: 'LEXI', colour: 'Floral Print', size: 6, rentPrice: 1200, rrp: 9000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Lola', brand: 'NADINE MERABI', colour: 'Floral Print', size: 8, rentPrice: 2100, rrp: 23000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Aribella', brand: 'REFORMATION', colour: 'Floral Print', size: 8, rentPrice: 1200, rrp: 11000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Anais', brand: 'ROCOCO SAND', colour: 'Floral Print', size: 8, rentPrice: 2200, rrp: 20000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: 'Lamour', brand: 'SELKIE', colour: 'Floral Print', size: 6, rentPrice: 1800, rrp: 9500, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
   // No images found
-  Dress(id: '-', name: "Kiss On The Lips", brand: 'SELKIE', colour: 'Floral Print', size: 6, rentPrice: 1800, rrp: 9500, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Cosmic", brand: 'ZIMMERMANN', colour: 'Floral Print', size: 8, rentPrice: 3500, rrp: 45000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Applique", brand: 'ZIMMERMANN', colour: 'Floral Print', size: 8, rentPrice: 3000, rrp: 35000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Carla", brand: 'ELIYA', colour: 'Gold', size: 6, rentPrice: 3000, rrp: 13500, description: 'Description', bust: '', waist: '', hips: ''),
+  Dress(id: '-', name: "Kiss On The Lips", brand: 'SELKIE', colour: 'Floral Print', size: 6, rentPrice: 1800, rrp: 9500, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Cosmic", brand: 'ZIMMERMANN', colour: 'Floral Print', size: 8, rentPrice: 3500, rrp: 45000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Applique", brand: 'ZIMMERMANN', colour: 'Floral Print', size: 8, rentPrice: 3000, rrp: 35000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Carla", brand: 'ELIYA', colour: 'Gold', size: 6, rentPrice: 3000, rrp: 13500, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
   // Not sure what this is
-  // Dress(id: '-', name: "Gold", brand: 'UNEARTHED COLLECTIONS', colour: 'Gold', size: 8, rentPrice: 1500, rrp: 8000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Faye", brand: 'HOUSE OF CB', colour: 'Green', size: 6, rentPrice: 1300, rrp: 9000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Mathilde", brand: 'AJE', colour: 'Pink', size: 4, rentPrice: 3000, rrp: 16000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Tidal", brand: 'AJE', colour: 'Pink', size: 4, rentPrice: 3000, rrp: 13500, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Ribera", brand: 'BAOBAB', colour: 'Pink', size: 6, rentPrice: 1600, rrp: 12000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Farah", brand: 'BRONX AND BANCO', colour: 'Pink', size: 8, rentPrice: 3700, rrp: 32000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Genevieve", brand: 'HOUSE OF CB', colour: 'Pink', size: 6, rentPrice: 2000, rrp: 10000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Tuxedo", brand: 'ZIMMERMANN', colour: 'Pink', size: 8, rentPrice: 3000, rrp: 35000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Esme", brand: 'ELIYA', colour: 'Red', size: 6, rentPrice: 3000, rrp: 14000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Candice", brand: 'NADINE MERABI', colour: 'Red', size: 8, rentPrice: 1900, rrp: 13000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Flor", brand: 'REFORMATION', colour: 'Red', size: 6, rentPrice: 1200, rrp: 12900, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Socorro", brand: 'HOUSE OF CB', colour: 'Silver', size: 6, rentPrice: 1000, rrp: 8200, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Elia", brand: 'HOUSE OF CB', colour: 'White', size: 6, rentPrice: 1000, rrp: 7000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Belinda", brand: 'LEXI', colour: 'White', size: 8, rentPrice: 1500, rrp: 10000, description: 'Description', bust: '', waist: '', hips: ''),
+  // Dress(id: '-', name: "Gold", brand: 'UNEARTHED COLLECTIONS', colour: 'Gold', size: 8, rentPrice: 1500, rrp: 8000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Faye", brand: 'HOUSE OF CB', colour: 'Green', size: 6, rentPrice: 1300, rrp: 9000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Mathilde", brand: 'AJE', colour: 'Pink', size: 4, rentPrice: 3000, rrp: 16000, description: 'Aje The Mathilde Bubble Hem Midi DressS', bust: '', waist: '', hips: '', longDescription: 'The Mathilde Bubble Hem Midi Dress features pleating through to the drop waist and a voluminous bubble neckline and skirt. A statement style for any occasion, wear with your favourite Aje heel.'),
+  Dress(id: '-', name: "Tidal", brand: 'AJE', colour: 'Pink', size: 4, rentPrice: 3000, rrp: 13500, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Ribera", brand: 'BAOBAB', colour: 'Pink', size: 6, rentPrice: 1600, rrp: 12000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Farah", brand: 'BRONX AND BANCO', colour: 'Pink', size: 8, rentPrice: 3700, rrp: 32000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Genevieve", brand: 'HOUSE OF CB', colour: 'Pink', size: 6, rentPrice: 2000, rrp: 10000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Tuxedo", brand: 'ZIMMERMANN', colour: 'Pink', size: 8, rentPrice: 3000, rrp: 35000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Esme", brand: 'ELIYA', colour: 'Red', size: 6, rentPrice: 3000, rrp: 14000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Candice", brand: 'NADINE MERABI', colour: 'Red', size: 8, rentPrice: 1900, rrp: 13000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Flor", brand: 'REFORMATION', colour: 'Red', size: 6, rentPrice: 1200, rrp: 12900, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Socorro", brand: 'HOUSE OF CB', colour: 'Silver', size: 6, rentPrice: 1000, rrp: 8200, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Elia", brand: 'HOUSE OF CB', colour: 'White', size: 6, rentPrice: 1000, rrp: 7000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Belinda", brand: 'LEXI', colour: 'White', size: 8, rentPrice: 1500, rrp: 10000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
   // Duplicate
-  // Dress(id: '-', name: "Riley", brand: 'LEXI', colour: 'White', size: 8, rentPrice: 1500, rrp: 11000, description: 'Description', bust: '', waist: '', hips: ''),
-  Dress(id: '-', name: "Odessey", brand: 'ZIMMERMANN', colour: 'White', size: 6, rentPrice: 5000, rrp: 53000, description: 'Description', bust: '', waist: '', hips: ''),
+  // Dress(id: '-', name: "Riley", brand: 'LEXI', colour: 'White', size: 8, rentPrice: 1500, rrp: 11000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
+  Dress(id: '-', name: "Odessey", brand: 'ZIMMERMANN', colour: 'White', size: 6, rentPrice: 5000, rrp: 53000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: ''),
 ];
 
 class Dress {
@@ -69,6 +69,7 @@ class Dress {
           required this.bust,
           required this.waist,
           required this.hips,
+          required this.longDescription,
         });
 
     String id;
@@ -82,6 +83,7 @@ class Dress {
     String bust;
     String waist;
     String hips;
+    String longDescription;
     
 
 
@@ -98,6 +100,7 @@ class Dress {
       'bust': bust,
       'waist': waist,
       'hips': hips,
+      'longDescription': longDescription,
     };
   }
 
@@ -122,7 +125,8 @@ class Dress {
       description: data['description'],
       bust: data['bust'],
       waist: data['waist'],
-      hips: data['hips']
+      hips: data['hips'],
+      longDescription: data['longDescription']
     );
 
     return dress;

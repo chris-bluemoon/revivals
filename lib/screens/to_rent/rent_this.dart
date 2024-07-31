@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -59,8 +60,46 @@ class _RentThisState extends State<RentThis> {
     }
   }
 
+  List<DateTime> getBlackoutDates(String dressId) {
+    // log(Provider.of<DressStore>(context, listen: false)
+      // .dressRenters[0].endDate.toString());
+    List<DressRenter> rDate =Provider.of<DressStore>(context, listen: false)
+      .dressRenters;
+    log('DressRenters: ${rDate}');
+// 5b26a42c-f9b6-4682-a57e-b694c8f122c5 dressId
+// chris.milner@gmail.com
+// startDate 2024-07-15 00:00:00:000
+// endDate 2024-07-17 00:00:00:000
+
+
+    // DateTime formattedDate = DateFormat("yyyy-MM-dd").parse(rDate);
+    // log(formattedDate.toString());
+    // return DateFormat("yyyy-MM-dd").parse(rDate);
+    DateTime returnDate = DateFormat("yyyy-MM-dd").parse('2026-07-31');
+    log('returnDate: $returnDate');
+    return [DateFormat("yyyy-MM-dd").parse('2024-07-31')];
+    // return rDate;
+  }
+
+  List<int> setTodayInIntegers() {
+
+    DateTime now = DateTime.now();
+    // String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+    String day = DateFormat('d').format(now);
+    String month = DateFormat('M').format(now);
+    String year = DateFormat('y').format(now);
+    int dayNum = int.parse(day);
+    int monthNum = int.parse(month);
+    int yearNum = int.parse(year);
+    return[dayNum, monthNum, yearNum];
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    List<DateTime> blackOutDates = getBlackoutDates(widget.dress.id);
+    log(blackOutDates.toString());
+
     return Scaffold(
         appBar: AppBar(
         title: const Row(
@@ -101,8 +140,12 @@ class _RentThisState extends State<RentThis> {
         children: [
           Container(
             child: SfDateRangePicker(
-              // maxDate: DateTime(2024, 8, 1),
+              // minDate: DateTime(2024, 7, 5),
+              monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates('dressId')),
+              enablePastDates: false,
+              // minDate: DateTime(setTodayInIntegers()[2],setTodayInIntegers()[1],setTodayInIntegers()[0]),
               // enableMultiView: true,
+              // extendableRangeSelectionDirection: ExtendableRangeSelectionDirection.backward,
               navigationDirection: DateRangePickerNavigationDirection.vertical,
               backgroundColor: Colors.white,
               selectionColor: Colors.black,
@@ -118,7 +161,10 @@ class _RentThisState extends State<RentThis> {
             child: ConfirmRentWidget(widget.dress),
             onPressed: () {
                 String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
-                // log('Selected start date of: $startDate');
+                final f = DateFormat('yyyyMMdd');
+                // String startDateText = DateFormat('Y m d').format(startDate!);
+                String startDateText = f.format(startDate!);
+                log('Selected start date of: $startDateText');
                 // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
             },

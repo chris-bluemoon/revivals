@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/main.dart';
@@ -12,6 +13,8 @@ import 'package:uuid/uuid.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:intl/intl.dart';
+import 'package:unearthed/globals.dart' as globals;
 
 var uuid = const Uuid();
 
@@ -32,12 +35,19 @@ class ToRent extends StatefulWidget {
     return imageName;
   }
 
+
+
 }
 
 class _NewArrivalsState extends State<ToRent> {
   
   List items = [1, 2];
   int currentIndex = 0;
+
+ String getCurrency() {
+  var format = NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'THB');
+  return format.currencySymbol;
+}
 
   CarouselController buttonCarouselController = CarouselController();
 
@@ -78,41 +88,60 @@ class _NewArrivalsState extends State<ToRent> {
           )
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 10),
-          CarouselSlider(
-            carouselController: buttonCarouselController,
-            options: CarouselOptions(
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                },
-                height: 400,
-                autoPlay: true),
-            items: items.map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return DressWidget(dress: widget.dress, dressNumber: i);
-                  // return const SizedBox(child: Text("BOX"), height: 20, width: 20);
-                },
-              );
-            }).toList(),
-          ),
-          Center(
-            child: DotsIndicator(
-              dotsCount: items.length,
-              position: currentIndex.toDouble(),
-              decorator: const DotsDecorator(
-                colors: [Colors.grey, Colors.grey],
-                activeColor: Colors.black,
-                // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 10),
+            CarouselSlider(
+              carouselController: buttonCarouselController,
+              options: CarouselOptions(
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                  height: 400,
+                  autoPlay: true),
+              items: items.map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return DressWidget(dress: widget.dress, dressNumber: i);
+                    // return const SizedBox(child: Text("BOX"), height: 20, width: 20);
+                  },
+                );
+              }).toList(),
+            ),
+            Center(
+              child: DotsIndicator(
+                dotsCount: items.length,
+                position: currentIndex.toDouble(),
+                decorator: const DotsDecorator(
+                  colors: [Colors.grey, Colors.grey],
+                  activeColor: Colors.black,
+                  // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
+                ),
               ),
             ),
-          ),
-          Text('DESCRIPTION HERE'),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: StyledHeading(widget.dress.description),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, bottom: 10),
+              child: StyledBody('Rental price: ${widget.dress.rentPrice.toString()} ${globals.thb}'),
+              // child: StyledBody('Rental price: ${widget.dress.rentPrice.toString()} ${getCurrency()}'),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, bottom: 10),
+              child: Text(widget.dress.longDescription),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, bottom: 10),
+              child: Text(widget.dress.longDescription),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

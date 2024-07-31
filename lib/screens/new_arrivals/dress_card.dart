@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/shared/styled_text.dart';
+import 'package:unearthed/globals.dart' as globals;
 
 // ignore: must_be_immutable
 class DressCard extends StatelessWidget {
@@ -23,17 +24,18 @@ class DressCard extends StatelessWidget {
     return Card(
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: Image.asset('assets/img/new_dresses/${setDressImage()}')),
-            // Expanded(child: Image.asset('assets/img/dresses/$imageName')),
-            // Expanded(child: Image.asset('assets/img/dresses/test.png')),
+            Center(child: StyledHeading(dress.brand)),
+            // Image.asset('assets/img/new_dresses/${setDressImage()}', width: 200, height: 600),
+            Expanded(child: Image.asset('assets/img/new_dresses/${setDressImage()}'),),
+            // Image.asset('assets/img/new_dresses/${setDressImage()}', fit: BoxFit.fill),
             StyledHeading(dress.name),
             // StyledText('Size: ${dress.size.toString()}'),
-            StyledBody('Rent ${dress.rentPrice.toString()} per day'),
-            StyledBodyStrikeout('RRP ${dress.rrp.toString()}'),
+            StyledBody('Rent for ${dress.rentPrice.toString()} ${globals.thb} per day'),
+            StyledBodyStrikeout('RRP ${dress.rrp.toString()} ${globals.thb}'),
           ],
         ),
       ),

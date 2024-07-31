@@ -23,6 +23,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     Provider.of<DressStore>(context, listen: false)
       .fetchDressesOnce();
+    Provider.of<DressStore>(context, listen: false)
+      .fetchDressRentersOnce();
 
     getCurrentUser();
     super.initState();
