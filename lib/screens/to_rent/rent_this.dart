@@ -88,19 +88,6 @@ class _RentThisState extends State<RentThis> {
     // return rDate;
   }
 
-  List<int> setTodayInIntegers() {
-
-    DateTime now = DateTime.now();
-    // String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
-    String day = DateFormat('d').format(now);
-    String month = DateFormat('M').format(now);
-    String year = DateFormat('y').format(now);
-    int dayNum = int.parse(day);
-    int monthNum = int.parse(month);
-    int yearNum = int.parse(year);
-    return[dayNum, monthNum, yearNum];
-  }
-
   @override
   Widget build(BuildContext context) {
 
@@ -150,9 +137,6 @@ class _RentThisState extends State<RentThis> {
               // minDate: DateTime(2024, 7, 5),
               monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates('dressId')),
               enablePastDates: false,
-              // minDate: DateTime(setTodayInIntegers()[2],setTodayInIntegers()[1],setTodayInIntegers()[0]),
-              // enableMultiView: true,
-              // extendableRangeSelectionDirection: ExtendableRangeSelectionDirection.backward,
               navigationDirection: DateRangePickerNavigationDirection.vertical,
               backgroundColor: Colors.white,
               selectionColor: Colors.black,
