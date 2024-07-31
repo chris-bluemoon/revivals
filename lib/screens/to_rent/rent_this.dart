@@ -63,21 +63,28 @@ class _RentThisState extends State<RentThis> {
   List<DateTime> getBlackoutDates(String dressId) {
     // log(Provider.of<DressStore>(context, listen: false)
       // .dressRenters[0].endDate.toString());
-    List<DressRenter> rDate =Provider.of<DressStore>(context, listen: false)
+    List<DressRenter> renters =Provider.of<DressStore>(context, listen: false)
       .dressRenters;
-    log('DressRenters: ${rDate}');
+    log('DressRenters: ${renters}');
+    List<DateTime> tempList = [];
 // 5b26a42c-f9b6-4682-a57e-b694c8f122c5 dressId
 // chris.milner@gmail.com
 // startDate 2024-07-15 00:00:00:000
 // endDate 2024-07-17 00:00:00:000
 
+    for (int i = 0; i<renters.length; i++) {
+      DateTime startDate = DateFormat("yyyy-MM-dd").parse(renters[i].startDate);
+      DateTime endDate = DateFormat("yyyy-MM-dd").parse(renters[i].endDate);
+      for (int y = 0; y <= endDate.difference(startDate).inDays; y++) {
+        tempList.add(startDate.add(Duration(days: y)));
+    }}
 
     // DateTime formattedDate = DateFormat("yyyy-MM-dd").parse(rDate);
     // log(formattedDate.toString());
     // return DateFormat("yyyy-MM-dd").parse(rDate);
-    DateTime returnDate = DateFormat("yyyy-MM-dd").parse('2026-07-31');
-    log('returnDate: $returnDate');
-    return [DateFormat("yyyy-MM-dd").parse('2024-07-31')];
+    // return [DateFormat("yyyy-MM-dd").parse('2024-07-31')];
+    log(tempList.toString());
+    return tempList;
     // return rDate;
   }
 
