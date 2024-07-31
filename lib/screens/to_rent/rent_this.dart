@@ -128,6 +128,7 @@ class _RentThisState extends State<RentThis> {
       body: Column(
         children: [
           Container(
+            height: 500,
             child: SfDateRangePicker(
               // minDate: DateTime(2024, 7, 5),
               monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates(widget.dress.id)),
@@ -142,8 +143,11 @@ class _RentThisState extends State<RentThis> {
               monthCellStyle: const DateRangePickerMonthCellStyle(blackoutDateTextStyle:
                 TextStyle(
                     color: Colors.red,
-                    decoration: TextDecoration.lineThrough),
+                    decoration: TextDecoration.lineThrough,
+                    decorationThickness: 1,
+                    decorationColor: Colors.red,),
                 ),
+                enableMultiView: true,
               
               // rangeSelectionColor: Colors.green,
             ),
