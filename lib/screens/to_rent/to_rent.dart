@@ -48,7 +48,7 @@ class _NewArrivalsState extends State<ToRent> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StyledTitle(widget.dress.name.toUpperCase()),
+            StyledTitle(widget.dress.brand.toUpperCase()),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,
@@ -80,8 +80,8 @@ class _NewArrivalsState extends State<ToRent> {
       ),
       body: Column(
         children: [
-          SizedBox(height:10),
-                    CarouselSlider(
+          SizedBox(height: 10),
+          CarouselSlider(
             carouselController: buttonCarouselController,
             options: CarouselOptions(
                 onPageChanged: (index, reason) {
@@ -89,17 +89,18 @@ class _NewArrivalsState extends State<ToRent> {
                     currentIndex = index;
                   });
                 },
-                height: 450,
+                height: 400,
                 autoPlay: true),
             items: items.map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return DressWidget(dress: widget.dress, dressNumber: i);
+                  // return const SizedBox(child: Text("BOX"), height: 20, width: 20);
                 },
               );
             }).toList(),
           ),
-                    Center(
+          Center(
             child: DotsIndicator(
               dotsCount: items.length,
               position: currentIndex.toDouble(),

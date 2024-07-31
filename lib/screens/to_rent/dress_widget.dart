@@ -32,19 +32,12 @@ class _DressWidgetState extends State<DressWidget> {
   @override
   Widget build(BuildContext context) {
                       // String dressImage = 'assets/img/new_dresses/${widget.dress.brand}_${widget.dress.name}_Dress_${widget.dressNumber}.jpg';
-                      return Container(
-                      // width: MediaQuery.of(context).size.width*2,
-                      // width: 400,
-                      // height: 800,
-                      // margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      // decoration: BoxDecoration(color: Colors.white),
-                      // child: StyledHeading('text $i'));
-                      child: Image.asset(setDressImage(),)
-                      
-                      
-                      // child: Image.asset('assets/img/dresses/LEXI_Dione_Dress.webp'),
-                      // child: Image.asset('assets/img/backgrounds/carousel_image_1.jpg'),
-                      );
+                      // return FittedBox(
+                        
+                        return Image.asset(setDressImage(), fit: BoxFit.contain);
+                        // child: Image.asset(setDressImage(),),
+                        // fit: BoxFit.fill,
+                      // );
 
   }
 }
