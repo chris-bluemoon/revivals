@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/summary/summary.dart';
@@ -128,7 +129,13 @@ class _RentThisState extends State<RentThis> {
       body: Column(
         children: [
           Container(
-            height: 500,
+            padding: EdgeInsets.all(1),
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              color: Colors.grey,
+            ),
+            height: 400,
             child: SfDateRangePicker(
               // minDate: DateTime(2024, 7, 5),
               monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates(widget.dress.id)),
@@ -143,11 +150,16 @@ class _RentThisState extends State<RentThis> {
               monthCellStyle: const DateRangePickerMonthCellStyle(blackoutDateTextStyle:
                 TextStyle(
                     color: Colors.red,
-                    decoration: TextDecoration.lineThrough,
-                    decorationThickness: 1,
-                    decorationColor: Colors.red,),
+                    decoration: TextDecoration.lineThrough),
                 ),
+                startRangeSelectionColor: Colors.black,
+                endRangeSelectionColor: Colors.black,
+                rangeSelectionColor: Colors.black.withOpacity(0.1),
+                todayHighlightColor: Colors.grey,
+                selectionShape: DateRangePickerSelectionShape.circle,
                 enableMultiView: true,
+                // headerHeight: 60,
+                
               
               // rangeSelectionColor: Colors.green,
             ),
