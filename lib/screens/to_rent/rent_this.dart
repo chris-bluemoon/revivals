@@ -14,6 +14,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:unearthed/globals.dart' as globals;
 
 var uuid = const Uuid();
 
@@ -30,6 +31,8 @@ class RentThis extends StatefulWidget {
 class _RentThisState extends State<RentThis> {
   DateTime? startDate;
   DateTime? endDate;
+  late int noOfDays = 0;
+  late int totalPrice = 0;
   bool bothDatesSelected = false;
   bool showConfirm = false;
 
@@ -52,6 +55,9 @@ class _RentThisState extends State<RentThis> {
       setState(() {
         bothDatesSelected = true;
         showConfirm = true;
+        noOfDays = endDate!.difference(startDate!).inDays;
+        totalPrice = noOfDays * widget.dress.rentPrice;
+        log(noOfDays.toString());
       });
     } else {
       setState(() {
@@ -135,7 +141,7 @@ class _RentThisState extends State<RentThis> {
               border: Border.all(color: Colors.grey),
               color: Colors.grey,
             ),
-            height: 400,
+            height: 550,
             child: SfDateRangePicker(
               // minDate: DateTime(2024, 7, 5),
               monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates(widget.dress.id)),
@@ -143,7 +149,12 @@ class _RentThisState extends State<RentThis> {
               navigationDirection: DateRangePickerNavigationDirection.vertical,
               backgroundColor: Colors.white,
               selectionColor: Colors.black,
-              headerStyle: DateRangePickerHeaderStyle(backgroundColor: Colors.white),
+              headerStyle: const DateRangePickerHeaderStyle(
+                backgroundColor: Colors.white,
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold
+                )),
               onSelectionChanged: _onSelectionChanged,
               // selectionTextStyle: const TextStyle(backgroundColor: Colors.blue),
               selectionMode: DateRangePickerSelectionMode.range,
@@ -158,25 +169,73 @@ class _RentThisState extends State<RentThis> {
                 todayHighlightColor: Colors.grey,
                 selectionShape: DateRangePickerSelectionShape.circle,
                 enableMultiView: true,
+                headerHeight: 60,
                 // headerHeight: 60,
                 
               
               // rangeSelectionColor: Colors.green,
             ),
           ),
-          if (showConfirm) ElevatedButton(
-            child: ConfirmRentWidget(widget.dress),
-            onPressed: () {
-                String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
-                final f = DateFormat('yyyyMMdd');
-                // String startDateText = DateFormat('Y m d').format(startDate!);
-                String startDateText = f.format(startDate!);
-                // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
-            },
-          ),
+          // if (showConfirm) ElevatedButton(
+          //   child: ConfirmRentWidget(widget.dress),
+          //   onPressed: () {
+          //       String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
+          //       final f = DateFormat('yyyyMMdd');
+          //       // String startDateText = DateFormat('Y m d').format(startDate!);
+          //       String startDateText = f.format(startDate!);
+          //       // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
+          //       Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
+          //   },
+          // ),
         ],
       ),
+            bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              spreadRadius: 3,
+            )
+          ],
+        ),
+            padding: EdgeInsets.all(10),
+            child: Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Text('Rent ${widget.dress.name} for ${widget.dress.rentPrice} ${globals.thb}', style: TextStyle(color: Colors.black, fontSize: 16)),
+                Text('${totalPrice}${globals.thb} for $noOfDays day(s)', style: TextStyle(color: Colors.black, fontSize: 18)),
+                SizedBox(width: 50),
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: !showConfirm ? null: () { 
+                      
+                String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
+                // String startDateText = DateFormat('Y m d').format(startDate!);
+                // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
+                    },
+                    // calculateWhetherDisabledReturnsBool() ? null : () => whatToDoOnPressed,
+                    // onPressed: () {
+                    //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress)))); 
+                    // },
+                    child: const Text('NEXT'),
+                    // child: const Text('NEXT', style: TextStyle(color: Colors.white)),
+                      // style: OutlinedButton.styleFrom(
+                      //   backgroundColor: Colors.black,
+                      //   shape: RoundedRectangleBorder(
+                      //   borderRadius: BorderRadius.circular(1.0),
+                      //   )),
+                    //   ),
+                    //   side: BorderSide(width: 1.0, color: Colors.black),
+                    //   ),
+                  ),
+                ),
+              ],
+            ),
+          ),   
     );
   }
 }
