@@ -47,6 +47,7 @@ class _Summary2State extends State<Summary2> {
 
     void handleSubmit(String renterId, String dressId, String startDate,
         String endDate, int price) {
+      
       Provider.of<DressStore>(context, listen: false)
           .addDressRenter(DressRenter(
         id: uuid.v4(),
@@ -158,8 +159,9 @@ class _Summary2State extends State<Summary2> {
                       String endDateText = widget.endDate.toString();
                       handleSubmit(email, widget.dress.id, startDateText, endDateText,
                           widget.dress.rentPrice);
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => (const Congrats())));
+                      showAlertDialog(context);  
+                      // Navigator.of(context).push(MaterialPageRoute(
+                          // builder: (context) => (const Congrats())));
                     },
                   ),
                 ),
@@ -170,4 +172,28 @@ class _Summary2State extends State<Summary2> {
       ),
     );
   }
+showAlertDialog(BuildContext context) {  
+  // Create button  
+  Widget okButton = ElevatedButton(  
+    child: Center(child: Text("OK")),  
+    onPressed: () {  
+      // Navigator.of(context).pop();  
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    },  
+  ); 
+    // Create AlertDialog  
+  AlertDialog alert = AlertDialog(  
+    title: Text("Congratulations"),  
+    content: Text("Your dress is being prepared"),  
+    actions: [  
+      okButton,  
+    ],  
+  );  
+    showDialog(  
+    context: context,  
+    builder: (BuildContext context) {  
+      return alert;  
+    },  
+  );   
+}
 }
