@@ -93,7 +93,7 @@ class _Summary2State extends State<Summary2> {
           Text(widget.endDate.toString()),
           Text(widget.noOfDays.toString()),
         ElevatedButton(
-            child: Text('Confirm'),
+            child: const Text('Confirm'),
             onPressed: () {
                 String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
                 // final f = DateFormat('yyyyMMdd');

@@ -33,30 +33,36 @@ class RentThisNextBar extends StatefulWidget {
 class _RentThisNextBarState extends State<RentThisNextBar> {
   @override
   Widget build(BuildContext context) {
-    return  Row(
+
+    int totalPrice = widget.dress.rentPrice * widget.noOfDays;
+
+    return Row(
       children: [
         Padding(
           padding: const EdgeInsets.all(20),
-          child: Text('Rent for ${widget.dress.rentPrice} ${globals.thb}'),
+          child: Text('${totalPrice}${globals.thb} for ${widget.noOfDays} days', style: TextStyle(fontSize: 18),),
         ),
-        Expanded(child: SizedBox()),
+        const Expanded(child: SizedBox()),
         Padding(
-          padding: const EdgeInsets.all(20),
-          child: OutlinedButton(
-                    onPressed: () {
-                    //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary('email', widget.dress, 'start date','end date')))); 
-                    //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary())));
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary2(widget.dress, widget.startDate, widget.endDate, widget.noOfDays, widget.dress.rentPrice))));
-                    },
-                    child: const Text('NEXT', style: TextStyle(color: Colors.white)),
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(1.0),
-                      ),
-                      side: BorderSide(width: 1.0, color: Colors.black),
-                      ),
-                  ),
+          padding: const EdgeInsets.fromLTRB(10,10,20,10),
+          child: SizedBox(
+            width: 120,
+            child: OutlinedButton(
+                      onPressed: () {
+                      //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary('email', widget.dress, 'start date','end date')))); 
+                      //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary())));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary2(widget.dress, widget.startDate, widget.endDate, widget.noOfDays, widget.dress.rentPrice))));
+                      },
+                      child: const Text('NEXT', style: TextStyle(color: Colors.white)),
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(1.0),
+                        ),
+                        side: BorderSide(width: 1.0, color: Colors.black),
+                        ),
+                    ),
+          ),
         )
       ],
     );

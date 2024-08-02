@@ -188,6 +188,8 @@ class _RentThisState extends State<RentThis> {
           //       Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
           //   },
           // ),
+        const Expanded(child: SizedBox()),
+        const Divider(height: 1),
       if (showConfirm) 
         Expanded(child: RentThisNextBar(widget.dress, noOfDays, startDate!, endDate!)),
         ],
