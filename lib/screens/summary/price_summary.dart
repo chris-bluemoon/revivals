@@ -46,7 +46,7 @@ class PriceSummary extends StatelessWidget {
               children: [
                 Text('$pricePerDay x $noOfDays days',style: TextStyle(fontSize: 14, color: Colors.grey[700]) ),
                 Expanded(child: SizedBox()),
-                Text('$pricePerDay${globals.thb}', style: TextStyle(fontSize: 14, color: Colors.grey[700])),
+                Text('$price${globals.thb}', style: TextStyle(fontSize: 14, color: Colors.grey[700])),
               ],
             ),
           ),
