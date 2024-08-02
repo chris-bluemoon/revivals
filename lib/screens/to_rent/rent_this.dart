@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
+import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
 import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/models/dress.dart';
@@ -187,55 +188,57 @@ class _RentThisState extends State<RentThis> {
           //       Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
           //   },
           // ),
+      if (showConfirm) 
+        Expanded(child: RentThisNextBar(widget.dress, noOfDays, startDate!, endDate!)),
         ],
       ),
-            bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
-              spreadRadius: 3,
-            )
-          ],
-        ),
-            padding: EdgeInsets.all(10),
-            child: Row(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Text('Rent ${widget.dress.name} for ${widget.dress.rentPrice} ${globals.thb}', style: TextStyle(color: Colors.black, fontSize: 16)),
-                Text('${totalPrice}${globals.thb} for $noOfDays day(s)', style: TextStyle(color: Colors.black, fontSize: 18)),
-                SizedBox(width: 50),
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: !showConfirm ? null: () { 
+        //     bottomNavigationBar: Container(
+        // decoration: BoxDecoration(
+        //   color: Colors.white,
+        //   border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
+        //   boxShadow: [
+        //     BoxShadow(
+        //       color: Colors.black.withOpacity(0.2),
+        //       blurRadius: 10,
+        //       spreadRadius: 3,
+        //     )
+        //   ],
+        // ),
+        //     padding: EdgeInsets.all(10),
+        //     child: Row(
+        //       // crossAxisAlignment: CrossAxisAlignment.start,
+        //       children: [
+        //         // Text('Rent ${widget.dress.name} for ${widget.dress.rentPrice} ${globals.thb}', style: TextStyle(color: Colors.black, fontSize: 16)),
+        //         Text('${totalPrice}${globals.thb} for $noOfDays day(s)', style: TextStyle(color: Colors.black, fontSize: 18)),
+        //         SizedBox(width: 50),
+        //         Expanded(
+        //           child: OutlinedButton(
+        //             onPressed: !showConfirm ? null: () { 
                       
-                String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
-                // String startDateText = DateFormat('Y m d').format(startDate!);
-                // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
-                    },
-                    // calculateWhetherDisabledReturnsBool() ? null : () => whatToDoOnPressed,
-                    // onPressed: () {
-                    //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress)))); 
-                    // },
-                    child: const Text('NEXT'),
-                    // child: const Text('NEXT', style: TextStyle(color: Colors.white)),
-                      // style: OutlinedButton.styleFrom(
-                      //   backgroundColor: Colors.black,
-                      //   shape: RoundedRectangleBorder(
-                      //   borderRadius: BorderRadius.circular(1.0),
-                      //   )),
-                    //   ),
-                    //   side: BorderSide(width: 1.0, color: Colors.black),
-                    //   ),
-                  ),
-                ),
-              ],
-            ),
-          ),   
+        //         String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
+        //         // String startDateText = DateFormat('Y m d').format(startDate!);
+        //         // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
+        //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
+        //             },
+        //             // calculateWhetherDisabledReturnsBool() ? null : () => whatToDoOnPressed,
+        //             // onPressed: () {
+        //             //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress)))); 
+        //             // },
+        //             child: const Text('NEXT'),
+        //             // child: const Text('NEXT', style: TextStyle(color: Colors.white)),
+        //               // style: OutlinedButton.styleFrom(
+        //               //   backgroundColor: Colors.black,
+        //               //   shape: RoundedRectangleBorder(
+        //               //   borderRadius: BorderRadius.circular(1.0),
+        //               //   )),
+        //             //   ),
+        //             //   side: BorderSide(width: 1.0, color: Colors.black),
+        //             //   ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),   
     );
   }
 }
