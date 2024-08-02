@@ -21,7 +21,21 @@ class _HomeState extends State<Home> {
   CarouselController buttonCarouselController = CarouselController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Scaffold(
+            appBar: AppBar(
+        // centerTitle: true,
+        title: Row(
+          // TODO: Image is not centered in appbar with back arrow
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/logos/unearthed_logo_2.png', 
+                // 'assets/logos/unearthed_collections.png', 
+                 height: 200,
+                                    ),
+              ]),
+      ),
+    body: SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -99,6 +113,7 @@ class _HomeState extends State<Home> {
           const SizedBox(height: 20),
         ],
       ),
+    )
     );
   }
 }

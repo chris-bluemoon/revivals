@@ -72,19 +72,19 @@ User? _user = await FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // centerTitle: true,
-        title: Row(
-          // TODO: Image is not centered in appbar with back arrow
-          mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/logos/unearthed_logo_2.png', 
-                // 'assets/logos/unearthed_collections.png', 
-                 height: 200,
-                                    ),
-              ]),
-      ),
+      // appBar: AppBar(
+      //   // centerTitle: true,
+      //   title: Row(
+      //     // TODO: Image is not centered in appbar with back arrow
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //       children: [
+      //         Image.asset(
+      //           'assets/logos/unearthed_logo_2.png', 
+      //           // 'assets/logos/unearthed_collections.png', 
+      //            height: 200,
+      //                               ),
+      //         ]),
+      // ),
 
       body: _pages[_pageIndex],
 
