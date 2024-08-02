@@ -96,10 +96,12 @@ class _Summary2State extends State<Summary2> {
             child: Text('Confirm'),
             onPressed: () {
                 String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
-                final f = DateFormat('yyyyMMdd');
+                // final f = DateFormat('yyyyMMdd');
                 // String startDateText = DateFormat('Y m d').format(startDate!);
-                String startDateText = f.format(widget.startDate);
-                String endDateText = f.format(widget.endDate);
+                // String startDateText = f.format(widget.startDate);
+                // String endDateText = f.format(widget.endDate);
+                String startDateText = widget.startDate.toString();
+                String endDateText = widget.endDate.toString();
                 handleSubmit(email, widget.dress.id, startDateText, endDateText, widget.dress.rentPrice);
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Congrats())));
             },

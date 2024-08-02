@@ -71,14 +71,14 @@ class _RentThisState extends State<RentThis> {
   List<DateTime> getBlackoutDates(String dressId) {
 
     log(dressId);
-    List<DressRenter> renters =Provider.of<DressStore>(context, listen: false)
+    List<DressRenter> dressRenters =Provider.of<DressStore>(context, listen: false)
       .dressRenters;
     List<DateTime> tempList = [];
 
-    for (int i = 0; i<renters.length; i++) {
-      DateTime startDate = DateFormat("yyyy-MM-dd").parse(renters[i].startDate);
-      DateTime endDate = DateFormat("yyyy-MM-dd").parse(renters[i].endDate);
-      String dressIdDB = renters[i].dressId;
+    for (int i = 0; i<dressRenters.length; i++) {
+      DateTime startDate = DateFormat("yyyy-MM-dd").parse(dressRenters[i].startDate);
+      DateTime endDate = DateFormat("yyyy-MM-dd").parse(dressRenters[i].endDate);
+      String dressIdDB = dressRenters[i].dressId;
       if (dressIdDB == dressId) {
       for (int y = 0; y <= endDate.difference(startDate).inDays; y++) {
         tempList.add(startDate.add(Duration(days: y)));
