@@ -183,11 +183,14 @@ showAlertDialog(BuildContext context) {
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: Text("Congratulations"),  
-    content: Text("Your dress is being prepared"),  
+    title: Center(child: Text("Congratulations")),
+    content: Text("      Your dress is being prepared"),  
     actions: [  
       okButton,  
     ],  
+                shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            ),
   );  
     showDialog(  
     context: context,  
