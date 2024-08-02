@@ -91,7 +91,7 @@ class _Summary2State extends State<Summary2> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             SummaryImageWidget(widget.dress),
             SizedBox(height: 20),
             Row(
@@ -122,7 +122,7 @@ class _Summary2State extends State<Summary2> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Rent for ${widget.noOfDays} days at ${widget.price}${globals.thb}', style: TextStyle(fontSize: 14)),
+                    Text('Rent for ${widget.noOfDays} days at ${widget.price}${globals.thb}', style: TextStyle(fontSize: 16)),
                     SizedBox(height: 5),
                     Text('(${pricePerDay}${globals.thb} per day)', style: TextStyle(fontSize: 14)),
                   ],
@@ -133,6 +133,7 @@ class _Summary2State extends State<Summary2> {
             Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
             // SizedBox(height: 20),
             DeliveryRadioWidget(),
+            Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
             PriceSummary(widget.price, widget.noOfDays, 0),
 
             Row(

@@ -18,9 +18,20 @@ import 'package:uuid/uuid.dart';
 import 'package:unearthed/globals.dart' as globals;
 
 class SummaryImageWidget extends StatelessWidget {
-  const SummaryImageWidget(this.dress, {super.key});
+  SummaryImageWidget(this.dress, {super.key});
 
   final Dress dress;
+
+  late String dressName;
+  late String brandName;
+  late String imageName;
+
+  String setDressImage() {
+    dressName = dress.name.replaceAll(RegExp(' +'), '_');
+    brandName = dress.brand.replaceAll(RegExp(' +'), '_');
+    imageName = '${brandName}_${dressName}_Dress_1.jpg';
+    return imageName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +42,7 @@ class SummaryImageWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: 
-              Image.asset('assets/img/new_dresses/ZIMMERMANN_Tuxedo_Dress_1.jpg', fit: BoxFit.fitHeight, height: 100, width: 80)),
+              Image.asset('assets/img/new_dresses/${setDressImage()}', fit: BoxFit.fitHeight, height: 100, width: 80)),
           SizedBox(width: 30),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
