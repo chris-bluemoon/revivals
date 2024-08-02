@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:unearthed/screens/summary/congrats.dart';
+import 'package:unearthed/screens/summary/delivery_radio_widget.dart';
+import 'package:unearthed/screens/summary/price_summary.dart';
+import 'package:unearthed/screens/summary/summary_image_widget.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
 import 'package:unearthed/screens/summary/summary.dart';
@@ -18,11 +21,12 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:unearthed/globals.dart' as globals;
 
-
 var uuid = const Uuid();
 
 class Summary2 extends StatefulWidget {
-  const Summary2(this.dress, this.startDate, this.endDate, this.noOfDays, this.price, {super.key});
+  const Summary2(
+      this.dress, this.startDate, this.endDate, this.noOfDays, this.price,
+      {super.key});
 
   final Dress dress;
   final DateTime startDate;
@@ -38,30 +42,28 @@ class _Summary2State extends State<Summary2> {
   // final int i;
   @override
   Widget build(BuildContext context) {
+    
+    int pricePerDay = widget.price~/widget.noOfDays;
 
-  void handleSubmit(String renterId, String dressId, String startDate, String endDate, int price) {
-    Provider.of<DressStore>(context, listen: false).addDressRenter(DressRenter(
-      id: uuid.v4(),
-      renterId: renterId,
-      dressId: dressId,
-      startDate: startDate,
-      endDate: endDate,
-      price: price,
-    ));
-  }
+    void handleSubmit(String renterId, String dressId, String startDate,
+        String endDate, int price) {
+      Provider.of<DressStore>(context, listen: false)
+          .addDressRenter(DressRenter(
+        id: uuid.v4(),
+        renterId: renterId,
+        dressId: dressId,
+        startDate: startDate,
+        endDate: endDate,
+        price: price,
+      ));
+    }
 
-  return Scaffold(
-        appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // StyledTitle(widget.dress.name.toUpperCase()),
-            StyledTitle('Summary'),
-            // Image.asset(
-            //   'assets/logos/unearthed_logo_2.png',
-            //   fit: BoxFit.contain,
-            //   height: 200,
-            // ),
+            StyledTitle('Review and Pay'),
           ],
         ),
         centerTitle: true,
@@ -75,39 +77,95 @@ class _Summary2State extends State<Summary2> {
         actions: [
           IconButton(
               onPressed: () =>
-                {Navigator.of(context).popUntil((route) => route.isFirst)},
+                  {Navigator.of(context).popUntil((route) => route.isFirst)},
               icon: const Icon(Icons.close)),
         ],
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4.0),
-          child: Container(
-            color: Colors.grey[300],
-            height: 1.0,
-          )
-        ),
+            preferredSize: const Size.fromHeight(4.0),
+            child: Container(
+              color: Colors.grey[300],
+              height: 1.0,
+            )),
       ),
-      body: Column(
-        children: [
-          Text(widget.dress.name),
-          Text(widget.startDate.toString()),
-          Text(widget.endDate.toString()),
-          Text(widget.noOfDays.toString()),
-        ElevatedButton(
-            child: const Text('Confirm'),
-            onPressed: () {
-                String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
-                // final f = DateFormat('yyyyMMdd');
-                // String startDateText = DateFormat('Y m d').format(startDate!);
-                // String startDateText = f.format(widget.startDate);
-                // String endDateText = f.format(widget.endDate);
-                String startDateText = widget.startDate.toString();
-                String endDateText = widget.endDate.toString();
-                handleSubmit(email, widget.dress.id, startDateText, endDateText, widget.dress.rentPrice);
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Congrats())));
-            },
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 20),
+            SummaryImageWidget(widget.dress),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                SizedBox(width: 20),
+                Icon(Icons.calendar_month_outlined),
+                SizedBox(width: 20),
+                Text(DateFormat.yMMMd().format(widget.startDate), style: TextStyle(fontSize: 14)),
+                Text('   -   '),
+                Text(DateFormat.yMMMd().format(widget.endDate), style: TextStyle(fontSize: 14)),
 
-        ],
+              ],),
+            const SizedBox(height: 20),
+            const Row(
+              children: [
+                SizedBox(width: 20),
+                Icon(Icons.location_pin),
+                SizedBox(width: 20),
+                Text('Bangkok, Thailand', style: TextStyle(fontSize: 14)),
+              ],),
+            const SizedBox(height: 40),
+            Center(
+              child: Container(
+                color: Colors.grey[200],
+                height: 70,
+                width: 350,
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Rent for ${widget.noOfDays} days at ${widget.price}${globals.thb}', style: TextStyle(fontSize: 14)),
+                    SizedBox(height: 5),
+                    Text('(${pricePerDay}${globals.thb} per day)', style: TextStyle(fontSize: 14)),
+                  ],
+                ),),
+            ),
+
+            SizedBox(height: 20),
+            Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
+            // SizedBox(height: 20),
+            DeliveryRadioWidget(),
+            PriceSummary(widget.price, widget.noOfDays, 0),
+
+            Row(
+              children: [
+                Expanded(child: SizedBox()),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    child: const Text('CONFIRM', style: TextStyle(color: Colors.white)),
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(1.0),
+                        ),
+                        side: BorderSide(width: 1.0, color: Colors.black),
+                        ),
+                    onPressed: () {
+                      String email = Provider.of<DressStore>(context, listen: false)
+                          .renters[0]
+                          .email;
+                      String startDateText = widget.startDate.toString();
+                      String endDateText = widget.endDate.toString();
+                      handleSubmit(email, widget.dress.id, startDateText, endDateText,
+                          widget.dress.rentPrice);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => (const Congrats())));
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

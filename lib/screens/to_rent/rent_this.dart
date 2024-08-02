@@ -189,7 +189,7 @@ class _RentThisState extends State<RentThis> {
           //   },
           // ),
         const Expanded(child: SizedBox()),
-        const Divider(height: 1),
+        const Divider(height: 1, color: Colors.black),
       if (showConfirm) 
         Expanded(child: RentThisNextBar(widget.dress, noOfDays, startDate!, endDate!)),
         ],

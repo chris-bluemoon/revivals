@@ -34,13 +34,22 @@ class _RentThisNextBarState extends State<RentThisNextBar> {
   @override
   Widget build(BuildContext context) {
 
-    int totalPrice = widget.dress.rentPrice * widget.noOfDays;
+    double dayOffSet = 1.0;
+    if (widget.noOfDays > 1) {
+      dayOffSet = 0.8;
+    }
+    if (widget.noOfDays > 3) {
+      dayOffSet = 0.7;
+    }
+    int totalPrice = (widget.dress.rentPrice * widget.noOfDays * dayOffSet).toInt();
+    int offSetPrice = (widget.dress.rentPrice * dayOffSet).toInt();
 
     return Row(
       children: [
         Padding(
           padding: const EdgeInsets.all(20),
-          child: Text('${totalPrice}${globals.thb} for ${widget.noOfDays} days', style: TextStyle(fontSize: 18),),
+          child: Text('${offSetPrice}${globals.thb}/day for ${widget.noOfDays} days', style: TextStyle(fontSize: 18),),
+          // child: Text('${totalPrice}${globals.thb} for ${widget.noOfDays} days', style: TextStyle(fontSize: 18),),
         ),
         const Expanded(child: SizedBox()),
         Padding(
@@ -51,7 +60,7 @@ class _RentThisNextBarState extends State<RentThisNextBar> {
                       onPressed: () {
                       //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary('email', widget.dress, 'start date','end date')))); 
                       //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary())));
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary2(widget.dress, widget.startDate, widget.endDate, widget.noOfDays, widget.dress.rentPrice))));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary2(widget.dress, widget.startDate, widget.endDate, widget.noOfDays, totalPrice))));
                       },
                       child: const Text('NEXT', style: TextStyle(color: Colors.white)),
                         style: OutlinedButton.styleFrom(
