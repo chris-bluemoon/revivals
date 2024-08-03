@@ -22,103 +22,100 @@ class ProfileLanding extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('PERSONAL (${user!.displayName!})', style: const TextStyle(fontSize: 16)),
-          const SizedBox(height: 20),
-          const Row(
+          Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.account_circle),
-              SizedBox(width: 20),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.account_circle)),
               Text('MY ACCOUNT'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          const Row(
+          Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.woman_2_outlined),
-              SizedBox(width: 20),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.woman_2_outlined)),
               Text('MY RENTALS'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          const Row(
+          Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.description),
-              SizedBox(width: 20),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.description)),
               Text('INVOICE HISTORY'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          const Row(
+          Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.group_add),
-              SizedBox(width: 20),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.group_add)),
               Text('REFER A FRIEND'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          const Row(
+          Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.account_circle),
-              SizedBox(width: 20),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.account_circle)),
               Text('NOTIFICATIONS'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          const Row(
+           Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.settings),
-              SizedBox(width: 20),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.settings)),
               Text('SETTINGS'),
             ],
           ),
-          const SizedBox(height: 40),
-          const Text('SUPPORT', style: TextStyle(fontSize: 16),),
+
           const SizedBox(height: 20),
-          const Row(
+          const Text('SUPPORT', style: TextStyle(fontSize: 16),),
+          Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.account_circle),
-              SizedBox(width: 20),
-              Text('NOTIFICATIONS'),
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.account_circle)),
+              const Text('FAQ'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          const Row(
+           Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.chat_bubble_rounded),
-              SizedBox(width: 20),
+              IconButton(
+                onPressed: () {log('Pressed');},
+                icon: Icon(Icons.chat_bubble_rounded)),
               Text('CHAT WITH US'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          const Row(
+          Row(
             children: [
               SizedBox(width: 10),
-              Icon(Icons.exit_to_app),
-              SizedBox(width: 20),
+              IconButton(
+                onPressed: () async {
+                  bool result = await signOutFromGoogle();
+                  if (result) userCredential.value = '';
+                },
+                icon: Icon(Icons.exit_to_app)),
               Text('SIGN OUT'),
             ],
           ),
-          Divider(indent: 50, color: Colors.grey[200],),
-
-
-
-          const Expanded(child: SizedBox()),
-          ElevatedButton(
-            onPressed: () async {
-              bool result = await signOutFromGoogle();
-              if (result) userCredential.value = '';
-                },
-              child: const Text('Logout')
-            ),
-
-            
         ],),
     );
   }
