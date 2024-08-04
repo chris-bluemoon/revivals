@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/models/renter.dart';
@@ -39,6 +41,16 @@ class FirestoreService {
   // add a new renter
   static Future<void> addRenter(Renter renter) async {
     await refRenter.doc(renter.id).set(renter);
+  }
+
+  // add a new renter
+  static Future<void> updateRenter(Renter renter) async {
+    await refRenter.doc(renter.id).update(
+      {
+        'address': renter.address
+      }
+    );
+    log('Shoudl have changed address to: ${renter.address}');
   }
 
   // get renters once

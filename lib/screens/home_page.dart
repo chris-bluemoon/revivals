@@ -1,8 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:unearthed/screens/browse/browse.dart';
 import 'package:unearthed/screens/home/home.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/send_line.dart';
+import 'package:unearthed/shared/send_whatsapp.dart';
+import 'package:unearthed/shared/sms.dart';
 import 'package:unearthed/screens/sign_up/sign_up.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/profile/profile.dart';
@@ -36,7 +40,7 @@ class _HomePageState extends State<HomePage> {
 
   final _pages = [
     Home(),
-    Center(child: Text('Browse'),),
+    Browse(),
     Center(child: Text('Favourites'),),
     Profile(),
   ];

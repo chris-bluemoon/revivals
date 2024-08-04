@@ -50,7 +50,7 @@ class _Profile extends State<Profile> {
           // TODO: Image is not centered in appbar with back arrow
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('PROFILE')
+              Text('PROFILE', style: TextStyle(fontSize: 22))
               ]),
       ),
         body: ValueListenableBuilder(
@@ -72,6 +72,7 @@ class _Profile extends State<Profile> {
               // );
             }));
   }
+
 }
 
 Future<dynamic> signInWithGoogle() async {
@@ -101,4 +102,32 @@ Future<bool> signOutFromGoogle() async {
   } on Exception catch (_) {
     return false;
   }
+}
+
+showAlertDialog(BuildContext context) {  
+  // Create button  
+  Widget okButton = ElevatedButton(  
+    child: Center(child: Text("OK")),  
+    onPressed: () {  
+      // Navigator.of(context).pop();  
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    },  
+  ); 
+    // Create AlertDialog  
+  AlertDialog alert = AlertDialog(  
+    title: Center(child: Text("SIGNED OUT")),
+    // content: Text("      Your dress is being prepared"),  
+    actions: [  
+      okButton,  
+    ],  
+                shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            ),
+  );  
+    showDialog(  
+    context: context,  
+    builder: (BuildContext context) {  
+      return alert;  
+    },  
+  );
 }
