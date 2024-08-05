@@ -50,18 +50,25 @@ User? _user = await FirebaseAuth.instance.currentUser;
 // Firebase.Auth.FirebaseUser user = auth.CurrentUser;
     // User? asda = FirebaseAuth.instance.currentUser;
     if(_user != null) {
-      log('asda: ${_user.displayName}');
+      log('Logged in with displayName: ${_user.displayName}');
+      log('and email: ${_user.email}');
       loggedIn = true;
-      Provider.of<DressStore>(context, listen: false).addRenterAppOnly(Renter(
-        id: uuid.v4(),
-        email: _user.email!,
-        name: _user.displayName!,
-        size: 0,
-        address: 'Thailand',
-        phoneNum: 0,
-    ));
+      // Get correct user from database
+      Provider.of<DressStore>(context, listen: false).fetchRentersOnce(_user.email!);
+      // Provider.of<DressStore>(context, listen: false).fetchRentersOnce('uneartheduser@gmail.com');
+      // Provider.of<DressStore>(context, listen: false).fetchRentersOnce(_user.email!);
+      // Then add to Provider
+    //   Provider.of<DressStore>(context, listen: false).addRenterAppOnly(Renter(
+    //     id: uuid.v4(),
+    //     email: _user.email!,
+    //     name: _user.displayName!,
+    //     size: 0,
+    //     address: 'Thailand',
+    //     phoneNum: 0,
+    // ));
     } else {
       log('Not logged in');
+      Provider.of<DressStore>(context, listen: false).fetchRentersAll();
       loggedIn = false;
     };
     return _user;

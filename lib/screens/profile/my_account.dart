@@ -28,15 +28,22 @@ class MyAccount extends StatefulWidget {
 }
 
 class _MyAccountState extends State<MyAccount> {
+  
+
   late TextEditingController _addressController;
     @override
   void initState() {
     super.initState();
-    _addressController = new TextEditingController(text: 'Initial value');
+    _addressController = TextEditingController(text: 'Dummy address value');
+    // _addressController = new TextEditingController(text: 'Initial value');
   }
   
   @override
   Widget build(BuildContext context) {
+
+    String address = Provider.of<DressStore>(context, listen: false).renters[0].address;
+
+    _addressController = TextEditingController(text: address);
     // ValueNotifier userCredential = ValueNotifier('');
     return Scaffold(
       appBar: AppBar(
@@ -74,6 +81,7 @@ class _MyAccountState extends State<MyAccount> {
             Text('ADDRESS', style: TextStyle(fontSize: 12, color: Colors.grey),),
             TextFormField(
               // initialValue: '12 Acacia Road, Bangkok, Thailand',
+              // initialValue: address,
               controller: _addressController,
             ),
             SizedBox(height: 30),

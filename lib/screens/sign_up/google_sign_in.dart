@@ -19,17 +19,31 @@ class GoogleSignInScreen extends StatefulWidget {
 class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
   ValueNotifier userCredential = ValueNotifier('');
 
+  late bool found = false;
 
   void handleSubmit(String email, String name) {
-    log('Adding renter');
+    log('Adding renter if not exists!');
+    List renters = Provider.of<DressStore>(context, listen: false).fetchRentersAll();
+    log('Current DB list is: ${renters.toString()}');
+    for (Renter r in renters) {
+      if (r.email == email) {
+        found = true;
+        log('User ${r.email} already found, not adding');
+      } else {
+        found = false;
+      }
+    }
+    if (found == false) {
+    log('Adding user to DB for first time');
     Provider.of<DressStore>(context, listen: false).addRenter(Renter(
       id: uuid.v4(),
       email: email,
       name: name,
       size: 0,
-      address: 'Bangkok',
+      address: '',
       phoneNum: 0,
     ));
+    }
   }
 
   @override

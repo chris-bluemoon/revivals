@@ -11,6 +11,7 @@ class DressStore extends ChangeNotifier {
   final List<Dress> _dresses = [];
   final List<Renter> _renters = [];
   final List<DressRenter> _dressRenters = [];
+  late final Renter _user;
   // final List<Dress> _dresses = [
   //   Dress(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
   //   Dress(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
@@ -24,12 +25,20 @@ class DressStore extends ChangeNotifier {
   get dresses => _dresses;
   get renters => _renters;
   get dressRenters => _dressRenters;
+  get renter => _user;
 
   // add dress
   // void addCharacter(Dress dress) {
   //   _dresses.add(dress);
   //   notifyListeners();
   // }
+
+  // add user
+  void addUser(Renter user) async {
+    // await FirestoreService.addDress(dress);
+    _user = user;
+    notifyListeners();
+  }
 
   // add character
   void addDress(Dress dress) async {
@@ -47,6 +56,7 @@ class DressStore extends ChangeNotifier {
 
   void saveRenter(Renter renter) async {
     await FirestoreService.updateRenter(renter);
+    _renters[0].address = renter.address;
     return;
   }
 
@@ -71,11 +81,43 @@ class DressStore extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  // initially fetch dressRenters
   void fetchDressRentersOnce() async {
     if (dressRenters.length == 0) {
       final snapshot = await FirestoreService.getDressRentersOnce();
       for (var doc in snapshot.docs) {
         _dressRenters.add(doc.data());
+      }
+      notifyListeners();
+    }
+  }
+
+  // initially fetch renters
+    fetchRentersAll() async {
+    if (dressRenters.length == 0) {
+      final snapshot = await FirestoreService.getRentersOnce();
+      for (var doc in snapshot.docs) {
+        _renters.add(doc.data());
+        }
+      }
+
+      notifyListeners();
+      return _renters;
+    }
+
+  void fetchRentersOnce(String email) async {
+    if (dressRenters.length == 0) {
+      final snapshot = await FirestoreService.getRentersOnce();
+      for (var doc in snapshot.docs) {
+        if (doc.data().email == email) {
+        _renters.add(doc.data());
+        log('Only adding ${doc.data().email}');
+        }
+        for (var r in _renters) {
+          log('Name in _renters is ${r.name}');
+          log('Email in _renters is ${r.email}');
+        }
       }
 
       notifyListeners();

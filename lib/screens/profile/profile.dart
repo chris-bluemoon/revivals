@@ -33,6 +33,7 @@ class _Profile extends State<Profile> {
     if (_user != null) {
       log('Setting uname: ${_user.displayName}');
       uname = _user.displayName.toString();
+      // Insert user to Provider here?
     } else {
       log('Not logged in');
     }
