@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:unearthed/models/renter.dart';
 import 'dart:developer';
 
 import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
+import 'package:unearthed/services/class_store.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -21,6 +24,9 @@ class _Profile extends State<Profile> {
   initState() {
     getCurrentUser();
     // final uid = user.uid;
+    List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+    log('Renters in Provider DB now:');
+    log(renters.length.toString());
     super.initState();
   }
 
@@ -36,6 +42,7 @@ class _Profile extends State<Profile> {
       // Insert user to Provider here?
     } else {
       log('Not logged in');
+      signInWithGoogle();
     }
     ;
     return _user;

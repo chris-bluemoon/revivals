@@ -47,10 +47,12 @@ class FirestoreService {
   static Future<void> updateRenter(Renter renter) async {
     await refRenter.doc(renter.id).update(
       {
-        'address': renter.address
+        'address': renter.address,
+        'phoneNum': renter.phoneNum
       }
     );
-    log('Shoudl have changed address to: ${renter.address}');
+    log('Should have changed address to: ${renter.address}');
+    log('Should have changed phoneNum to: ${renter.phoneNum}');
   }
 
   // get renters once

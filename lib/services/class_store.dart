@@ -33,12 +33,20 @@ class DressStore extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  // add user
-  void addUser(Renter user) async {
+  // assign the user
+  void assignUser(Renter user) async {
     // await FirestoreService.addDress(dress);
     _user = user;
     notifyListeners();
   }
+
+
+  // // remove the user
+  // void unassignUser(Renter user) async {
+  //   // await FirestoreService.addDress(dress);
+  //   _user = null;
+  //   notifyListeners();
+  // }
 
   // add character
   void addDress(Dress dress) async {
@@ -56,7 +64,8 @@ class DressStore extends ChangeNotifier {
 
   void saveRenter(Renter renter) async {
     await FirestoreService.updateRenter(renter);
-    _renters[0].address = renter.address;
+    // _renters[0].address = renter.address;
+      _user.address = renter.address;
     return;
   }
 
@@ -94,33 +103,14 @@ class DressStore extends ChangeNotifier {
   }
 
   // initially fetch renters
-    fetchRentersAll() async {
-    if (dressRenters.length == 0) {
+  void fetchRentersOnce() async {
+    if (renters.length == 0) {
       final snapshot = await FirestoreService.getRentersOnce();
       for (var doc in snapshot.docs) {
         _renters.add(doc.data());
         }
       }
-
-      notifyListeners();
-      return _renters;
-    }
-
-  void fetchRentersOnce(String email) async {
-    if (dressRenters.length == 0) {
-      final snapshot = await FirestoreService.getRentersOnce();
-      for (var doc in snapshot.docs) {
-        if (doc.data().email == email) {
-        _renters.add(doc.data());
-        log('Only adding ${doc.data().email}');
-        }
-        for (var r in _renters) {
-          log('Name in _renters is ${r.name}');
-          log('Email in _renters is ${r.email}');
-        }
-      }
-
+      log("Renters populated with lenght ${_renters.length}");
       notifyListeners();
     }
-  }
 }

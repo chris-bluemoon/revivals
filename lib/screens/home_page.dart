@@ -29,6 +29,8 @@ class _HomePageState extends State<HomePage> {
       .fetchDressesOnce();
     Provider.of<DressStore>(context, listen: false)
       .fetchDressRentersOnce();
+    Provider.of<DressStore>(context, listen: false)
+      .fetchRentersOnce();
 
     getCurrentUser();
     super.initState();
@@ -54,7 +56,7 @@ User? _user = await FirebaseAuth.instance.currentUser;
       log('and email: ${_user.email}');
       loggedIn = true;
       // Get correct user from database
-      Provider.of<DressStore>(context, listen: false).fetchRentersOnce(_user.email!);
+    //  Provider.of<DressStore>(context, listen: false).fetchRentersOnce(_user.email!);
       // Provider.of<DressStore>(context, listen: false).fetchRentersOnce('uneartheduser@gmail.com');
       // Provider.of<DressStore>(context, listen: false).fetchRentersOnce(_user.email!);
       // Then add to Provider
@@ -66,9 +68,19 @@ User? _user = await FirebaseAuth.instance.currentUser;
     //     address: 'Thailand',
     //     phoneNum: 0,
     // ));
+    List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+    
+    log('Current Provider list is: ${renters.toString()}');
+    for (Renter r in renters) {
+      log('Checking google email: ${_user.email}');
+      log('again database email: ${r.email}');
+      if (r.email == _user.email) {
+        Provider.of<DressStore>(context, listen: false).assignUser(r);
+        log('User ${r.email} found in DB, adding to current app user');
+      } 
+    }
     } else {
       log('Not logged in');
-      Provider.of<DressStore>(context, listen: false).fetchRentersAll();
       loggedIn = false;
     };
     return _user;

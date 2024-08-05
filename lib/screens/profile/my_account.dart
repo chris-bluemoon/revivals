@@ -31,20 +31,28 @@ class _MyAccountState extends State<MyAccount> {
   
 
   late TextEditingController _addressController;
-    @override
+  late TextEditingController _phoneNumController;
+
+  @override
   void initState() {
     super.initState();
     _addressController = TextEditingController(text: 'Dummy address value');
+    _phoneNumController = TextEditingController(text: 'Dummy phoneNum value');
     // _addressController = new TextEditingController(text: 'Initial value');
   }
   
   @override
   Widget build(BuildContext context) {
 
-    String address = Provider.of<DressStore>(context, listen: false).renters[0].address;
+    // String address = Provider.of<DressStore>(context, listen: false).renters[0].address;
+    String address = Provider.of<DressStore>(context, listen: false).renter.address;
+    String phoneNum = Provider.of<DressStore>(context, listen: false).renter.phoneNum;
 
     _addressController = TextEditingController(text: address);
+    _phoneNumController = TextEditingController(text: phoneNum);
     // ValueNotifier userCredential = ValueNotifier('');
+
+
     return Scaffold(
       appBar: AppBar(
         // centerTitle: true,
@@ -88,7 +96,7 @@ class _MyAccountState extends State<MyAccount> {
 
             Text('PHONE', style: TextStyle(fontSize: 12, color: Colors.grey),),
             TextFormField(
-              initialValue: '+0 000 0000',
+              controller: _phoneNumController,
             ),
             // AddressForm(),
           ],),
@@ -126,11 +134,16 @@ class _MyAccountState extends State<MyAccount> {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                    Renter toSave = Provider.of<DressStore>(context, listen: false).renters[0];
+                    Renter toSave = Provider.of<DressStore>(context, listen: false).renter;
                     log('Renters current address: ${toSave.address}');
+                    log('Renters current phoneNum: ${toSave.phoneNum}');
                     log('Renters id: ${toSave.id}');
                     log(_addressController.value.text);
+                    log(_phoneNumController.value.text);
+                    log('Renters NEW address: ${_addressController.value.text}');
+                    log('Renters NEW phoneNum: ${_phoneNumController.value.text}');
                     toSave.address = _addressController.value.text;
+                    toSave.phoneNum = _phoneNumController.value.text;
                         Provider.of<DressStore>(context, listen: false).saveRenter(toSave);
                     },
                     child: const Text('SAVE', style: TextStyle(color: Colors.white)),

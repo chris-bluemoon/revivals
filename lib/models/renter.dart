@@ -15,7 +15,7 @@ class Renter {
     String name;
     int size;
     String address;
-    int phoneNum;
+    String phoneNum;
 
   // dress to firestore (map)
   Map<String, dynamic> toFirestore() {

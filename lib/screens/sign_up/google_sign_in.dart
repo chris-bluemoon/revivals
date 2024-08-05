@@ -23,8 +23,8 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
 
   void handleSubmit(String email, String name) {
     log('Adding renter if not exists!');
-    List renters = Provider.of<DressStore>(context, listen: false).fetchRentersAll();
-    log('Current DB list is: ${renters.toString()}');
+    List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+    log('Current Provider of renters list is: ${renters.toString()}');
     for (Renter r in renters) {
       if (r.email == email) {
         found = true;
@@ -35,13 +35,23 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
     }
     if (found == false) {
     log('Adding user to DB for first time');
+    String jointUuid = uuid.v4();
     Provider.of<DressStore>(context, listen: false).addRenter(Renter(
-      id: uuid.v4(),
+      id: jointUuid,
       email: email,
       name: name,
       size: 0,
       address: '',
-      phoneNum: 0,
+      phoneNum: '',
+    ));
+    log('Adding single user');
+    Provider.of<DressStore>(context, listen: false).assignUser(Renter(
+      id: jointUuid,
+      email: email,
+      name: name,
+      size: 0,
+      address: '',
+      phoneNum: '',
     ));
     }
   }
@@ -106,6 +116,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                           ElevatedButton(
                               onPressed: () async {
                                 bool result = await signOutFromGoogle();
+                                // Provider.of<DressStore>(context, listen: false).unassignUser();
                                 if (result) userCredential.value = '';
                               },
                               child: const Text('Logout'))
