@@ -8,8 +8,8 @@ import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/globals.dart' as globals;
 
 // ignore: must_be_immutable
-class DressCard extends StatelessWidget {
-  DressCard(this.dress, {super.key});
+class FavouritesCard extends StatelessWidget {
+  FavouritesCard(this.dress, {super.key});
 
   final Dress dress;
   late String imageName;

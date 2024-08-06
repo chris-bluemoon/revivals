@@ -60,7 +60,7 @@ class FirestoreService {
     log('Firestore service received dress id: ${dress.id}');
     await refDress.doc(dress.id).update(
       {
-        'isFav': true,
+        'isFav': dress.isFav,
       }
     );
   }

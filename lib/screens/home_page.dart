@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/browse.dart';
+import 'package:unearthed/screens/favourites/favourites.dart';
 import 'package:unearthed/screens/home/home.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/send_line.dart';
@@ -31,7 +32,8 @@ class _HomePageState extends State<HomePage> {
       .fetchDressRentersOnce();
     Provider.of<DressStore>(context, listen: false)
       .fetchRentersOnce();
-
+    // Provider.of<DressStore>(context, listen: false).addAllFavourites();
+    
     getCurrentUser();
     super.initState();
   }
@@ -43,7 +45,7 @@ class _HomePageState extends State<HomePage> {
   final _pages = [
     Home(),
     Browse(),
-    Center(child: Text('Favourites'),),
+    Favourites(),
     Profile(),
   ];
 
