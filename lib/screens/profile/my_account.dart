@@ -135,6 +135,7 @@ class _MyAccountState extends State<MyAccount> {
                   child: OutlinedButton(
                     onPressed: () {
                     Renter toSave = Provider.of<DressStore>(context, listen: false).renter;
+                    log('toSave renter: ${toSave.name}');
                     log('Renters current address: ${toSave.address}');
                     log('Renters current phoneNum: ${toSave.phoneNum}');
                     log('Renters id: ${toSave.id}');
@@ -144,6 +145,8 @@ class _MyAccountState extends State<MyAccount> {
                     log('Renters NEW phoneNum: ${_phoneNumController.value.text}');
                     toSave.address = _addressController.value.text;
                     toSave.phoneNum = _phoneNumController.value.text;
+                    log('Showing the id of the user');
+                    log(toSave.id);
                         Provider.of<DressStore>(context, listen: false).saveRenter(toSave);
                     },
                     child: const Text('SAVE', style: TextStyle(color: Colors.white)),

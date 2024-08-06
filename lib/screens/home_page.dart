@@ -11,6 +11,7 @@ import 'package:unearthed/shared/sms.dart';
 import 'package:unearthed/screens/sign_up/sign_up.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/profile/profile.dart';
+import 'package:unearthed/screens/home_page.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
 
@@ -32,9 +33,13 @@ class _HomePageState extends State<HomePage> {
       .fetchDressRentersOnce();
     Provider.of<DressStore>(context, listen: false)
       .fetchRentersOnce();
+      
     // Provider.of<DressStore>(context, listen: false).addAllFavourites();
+    List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+    log('Renters list:');
+    log(renters.toString());
     
-    getCurrentUser();
+    // getCurrentUser();
     super.initState();
   }
 
@@ -72,13 +77,14 @@ User? _user = await FirebaseAuth.instance.currentUser;
     // ));
     List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
     
+    // Provider.of<DressStore>(context, listen: false).fetchRentersOnce();
     log('Current Provider list is: ${renters.toString()}');
     for (Renter r in renters) {
       log('Checking google email: ${_user.email}');
       log('again database email: ${r.email}');
       if (r.email == _user.email) {
         Provider.of<DressStore>(context, listen: false).assignUser(r);
-        log('User ${r.email} found in DB, adding to current app user');
+        log('User ${r.email} found in DB, just assigned to _user');
       } 
     }
     } else {

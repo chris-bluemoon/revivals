@@ -20,26 +20,13 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
-  void handleSubmit() {
-    for (var i = 0; i < myDresses.length; i++) {
-      log(myDresses[i].name);
-      Provider.of<DressStore>(context, listen: false).addDress(Dress(
-        id: uuid.v4(),
-        name: myDresses[i].name,
-        brand: myDresses[i].brand,
-        colour: myDresses[i].colour,
-        size: myDresses[i].size,
-        rentPrice: myDresses[i].rentPrice,
-        rrp: myDresses[i].rrp,
-        description: myDresses[i].description,
-        bust: myDresses[i].bust,
-        waist: myDresses[i].waist,
-        hips: myDresses[i].hips,
-        longDescription: myDresses[i].longDescription,
-        isFav: myDresses[i].isFav,
-    ));
-    }
-  }
+
+@override
+initState() {
+
+  Provider.of<DressStore>(context, listen: false).populateFavourites();
+  super.initState();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +54,7 @@ class _FavouritesState extends State<Favourites> {
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) =>
                     GestureDetector(
-                        child: DressCard(value.favourites[index]),
+                        child: FavouritesCard(value.favourites[index]),
                         onTap: () {
                           // if (Provider.of<DressStore>(context, listen: false).renters.length == 0) {
                             // log('Not logged in, cannot rent, redirecting');

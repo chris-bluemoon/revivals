@@ -48,22 +48,21 @@ class FirestoreService {
     await refRenter.doc(renter.id).update(
       {
         'address': renter.address,
-        'phoneNum': renter.phoneNum
-      }
+        'phoneNum': renter.phoneNum,
+        'favourites': renter.favourites,
+     }
     );
-    log('Should have changed address to: ${renter.address}');
-    log('Should have changed phoneNum to: ${renter.phoneNum}');
   }
 
   // Toggle isFav
-  static Future<void> updateDress(Dress dress) async {
-    log('Firestore service received dress id: ${dress.id}');
-    await refDress.doc(dress.id).update(
-      {
-        'isFav': dress.isFav,
-      }
-    );
-  }
+  // static Future<void> updateDress(Dress dress) async {
+  //   log('Firestore service received dress id: ${dress.id}');
+  //   await refDress.doc(dress.id).update(
+  //     {
+  //       'isFav': dress.isFav,
+  //     }
+  //   );
+  // }
 
   // get renters once
   static Future<QuerySnapshot<Renter>> getRentersOnce() {

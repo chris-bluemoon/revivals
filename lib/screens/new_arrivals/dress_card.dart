@@ -3,25 +3,70 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/globals.dart' as globals;
 
 // ignore: must_be_immutable
-class DressCard extends StatelessWidget {
+class DressCard extends StatefulWidget {
   DressCard(this.dress, {super.key});
 
   final Dress dress;
+
+  @override
+  State<DressCard> createState() => _DressCardState();
+}
+
+class _DressCardState extends State<DressCard> {
   late String imageName;
+
   late String dressName;
+
   late String brandName;
 
+  bool isFav = false;
+
   String setDressImage() {
-    dressName = dress.name.replaceAll(RegExp(' +'), '_');
-    brandName = dress.brand.replaceAll(RegExp(' +'), '_');
+    dressName = widget.dress.name.replaceAll(RegExp(' +'), '_');
+    brandName = widget.dress.brand.replaceAll(RegExp(' +'), '_');
     imageName = '${brandName}_${dressName}_Dress_1.jpg';
     return imageName;
   }
+
+  bool isAFav(Dress d, List favs) {
+    log(favs.toString());
+    if (favs.contains(d)) {
+      log("Found a fav!");
+      log(d.id);
+      return true;
+    } else {
+      log("This not a fav!");
+      log(d.id);
+      return false;
+    }
+  }
+
+    void _toggleFav() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      if (isFav == true) {
+        isFav = false;
+      } else {
+        isFav = true;
+      }
+    });}
+
+    @override
+    void initState() {
+    List currListOfFavs = Provider.of<DressStore>(context, listen: false).favourites;
+    isFav = isAFav(widget.dress, currListOfFavs);
+     super.initState();
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -33,39 +78,49 @@ class DressCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
-            Center(child: StyledHeading(dress.brand)),
+            Center(child: StyledHeading(widget.dress.brand)),
             // Image.asset('assets/img/new_dresses/${setDressImage()}', width: 200, height: 600),
             Expanded(child: Image.asset('assets/img/new_dresses/${setDressImage()}'),),
             // Image.asset('assets/img/new_dresses/${setDressImage()}', fit: BoxFit.fill),
             Row(
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [
-                StyledHeading(dress.name),
+                StyledHeading(widget.dress.name),
                 Expanded(child: SizedBox()),
-                dress.isFav ?  IconButton(
+                isFav ?  IconButton(
                   icon: Icon(Icons.favorite), color: Colors.red,
                   onPressed: () {
                     log('Pressed Fav');
-                      dress.isFav = false;
-                      Provider.of<DressStore>(context, listen: false)
-                        .toggleDressFav(dress);
+                      // isFav = false;
+                      _toggleFav();
+                      // Provider.of<DressStore>(context, listen: false)
+                      //   .toggleDressFav(dress);
+                      Renter toSave = Provider.of<DressStore>(context, listen: false).renter;
+                      log('toSave renter: ${toSave.name}');
+                      toSave.favourites.remove(widget.dress.id);
+                      Provider.of<DressStore>(context, listen: false).saveRenter(toSave);
+
                   }) : 
                   IconButton(
                     icon: Icon(Icons.favorite_border_outlined),
                     onPressed: () {
-                      log('Pressed empty Fav on dress ID: ${dress.id}');
-                      log('Since current value is ${dress.isFav}');
-                      dress.isFav = true;
-                      Provider.of<DressStore>(context, listen: false)
-                        .toggleDressFav(dress);
+                      log('Pressed empty Fav on dress ID: ${widget.dress.id}');
+                      // isFav = true;
+                      _toggleFav();
+                      // Provider.of<DressStore>(context, listen: false)
+                      //   .toggleDressFav(dress);
+                      Renter toSave = Provider.of<DressStore>(context, listen: false).renter;
+                      log('toSave renter: ${toSave.name}');
+                      toSave.favourites.add(widget.dress.id);
+                      Provider.of<DressStore>(context, listen: false).saveRenter(toSave);
                     }
                   )
                   
               ],
             ),
             // StyledText('Size: ${dress.size.toString()}'),
-            StyledBody('Rent for ${dress.rentPrice.toString()} ${globals.thb} per day'),
-            StyledBodyStrikeout('RRP ${dress.rrp.toString()} ${globals.thb}'),
+            StyledBody('Rent for ${widget.dress.rentPrice.toString()} ${globals.thb} per day'),
+            StyledBodyStrikeout('RRP ${widget.dress.rrp.toString()} ${globals.thb}'),
           ],
         ),
       ),

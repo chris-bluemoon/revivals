@@ -14,7 +14,7 @@ class DressStore extends ChangeNotifier {
   final List<DressRenter> _dressRenters = [];
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
-  Renter _user = Renter(id: '', email: '', name: '', size: 0, address: '', phoneNum: '', favourites: []);
+  Renter _user = Renter(id: '0000', email: 'dummy', name: 'dummy', size: 0, address: '', phoneNum: '', favourites: []);
   // final List<Dress> _dresses = [
   //   Dress(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
   //   Dress(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
@@ -41,6 +41,15 @@ class DressStore extends ChangeNotifier {
     // await FirestoreService.addDress(dress);
     _favourites.add(dress);
     notifyListeners();
+  }
+
+  void addFavourite2(Dress dress) async {
+    _user.favourites.add(dress.id);
+    saveRenter(_user);
+    log('New user with favourite added:');
+    log(_user.favourites.toString());
+    log('Showing user id');
+    log(_user.id);
   }
 
   // void addAllFavourites() {
@@ -77,20 +86,20 @@ class DressStore extends ChangeNotifier {
   }
 
   // add character
-  void toggleDressFav(Dress dress) async {
-    log('Updating dress with new value: ${dress.isFav}');
-    if (dress.isFav == true) {
-      _favourites.add(dress);
-    } else {
-      _favourites.remove(dress);
-    }
-    log('List of favourites');
-    for (Dress d in _favourites) {
-      log(d.name);
-    }
-    await FirestoreService.updateDress(dress);
-    notifyListeners();
-  }
+  // void toggleDressFav(Dress dress) async {
+  //   log('Updating dress with new value: ${dress.isFav}');
+  //   if (dress.isFav == true) {
+  //     _favourites.add(dress);
+  //   } else {
+  //     _favourites.remove(dress);
+  //   }
+  //   log('List of favourites');
+  //   for (Dress d in _favourites) {
+  //     log(d.name);
+  //   }
+  //   await FirestoreService.updateDress(dress);
+  //   notifyListeners();
+  // }
 
   void addRenter(Renter renter) async {
     await FirestoreService.addRenter(renter);
@@ -118,19 +127,43 @@ class DressStore extends ChangeNotifier {
 
     // initially fetch dresses
   void fetchDressesOnce() async {
+    // List favs = _user.favourites;
     if (dresses.length == 0) {
       final snapshot = await FirestoreService.getDressesOnce();
       for (var doc in snapshot.docs) {
         _dresses.add(doc.data());
-        if (doc.data().isFav) {
-          _favourites.add(doc.data());
-        }
+        
+         
+        // log('List of favourites...');
+        // log(favs.toString());
+        // if (favs.contains(doc.data().id)) {
+        //   _favourites.add(doc.data());
+        // }
+        // if (doc.data().id == 'Tidal') {
+          // _favourites.add(doc.data());
+        // }
+        // if (doc.data().isFav) {
+        //   _favourites.add(doc.data());
+        // }
       }
 
       notifyListeners();
     }
-  }
 
+
+  }
+    void populateFavourites() {
+      List favs = _user.favourites;
+      _favourites.clear();
+      log('Favourties...');
+      log(favs.toString());
+      for (Dress d in _dresses) {
+        if (favs.contains(d.id)) {
+          log('Adding a favourite');
+          _favourites.add(d);
+        }
+      }
+    }
   // initially fetch dressRenters
   void fetchDressRentersOnce() async {
     if (dressRenters.length == 0) {
@@ -144,13 +177,16 @@ class DressStore extends ChangeNotifier {
 
   // initially fetch renters
   void fetchRentersOnce() async {
+    log('fetchRentersOnce is being called');
+    log('current length: ${renters.length}');
     if (renters.length == 0) {
       final snapshot = await FirestoreService.getRentersOnce();
       for (var doc in snapshot.docs) {
+        log('Adding ${doc.data().email} to _renters');
         _renters.add(doc.data());
         }
       }
-      log("Renters populated with lenght ${_renters.length}");
+      log("Renters populated with length ${_renters.length}");
       log(_renters[0].favourites.toString());
       notifyListeners();
     }

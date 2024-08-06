@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/renter.dart';
+import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/new_arrivals/dress_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/services/class_store.dart';
@@ -35,13 +38,46 @@ class _NewArrivalsState extends State<NewArrivals> {
         waist: myDresses[i].waist,
         hips: myDresses[i].hips,
         longDescription: myDresses[i].longDescription,
-        isFav: myDresses[i].isFav,
+        // isFav: myDresses[i].isFav,
     ));
     }
+
   }
+
+    Future<dynamic> getCurrentUser() async {
+      User? _user = await FirebaseAuth.instance.currentUser;
+      if (_user != null) {
+        log('Logged in with displayName: ${_user.displayName}');
+        log('and email: ${_user.email}');
+        List<Renter> renters =
+            Provider.of<DressStore>(context, listen: false).renters;
+        log('Current Provider list is: ${renters.toString()}');
+        for (Renter r in renters) {
+          log('Checking google email: ${_user.email}');
+          log('again database email: ${r.email}');
+          if (r.email == _user.email) {
+            Provider.of<DressStore>(context, listen: false).assignUser(r);
+            log('User ${r.email} found in DB, just assigned to _user');
+          }
+        }
+      } else {
+        log('Not logged in');
+        // loggedIn = false;
+      }
+      ;
+      return _user;
+      // return asda;
+    }
+
+    @override
+    initState() {
+      getCurrentUser();
+      super.initState();
+    }
 
   @override
   Widget build(BuildContext context) {
+    // getCurrentUser();
     return Scaffold(
       appBar: AppBar(
         title: Row(
