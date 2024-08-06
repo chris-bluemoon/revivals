@@ -54,46 +54,28 @@ class _HomePageState extends State<HomePage> {
     Profile(),
   ];
 
-Future<dynamic> getCurrentUser() async {
-User? _user = await FirebaseAuth.instance.currentUser;
-// Firebase.Auth.FirebaseUser user = auth.CurrentUser;
-    // User? asda = FirebaseAuth.instance.currentUser;
-    if(_user != null) {
-      log('Logged in with displayName: ${_user.displayName}');
-      log('and email: ${_user.email}');
-      loggedIn = true;
-      // Get correct user from database
-    //  Provider.of<DressStore>(context, listen: false).fetchRentersOnce(_user.email!);
-      // Provider.of<DressStore>(context, listen: false).fetchRentersOnce('uneartheduser@gmail.com');
-      // Provider.of<DressStore>(context, listen: false).fetchRentersOnce(_user.email!);
-      // Then add to Provider
-    //   Provider.of<DressStore>(context, listen: false).addRenterAppOnly(Renter(
-    //     id: uuid.v4(),
-    //     email: _user.email!,
-    //     name: _user.displayName!,
-    //     size: 0,
-    //     address: 'Thailand',
-    //     phoneNum: 0,
-    // ));
-    List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+// Future<dynamic> getCurrentUser() async {
+//   User? _user = await FirebaseAuth.instance.currentUser;
+// // Firebase.Auth.FirebaseUser user = auth.CurrentUser;
+//     // User? asda = FirebaseAuth.instance.currentUser;
+//     if(_user != null) {
+//       loggedIn = true;
+//     List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
     
-    // Provider.of<DressStore>(context, listen: false).fetchRentersOnce();
-    log('Current Provider list is: ${renters.toString()}');
-    for (Renter r in renters) {
-      log('Checking google email: ${_user.email}');
-      log('again database email: ${r.email}');
-      if (r.email == _user.email) {
-        Provider.of<DressStore>(context, listen: false).assignUser(r);
-        log('User ${r.email} found in DB, just assigned to _user');
-      } 
-    }
-    } else {
-      log('Not logged in');
-      loggedIn = false;
-    };
-    return _user;
-    // return asda;
-  }
+//     // Provider.of<DressStore>(context, listen: false).fetchRentersOnce();
+//     for (Renter r in renters) {
+//       if (r.email == _user.email) {
+//         Provider.of<DressStore>(context, listen: false).assignUser(r);
+//         log('User ${r.email} found in DB, just assigned to _user');
+//       } 
+//     }
+//     } else {
+//       log('Not logged in');
+//       loggedIn = false;
+//     };
+//     return _user;
+//     // return asda;
+//   }
 
 // final User user = auth.currentUser;
 // if (_user.displayName == null) 
@@ -160,7 +142,7 @@ User? _user = await FirebaseAuth.instance.currentUser;
         onTap: (int index) {
           setState(
             () {
-              getCurrentUser();
+              // getCurrentUser();
               _pageIndex = index;
               if (index == 3 && loggedIn == false) {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));

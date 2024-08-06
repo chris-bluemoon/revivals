@@ -1,10 +1,12 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/dress.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/models/dress_renter.dart';
 import 'package:unearthed/services/firestore_service.dart';
+import 'package:unearthed/shared/get_current_user.dart';
 
 class DressStore extends ChangeNotifier {
 
@@ -165,6 +167,25 @@ class DressStore extends ChangeNotifier {
       }
     }
   // initially fetch dressRenters
+      Future<dynamic> setCurrentUser() async {
+      User? _user = await FirebaseAuth.instance.currentUser;
+      if (_user != null) {
+        List<Renter> renters = this.renters;
+        for (Renter r in renters) {
+          if (r.email == _user.email) {
+            assignUser(r);
+            log('Setting current user');
+          }
+        }
+      } else {
+        log('Not logged in');
+        // loggedIn = false;
+      }
+      ;
+      return _user;
+      // return asda;
+    }
+
   void fetchDressRentersOnce() async {
     if (dressRenters.length == 0) {
       final snapshot = await FirestoreService.getDressRentersOnce();
@@ -186,6 +207,7 @@ class DressStore extends ChangeNotifier {
         _renters.add(doc.data());
         }
       }
+      setCurrentUser();
       log("Renters populated with length ${_renters.length}");
       log(_renters[0].favourites.toString());
       notifyListeners();

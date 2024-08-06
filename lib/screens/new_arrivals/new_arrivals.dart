@@ -71,7 +71,7 @@ class _NewArrivalsState extends State<NewArrivals> {
 
     @override
     initState() {
-      getCurrentUser();
+      // getCurrentUser();
       super.initState();
     }
 
