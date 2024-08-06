@@ -55,6 +55,20 @@ class DressStore extends ChangeNotifier {
     notifyListeners();
   }
 
+  // add character
+  void toggleDressFav(Dress dress) async {
+    if (dress.isFav = true) {
+      dress.isFav = false;
+      log('Setting isFav to false');
+    } else {
+      dress.isFav = true;
+      log('Setting isFav to true');
+    };
+    log('Updating dress');
+    await FirestoreService.updateDress(dress);
+    notifyListeners();
+  }
+
   void addRenter(Renter renter) async {
     await FirestoreService.addRenter(renter);
     _renters.add(renter);

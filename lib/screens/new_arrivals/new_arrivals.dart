@@ -34,7 +34,8 @@ class _NewArrivalsState extends State<NewArrivals> {
         bust: myDresses[i].bust,
         waist: myDresses[i].waist,
         hips: myDresses[i].hips,
-        longDescription: myDresses[i].longDescription
+        longDescription: myDresses[i].longDescription,
+        isFav: myDresses[i].isFav,
     ));
     }
   }

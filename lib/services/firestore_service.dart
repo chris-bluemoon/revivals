@@ -43,7 +43,7 @@ class FirestoreService {
     await refRenter.doc(renter.id).set(renter);
   }
 
-  // add a new renter
+  // Update renter
   static Future<void> updateRenter(Renter renter) async {
     await refRenter.doc(renter.id).update(
       {
@@ -53,6 +53,16 @@ class FirestoreService {
     );
     log('Should have changed address to: ${renter.address}');
     log('Should have changed phoneNum to: ${renter.phoneNum}');
+  }
+
+  // Toggle isFav
+  static Future<void> updateDress(Dress dress) async {
+    log('Firestore service received dress id: ${dress.id}');
+    await refDress.doc(dress.id).update(
+      {
+        'isFav': true,
+      }
+    );
   }
 
   // get renters once
