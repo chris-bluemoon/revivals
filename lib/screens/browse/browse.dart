@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unearthed/screens/browse/category_list_view.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class Browse extends StatelessWidget {
@@ -10,25 +11,26 @@ class Browse extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          bottom: TabBar(
+          bottom: const TabBar(
+            // indicatorColor: Colors.black,
+            // labelColor: Colors.black,
             tabs: [
-              const Tab(text: 'Occasion'),
-              const Tab(text: 'Category'),
-              const Tab(text: 'Style'),
-              const Tab(text: 'Designer'),
+              Tab(text: 'Occasion'),
+              Tab(text: 'Category'),
+              Tab(text: 'Style'),
+              Tab(text: 'Designer'),
             ],
           ),
           title: const Row(
-          // TODO: Image is not centered in appbar with back arrow
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('BROWSE', style: TextStyle(fontSize: 22))
               ]),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             StyledBody('Occasion'),
-            StyledBody('Category'),
+            CategoryListView(),
             StyledBody('Style'),
             StyledBody('Designer'),
           ],

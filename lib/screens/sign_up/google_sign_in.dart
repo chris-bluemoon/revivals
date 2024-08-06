@@ -43,6 +43,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       size: 0,
       address: '',
       phoneNum: '',
+      favourites: ['123213','99999'],
     ));
     log('Adding single user');
     Provider.of<DressStore>(context, listen: false).assignUser(Renter(
@@ -52,6 +53,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       size: 0,
       address: '',
       phoneNum: '',
+      favourites: [],
     ));
     }
   }

@@ -59,4 +59,11 @@ ThemeData primaryTheme = ThemeData(
     
   ),
 
+        tabBarTheme: const TabBarTheme(
+          labelColor: Colors.black,
+          indicatorColor: Colors.black,
+          dividerColor: Colors.grey,
+          unselectedLabelColor: Colors.grey,
+        )
+
 );

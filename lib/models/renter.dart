@@ -8,6 +8,7 @@ class Renter {
           required this.size, 
           required this.address, 
           required this.phoneNum,
+          required this.favourites,
         }); 
 
     String id;
@@ -16,6 +17,7 @@ class Renter {
     int size;
     String address;
     String phoneNum;
+    List favourites;
 
   // dress to firestore (map)
   Map<String, dynamic> toFirestore() {
@@ -25,6 +27,7 @@ class Renter {
       'size': size,
       'address': address,
       'phoneNum': phoneNum,
+      'favourites': favourites,
     };
   }
 
@@ -45,6 +48,7 @@ class Renter {
       size: data['size'],
       address: data['address'],
       phoneNum: data['phoneNum'],
+      favourites: data['favourites'],
     );
 
     return renter;

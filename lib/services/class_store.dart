@@ -14,7 +14,7 @@ class DressStore extends ChangeNotifier {
   final List<DressRenter> _dressRenters = [];
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
-  Renter _user = Renter(id: '', email: '', name: '', size: 0, address: '', phoneNum: '');
+  Renter _user = Renter(id: '', email: '', name: '', size: 0, address: '', phoneNum: '', favourites: []);
   // final List<Dress> _dresses = [
   //   Dress(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
   //   Dress(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
@@ -102,7 +102,7 @@ class DressStore extends ChangeNotifier {
   void saveRenter(Renter renter) async {
     await FirestoreService.updateRenter(renter);
     // _renters[0].address = renter.address;
-      _user.address = renter.address;
+      // _user.address = renter.address;
     return;
   }
 
@@ -151,6 +151,7 @@ class DressStore extends ChangeNotifier {
         }
       }
       log("Renters populated with lenght ${_renters.length}");
+      log(_renters[0].favourites.toString());
       notifyListeners();
     }
 }
