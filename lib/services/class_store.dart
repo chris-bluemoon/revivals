@@ -16,7 +16,8 @@ class DressStore extends ChangeNotifier {
   final List<DressRenter> _dressRenters = [];
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
-  Renter _user = Renter(id: '0000', email: 'dummy', name: 'dummy', size: 0, address: '', phoneNum: '', favourites: []);
+  Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', phoneNum: '', favourites: []);
+  bool _loggedIn = false;
   // final List<Dress> _dresses = [
   //   Dress(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
   //   Dress(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
@@ -32,6 +33,7 @@ class DressStore extends ChangeNotifier {
   get renters => _renters;
   get dressRenters => _dressRenters;
   get renter => _user;
+  get loggedIn => _loggedIn;
 
   // add dress
   // void addCharacter(Dress dress) {
@@ -175,16 +177,21 @@ class DressStore extends ChangeNotifier {
           if (r.email == _user.email) {
             assignUser(r);
             log('Setting current user');
+            _loggedIn = true;
           }
         }
       } else {
         log('Not logged in');
-        // loggedIn = false;
+        _loggedIn = false;
       }
       ;
       return _user;
       // return asda;
     }
+  void setLoggedIn(bool loggedIn) {
+    log('Set _loggedIn to ${loggedIn}');
+    _loggedIn = loggedIn;
+  }
 
   void fetchDressRentersOnce() async {
     if (dressRenters.length == 0) {

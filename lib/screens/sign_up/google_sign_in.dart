@@ -119,7 +119,10 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                               onPressed: () async {
                                 bool result = await signOutFromGoogle();
                                 // Provider.of<DressStore>(context, listen: false).unassignUser();
-                                if (result) userCredential.value = '';
+                                Provider.of<DressStore>(context, listen: false).setLoggedIn(false);
+                                if (result) {
+                                  userCredential.value = '';}
+                                  Provider.of<DressStore>(context, listen: false).setLoggedIn(false);
                               },
                               child: const Text('Logout'))
                         ],
