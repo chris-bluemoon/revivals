@@ -45,51 +45,14 @@ class _FavouritesState extends State<Favourites> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        // centerTitle: true,
+        title: const Row(
+          // TODO: Image is not centered in appbar with back arrow
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/logos/unearthed_logo_2.png',
-              fit: BoxFit.contain,
-              height: 200,
-            ),
-          ],
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back),
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () =>
-        //           {Navigator.of(context).popUntil((route) => route.isFirst)},
-        //       icon: Icon(Icons.close)),
-        // ],
+            children: [
+              Text('WISH LIST', style: TextStyle(fontSize: 22))
+              ]),
       ),
-      // appBar: AppBar(
-      //           actions: <Widget>[
-      //     IconButton(
-      //       icon: const Icon(Icons.close),
-      //       onPressed: () {
-      //         // handle the press
-      //       },
-      //     ),
-      //   ],
-      //   title: Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     // TODO: Title image Not quite centered
-      //     mainAxisSize: MainAxisSize.min,
-      //       children: [
-      //         Image.asset(
-      //           'assets/logos/unearthed_collections.png',
-      //            height: 300,
-      //                               ),
-      //         ]),
-      // ),
       body: Container(
           color: Colors.white,
           child: Column(
@@ -119,13 +82,6 @@ class _FavouritesState extends State<Favourites> {
                   ),
                 );
               }),
-              TextButton(
-                onPressed: () {
-                  handleSubmit();
-                  // addDressesAll();
-                },
-                child: const Text('ADD'),
-              )
             ],
           )),
     );
