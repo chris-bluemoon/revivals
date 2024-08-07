@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/home/home.dart';
@@ -20,6 +21,14 @@ class ProfileLanding extends StatelessWidget {
 
   final User? user;
   final Function() signOutFromGoogle;
+
+  Future<void> shareApp() async {
+    log('Sharing a link');
+    const String appLink = 'https://my google play link';
+    const String message = 'Check out my new app $appLink';
+    await FlutterShare.share(
+        title: 'Share App', text: message, linkUrl: appLink);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +76,9 @@ class ProfileLanding extends StatelessWidget {
             children: [
               SizedBox(width: 10),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  shareApp();
+                },
                 icon: Icon(Icons.group_add)),
               Text('REFER A FRIEND'),
             ],
