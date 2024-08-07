@@ -23,6 +23,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
 
   void handleSubmit(String email, String name) {
     log('Adding renter if not exists!');
+    Provider.of<DressStore>(context, listen: false).setLoggedIn(true);
     List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
     log('Current Provider of renters list is: ${renters.toString()}');
     for (Renter r in renters) {

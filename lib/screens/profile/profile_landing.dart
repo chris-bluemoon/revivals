@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
 
@@ -10,6 +11,7 @@ import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/profile/profile.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/send_whatsapp.dart';
 import 'package:unearthed/shared/whatsapp.dart';
 
@@ -122,6 +124,7 @@ class ProfileLanding extends StatelessWidget {
               IconButton(
                 onPressed: () async {
                   bool result = await signOutFromGoogle();
+                  Provider.of<DressStore>(context, listen: false).setLoggedIn(false);
                   if (result) userCredential.value = '';
                   showAlertDialog(context);
                   // Navigator.of(context).popUntil((route) => route.isFirst);

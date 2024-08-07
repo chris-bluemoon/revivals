@@ -40,6 +40,9 @@ class DressStore extends ChangeNotifier {
   //   _dresses.add(dress);
   //   notifyListeners();
   // }
+  // void setLoggedIn(loggedIn) {
+  //   _loggedIn = loggedIn;
+  // }
 
   void addFavourite(Dress dress) async {
     // await FirestoreService.addDress(dress);
