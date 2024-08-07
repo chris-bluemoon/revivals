@@ -124,8 +124,10 @@ class ProfileLanding extends StatelessWidget {
               IconButton(
                 onPressed: () async {
                   bool result = await signOutFromGoogle();
-                  Provider.of<DressStore>(context, listen: false).setLoggedIn(false);
-                  if (result) userCredential.value = '';
+                  if (result) {
+                    userCredential.value = '';
+                    Provider.of<DressStore>(context, listen: false).setLoggedIn(false);
+                  }
                   showAlertDialog(context);
                   // Navigator.of(context).popUntil((route) => route.isFirst);
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Home())));
