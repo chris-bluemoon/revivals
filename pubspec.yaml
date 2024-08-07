@@ -28,6 +28,12 @@ dev_dependencies:
   carousel_slider: ^4.2.1
   dots_indicator: ^2.1.1
   syncfusion_flutter_datepicker: ^26.2.4
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/logos/uc_icon.png"
 
 flutter:
   uses-material-design: true
