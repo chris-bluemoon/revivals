@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/category_list_view.dart';
+import 'package:unearthed/screens/browse/designer_list_view.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class Browse extends StatelessWidget {
@@ -27,12 +28,12 @@ class Browse extends StatelessWidget {
               Text('BROWSE', style: TextStyle(fontSize: 22))
               ]),
         ),
-        body: const TabBarView(
+        body:  TabBarView(
           children: [
             StyledBody('Occasion'),
             CategoryListView(),
             StyledBody('Style'),
-            StyledBody('Designer'),
+            DesignerListView(),
           ],
         ),
       ),
