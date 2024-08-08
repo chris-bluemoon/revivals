@@ -30,6 +30,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       if (r.email == email) {
         found = true;
         log('User ${r.email} already found, not adding');
+        break; // fixed this
       } else {
         found = false;
       }
@@ -46,7 +47,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       phoneNum: '',
       favourites: [''],
     ));
-    log('Adding single user');
+    log('Assigning user');
     Provider.of<DressStore>(context, listen: false).assignUser(Renter(
       id: jointUuid,
       email: email,
