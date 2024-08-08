@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -10,9 +10,9 @@ import 'package:unearthed/globals.dart' as globals;
 
 // ignore: must_be_immutable
 class FavouritesCard extends StatefulWidget {
-  FavouritesCard(this.dress, {super.key});
+  FavouritesCard(this.item, {super.key});
 
-  final Dress dress;
+  final Item item;
 
   @override
   State<FavouritesCard> createState() => _FavouritesCardState();
@@ -21,20 +21,20 @@ class FavouritesCard extends StatefulWidget {
 class _FavouritesCardState extends State<FavouritesCard> {
   late String imageName;
 
-  late String dressName;
+  late String itemName;
 
   late String brandName;
 
   bool isFav = false;
 
-  String setDressImage() {
-    dressName = widget.dress.name.replaceAll(RegExp(' +'), '_');
-    brandName = widget.dress.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${dressName}_Dress_1.jpg';
+  String setItemImage() {
+    itemName = widget.item.name.replaceAll(RegExp(' +'), '_');
+    brandName = widget.item.brand.replaceAll(RegExp(' +'), '_');
+    imageName = '${brandName}_${itemName}_Item_1.jpg';
     return imageName;
   }
 
-  bool isAFav(Dress d, List favs) {
+  bool isAFav(Item d, List favs) {
     log(favs.toString());
     if (favs.contains(d)) {
       log("Found a fav!");
@@ -63,8 +63,8 @@ class _FavouritesCardState extends State<FavouritesCard> {
 
     @override
     void initState() {
-    List currListOfFavs = Provider.of<DressStore>(context, listen: false).favourites;
-    isFav = isAFav(widget.dress, currListOfFavs);
+    List currListOfFavs = Provider.of<ItemStore>(context, listen: false).favourites;
+    isFav = isAFav(widget.item, currListOfFavs);
      super.initState();
     }
 
@@ -78,14 +78,14 @@ class _FavouritesCardState extends State<FavouritesCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
-            Center(child: StyledHeading(widget.dress.brand)),
-            // Image.asset('assets/img/new_dresses/${setDressImage()}', width: 200, height: 600),
-            Expanded(child: Image.asset('assets/img/new_dresses/${setDressImage()}'),),
-            // Image.asset('assets/img/new_dresses/${setDressImage()}', fit: BoxFit.fill),
+            Center(child: StyledHeading(widget.item.brand)),
+            // Image.asset('assets/img/new_items/${setItemImage()}', width: 200, height: 600),
+            Expanded(child: Image.asset('assets/img/new_items/${setItemImage()}'),),
+            // Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fill),
             Row(
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [
-                StyledHeading(widget.dress.name),
+                StyledHeading(widget.item.name),
                 Expanded(child: SizedBox()),
                 isFav ?  IconButton(
                   icon: Icon(Icons.favorite), color: Colors.red,
@@ -93,34 +93,34 @@ class _FavouritesCardState extends State<FavouritesCard> {
                     log('Pressed Fav');
                       // isFav = false;
                       _toggleFav();
-                      // Provider.of<DressStore>(context, listen: false)
-                      //   .toggleDressFav(dress);
-                      Renter toSave = Provider.of<DressStore>(context, listen: false).renter;
+                      // Provider.of<ItemStore>(context, listen: false)
+                      //   .toggleItemFav(item);
+                      Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                       log('toSave renter: ${toSave.name}');
-                      toSave.favourites.remove(widget.dress.id);
-                      Provider.of<DressStore>(context, listen: false).saveRenter(toSave);
+                      toSave.favourites.remove(widget.item.id);
+                      Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
 
                   }) : 
                   IconButton(
                     icon: Icon(Icons.favorite_border_outlined),
                     onPressed: () {
-                      log('Pressed empty Fav on dress ID: ${widget.dress.id}');
+                      log('Pressed empty Fav on item ID: ${widget.item.id}');
                       // isFav = true;
                       _toggleFav();
-                      // Provider.of<DressStore>(context, listen: false)
-                      //   .toggleDressFav(dress);
-                      Renter toSave = Provider.of<DressStore>(context, listen: false).renter;
+                      // Provider.of<ItemStore>(context, listen: false)
+                      //   .toggleItemFav(item);
+                      Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                       log('toSave renter: ${toSave.name}');
-                      toSave.favourites.add(widget.dress.id);
-                      Provider.of<DressStore>(context, listen: false).saveRenter(toSave);
+                      toSave.favourites.add(widget.item.id);
+                      Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
                     }
                   )
                   
               ],
             ),
-            // StyledText('Size: ${dress.size.toString()}'),
-            StyledBody('Rent for ${widget.dress.rentPrice.toString()} ${globals.thb} per day'),
-            StyledBodyStrikeout('RRP ${widget.dress.rrp.toString()} ${globals.thb}'),
+            // StyledText('Size: ${item.size.toString()}'),
+            StyledBody('Rent for ${widget.item.rentPrice.toString()} ${globals.thb} per day'),
+            StyledBodyStrikeout('RRP ${widget.item.rrp.toString()} ${globals.thb}'),
           ],
         ),
       ),

@@ -23,8 +23,8 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
 
   void handleSubmit(String email, String name) {
     log('Adding renter if not exists!');
-    Provider.of<DressStore>(context, listen: false).setLoggedIn(true);
-    List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+    Provider.of<ItemStore>(context, listen: false).setLoggedIn(true);
+    List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
     log('Current Provider of renters list is: ${renters.toString()}');
     for (Renter r in renters) {
       if (r.email == email) {
@@ -38,7 +38,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
     if (found == false) {
     log('Adding user to DB for first time');
     String jointUuid = uuid.v4();
-    Provider.of<DressStore>(context, listen: false).addRenter(Renter(
+    Provider.of<ItemStore>(context, listen: false).addRenter(Renter(
       id: jointUuid,
       email: email,
       name: name,
@@ -48,7 +48,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       favourites: [''],
     ));
     log('Assigning user');
-    Provider.of<DressStore>(context, listen: false).assignUser(Renter(
+    Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
       id: jointUuid,
       email: email,
       name: name,
@@ -120,11 +120,11 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                           ElevatedButton(
                               onPressed: () async {
                                 bool result = await signOutFromGoogle();
-                                // Provider.of<DressStore>(context, listen: false).unassignUser();
-                                Provider.of<DressStore>(context, listen: false).setLoggedIn(false);
+                                // Provider.of<ItemStore>(context, listen: false).unassignUser();
+                                Provider.of<ItemStore>(context, listen: false).setLoggedIn(false);
                                 if (result) {
                                   userCredential.value = '';}
-                                  Provider.of<DressStore>(context, listen: false).setLoggedIn(false);
+                                  Provider.of<ItemStore>(context, listen: false).setLoggedIn(false);
                               },
                               child: const Text('Logout'))
                         ],

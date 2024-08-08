@@ -30,25 +30,25 @@ class MyAccount extends StatefulWidget {
 class _MyAccountState extends State<MyAccount> {
   
 
-  late TextEditingController _addressController;
+  late TextEditingController _aditemController;
   late TextEditingController _phoneNumController;
 
   @override
   void initState() {
     super.initState();
-    _addressController = TextEditingController(text: 'Dummy address value');
+    _aditemController = TextEditingController(text: 'Dummy aditem value');
     _phoneNumController = TextEditingController(text: 'Dummy phoneNum value');
-    // _addressController = new TextEditingController(text: 'Initial value');
+    // _aditemController = new TextEditingController(text: 'Initial value');
   }
   
   @override
   Widget build(BuildContext context) {
 
-    // String address = Provider.of<DressStore>(context, listen: false).renters[0].address;
-    String address = Provider.of<DressStore>(context, listen: false).renter.address;
-    String phoneNum = Provider.of<DressStore>(context, listen: false).renter.phoneNum;
+    // String aditem = Provider.of<ItemStore>(context, listen: false).renters[0].aditem;
+    String aditem = Provider.of<ItemStore>(context, listen: false).renter.aditem;
+    String phoneNum = Provider.of<ItemStore>(context, listen: false).renter.phoneNum;
 
-    _addressController = TextEditingController(text: address);
+    _aditemController = TextEditingController(text: aditem);
     _phoneNumController = TextEditingController(text: phoneNum);
     // ValueNotifier userCredential = ValueNotifier('');
 
@@ -89,8 +89,8 @@ class _MyAccountState extends State<MyAccount> {
             Text('ADDRESS', style: TextStyle(fontSize: 12, color: Colors.grey),),
             TextFormField(
               // initialValue: '12 Acacia Road, Bangkok, Thailand',
-              // initialValue: address,
-              controller: _addressController,
+              // initialValue: aditem,
+              controller: _aditemController,
             ),
             SizedBox(height: 30),
 
@@ -98,7 +98,7 @@ class _MyAccountState extends State<MyAccount> {
             TextFormField(
               controller: _phoneNumController,
             ),
-            // AddressForm(),
+            // AditemForm(),
           ],),
       ),
             bottomNavigationBar: Container(
@@ -134,20 +134,20 @@ class _MyAccountState extends State<MyAccount> {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                    Renter toSave = Provider.of<DressStore>(context, listen: false).renter;
+                    Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                     log('toSave renter: ${toSave.name}');
-                    log('Renters current address: ${toSave.address}');
+                    log('Renters current aditem: ${toSave.address}');
                     log('Renters current phoneNum: ${toSave.phoneNum}');
                     log('Renters id: ${toSave.id}');
-                    log(_addressController.value.text);
+                    log(_aditemController.value.text);
                     log(_phoneNumController.value.text);
-                    log('Renters NEW address: ${_addressController.value.text}');
+                    log('Renters NEW aditem: ${_aditemController.value.text}');
                     log('Renters NEW phoneNum: ${_phoneNumController.value.text}');
-                    toSave.address = _addressController.value.text;
+                    toSave.address = _aditemController.value.text;
                     toSave.phoneNum = _phoneNumController.value.text;
                     log('Showing the id of the user');
                     log(toSave.id);
-                        Provider.of<DressStore>(context, listen: false).saveRenter(toSave);
+                        Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
                     },
                     child: const Text('SAVE', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(
@@ -208,7 +208,7 @@ showAlertDialog(BuildContext context) {
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
     title: Center(child: Text("SIGNED OUT")),
-    // content: Text("      Your dress is being prepared"),  
+    // content: Text("      Your item is being prepared"),  
     actions: [  
       okButton,  
     ],  

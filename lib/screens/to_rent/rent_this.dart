@@ -7,8 +7,8 @@ import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
 import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -21,9 +21,9 @@ var uuid = const Uuid();
 
 
 class RentThis extends StatefulWidget {
-  RentThis(this.dress, {super.key});
+  RentThis(this.item, {super.key});
   
-  final Dress dress;
+  final Item item;
 
   @override
   State<RentThis> createState() => _RentThisState();
@@ -37,11 +37,11 @@ class _RentThisState extends State<RentThis> {
   bool bothDatesSelected = false;
   bool showConfirm = false;
 
-  // void handleSubmit(String renterId, String dressId, String startDate, String endDate, int price) {
-  //   Provider.of<DressStore>(context, listen: false).addDressRenter(DressRenter(
+  // void handleSubmit(String renterId, String itemId, String startDate, String endDate, int price) {
+  //   Provider.of<ItemStore>(context, listen: false).addItemRenter(ItemRenter(
   //     id: uuid.v4(),
   //     renterId: renterId,
-  //     dressId: dressId,
+  //     itemId: itemId,
   //     startDate: startDate,
   //     endDate: endDate,
   //     price: 0,
@@ -57,7 +57,7 @@ class _RentThisState extends State<RentThis> {
         bothDatesSelected = true;
         showConfirm = true;
         noOfDays = endDate!.difference(startDate!).inDays;
-        totalPrice = noOfDays * widget.dress.rentPrice;
+        totalPrice = noOfDays * widget.item.rentPrice;
         log(noOfDays.toString());
       });
     } else {
@@ -68,18 +68,18 @@ class _RentThisState extends State<RentThis> {
     }
   }
 
-  List<DateTime> getBlackoutDates(String dressId) {
+  List<DateTime> getBlackoutDates(String itemId) {
 
-    log(dressId);
-    List<DressRenter> dressRenters =Provider.of<DressStore>(context, listen: false)
-      .dressRenters;
+    log(itemId);
+    List<ItemRenter> itemRenters =Provider.of<ItemStore>(context, listen: false)
+      .itemRenters;
     List<DateTime> tempList = [];
 
-    for (int i = 0; i<dressRenters.length; i++) {
-      DateTime startDate = DateFormat("yyyy-MM-dd").parse(dressRenters[i].startDate);
-      DateTime endDate = DateFormat("yyyy-MM-dd").parse(dressRenters[i].endDate);
-      String dressIdDB = dressRenters[i].dressId;
-      if (dressIdDB == dressId) {
+    for (int i = 0; i<itemRenters.length; i++) {
+      DateTime startDate = DateFormat("yyyy-MM-dd").parse(itemRenters[i].startDate);
+      DateTime endDate = DateFormat("yyyy-MM-dd").parse(itemRenters[i].endDate);
+      String itemIdDB = itemRenters[i].itemId;
+      if (itemIdDB == itemId) {
       for (int y = 0; y <= endDate.difference(startDate).inDays; y++) {
         tempList.add(startDate.add(Duration(days: y)));
       }
@@ -102,7 +102,7 @@ class _RentThisState extends State<RentThis> {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // StyledTitle(widget.dress.name.toUpperCase()),
+            // StyledTitle(widget.item.name.toUpperCase()),
             StyledTitle('Select Dates'),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
@@ -145,7 +145,7 @@ class _RentThisState extends State<RentThis> {
             height: 550,
             child: SfDateRangePicker(
               // minDate: DateTime(2024, 7, 5),
-              monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates(widget.dress.id)),
+              monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates(widget.item.id)),
               enablePastDates: false,
               navigationDirection: DateRangePickerNavigationDirection.vertical,
               backgroundColor: Colors.white,
@@ -178,20 +178,20 @@ class _RentThisState extends State<RentThis> {
             ),
           ),
           // if (showConfirm) ElevatedButton(
-          //   child: ConfirmRentWidget(widget.dress),
+          //   child: ConfirmRentWidget(widget.item),
           //   onPressed: () {
-          //       String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
+          //       String email = Provider.of<ItemStore>(context, listen: false).renters[0].email;
           //       final f = DateFormat('yyyyMMdd');
           //       // String startDateText = DateFormat('Y m d').format(startDate!);
           //       String startDateText = f.format(startDate!);
-          //       // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
-          //       Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
+          //       // handleSubmit(email, widget.item.id, '${startDate}', '${startDate}', 0);
+          //       Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.item, '${startDate}', '${endDate}' ))));
           //   },
           // ),
         const Expanded(child: SizedBox()),
         const Divider(height: 1, color: Colors.black),
       if (showConfirm) 
-        Expanded(child: RentThisNextBar(widget.dress, noOfDays, startDate!, endDate!)),
+        Expanded(child: RentThisNextBar(widget.item, noOfDays, startDate!, endDate!)),
         ],
       ),
         //     bottomNavigationBar: Container(
@@ -210,21 +210,21 @@ class _RentThisState extends State<RentThis> {
         //     child: Row(
         //       // crossAxisAlignment: CrossAxisAlignment.start,
         //       children: [
-        //         // Text('Rent ${widget.dress.name} for ${widget.dress.rentPrice} ${globals.thb}', style: TextStyle(color: Colors.black, fontSize: 16)),
+        //         // Text('Rent ${widget.item.name} for ${widget.item.rentPrice} ${globals.thb}', style: TextStyle(color: Colors.black, fontSize: 16)),
         //         Text('${totalPrice}${globals.thb} for $noOfDays day(s)', style: TextStyle(color: Colors.black, fontSize: 18)),
         //         SizedBox(width: 50),
         //         Expanded(
         //           child: OutlinedButton(
         //             onPressed: !showConfirm ? null: () { 
                       
-        //         String email = Provider.of<DressStore>(context, listen: false).renters[0].email;
+        //         String email = Provider.of<ItemStore>(context, listen: false).renters[0].email;
         //         // String startDateText = DateFormat('Y m d').format(startDate!);
-        //         // handleSubmit(email, widget.dress.id, '${startDate}', '${startDate}', 0);
-        //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.dress, '${startDate}', '${endDate}' ))));
+        //         // handleSubmit(email, widget.item.id, '${startDate}', '${startDate}', 0);
+        //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.item, '${startDate}', '${endDate}' ))));
         //             },
         //             // calculateWhetherDisabledReturnsBool() ? null : () => whatToDoOnPressed,
         //             // onPressed: () {
-        //             //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress)))); 
+        //             //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.item)))); 
         //             // },
         //             child: const Text('NEXT'),
         //             // child: const Text('NEXT', style: TextStyle(color: Colors.white)),

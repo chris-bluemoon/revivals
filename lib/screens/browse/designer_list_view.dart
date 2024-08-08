@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/browse/designer_dresses.dart';
+import 'package:unearthed/screens/browse/designer_items.dart';
 
 class DesignerListView extends StatelessWidget {
   DesignerListView({super.key});
@@ -23,7 +23,7 @@ class DesignerListView extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (DesignerDresses(brands[index])))); 
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (DesignerItems(brands[index])))); 
                       },
                       child: ListTile(
                         dense: true,

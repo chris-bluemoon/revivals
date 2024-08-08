@@ -42,7 +42,7 @@ class OfferWidget extends StatelessWidget {
                           ),
                         ],
                       )
-                      // child: Image.asset('assets/img/dresses/LEXI_Dione_Dress.webp'),
+                      // child: Image.asset('assets/img/items/LEXI_Dione_Item.webp'),
                       // child: Image.asset('assets/img/backgrounds/carousel_image_1.jpg'),
                       );
 

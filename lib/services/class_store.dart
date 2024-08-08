@@ -2,56 +2,56 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/services/firestore_service.dart';
 import 'package:unearthed/shared/get_current_user.dart';
 
-class DressStore extends ChangeNotifier {
+class ItemStore extends ChangeNotifier {
 
-  final List<Dress> _dresses = [];
-  final List<Dress> _favourites = [];
+  final List<Item> _items = [];
+  final List<Item> _favourites = [];
   final List<Renter> _renters = [];
-  final List<DressRenter> _dressRenters = [];
+  final List<ItemRenter> _itemRenters = [];
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
   Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', phoneNum: '', favourites: []);
   bool _loggedIn = false;
-  // final List<Dress> _dresses = [
-  //   Dress(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Dress(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Dress(id: '3', name: 'Elinor', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Dress(id: '4', name: 'Francesca Mini', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Dress(id: '5', name: 'Dione', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Dress(id: '6', name: 'Riley Chiffon', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Dress(id: '7', name: 'Sheena', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
+  // final List<Item> _Items = [
+  //   Item(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
+  //   Item(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
+  //   Item(id: '3', name: 'Elinor', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
+  //   Item(id: '4', name: 'Francesca Mini', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
+  //   Item(id: '5', name: 'Dione', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
+  //   Item(id: '6', name: 'Riley Chiffon', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
+  //   Item(id: '7', name: 'Sheena', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
   // ];
 
-  get dresses => _dresses;
+  get items => _items;
   get favourites => _favourites;
   get renters => _renters;
-  get dressRenters => _dressRenters;
+  get itemRenters => _itemRenters;
   get renter => _user;
   get loggedIn => _loggedIn;
 
-  // add dress
-  // void addCharacter(Dress dress) {
-  //   _dresses.add(dress);
+  // add item
+  // void addCharacter(Item item) {
+  //   _Items.add(item);
   //   notifyListeners();
   // }
   // void setLoggedIn(loggedIn) {
   //   _loggedIn = loggedIn;
   // }
 
-  void addFavourite(Dress dress) async {
-    // await FirestoreService.addDress(dress);
-    _favourites.add(dress);
+  void addFavourite(Item item) async {
+    // await FirestoreService.addItem(item);
+    _favourites.add(item);
     notifyListeners();
   }
 
-  void addFavourite2(Dress dress) async {
-    _user.favourites.add(dress.id);
+  void addFavourite2(Item item) async {
+    _user.favourites.add(item.id);
     saveRenter(_user);
     log('New user with favourite added:');
     log(_user.favourites.toString());
@@ -60,9 +60,9 @@ class DressStore extends ChangeNotifier {
   }
 
   // void addAllFavourites() {
-  //   Dress d;
-  //   log('_dresses size is: ${_dresses.length}');
-  //   for (d in _dresses) {
+  //   Item d;
+  //   log('_Items size is: ${_Items.length}');
+  //   for (d in _Items) {
   //     if (d.isFav == true) {
   //       _favourites.add(d);
   //     }
@@ -72,7 +72,7 @@ class DressStore extends ChangeNotifier {
 
   // assign the user
   void assignUser(Renter user) async {
-    // await FirestoreService.addDress(dress);
+    // await FirestoreService.addItem(item);
     _user = user;
     notifyListeners();
   }
@@ -80,31 +80,31 @@ class DressStore extends ChangeNotifier {
 
   // // remove the user
   // void unassignUser(Renter user) async {
-  //   // await FirestoreService.addDress(dress);
+  //   // await FirestoreService.addItem(item);
   //   _user = null;
   //   notifyListeners();
   // }
 
   // add character
-  void addDress(Dress dress) async {
-    await FirestoreService.addDress(dress);
-    _dresses.add(dress);
+  void addItem(Item item) async {
+    await FirestoreService.addItem(item);
+    _items.add(item);
     notifyListeners();
   }
 
   // add character
-  // void toggleDressFav(Dress dress) async {
-  //   log('Updating dress with new value: ${dress.isFav}');
-  //   if (dress.isFav == true) {
-  //     _favourites.add(dress);
+  // void toggleItemFav(Item item) async {
+  //   log('Updating item with new value: ${item.isFav}');
+  //   if (item.isFav == true) {
+  //     _favourites.add(item);
   //   } else {
-  //     _favourites.remove(dress);
+  //     _favourites.remove(item);
   //   }
   //   log('List of favourites');
-  //   for (Dress d in _favourites) {
+  //   for (Item d in _favourites) {
   //     log(d.name);
   //   }
-  //   await FirestoreService.updateDress(dress);
+  //   await FirestoreService.updateItem(item);
   //   notifyListeners();
   // }
 
@@ -117,41 +117,28 @@ class DressStore extends ChangeNotifier {
 
   void saveRenter(Renter renter) async {
     await FirestoreService.updateRenter(renter);
-    // _renters[0].address = renter.address;
-      // _user.address = renter.address;
+    // _renters[0].aditem = renter.aditem;
+      // _user.aditem = renter.aditem;
     return;
   }
 
   void addRenterAppOnly(Renter renter) {
     _renters.add(renter);
   }
-  // add dressRenter
-  void addDressRenter(DressRenter dressRenter) async {
-    await FirestoreService.addDressRenter(dressRenter);
-    _dressRenters.add(dressRenter);
+  // add itemRenter
+  void addItemRenter(ItemRenter itemRenter) async {
+    await FirestoreService.addItemRenter(itemRenter);
+    _itemRenters.add(itemRenter);
     notifyListeners();
   }
 
-    // initially fetch dresses
-  void fetchDressesOnce() async {
+    // initially fetch items
+  void fetchItemsOnce() async {
     // List favs = _user.favourites;
-    if (dresses.length == 0) {
-      final snapshot = await FirestoreService.getDressesOnce();
+    if (items.length == 0) {
+      final snapshot = await FirestoreService.getItemsOnce();
       for (var doc in snapshot.docs) {
-        _dresses.add(doc.data());
-        
-         
-        // log('List of favourites...');
-        // log(favs.toString());
-        // if (favs.contains(doc.data().id)) {
-        //   _favourites.add(doc.data());
-        // }
-        // if (doc.data().id == 'Tidal') {
-          // _favourites.add(doc.data());
-        // }
-        // if (doc.data().isFav) {
-        //   _favourites.add(doc.data());
-        // }
+        _items.add(doc.data());
       }
 
       notifyListeners();
@@ -164,14 +151,14 @@ class DressStore extends ChangeNotifier {
       _favourites.clear();
       log('Favourties...');
       log(favs.toString());
-      for (Dress d in _dresses) {
+      for (Item d in _items) {
         if (favs.contains(d.id)) {
           log('Adding a favourite');
           _favourites.add(d);
         }
       }
     }
-  // initially fetch dressRenters
+  // initially fetch itemRenters
       Future<dynamic> setCurrentUser() async {
       User? _user = await FirebaseAuth.instance.currentUser;
       if (_user != null) {
@@ -196,11 +183,11 @@ class DressStore extends ChangeNotifier {
     _loggedIn = loggedIn;
   }
 
-  void fetchDressRentersOnce() async {
-    if (dressRenters.length == 0) {
-      final snapshot = await FirestoreService.getDressRentersOnce();
+  void fetchItemRentersOnce() async {
+    if (itemRenters.length == 0) {
+      final snapshot = await FirestoreService.getItemRentersOnce();
       for (var doc in snapshot.docs) {
-        _dressRenters.add(doc.data());
+        _itemRenters.add(doc.data());
       }
       notifyListeners();
     }

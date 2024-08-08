@@ -11,8 +11,8 @@ import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
 import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -25,10 +25,10 @@ var uuid = const Uuid();
 
 class Summary2 extends StatefulWidget {
   const Summary2(
-      this.dress, this.startDate, this.endDate, this.noOfDays, this.price,
+      this.item, this.startDate, this.endDate, this.noOfDays, this.price,
       {super.key});
 
-  final Dress dress;
+  final Item item;
   final DateTime startDate;
   final DateTime endDate;
   final int noOfDays;
@@ -45,14 +45,14 @@ class _Summary2State extends State<Summary2> {
     
     int pricePerDay = widget.price~/widget.noOfDays;
 
-    void handleSubmit(String renterId, String dressId, String startDate,
+    void handleSubmit(String renterId, String itemId, String startDate,
         String endDate, int price) {
       
-      Provider.of<DressStore>(context, listen: false)
-          .addDressRenter(DressRenter(
+      Provider.of<ItemStore>(context, listen: false)
+          .addItemRenter(ItemRenter(
         id: uuid.v4(),
         renterId: renterId,
-        dressId: dressId,
+        itemId: itemId,
         startDate: startDate,
         endDate: endDate,
         price: price,
@@ -93,7 +93,7 @@ class _Summary2State extends State<Summary2> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 10),
-            SummaryImageWidget(widget.dress),
+            SummaryImageWidget(widget.item),
             SizedBox(height: 20),
             Row(
               children: [
@@ -152,11 +152,11 @@ class _Summary2State extends State<Summary2> {
                         side: BorderSide(width: 1.0, color: Colors.black),
                         ),
                     onPressed: () {
-                      String email = Provider.of<DressStore>(context, listen: false).renter.email;
+                      String email = Provider.of<ItemStore>(context, listen: false).renter.email;
                       String startDateText = widget.startDate.toString();
                       String endDateText = widget.endDate.toString();
-                      handleSubmit(email, widget.dress.id, startDateText, endDateText,
-                          widget.dress.rentPrice);
+                      handleSubmit(email, widget.item.id, startDateText, endDateText,
+                          widget.item.rentPrice);
                       showAlertDialog(context);  
                       // Navigator.of(context).push(MaterialPageRoute(
                           // builder: (context) => (const Congrats())));
@@ -182,7 +182,7 @@ showAlertDialog(BuildContext context) {
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
     title: Center(child: Text("Congratulations")),
-    content: Text("      Your dress is being prepared"),  
+    content: Text("      Your item is being prepared"),  
     actions: [  
       okButton,  
     ],  

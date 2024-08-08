@@ -13,12 +13,12 @@ import 'package:unearthed/screens/profile/my_account.dart';
 import 'package:unearthed/shared/send_whatsapp.dart';
 import 'package:unearthed/shared/whatsapp.dart';
 
-class AddressForm extends StatefulWidget {
+class AditemForm extends StatefulWidget {
   @override
-  _AddressFormState createState() => _AddressFormState();
+  _AditemFormState createState() => _AditemFormState();
 }
 
-class _AddressFormState extends State<AddressForm> {
+class _AditemFormState extends State<AditemForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -42,7 +42,7 @@ class _AddressFormState extends State<AddressForm> {
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter your email address';
+                  return 'Please enter your email aditem';
                 }
                 return null;
               },

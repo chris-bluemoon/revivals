@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/summary/congrats.dart';
@@ -16,11 +16,11 @@ import 'package:uuid/uuid.dart';
 var uuid = const Uuid();
 
 class Summary extends StatefulWidget {
-  const Summary(this.email, this.dress, this.startDate, this.endDate, {super.key});
+  const Summary(this.email, this.item, this.startDate, this.endDate, {super.key});
 
 
   final String email;
-  final Dress dress;
+  final Item item;
   final String startDate;
   final String endDate;
 
@@ -30,11 +30,11 @@ class Summary extends StatefulWidget {
 
 class _SummaryState extends State<Summary> {
   
-  void handleSubmit(String renterId, String dressId, String startDate, String endDate, int price) {
-    Provider.of<DressStore>(context, listen: false).addDressRenter(DressRenter(
+  void handleSubmit(String renterId, String itemId, String startDate, String endDate, int price) {
+    Provider.of<ItemStore>(context, listen: false).addItemRenter(ItemRenter(
       id: uuid.v4(),
       renterId: renterId,
-      dressId: dressId,
+      itemId: itemId,
       startDate: startDate,
       endDate: endDate,
       price: 0,
@@ -48,7 +48,7 @@ class _SummaryState extends State<Summary> {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // StyledTitle(widget.dress.name.toUpperCase()),
+            // StyledTitle(widget.item.name.toUpperCase()),
             StyledTitle('Summary'),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
@@ -83,12 +83,12 @@ class _SummaryState extends State<Summary> {
         children: [
         Text(widget.startDate),
         Text(widget.endDate),
-        Text(widget.dress.name),
+        Text(widget.item.name),
         Text(widget.email),
         ElevatedButton(
             child: Text('Confirm'),
             onPressed: () {
-                handleSubmit(widget.email, widget.dress.id, widget.startDate, widget.endDate, widget.dress.rentPrice);
+                handleSubmit(widget.email, widget.item.id, widget.startDate, widget.endDate, widget.item.rentPrice);
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Congrats())));
             },
           ),

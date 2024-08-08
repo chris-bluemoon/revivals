@@ -3,11 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/main.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/screens/new_arrivals/dress_card.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/screens/new_arrivals/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/to_rent/rent_this.dart';
-import 'package:unearthed/screens/to_rent/dress_widget.dart';
+import 'package:unearthed/screens/to_rent/item_widget.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:uuid/uuid.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -20,18 +20,18 @@ var uuid = const Uuid();
 
 // ignore: must_be_immutable
 class ToRent extends StatefulWidget {
-  ToRent(this.dress, {super.key});
+  ToRent(this.item, {super.key});
 
   @override
   State<ToRent> createState() => _NewArrivalsState();
 
-  final Dress dress;
-  late String dressName;
+  final Item item;
+  late String itemName;
   late String imageName;
 
-  String setDressImage() {
-    dressName = dress.name.replaceAll(RegExp(' '), '_');
-    imageName = '${dress.brand}_${dressName}_Dress.webp';
+  String setItemImage() {
+    itemName = item.name.replaceAll(RegExp(' '), '_');
+    imageName = '${item.brand}_${itemName}_Item.webp';
     return imageName;
   }
 
@@ -58,7 +58,7 @@ class _NewArrivalsState extends State<ToRent> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StyledTitle(widget.dress.brand.toUpperCase()),
+            StyledTitle(widget.item.brand.toUpperCase()),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,
@@ -106,7 +106,7 @@ class _NewArrivalsState extends State<ToRent> {
               items: items.map((i) {
                 return Builder(
                   builder: (BuildContext context) {
-                    return DressWidget(dress: widget.dress, dressNumber: i);
+                    return ItemWidget(item: widget.item, itemNumber: i);
                     // return const SizedBox(child: Text("BOX"), height: 20, width: 20);
                   },
                 );
@@ -125,20 +125,20 @@ class _NewArrivalsState extends State<ToRent> {
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: StyledHeading(widget.dress.description),
+              child: StyledHeading(widget.item.description),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, bottom: 10),
-              child: StyledBody('Rental price: ${widget.dress.rentPrice.toString()} ${globals.thb}'),
-              // child: StyledBody('Rental price: ${widget.dress.rentPrice.toString()} ${getCurrency()}'),
+              child: StyledBody('Rental price: ${widget.item.rentPrice.toString()} ${globals.thb}'),
+              // child: StyledBody('Rental price: ${widget.item.rentPrice.toString()} ${getCurrency()}'),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, bottom: 10),
-              child: Text(widget.dress.longDescription),
+              child: Text(widget.item.longDescription),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, bottom: 10),
-              child: Text(widget.dress.longDescription),
+              child: Text(widget.item.longDescription),
             ),
           ],
         ),
@@ -175,7 +175,7 @@ class _NewArrivalsState extends State<ToRent> {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress)))); 
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.item)))); 
                     },
                     child: const Text('RENT THIS', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(

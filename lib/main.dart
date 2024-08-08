@@ -18,41 +18,11 @@ void main() async {
   );
 
   runApp(ChangeNotifierProvider(
-    create: (context) => DressStore(),
+    create: (context) => ItemStore(),
     child: MaterialApp(
       theme: primaryTheme,
       home: HomePage(),
     ),
   ));
-}
-//   runApp(MaterialApp(
-//     theme: primaryTheme,
-//     // home: HomePage(),
-//     routes: {
-//       // When navigating to the "/" route, build the FirstScreen widget.
-//       '/': (context) => HomePage(),
-//       // When navigating to the "/second" route, build the SecondScreen widget.
-//       '/profile': (context) => const Profile(),
-//       '/browse': (context) => const Profile(),
-//       '/account': (context) => const Profile(),
-//       '/new_arrivals': (context) => const NewArrivals(),
-//   },
-//   ));
-// }
-
-// sandbox
-class Sandbox extends StatelessWidget {
-  const Sandbox({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sandbox'),
-        backgroundColor: Colors.grey,
-      ),
-      body: const Text('sandbox')
-    );
-  }
 }
 

@@ -28,14 +28,14 @@ class CategoryListView extends StatelessWidget {
              children: [
                Padding(
           padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-          child: Image.asset('assets/img/new_dresses/transparent_dress.webp', height: 100),
+          child: Image.asset('assets/img/new_items/transparent_item.webp', height: 100),
                ),
                SizedBox(width: 100),
                Text('DRESSES', style: TextStyle(fontSize: 16)),
              ],
            )
          ),
-         onTap: () {log('Tapped dresses');},
+         onTap: () {log('Tapped items');},
        ),
 Container(
   margin: const EdgeInsets.all(15.0),
@@ -61,7 +61,7 @@ Container(
       SizedBox(width: 70),
       Padding(
         padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-        child: Image.asset('assets/img/new_dresses/jacket_transparent2.webp', height: 100),
+        child: Image.asset('assets/img/new_items/jacket_transparent2.webp', height: 100),
       ),
     ],
   )

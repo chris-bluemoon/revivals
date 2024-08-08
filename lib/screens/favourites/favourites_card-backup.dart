@@ -2,24 +2,24 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/globals.dart' as globals;
 
 // ignore: must_be_immutable
 class FavouritesCard extends StatelessWidget {
-  FavouritesCard(this.dress, {super.key});
+  FavouritesCard(this.item, {super.key});
 
-  final Dress dress;
+  final Item item;
   late String imageName;
-  late String dressName;
+  late String itemName;
   late String brandName;
 
-  String setDressImage() {
-    dressName = dress.name.replaceAll(RegExp(' +'), '_');
-    brandName = dress.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${dressName}_Dress_1.jpg';
+  String setItemImage() {
+    itemName = item.name.replaceAll(RegExp(' +'), '_');
+    brandName = item.brand.replaceAll(RegExp(' +'), '_');
+    imageName = '${brandName}_${itemName}_Item_1.jpg';
     return imageName;
   }
 
@@ -34,38 +34,38 @@ class FavouritesCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
-            Center(child: StyledHeading(dress.brand)),
-            // Image.asset('assets/img/new_dresses/${setDressImage()}', width: 200, height: 600),
-            Expanded(child: Image.asset('assets/img/new_dresses/${setDressImage()}'),),
-            // Image.asset('assets/img/new_dresses/${setDressImage()}', fit: BoxFit.fill),
+            Center(child: StyledHeading(item.brand)),
+            // Image.asset('assets/img/new_items/${setItemImage()}', width: 200, height: 600),
+            Expanded(child: Image.asset('assets/img/new_items/${setItemImage()}'),),
+            // Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fill),
             Row(
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [
-                StyledHeading(dress.name),
+                StyledHeading(item.name),
                 Expanded(child: SizedBox()),
                 isFav ?  IconButton(
                   icon: Icon(Icons.favorite), color: Colors.red,
                   onPressed: () {
                     log('Pressed Fav');
                       isFav = false;
-                      // Provider.of<DressStore>(context, listen: false)
-                      //   .toggleDressFav(dress);
+                      // Provider.of<ItemStore>(context, listen: false)
+                      //   .toggleItemFav(item);
                   }) : 
                   IconButton(
                     icon: Icon(Icons.favorite_border_outlined),
                     onPressed: () {
-                      log('Pressed empty Fav on dress ID: ${dress.id}');
+                      log('Pressed empty Fav on item ID: ${item.id}');
                       isFav = true;
-                      // Provider.of<DressStore>(context, listen: false)
-                      //   .toggleDressFav(dress);
+                      // Provider.of<ItemStore>(context, listen: false)
+                      //   .toggleItemFav(item);
                     }
                   )
                   
               ],
             ),
-            // StyledText('Size: ${dress.size.toString()}'),
-            StyledBody('Rent for ${dress.rentPrice.toString()} ${globals.thb} per day'),
-            StyledBodyStrikeout('RRP ${dress.rrp.toString()} ${globals.thb}'),
+            // StyledText('Size: ${item.size.toString()}'),
+            StyledBody('Rent for ${item.rentPrice.toString()} ${globals.thb} per day'),
+            StyledBodyStrikeout('RRP ${item.rrp.toString()} ${globals.thb}'),
           ],
         ),
       ),

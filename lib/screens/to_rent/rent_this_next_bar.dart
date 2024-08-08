@@ -8,8 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/summary/summary2.dart';
 import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -19,9 +19,9 @@ import 'package:uuid/uuid.dart';
 import 'package:unearthed/globals.dart' as globals;
 
 class RentThisNextBar extends StatefulWidget {
-  const RentThisNextBar(this.dress, this.noOfDays, this.startDate, this.endDate, {super.key});
+  const RentThisNextBar(this.item, this.noOfDays, this.startDate, this.endDate, {super.key});
 
-  final Dress dress;
+  final Item item;
   final int noOfDays;
   final DateTime startDate;
   final DateTime endDate;
@@ -41,8 +41,8 @@ class _RentThisNextBarState extends State<RentThisNextBar> {
     if (widget.noOfDays > 3) {
       dayOffSet = 0.7;
     }
-    int totalPrice = (widget.dress.rentPrice * widget.noOfDays * dayOffSet).toInt();
-    int offSetPrice = (widget.dress.rentPrice * dayOffSet).toInt();
+    int totalPrice = (widget.item.rentPrice * widget.noOfDays * dayOffSet).toInt();
+    int offSetPrice = (widget.item.rentPrice * dayOffSet).toInt();
 
     return Row(
       children: [
@@ -58,9 +58,9 @@ class _RentThisNextBarState extends State<RentThisNextBar> {
             width: 120,
             child: OutlinedButton(
                       onPressed: () {
-                      //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary('email', widget.dress, 'start date','end date')))); 
+                      //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary('email', widget.item, 'start date','end date')))); 
                       //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary())));
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary2(widget.dress, widget.startDate, widget.endDate, widget.noOfDays, totalPrice))));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary2(widget.item, widget.startDate, widget.endDate, widget.noOfDays, totalPrice))));
                       },
                       child: const Text('NEXT', style: TextStyle(color: Colors.white)),
                         style: OutlinedButton.styleFrom(

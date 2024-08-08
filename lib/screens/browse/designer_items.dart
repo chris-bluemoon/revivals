@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/browse/designer_dress_card.dart';
+import 'package:unearthed/screens/browse/designer_item_card.dart';
 import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/screens/new_arrivals/dress_card.dart';
+import 'package:unearthed/screens/new_arrivals/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
@@ -15,20 +15,20 @@ import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 
 var uuid = const Uuid();
 
-class DesignerDresses extends StatefulWidget {
-  const DesignerDresses(this.brand, {super.key});
+class DesignerItems extends StatefulWidget {
+  const DesignerItems(this.brand, {super.key});
 
   final String brand;
 
   @override
-  State<DesignerDresses> createState() => _DesignerDressesState();
+  State<DesignerItems> createState() => _DesignerItemsState();
 }
 
-class _DesignerDressesState extends State<DesignerDresses> {
+class _DesignerItemsState extends State<DesignerItems> {
 
 
  
-    final List<Dress> brandDresses = [];
+    final List<Item> brandItems = [];
 
     @override
     initState() {
@@ -39,10 +39,10 @@ class _DesignerDressesState extends State<DesignerDresses> {
   @override
   Widget build(BuildContext context) {
     // getCurrentUser();
-    List<Dress> allDresses = Provider.of<DressStore>(context, listen: false).dresses;
-    for (Dress dress in allDresses) {
-      if (widget.brand == dress.brand) {
-        brandDresses.add(dress);
+    List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
+    for (Item item in allItems) {
+      if (widget.brand == item.brand) {
+        brandItems.add(item);
       }
     }
     log(widget.brand);
@@ -82,7 +82,7 @@ class _DesignerDressesState extends State<DesignerDresses> {
           color: Colors.white,
           child: Column(
             children: [
-              Consumer<DressStore>(
+              Consumer<ItemStore>(
                   // child not required
                   builder: (context, value, child) {
                 return Expanded(
@@ -91,13 +91,13 @@ class _DesignerDressesState extends State<DesignerDresses> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: DesignerDressCard(brandDresses[index]),
+                        child: DesignerItemCard(brandItems[index]),
                         onTap: () {
-                          log(brandDresses[0].toString());
-                            // log('About to rent ${value.brandDresses[index].name}');
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(brandDresses[index]))));
+                          log(brandItems[0].toString());
+                            // log('About to rent ${value.brandItems[index].name}');
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(brandItems[index]))));
                         }),
-                    itemCount: brandDresses.length,
+                    itemCount: brandItems.length,
                   ),
                 );
               }),

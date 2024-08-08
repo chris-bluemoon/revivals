@@ -140,7 +140,7 @@ class ProfileLanding extends StatelessWidget {
                   bool result = await signOutFromGoogle();
                   if (result) {
                     userCredential.value = '';
-                    Provider.of<DressStore>(context, listen: false).setLoggedIn(false);
+                    Provider.of<ItemStore>(context, listen: false).setLoggedIn(false);
                   }
                   showAlertDialog(context);
                   // Navigator.of(context).popUntil((route) => route.isFirst);
@@ -197,7 +197,7 @@ showAlertDialog(BuildContext context) {
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
     title: Center(child: Text("SIGNED OUT")),
-    // content: Text("      Your dress is being prepared"),  
+    // content: Text("      Your item is being prepared"),  
     actions: [  
       okButton,  
     ],  

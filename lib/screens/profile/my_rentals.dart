@@ -5,8 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
@@ -32,8 +32,8 @@ class MyRentals extends StatefulWidget {
 class _MyRentalsState extends State<MyRentals> {
   
 
-  List<DressRenter> myRentals = [];
-  List<Dress> myDresses = [];
+  List<ItemRenter> myRentals = [];
+  List<Item> myItemes = [];
 
   @override
   void initState() {
@@ -44,18 +44,18 @@ class _MyRentalsState extends State<MyRentals> {
   void loadMyRentals() {
     log('Loading loadMyRentals');
     // get current user
-    String userEmail = Provider.of<DressStore>(context, listen: false).renter.email;
+    String userEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
     log('User email: $userEmail');
-    // List<DressRenter> myDressRenters = Provider.of<DressStore>(context, listen: false).dressRenters;
-    List<DressRenter> allDressRenters = List.from(Provider.of<DressStore>(context, listen: false).dressRenters);
-    List<Dress> allDresses = List.from(Provider.of<DressStore>(context, listen: false).dresses);
-    for (DressRenter dr in allDressRenters) {
+    // List<ItemRenter> myItemRenters = Provider.of<ItemStore>(context, listen: false).itemRenters;
+    List<ItemRenter> allItemRenters = List.from(Provider.of<ItemStore>(context, listen: false).itemRenters);
+    List<Item> allItemes = List.from(Provider.of<ItemStore>(context, listen: false).items);
+    for (ItemRenter dr in allItemRenters) {
       if (dr.renterId == userEmail) {
         myRentals.add(dr);
-        log('Rented: ${dr.dressId}');
-        for (Dress d in allDresses) {
-          if (d.id == dr.dressId) {
-            myDresses.add(d);
+        log('Rented: ${dr.itemId}');
+        for (Item d in allItemes) {
+          if (d.id == dr.itemId) {
+            myItemes.add(d);
           }
         }
       }
@@ -66,7 +66,7 @@ class _MyRentalsState extends State<MyRentals> {
   @override
   Widget build(BuildContext context) {
 
-    // String address = Provider.of<DressStore>(context, listen: false).renters[0].address;
+    // String aditem = Provider.of<ItemStore>(context, listen: false).renters[0].aditem;
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -102,7 +102,7 @@ class _MyRentalsState extends State<MyRentals> {
         itemBuilder: (BuildContext context, int index) {
           return Container(
           height: 100,
-          child: MyRentalsImageWidget(myRentals[index].dressId, myRentals[index].startDate, myRentals[index].endDate, myRentals[index].price),
+          child: MyRentalsImageWidget(myRentals[index].itemId, myRentals[index].startDate, myRentals[index].endDate, myRentals[index].price),
         );
       }
     ));

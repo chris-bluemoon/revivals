@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/browse/designer_dress_card.dart';
+import 'package:unearthed/screens/browse/designer_item_card.dart';
 import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/screens/new_arrivals/dress_card.dart';
+import 'package:unearthed/screens/new_arrivals/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
@@ -28,7 +28,7 @@ class _CategoryItemsState extends State<CategoryItems> {
 
 
  
-    final List<Dress> brandDresses = [];
+    final List<Item> categoryItems = [];
 
     @override
     initState() {
@@ -39,10 +39,10 @@ class _CategoryItemsState extends State<CategoryItems> {
   @override
   Widget build(BuildContext context) {
     // getCurrentUser();
-    List<Dress> allDresses = Provider.of<DressStore>(context, listen: false).dresses;
-    for (Dress d in allDresses) {
-      if (widget.type == item.type) {
-        typeItems.add(item);
+    List<Item> allItemes = Provider.of<ItemStore>(context, listen: false).items;
+    for (Item i in allItemes) {
+      if (widget.type == i.type) {
+        categoryItems.add(i);
       }
     }
     return Scaffold(
@@ -81,7 +81,7 @@ class _CategoryItemsState extends State<CategoryItems> {
           color: Colors.white,
           child: Column(
             children: [
-              Consumer<DressStore>(
+              Consumer<ItemStore>(
                   // child not required
                   builder: (context, value, child) {
                 return Expanded(
@@ -90,13 +90,13 @@ class _CategoryItemsState extends State<CategoryItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: DesignerDressCard(brandDresses[index]),
+                        child: DesignerItemCard(categoryItems[index]),
                         onTap: () {
-                          log(brandDresses[0].toString());
-                            // log('About to rent ${value.brandDresses[index].name}');
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(brandDresses[index]))));
+                          log(categoryItems[0].toString());
+                            // log('About to rent ${value.brandItemes[index].name}');
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(categoryItems[index]))));
                         }),
-                    itemCount: brandDresses.length,
+                    itemCount: categoryItems.length,
                   ),
                 );
               }),

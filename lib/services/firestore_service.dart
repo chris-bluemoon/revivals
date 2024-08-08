@@ -1,17 +1,17 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item_renter.dart';
 
 class FirestoreService {
 
-  static final refDress = FirebaseFirestore.instance
-    .collection('dress')
+  static final refItem = FirebaseFirestore.instance
+    .collection('item')
     .withConverter(
-      fromFirestore: Dress.fromFirestore, 
-      toFirestore: (Dress d, _) => d.toFirestore()
+      fromFirestore: Item.fromFirestore, 
+      toFirestore: (Item d, _) => d.toFirestore()
   );
 
   static final refRenter = FirebaseFirestore.instance
@@ -21,21 +21,21 @@ class FirestoreService {
       toFirestore: (Renter d, _) => d.toFirestore()
   );
 
-  static final refDressRenter = FirebaseFirestore.instance
-    .collection('dressRenter')
+  static final refItemRenter = FirebaseFirestore.instance
+    .collection('itemRenter')
     .withConverter(
-      fromFirestore: DressRenter.fromFirestore, 
-      toFirestore: (DressRenter d, _) => d.toFirestore()
+      fromFirestore: ItemRenter.fromFirestore, 
+      toFirestore: (ItemRenter d, _) => d.toFirestore()
   );
 
-  // add a new dress
-  static Future<void> addDress(Dress dress) async {
-    await refDress.doc(dress.id).set(dress);
+  // add a new item
+  static Future<void> addItem(Item item) async {
+    await refItem.doc(item.id).set(item);
   }
 
-  // get dress once
-  static Future<QuerySnapshot<Dress>> getDressesOnce() {
-    return refDress.get();
+  // get item once
+  static Future<QuerySnapshot<Item>> getItemsOnce() {
+    return refItem.get();
   }
 
   // add a new renter
@@ -55,11 +55,11 @@ class FirestoreService {
   }
 
   // Toggle isFav
-  // static Future<void> updateDress(Dress dress) async {
-  //   log('Firestore service received dress id: ${dress.id}');
-  //   await refDress.doc(dress.id).update(
+  // static Future<void> updateItem(Item item) async {
+  //   log('Firestore service received item id: ${item.id}');
+  //   await refItem.doc(item.id).update(
   //     {
-  //       'isFav': dress.isFav,
+  //       'isFav': item.isFav,
   //     }
   //   );
   // }
@@ -69,13 +69,13 @@ class FirestoreService {
     return refRenter.get();
   }
 
-  // add a new renterDress
-  static Future<void> addDressRenter(DressRenter dressRenter) async {
-    await refDressRenter.doc(dressRenter.id).set(dressRenter);
+  // add a new renterItem
+  static Future<void> addItemRenter(ItemRenter itemRenter) async {
+    await refItemRenter.doc(itemRenter.id).set(itemRenter);
   }
 
-  // get dressRenters once
-  static Future<QuerySnapshot<DressRenter>> getDressRentersOnce() {
-    return refDressRenter.get();
+  // get itemRenters once
+  static Future<QuerySnapshot<ItemRenter>> getItemRentersOnce() {
+    return refItemRenter.get();
   }
 }

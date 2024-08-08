@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -24,7 +24,7 @@ class Congrats extends StatelessWidget {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // StyledTitle(widget.dress.name.toUpperCase()),
+            // StyledTitle(widget.item.name.toUpperCase()),
             // StyledTitle('Congrats'),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',

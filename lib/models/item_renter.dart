@@ -1,38 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Renter {
+class ItemRenter {
   
-  Renter({required this.id, 
-          required this.email, 
-          required this.name, 
-          required this.size, 
-          required this.address, 
-          required this.phoneNum,
-          required this.favourites,
+  ItemRenter({required this.id, 
+          required this.renterId, 
+          required this.itemId, 
+          required this.startDate, 
+          required this.endDate, 
+          required this.price,
         }); 
 
     String id;
-    String email;
-    String name;
-    int size;
-    String address;
-    String phoneNum;
-    List favourites;
+    String renterId;
+    String itemId;
+    String startDate;
+    String endDate;
+    int price;
 
   // item to firestore (map)
   Map<String, dynamic> toFirestore() {
     return {
-      'email': email,
-      'name': name,
-      'size': size,
-      'address': address,
-      'phoneNum': phoneNum,
-      'favourites': favourites,
+      'renterId': renterId,
+      'itemId': itemId,
+      'startDate': startDate,
+      'endDate': endDate,
+      'price': price,
     };
   }
 
-  // character from firestore
-  factory Renter.fromFirestore(
+  // ItemRenter from firestore
+  factory ItemRenter.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,
   ) {
@@ -41,17 +38,16 @@ class Renter {
     final data = snapshot.data()!;
 
     // make character instance
-    Renter renter = Renter(
+    ItemRenter itemRenter = ItemRenter(
       id: snapshot.id,
-      email: data['email'],
-      name: data['name'],
-      size: data['size'],
-      address: data['address'],
-      phoneNum: data['phoneNum'],
-      favourites: data['favourites'],
+      renterId: data['renterId'],
+      itemId: data['itemId'],
+      startDate: data['startDate'],
+      endDate: data['endDate'],
+      price: data['price'],
     );
 
-    return renter;
+    return itemRenter;
   } 
   
   

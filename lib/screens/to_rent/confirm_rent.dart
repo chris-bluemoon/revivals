@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/item.dart';
 
 class ConfirmRentWidget extends StatefulWidget {
-  const ConfirmRentWidget(this.dress, {super.key});
+  const ConfirmRentWidget(this.item, {super.key});
 
-  final Dress dress;
+  final Item item;
 
   @override
   State<ConfirmRentWidget> createState() => _ConfirmRentWidget();
@@ -15,8 +15,8 @@ class _ConfirmRentWidget extends State<ConfirmRentWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Text('Rent ${widget.dress.name} for ${widget.dress.rentPrice} Baht')
-        Text('Rent for ${widget.dress.rentPrice} Baht')
+        // Text('Rent ${widget.item.name} for ${widget.item.rentPrice} Baht')
+        Text('Rent for ${widget.item.rentPrice} Baht')
       ],
     );
   }

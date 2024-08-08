@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/dress.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/favourites/favourites_card.dart';
-import 'package:unearthed/screens/new_arrivals/dress_card.dart';
+import 'package:unearthed/screens/new_arrivals/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
@@ -24,7 +24,7 @@ class _FavouritesState extends State<Favourites> {
 @override
 initState() {
 
-  Provider.of<DressStore>(context, listen: false).populateFavourites();
+  Provider.of<ItemStore>(context, listen: false).populateFavourites();
   super.initState();
 }
 
@@ -44,7 +44,7 @@ initState() {
           color: Colors.white,
           child: Column(
             children: [
-              Consumer<DressStore>(
+              Consumer<ItemStore>(
                   // child not required
                   builder: (context, value, child) {
                 return Expanded(
@@ -56,11 +56,11 @@ initState() {
                     GestureDetector(
                         child: FavouritesCard(value.favourites[index]),
                         onTap: () {
-                          // if (Provider.of<DressStore>(context, listen: false).renters.length == 0) {
+                          // if (Provider.of<ItemStore>(context, listen: false).renters.length == 0) {
                             // log('Not logged in, cannot rent, redirecting');
                             // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (GoogleSignInScreen())));
                           // } else {
-                            // log('About to rent ${value.dresses[index].name}');
+                            // log('About to rent ${value.items[index].name}');
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(value.favourites[index]))));
                           // }
 

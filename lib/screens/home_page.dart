@@ -27,15 +27,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    Provider.of<DressStore>(context, listen: false)
-      .fetchDressesOnce();
-    Provider.of<DressStore>(context, listen: false)
-      .fetchDressRentersOnce();
-    Provider.of<DressStore>(context, listen: false)
+    Provider.of<ItemStore>(context, listen: false)
+      .fetchItemsOnce();
+    Provider.of<ItemStore>(context, listen: false)
+      .fetchItemRentersOnce();
+    Provider.of<ItemStore>(context, listen: false)
       .fetchRentersOnce();
       
-    // Provider.of<DressStore>(context, listen: false).addAllFavourites();
-    List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+    // Provider.of<ItemStore>(context, listen: false).addAllFavourites();
+    List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
     log('Renters list:');
     log(renters.toString());
     
@@ -60,12 +60,12 @@ class _HomePageState extends State<HomePage> {
 //     // User? asda = FirebaseAuth.instance.currentUser;
 //     if(_user != null) {
 //       loggedIn = true;
-//     List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+//     List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
     
-//     // Provider.of<DressStore>(context, listen: false).fetchRentersOnce();
+//     // Provider.of<ItemStore>(context, listen: false).fetchRentersOnce();
 //     for (Renter r in renters) {
 //       if (r.email == _user.email) {
-//         Provider.of<DressStore>(context, listen: false).assignUser(r);
+//         Provider.of<ItemStore>(context, listen: false).assignUser(r);
 //         log('User ${r.email} found in DB, just assigned to _user');
 //       } 
 //     }
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
             () {
               // getCurrentUser();
               _pageIndex = index;
-              bool loggedIn = Provider.of<DressStore>(context, listen: false).loggedIn;
+              bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
               log('Logged in is set to ${loggedIn}');
               if (index == 3 && loggedIn == false) {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));

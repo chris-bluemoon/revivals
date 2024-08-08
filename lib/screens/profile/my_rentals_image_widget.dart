@@ -7,8 +7,8 @@ import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
 import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/models/dress_renter.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -18,39 +18,39 @@ import 'package:uuid/uuid.dart';
 import 'package:unearthed/globals.dart' as globals;
 
 class MyRentalsImageWidget extends StatelessWidget {
-  MyRentalsImageWidget(this.dressId, this.startDate, this.endDate, this.price,
+  MyRentalsImageWidget(this.itemId, this.startDate, this.endDate, this.price,
       {super.key});
 
-  final String dressId;
+  final String itemId;
   final String startDate;
   final String endDate;
   final int price;
 
-  late String dressName;
+  late String itemName;
   late String brandName;
   late String imageName;
-  late Dress dress;
+  late Item item;
 
-  String setDressImage() {
-    dressName = dress.name.replaceAll(RegExp(' +'), '_');
-    brandName = dress.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${dressName}_Dress_1.jpg';
+  String setItemImage() {
+    itemName = item.name.replaceAll(RegExp(' +'), '_');
+    brandName = item.brand.replaceAll(RegExp(' +'), '_');
+    imageName = '${brandName}_${itemName}_Item_1.jpg';
     return imageName;
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Dress> allDresses =
-        Provider.of<DressStore>(context, listen: false).dresses;
+    List<Item> allItemes =
+        Provider.of<ItemStore>(context, listen: false).items;
     DateTime fromDate = DateTime.parse(startDate);
     DateTime toDate = DateTime.parse(endDate);
     String fromDateString = DateFormat('d MMMM, y').format(fromDate);
     String toDateString = DateFormat('d MMMM, y').format(toDate);
     // yMMMMd('en_US')
-    for (Dress d in allDresses) {
-      if (d.id == dressId) {
-        log('dress id');
-        dress = d;
+    for (Item d in allItemes) {
+      if (d.id == itemId) {
+        log('item id');
+        item = d;
       }
     }
     ColorFilter greyscale = ColorFilter.matrix(<double>[
@@ -110,7 +110,7 @@ class MyRentalsImageWidget extends StatelessWidget {
                 child: ColorFiltered(
                     colorFilter: greyscale,
                     child: Image.asset(
-                        'assets/img/new_dresses/${setDressImage()}',
+                        'assets/img/new_items/${setItemImage()}',
                         fit: BoxFit.fitHeight,
                         height: 100,
                         width: 80))),
@@ -118,7 +118,7 @@ class MyRentalsImageWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${dress.name} from ${dress.brand}',
+                Text('${item.name} from ${item.brand}',
                     style: TextStyle(fontSize: 14)),
                 const SizedBox(height: 5),
                 Row(

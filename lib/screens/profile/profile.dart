@@ -24,7 +24,7 @@ class _Profile extends State<Profile> {
   initState() {
     getCurrentUser();
     // final uid = user.uid;
-    List<Renter> renters = Provider.of<DressStore>(context, listen: false).renters;
+    List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
     log('Renters in Provider DB now:');
     log(renters.length.toString());
     super.initState();
@@ -124,7 +124,7 @@ showAlertDialog(BuildContext context) {
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
     title: Center(child: Text("SIGNED OUT")),
-    // content: Text("      Your dress is being prepared"),  
+    // content: Text("      Your item is being prepared"),  
     actions: [  
       okButton,  
     ],  

@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/main.dart';
-import 'package:unearthed/models/dress.dart';
-import 'package:unearthed/screens/new_arrivals/dress_card.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/screens/new_arrivals/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/to_rent/rent_this.dart';
 import 'package:unearthed/services/class_store.dart';
@@ -14,18 +14,18 @@ var uuid = const Uuid();
 
 // ignore: must_be_immutable
 class ToRent extends StatefulWidget {
-  ToRent(this.dress, {super.key});
+  ToRent(this.item, {super.key});
 
   @override
   State<ToRent> createState() => _NewArrivalsState();
 
-  final Dress dress;
-  late String dressName;
+  final Item item;
+  late String itemName;
   late String imageName;
 
-  String setDressImage() {
-    dressName = dress.name.replaceAll(RegExp(' '), '_');
-    imageName = '${dress.brand}_${dressName}_Dress.webp';
+  String setItemImage() {
+    itemName = item.name.replaceAll(RegExp(' '), '_');
+    imageName = '${item.brand}_${itemName}_Item.webp';
     return imageName;
   }
 
@@ -41,7 +41,7 @@ class _NewArrivalsState extends State<ToRent> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StyledTitle(widget.dress.name.toUpperCase()),
+            StyledTitle(widget.item.name.toUpperCase()),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,
@@ -80,11 +80,11 @@ class _NewArrivalsState extends State<ToRent> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.asset('assets/img/dresses/${widget.setDressImage()}'),
+                      child: Image.asset('assets/img/items/${widget.setItemImage()}'),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.asset('assets/img/dresses/${widget.setDressImage()}'),
+                      child: Image.asset('assets/img/items/${widget.setItemImage()}'),
                     ),
                   ],
                 )
@@ -124,7 +124,7 @@ class _NewArrivalsState extends State<ToRent> {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.dress)))); 
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.item)))); 
                     },
                     child: const Text('RENT THIS', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(
