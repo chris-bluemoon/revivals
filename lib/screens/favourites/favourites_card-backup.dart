@@ -12,14 +12,16 @@ class FavouritesCard extends StatelessWidget {
   FavouritesCard(this.item, {super.key});
 
   final Item item;
+  late String itemType;
   late String imageName;
   late String itemName;
   late String brandName;
 
   String setItemImage() {
+    itemType = item.type.replaceAll(RegExp(' +'), '_');
     itemName = item.name.replaceAll(RegExp(' +'), '_');
     brandName = item.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${itemName}_Item_1.jpg';
+    imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
     return imageName;
   }
 
@@ -35,7 +37,6 @@ class FavouritesCard extends StatelessWidget {
           children: [
             
             Center(child: StyledHeading(item.brand)),
-            // Image.asset('assets/img/new_items/${setItemImage()}', width: 200, height: 600),
             Expanded(child: Image.asset('assets/img/new_items/${setItemImage()}'),),
             // Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fill),
             Row(

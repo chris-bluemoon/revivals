@@ -19,6 +19,7 @@ class DesignerItemCard extends StatefulWidget {
 }
 
 class _DesignerItemCardState extends State<DesignerItemCard> {
+  late String itemType;
   late String imageName;
 
   late String itemName;
@@ -28,9 +29,10 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
   bool isFav = false;
 
   String setItemImage() {
+    itemType = widget.item.type.replaceAll(RegExp(' +'), '_');
     itemName = widget.item.name.replaceAll(RegExp(' +'), '_');
     brandName = widget.item.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${itemName}_Item_1.jpg';
+    imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
     return imageName;
   }
 

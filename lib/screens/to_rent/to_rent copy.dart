@@ -20,12 +20,14 @@ class ToRent extends StatefulWidget {
   State<ToRent> createState() => _NewArrivalsState();
 
   final Item item;
+  late String itemType;
   late String itemName;
   late String imageName;
 
   String setItemImage() {
+    itemType = item.type.replaceAll(RegExp(' '), '_');
     itemName = item.name.replaceAll(RegExp(' '), '_');
-    imageName = '${item.brand}_${itemName}_Item.webp';
+    imageName = '${item.brand}_${itemName}_${itemType}.webp';
     return imageName;
   }
 
