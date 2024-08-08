@@ -9,6 +9,7 @@ import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
 
 import 'package:unearthed/screens/home/my_app_client.dart';
+import 'package:unearthed/screens/profile/my_rentals.dart';
 import 'package:unearthed/screens/profile/profile.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
@@ -56,22 +57,24 @@ class ProfileLanding extends StatelessWidget {
             children: [
               SizedBox(width: 10),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyRentals())));
+                },
                 icon: Icon(Icons.woman_2_outlined)),
               Text('MY RENTALS'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          Row(
-            children: [
-              SizedBox(width: 10),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.description)),
-              Text('INVOICE HISTORY'),
-            ],
-          ),
-          Divider(indent: 50, color: Colors.grey[200],),
+          // Row(
+          //   children: [
+          //     SizedBox(width: 10),
+          //     IconButton(
+          //       onPressed: () {},
+          //       icon: Icon(Icons.description)),
+          //     Text('INVOICE HISTORY'),
+          //   ],
+          // ),
+          // Divider(indent: 50, color: Colors.grey[200],),
           Row(
             children: [
               SizedBox(width: 10),

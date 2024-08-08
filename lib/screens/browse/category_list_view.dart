@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CategoryListView extends StatelessWidget {
@@ -8,30 +10,33 @@ class CategoryListView extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
-       Container(
-  margin: const EdgeInsets.all(15.0),
-  padding: const EdgeInsets.all(0),
-  decoration: BoxDecoration(
-    border: Border.all(color: Colors.white),
-    borderRadius: BorderRadius.circular(5.0), 
-    color: Colors.grey,
-    gradient: LinearGradient(
-      colors: [Colors.grey, Colors.white],
-      stops: [0.2, 1.0],
-      // stops: [0.0, 0.5, 1.0],
-    ),
-  ),
-  child: Row(
-    children: [
-      Padding(
-        padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-        child: Image.asset('assets/img/new_dresses/transparent_dress.webp', height: 100),
-      ),
-      SizedBox(width: 100),
-      Text('DRESSES', style: TextStyle(fontSize: 16)),
-    ],
-  )
-),
+       GestureDetector(
+         child: Container(
+           margin: const EdgeInsets.all(15.0),
+           padding: const EdgeInsets.all(0),
+           decoration: BoxDecoration(
+             border: Border.all(color: Colors.white),
+             borderRadius: BorderRadius.circular(5.0), 
+             color: Colors.grey,
+             gradient: LinearGradient(
+               colors: [Colors.grey, Colors.white],
+               stops: [0.2, 1.0],
+               // stops: [0.0, 0.5, 1.0],
+             ),
+           ),
+           child: Row(
+             children: [
+               Padding(
+          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+          child: Image.asset('assets/img/new_dresses/transparent_dress.webp', height: 100),
+               ),
+               SizedBox(width: 100),
+               Text('DRESSES', style: TextStyle(fontSize: 16)),
+             ],
+           )
+         ),
+         onTap: () {log('Tapped dresses');},
+       ),
 Container(
   margin: const EdgeInsets.all(15.0),
   padding: const EdgeInsets.all(0),

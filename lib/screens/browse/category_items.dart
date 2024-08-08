@@ -15,16 +15,16 @@ import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 
 var uuid = const Uuid();
 
-class DesignerDresses extends StatefulWidget {
-  const DesignerDresses(this.brand, {super.key});
+class CategoryItems extends StatefulWidget {
+  const CategoryItems(this.type, {super.key});
 
-  final String brand;
+  final String type;
 
   @override
-  State<DesignerDresses> createState() => _DesignerDressesState();
+  State<CategoryItems> createState() => _CategoryItemsState();
 }
 
-class _DesignerDressesState extends State<DesignerDresses> {
+class _CategoryItemsState extends State<CategoryItems> {
 
 
  
@@ -40,12 +40,11 @@ class _DesignerDressesState extends State<DesignerDresses> {
   Widget build(BuildContext context) {
     // getCurrentUser();
     List<Dress> allDresses = Provider.of<DressStore>(context, listen: false).dresses;
-    for (Dress dress in allDresses) {
-      if (widget.brand == dress.brand) {
-        brandDresses.add(dress);
+    for (Dress d in allDresses) {
+      if (widget.type == item.type) {
+        typeItems.add(item);
       }
     }
-    log(widget.brand);
     return Scaffold(
       appBar: AppBar(
         title: Row(

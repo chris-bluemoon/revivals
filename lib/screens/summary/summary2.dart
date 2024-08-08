@@ -152,9 +152,7 @@ class _Summary2State extends State<Summary2> {
                         side: BorderSide(width: 1.0, color: Colors.black),
                         ),
                     onPressed: () {
-                      String email = Provider.of<DressStore>(context, listen: false)
-                          .renters[0]
-                          .email;
+                      String email = Provider.of<DressStore>(context, listen: false).renter.email;
                       String startDateText = widget.startDate.toString();
                       String endDateText = widget.endDate.toString();
                       handleSubmit(email, widget.dress.id, startDateText, endDateText,

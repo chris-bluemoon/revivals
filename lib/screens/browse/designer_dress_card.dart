@@ -78,7 +78,7 @@ class _DesignerDressCardState extends State<DesignerDressCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
-            Center(child: StyledHeading(widget.dress.brand)),
+            // Center(child: StyledHeading(widget.dress.brand)),
             // Image.asset('assets/img/new_dresses/${setDressImage()}', width: 200, height: 600),
             Expanded(child: Image.asset('assets/img/new_dresses/${setDressImage()}'),),
             // Image.asset('assets/img/new_dresses/${setDressImage()}', fit: BoxFit.fill),
