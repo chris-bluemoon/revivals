@@ -18,14 +18,16 @@ class ItemWidget extends StatefulWidget {
 
 class _ItemWidgetState extends State<ItemWidget> {
   
+  late String itemType;
   late String itemName;
   late String brandName;
   late String imageName;
 
   String setItemImage() {
+    itemType = widget.item.type.replaceAll(RegExp(' +'), '_');
     itemName = widget.item.name.replaceAll(RegExp(' +'), '_');
     brandName = widget.item.brand.replaceAll(RegExp(' +'), '_');
-    imageName = 'assets/img/new_items/${brandName}_${itemName}_Item_${widget.itemNumber}.jpg';
+    imageName = 'assets/img/new_items/${brandName}_${itemName}_${itemType}_${widget.itemNumber}.jpg';
     return imageName;
   }
 

@@ -30,12 +30,12 @@ class ToRent extends StatefulWidget {
   late String imageName;
   late String itemType; 
 
-  String setItemImage() {
-    itemType = item.type.replaceAll(RegExp(' '), '_');
-    itemName = item.name.replaceAll(RegExp(' '), '_');
-    imageName = '${item.brand}_${itemName}_${itemType}.webp';
-    return imageName;
-  }
+  // String setItemImage() {
+  //   itemType = item.type.replaceAll(RegExp(' '), '_');
+  //   itemName = item.name.replaceAll(RegExp(' '), '_');
+  //   imageName = '${item.brand}_${itemName}_${itemType}.webp';
+  //   return imageName;
+  // }
 
 
 
