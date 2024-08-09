@@ -45,7 +45,7 @@ class _MyRentalsState extends State<MyRentals> {
     log('Loading loadMyRentals');
     // get current user
     String userEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
-    log('User email: $userEmail');
+    // log('User email: $userEmail');
     // List<ItemRenter> myItemRenters = Provider.of<ItemStore>(context, listen: false).itemRenters;
     List<ItemRenter> allItemRenters = List.from(Provider.of<ItemStore>(context, listen: false).itemRenters);
     List<Item> allItemes = List.from(Provider.of<ItemStore>(context, listen: false).items);
