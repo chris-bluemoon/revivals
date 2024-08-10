@@ -42,7 +42,7 @@ class _AditemFormState extends State<AditemForm> {
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter your email aditem';
+                  return 'Please enter your email address';
                 }
                 return null;
               },

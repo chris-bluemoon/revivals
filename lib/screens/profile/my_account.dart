@@ -36,7 +36,7 @@ class _MyAccountState extends State<MyAccount> {
   @override
   void initState() {
     super.initState();
-    _aditemController = TextEditingController(text: 'Dummy aditem value');
+    _aditemController = TextEditingController(text: 'Dummy address value');
     _phoneNumController = TextEditingController(text: 'Dummy phoneNum value');
     // _aditemController = new TextEditingController(text: 'Initial value');
   }
@@ -44,11 +44,11 @@ class _MyAccountState extends State<MyAccount> {
   @override
   Widget build(BuildContext context) {
 
-    // String aditem = Provider.of<ItemStore>(context, listen: false).renters[0].aditem;
-    String aditem = Provider.of<ItemStore>(context, listen: false).renter.aditem;
+    // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
+    String address = Provider.of<ItemStore>(context, listen: false).renter.address;
     String phoneNum = Provider.of<ItemStore>(context, listen: false).renter.phoneNum;
 
-    _aditemController = TextEditingController(text: aditem);
+    _aditemController = TextEditingController(text: address);
     _phoneNumController = TextEditingController(text: phoneNum);
     // ValueNotifier userCredential = ValueNotifier('');
 
@@ -89,7 +89,7 @@ class _MyAccountState extends State<MyAccount> {
             Text('ADDRESS', style: TextStyle(fontSize: 12, color: Colors.grey),),
             TextFormField(
               // initialValue: '12 Acacia Road, Bangkok, Thailand',
-              // initialValue: aditem,
+              // initialValue: address,
               controller: _aditemController,
             ),
             SizedBox(height: 30),
@@ -136,12 +136,12 @@ class _MyAccountState extends State<MyAccount> {
                     onPressed: () {
                     Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                     log('toSave renter: ${toSave.name}');
-                    log('Renters current aditem: ${toSave.address}');
+                    log('Renters current address: ${toSave.address}');
                     log('Renters current phoneNum: ${toSave.phoneNum}');
                     log('Renters id: ${toSave.id}');
                     log(_aditemController.value.text);
                     log(_phoneNumController.value.text);
-                    log('Renters NEW aditem: ${_aditemController.value.text}');
+                    log('Renters NEW address: ${_aditemController.value.text}');
                     log('Renters NEW phoneNum: ${_phoneNumController.value.text}');
                     toSave.address = _aditemController.value.text;
                     toSave.phoneNum = _phoneNumController.value.text;

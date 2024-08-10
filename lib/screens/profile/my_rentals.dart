@@ -33,7 +33,7 @@ class _MyRentalsState extends State<MyRentals> {
   
 
   List<ItemRenter> myRentals = [];
-  List<Item> myItemes = [];
+  List<Item> myItems = [];
 
   @override
   void initState() {
@@ -48,25 +48,27 @@ class _MyRentalsState extends State<MyRentals> {
     // log('User email: $userEmail');
     // List<ItemRenter> myItemRenters = Provider.of<ItemStore>(context, listen: false).itemRenters;
     List<ItemRenter> allItemRenters = List.from(Provider.of<ItemStore>(context, listen: false).itemRenters);
-    List<Item> allItemes = List.from(Provider.of<ItemStore>(context, listen: false).items);
+    List<Item> allItems = List.from(Provider.of<ItemStore>(context, listen: false).items);
     for (ItemRenter dr in allItemRenters) {
       if (dr.renterId == userEmail) {
         myRentals.add(dr);
         log('Rented: ${dr.itemId}');
-        for (Item d in allItemes) {
+        for (Item d in allItems) {
           if (d.id == dr.itemId) {
-            myItemes.add(d);
+            myItems.add(d);
           }
         }
       }
-
+    }
+    if (myRentals.isEmpty) {
+      log('You have no rentals!');
     }
     myRentals.sort((a, b) => a.startDate.compareTo(b.startDate));
   }
   @override
   Widget build(BuildContext context) {
 
-    // String aditem = Provider.of<ItemStore>(context, listen: false).renters[0].aditem;
+    // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
     return Scaffold(
       appBar: AppBar(
         title: const Row(

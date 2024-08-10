@@ -15,16 +15,16 @@ import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 
 var uuid = const Uuid();
 
-class CategoryItems extends StatefulWidget {
-  const CategoryItems(this.type, {super.key});
+class StyleItems extends StatefulWidget {
+  const StyleItems(this.style, {super.key});
 
-  final String type;
+  final String style;
 
   @override
-  State<CategoryItems> createState() => _CategoryItemsState();
+  State<StyleItems> createState() => _StyleItemsState();
 }
 
-class _CategoryItemsState extends State<CategoryItems> {
+class _StyleItemsState extends State<StyleItems> {
 
 
  
@@ -42,8 +42,8 @@ class _CategoryItemsState extends State<CategoryItems> {
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     log('Size of allItems: ${allItems.length}');
     for (Item i in allItems) {
-      log('checking: ${widget.type} vs database stored type: ${i.type}');
-      if (widget.type == i.type) {
+      log('checking: ${widget.style} vs database stored style: ${i.style}');
+      if (widget.style == i.style) {
         categoryItems.add(i);
       }
     }

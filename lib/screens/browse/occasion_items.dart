@@ -15,20 +15,20 @@ import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 
 var uuid = const Uuid();
 
-class CategoryItems extends StatefulWidget {
-  const CategoryItems(this.type, {super.key});
+class OccasionItems extends StatefulWidget {
+  const OccasionItems(this.occasion, {super.key});
 
-  final String type;
+  final String occasion;
 
   @override
-  State<CategoryItems> createState() => _CategoryItemsState();
+  State<OccasionItems> createState() => _OccasionItemsState();
 }
 
-class _CategoryItemsState extends State<CategoryItems> {
+class _OccasionItemsState extends State<OccasionItems> {
 
 
  
-    final List<Item> categoryItems = [];
+    final List<Item> occasionItems = [];
 
     @override
     initState() {
@@ -42,9 +42,9 @@ class _CategoryItemsState extends State<CategoryItems> {
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     log('Size of allItems: ${allItems.length}');
     for (Item i in allItems) {
-      log('checking: ${widget.type} vs database stored type: ${i.type}');
-      if (widget.type == i.type) {
-        categoryItems.add(i);
+      log('checking: ${widget.occasion} vs database stored type: ${i.occasion}');
+      if (widget.occasion == i.occasion) {
+        occasionItems.add(i);
       }
     }
     return Scaffold(
@@ -92,13 +92,13 @@ class _CategoryItemsState extends State<CategoryItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: DesignerItemCard(categoryItems[index]),
+                        child: DesignerItemCard(occasionItems[index]),
                         onTap: () {
-                          log(categoryItems[0].toString());
+                          log(occasionItems[0].toString());
                             // log('About to rent ${value.brandItemes[index].name}');
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(categoryItems[index]))));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(occasionItems[index]))));
                         }),
-                    itemCount: categoryItems.length,
+                    itemCount: occasionItems.length,
                   ),
                 );
               }),

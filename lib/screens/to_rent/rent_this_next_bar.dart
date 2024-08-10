@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/summary/summary2.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -60,7 +61,10 @@ class _RentThisNextBarState extends State<RentThisNextBar> {
                       onPressed: () {
                       //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary('email', widget.item, 'start date','end date')))); 
                       //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary())));
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary2(widget.item, widget.startDate, widget.endDate, widget.noOfDays, totalPrice))));
+                      bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                      loggedIn ? Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => (Summary2(widget.item, widget.startDate, widget.endDate, widget.noOfDays, totalPrice))
+                      )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                       },
                       child: const Text('NEXT', style: TextStyle(color: Colors.white)),
                         style: OutlinedButton.styleFrom(

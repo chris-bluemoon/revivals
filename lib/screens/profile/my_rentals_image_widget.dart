@@ -42,19 +42,18 @@ class MyRentalsImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Item> allItemes =
-        Provider.of<ItemStore>(context, listen: false).items;
+    List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     DateTime fromDate = DateTime.parse(startDate);
     DateTime toDate = DateTime.parse(endDate);
     String fromDateString = DateFormat('d MMMM, y').format(fromDate);
     String toDateString = DateFormat('d MMMM, y').format(toDate);
     // yMMMMd('en_US')
-    for (Item d in allItemes) {
+    for (Item d in allItems) {
       if (d.id == itemId) {
-        log('item id');
+        log('Found rented item, ${d.id} matches $itemId');
         item = d;
       }
-    }
+    } 
     ColorFilter greyscale = ColorFilter.matrix(<double>[
       0.2126,
       0.7152,

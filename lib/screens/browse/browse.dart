@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/category_list_view.dart';
 import 'package:unearthed/screens/browse/designer_list_view.dart';
+import 'package:unearthed/screens/browse/occasion_grid_view.dart';
+import 'package:unearthed/screens/browse/style_list_view.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class Browse extends StatelessWidget {
@@ -30,9 +32,9 @@ class Browse extends StatelessWidget {
         ),
         body:  TabBarView(
           children: [
-            StyledBody('Occasion'),
+            OccasionGridView(),
             CategoryListView(),
-            StyledBody('Style'),
+            StyleListView(),
             DesignerListView(),
           ],
         ),

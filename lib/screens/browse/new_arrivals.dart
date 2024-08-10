@@ -95,25 +95,24 @@ class _NewArrivalsState extends State<NewArrivals> {
               Consumer<ItemStore>(
                   // child not required
                   builder: (context, value, child) {
-                return Expanded(
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, childAspectRatio: 0.5),
-                    itemBuilder: (_, index) => GestureDetector(
-                        child: ItemCard(value.items[index]),
-                        onTap: () {
-                          if (Provider.of<ItemStore>(context, listen: false).renters.length == 0) {
-                            log('Not logged in, cannot rent, redirecting');
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (GoogleSignInScreen())));
-                          } else {
-                            log('About to rent ${value.items[index].name}');
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(value.items[index]))));
-                          }
-
-                        }),
-                    itemCount: value.items.length,
-                  ),
+                // Unwrapped Gridview from Expanded...reinstate if issues
+                return GridView.builder(
+                  gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, childAspectRatio: 0.5),
+                  itemBuilder: (_, index) => GestureDetector(
+                      child: ItemCard(value.items[index]),
+                      onTap: () {
+                        if (Provider.of<ItemStore>(context, listen: false).renters.length == 0) {
+                          log('Not logged in, cannot rent, redirecting');
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => (GoogleSignInScreen())));
+                        } else {
+                          log('About to rent ${value.items[index].name}');
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(value.items[index]))));
+                        }
+                
+                      }),
+                  itemCount: value.items.length,
                 );
               }),
               TextButton(

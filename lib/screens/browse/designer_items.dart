@@ -13,8 +13,6 @@ import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:uuid/uuid.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 
-var uuid = const Uuid();
-
 class DesignerItems extends StatefulWidget {
   const DesignerItems(this.brand, {super.key});
 
