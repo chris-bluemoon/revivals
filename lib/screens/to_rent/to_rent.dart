@@ -60,7 +60,7 @@ class _NewArrivalsState extends State<ToRent> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StyledTitle(widget.item.brand.toUpperCase()),
+            StyledTitle(widget.item.name.toUpperCase()),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,

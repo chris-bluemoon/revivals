@@ -26,13 +26,20 @@ class _DesignerItemsState extends State<DesignerItems> {
 
 
  
-    final List<Item> brandItems = [];
+     List<Item> designerItems = [];
 
     @override
     initState() {
       // getCurrentUser();
+      designerItems = [];
       super.initState();
     }
+
+  setBrandLogo(brand) {
+    String brandName = brand.replaceAll(RegExp(' +'), '_');
+    String imageName = 'assets/logos/${brandName}.png'.toLowerCase();
+    return imageName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +47,7 @@ class _DesignerItemsState extends State<DesignerItems> {
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     for (Item item in allItems) {
       if (widget.brand == item.brand) {
-        brandItems.add(item);
+        designerItems.add(item);
       }
     }
     log(widget.brand);
@@ -51,7 +58,7 @@ class _DesignerItemsState extends State<DesignerItems> {
           children: [
             SizedBox(
               child: Image.asset(
-                'assets/logos/eliya.png',
+                setBrandLogo(widget.brand),
                 // fit: BoxFit.contain,
                 // height: 40,
               ),
@@ -89,13 +96,13 @@ class _DesignerItemsState extends State<DesignerItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: DesignerItemCard(brandItems[index]),
+                        child: DesignerItemCard(designerItems[index]),
                         onTap: () {
-                          log(brandItems[0].toString());
-                            // log('About to rent ${value.brandItems[index].name}');
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(brandItems[index]))));
+                          log(designerItems[0].toString());
+                            // log('About to rent ${value.designerItems[index].name}');
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(designerItems[index]))));
                         }),
-                    itemCount: brandItems.length,
+                    itemCount: designerItems.length,
                   ),
                 );
               }),

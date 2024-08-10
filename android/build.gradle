@@ -31,4 +31,7 @@ tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
 
+// signingConfig.storeFile=keystore.jks
+// signingConfig.keyAlias=key
+
 

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/browse/designer_item_card.dart';
+import 'package:unearthed/screens/browse/style_item_card.dart';
 import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/new_arrivals/item_card.dart';
 import 'package:provider/provider.dart';
@@ -28,11 +29,12 @@ class _StyleItemsState extends State<StyleItems> {
 
 
  
-    final List<Item> categoryItems = [];
+    List<Item> styleItems = [];
 
     @override
     initState() {
       // getCurrentUser();
+      styleItems = [];
       super.initState();
     }
 
@@ -44,7 +46,7 @@ class _StyleItemsState extends State<StyleItems> {
     for (Item i in allItems) {
       log('checking: ${widget.style} vs database stored style: ${i.style}');
       if (widget.style == i.style) {
-        categoryItems.add(i);
+        styleItems.add(i);
       }
     }
     return Scaffold(
@@ -52,15 +54,17 @@ class _StyleItemsState extends State<StyleItems> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              child: Image.asset(
-                'assets/logos/eliya.png',
-                // fit: BoxFit.contain,
-                // height: 40,
-              ),
-              height: 50,
-              width: 100
-            ),
+            Text(widget.style.toUpperCase(), style: TextStyle(fontSize: 18)),
+
+            // SizedBox(
+            //   child: Image.asset(
+            //     'assets/logos/eliya.png',
+            //     // fit: BoxFit.contain,
+            //     // height: 40,
+            //   ),
+            //   height: 50,
+            //   width: 100
+            // ),
           ],
         ),
         centerTitle: true,
@@ -92,13 +96,13 @@ class _StyleItemsState extends State<StyleItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: DesignerItemCard(categoryItems[index]),
+                        child: StyleItemCard(styleItems[index]),
                         onTap: () {
-                          log(categoryItems[0].toString());
+                          log(styleItems[0].toString());
                             // log('About to rent ${value.brandItemes[index].name}');
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(categoryItems[index]))));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(styleItems[index]))));
                         }),
-                    itemCount: categoryItems.length,
+                    itemCount: styleItems.length,
                   ),
                 );
               }),

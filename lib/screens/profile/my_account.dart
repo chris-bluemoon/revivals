@@ -30,13 +30,13 @@ class MyAccount extends StatefulWidget {
 class _MyAccountState extends State<MyAccount> {
   
 
-  late TextEditingController _aditemController;
+  late TextEditingController _addressController;
   late TextEditingController _phoneNumController;
 
   @override
   void initState() {
     super.initState();
-    _aditemController = TextEditingController(text: 'Dummy address value');
+    _addressController = TextEditingController(text: 'Dummy address value');
     _phoneNumController = TextEditingController(text: 'Dummy phoneNum value');
     // _aditemController = new TextEditingController(text: 'Initial value');
   }
@@ -48,7 +48,7 @@ class _MyAccountState extends State<MyAccount> {
     String address = Provider.of<ItemStore>(context, listen: false).renter.address;
     String phoneNum = Provider.of<ItemStore>(context, listen: false).renter.phoneNum;
 
-    _aditemController = TextEditingController(text: address);
+    _addressController = TextEditingController(text: address);
     _phoneNumController = TextEditingController(text: phoneNum);
     // ValueNotifier userCredential = ValueNotifier('');
 
@@ -71,6 +71,7 @@ class _MyAccountState extends State<MyAccount> {
           children: [
             Text('NAME', style: TextStyle(fontSize: 12, color: Colors.grey[700]),),
             TextFormField(
+              cursorColor: Colors.white,
               initialValue: widget.user!.displayName,
               // initialValue: 'John Doe',
               enabled: false,
@@ -87,15 +88,35 @@ class _MyAccountState extends State<MyAccount> {
             SizedBox(height: 30),
 
             Text('ADDRESS', style: TextStyle(fontSize: 12, color: Colors.grey),),
-            TextFormField(
-              // initialValue: '12 Acacia Road, Bangkok, Thailand',
-              // initialValue: address,
-              controller: _aditemController,
+                        TextFormField(
+              enableInteractiveSelection: false,
+              decoration: const InputDecoration(        
+              // counterText: '1111', 
+              enabledBorder: UnderlineInputBorder(      
+                      borderSide: BorderSide(color: Colors.grey),   
+                      ),  
+              focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                   ),  
+             ),
+              cursorColor: Colors.black,
+              controller: _addressController,
             ),
             SizedBox(height: 30),
 
             Text('PHONE', style: TextStyle(fontSize: 12, color: Colors.grey),),
             TextFormField(
+              enableInteractiveSelection: false,
+              decoration: const InputDecoration(        
+              // counterText: '1111', 
+              enabledBorder: UnderlineInputBorder(      
+                      borderSide: BorderSide(color: Colors.grey),   
+                      ),  
+              focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                   ),  
+             ),
+              cursorColor: Colors.black,
               controller: _phoneNumController,
             ),
             // AditemForm(),
@@ -139,11 +160,11 @@ class _MyAccountState extends State<MyAccount> {
                     log('Renters current address: ${toSave.address}');
                     log('Renters current phoneNum: ${toSave.phoneNum}');
                     log('Renters id: ${toSave.id}');
-                    log(_aditemController.value.text);
+                    log(_addressController.value.text);
                     log(_phoneNumController.value.text);
-                    log('Renters NEW address: ${_aditemController.value.text}');
+                    log('Renters NEW address: ${_addressController.value.text}');
                     log('Renters NEW phoneNum: ${_phoneNumController.value.text}');
-                    toSave.address = _aditemController.value.text;
+                    toSave.address = _addressController.value.text;
                     toSave.phoneNum = _phoneNumController.value.text;
                     log('Showing the id of the user');
                     log(toSave.id);

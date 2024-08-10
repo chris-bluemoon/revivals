@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
@@ -13,7 +15,7 @@ class AppColors {
 }
 
 ThemeData primaryTheme = ThemeData(
-
+  splashColor: Colors.white,
   // seed color theme
   colorScheme: ColorScheme.fromSeed(
     seedColor: AppColors.primaryColor,
@@ -58,12 +60,15 @@ ThemeData primaryTheme = ThemeData(
     ),
     
   ),
-
-        tabBarTheme: const TabBarTheme(
+   textSelectionTheme: TextSelectionThemeData(
+   selectionColor: Colors.green),
+   
+        tabBarTheme: TabBarTheme(
           labelColor: Colors.black,
           indicatorColor: Colors.black,
           dividerColor: Colors.grey,
           unselectedLabelColor: Colors.grey,
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
         )
 
 );

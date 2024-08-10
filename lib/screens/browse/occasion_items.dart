@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/browse/designer_item_card.dart';
+import 'package:unearthed/screens/browse/occasion_item_card.dart';
 import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/new_arrivals/item_card.dart';
 import 'package:provider/provider.dart';
@@ -28,11 +29,12 @@ class _OccasionItemsState extends State<OccasionItems> {
 
 
  
-    final List<Item> occasionItems = [];
+    List<Item> occasionItems = [];
 
     @override
     initState() {
       // getCurrentUser();
+      occasionItems = [];
       super.initState();
     }
 
@@ -52,15 +54,16 @@ class _OccasionItemsState extends State<OccasionItems> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              child: Image.asset(
-                'assets/logos/eliya.png',
-                // fit: BoxFit.contain,
-                // height: 40,
-              ),
-              height: 50,
-              width: 100
-            ),
+            Text(widget.occasion.toUpperCase(), style: TextStyle(fontSize: 18)),
+            // SizedBox(
+            //   child: Image.asset(
+            //     'assets/logos/eliya.png',
+            //     // fit: BoxFit.contain,
+            //     // height: 40,
+            //   ),
+            //   height: 50,
+            //   width: 100
+            // ),
           ],
         ),
         centerTitle: true,
@@ -92,7 +95,7 @@ class _OccasionItemsState extends State<OccasionItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: DesignerItemCard(occasionItems[index]),
+                        child: OccasionItemCard(occasionItems[index]),
                         onTap: () {
                           log(occasionItems[0].toString());
                             // log('About to rent ${value.brandItemes[index].name}');
