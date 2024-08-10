@@ -88,13 +88,10 @@ class _FavouritesCardState extends State<FavouritesCard> {
                 StyledHeading(widget.item.name),
                 Expanded(child: SizedBox()),
                 isFav ?  IconButton(
-                  icon: Icon(Icons.favorite), color: Colors.red,
+                  icon: Icon(Icons.favorite), color: Colors.red, 
                   onPressed: () {
                     log('Pressed Fav');
-                      // isFav = false;
                       _toggleFav();
-                      // Provider.of<ItemStore>(context, listen: false)
-                      //   .toggleItemFav(item);
                       Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                       log('toSave renter: ${toSave.name}');
                       toSave.favourites.remove(widget.item.id);
