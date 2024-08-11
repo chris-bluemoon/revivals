@@ -60,8 +60,6 @@ ThemeData primaryTheme = ThemeData(
     ),
     
   ),
-   textSelectionTheme: TextSelectionThemeData(
-   selectionColor: Colors.green),
    
         tabBarTheme: TabBarTheme(
           labelColor: Colors.black,
