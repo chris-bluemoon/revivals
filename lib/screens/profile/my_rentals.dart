@@ -12,7 +12,6 @@ import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
 
 import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/screens/profile/address_form.dart';
 import 'package:unearthed/screens/profile/my_rentals_image_widget.dart';
 import 'package:unearthed/screens/profile/profile.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';

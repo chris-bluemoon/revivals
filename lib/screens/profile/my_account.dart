@@ -10,7 +10,6 @@ import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
 
 import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/screens/profile/address_form.dart';
 import 'package:unearthed/screens/profile/profile.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
 import 'package:unearthed/shared/send_whatsapp.dart';
@@ -33,6 +32,7 @@ class _MyAccountState extends State<MyAccount> {
 
   late TextEditingController _addressController;
   late TextEditingController _phoneNumController;
+  bool editingMode = false;
 
   @override
   void initState() {
@@ -52,8 +52,17 @@ class _MyAccountState extends State<MyAccount> {
     _addressController = TextEditingController(text: address);
     _phoneNumController = TextEditingController(text: phoneNum);
     // ValueNotifier userCredential = ValueNotifier('');
+    SnackBar snackBar = SnackBar(
+  content: Center(child: Text('Data Saved', style: TextStyle(color: Colors.black, fontSize: 16))),
+  backgroundColor: Colors.grey[100],
+  behavior: SnackBarBehavior.fixed,
+//  shape: RoundedRectangleBorder
+  //  (borderRadius:BorderRadius.circular(50),
+      // ),
+);
 
-
+// Find the ScaffoldMessenger in the widget tree
+// and use it to show a SnackBar.
     return Scaffold(
       appBar: AppBar(
         // centerTitle: true,
@@ -102,13 +111,12 @@ class _MyAccountState extends State<MyAccount> {
              ),
               cursorColor: Colors.black,
               controller: _addressController,
+              enabled: editingMode,
             ),
             SizedBox(height: 30),
 
             Text('PHONE', style: TextStyle(fontSize: 12, color: Colors.grey),),
             TextFormField(
-              minLines: 3,
-              maxLines: 4,
               enableInteractiveSelection: false,
               decoration: const InputDecoration(        
               // counterText: '1111', 
@@ -121,8 +129,8 @@ class _MyAccountState extends State<MyAccount> {
              ),
               cursorColor: Colors.black,
               controller: _phoneNumController,
+              enabled: editingMode,
             ),
-            // AditemForm(),
           ],),
       ),
             bottomNavigationBar: Container(
@@ -140,10 +148,12 @@ class _MyAccountState extends State<MyAccount> {
             padding: EdgeInsets.all(10),
             child: Row(
               children: [
-                Expanded(
+                if (!editingMode) Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      log('Editing...');
+                      setState(() { 
+                        editingMode = true; 
+                      });
                     },
                     child: const Text('EDIT', style: TextStyle(color: Colors.black)),
                       style: OutlinedButton.styleFrom(
@@ -155,7 +165,7 @@ class _MyAccountState extends State<MyAccount> {
                   ),
                 ),
                 SizedBox(width: 5),
-                Expanded(
+                if (editingMode) Expanded(
                   child: OutlinedButton(
                     onPressed: () {
                     Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
@@ -172,6 +182,10 @@ class _MyAccountState extends State<MyAccount> {
                     log('Showing the id of the user');
                     log(toSave.id);
                         Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
+                    setState(() {
+                      editingMode = false;
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                     child: const Text('SAVE', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(

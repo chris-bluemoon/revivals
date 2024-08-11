@@ -32,6 +32,7 @@ class MyRentalsImageWidget extends StatelessWidget {
   late String imageName;
   late Item item;
 
+
   String setItemImage() {
     itemType = item.type.replaceAll(RegExp(' +'), '_');
     itemName = item.name.replaceAll(RegExp(' +'), '_');
