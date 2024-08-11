@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -106,6 +107,8 @@ class _MyAccountState extends State<MyAccount> {
 
             Text('PHONE', style: TextStyle(fontSize: 12, color: Colors.grey),),
             TextFormField(
+              minLines: 3,
+              maxLines: 4,
               enableInteractiveSelection: false,
               decoration: const InputDecoration(        
               // counterText: '1111', 

@@ -35,6 +35,7 @@ class _NewArrivalsState extends State<NewArrivals> {
         colour: myItems[i].colour,
         size: myItems[i].size,
         rentPrice: myItems[i].rentPrice,
+        buyPrice: myItems[i].buyPrice,
         rrp: myItems[i].rrp,
         description: myItems[i].description,
         bust: myItems[i].bust,

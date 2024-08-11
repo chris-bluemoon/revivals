@@ -160,21 +160,21 @@ class _NewArrivalsState extends State<ToRent> {
             padding: EdgeInsets.all(10),
             child: Row(
               children: [
-                Expanded(
+
+                (widget.item.buyPrice > 0) ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
                     },
-                    child: const Text('BUY PRELOVED', style: TextStyle(color: Colors.black)),
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1.0),
                       ),
-                      side: BorderSide(width: 1.0, color: Colors.black),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
-                  ),
-                ),
+                    child: const Text('BUY PRELOVED', style: TextStyle(color: Colors.black)),
+                )) : Expanded(child: SizedBox()),
                 SizedBox(width: 5),
-                Expanded(
+                (widget.item.rentPrice > 0) ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.item)))); 
@@ -188,7 +188,7 @@ class _NewArrivalsState extends State<ToRent> {
                       side: BorderSide(width: 1.0, color: Colors.black),
                       ),
                   ),
-                ),
+                ) : Expanded(child: SizedBox()),
               ],
             ),
           ),      
