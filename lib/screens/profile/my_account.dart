@@ -71,7 +71,7 @@ class _MyAccountState extends State<MyAccount> {
           // TODO: Image is not centered in appbar with back arrow
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('MY ACCOUNT', style: TextStyle(fontSize: 22))
+              Text('ACCOUNT', style: TextStyle(fontSize: 22))
               ]),
       ),
       body: Padding(

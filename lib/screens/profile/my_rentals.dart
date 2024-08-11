@@ -73,7 +73,7 @@ class _MyRentalsState extends State<MyRentals> {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('My Rentals'),
+            Text('RENTALS', style: TextStyle(fontSize: 22)),
           ],
         ),
         centerTitle: true,

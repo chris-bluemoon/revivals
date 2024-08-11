@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
-  static Color primaryColor = const Color.fromRGBO(162, 29, 19, 1);
+  static Color primaryColor = Color.fromARGB(255, 255, 255, 255);
   static Color primaryAccent = const Color.fromRGBO(120, 14, 14, 1);
   static Color secondaryColor = const Color.fromARGB(255, 255, 255, 255);
   static Color secondaryAccent = const Color.fromARGB(255, 255, 255, 255);

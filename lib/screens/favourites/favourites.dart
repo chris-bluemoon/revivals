@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
-import 'package:unearthed/screens/favourites/favourites_card.dart';
-import 'package:unearthed/screens/new_arrivals/item_card.dart';
+import 'package:unearthed/shared/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
@@ -54,7 +53,7 @@ initState() {
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) =>
                     GestureDetector(
-                        child: FavouritesCard(value.favourites[index]),
+                        child: ItemCard(value.favourites[index]),
                         onTap: () {
                           // if (Provider.of<ItemStore>(context, listen: false).renters.length == 0) {
                             // log('Not logged in, cannot rent, redirecting');

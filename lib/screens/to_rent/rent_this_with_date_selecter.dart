@@ -20,16 +20,16 @@ import 'package:unearthed/globals.dart' as globals;
 var uuid = const Uuid();
 
 
-class RentThis extends StatefulWidget {
-  RentThis(this.item, {super.key});
+class RentThisWithDateSelecter extends StatefulWidget {
+  RentThisWithDateSelecter(this.item, {super.key});
   
   final Item item;
 
   @override
-  State<RentThis> createState() => _RentThisState();
+  State<RentThisWithDateSelecter> createState() => _RentThisWithDateSelecterState();
 }
 
-class _RentThisState extends State<RentThis> {
+class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
   DateTime? startDate;
   DateTime? endDate;
   late int noOfDays = 0;
@@ -171,76 +171,16 @@ class _RentThisState extends State<RentThis> {
                 selectionShape: DateRangePickerSelectionShape.circle,
                 enableMultiView: true,
                 headerHeight: 60,
-                // headerHeight: 60,
-                
-              
-              // rangeSelectionColor: Colors.green,
             ),
           ),
-          // if (showConfirm) ElevatedButton(
-          //   child: ConfirmRentWidget(widget.item),
-          //   onPressed: () {
-          //       String email = Provider.of<ItemStore>(context, listen: false).renters[0].email;
-          //       final f = DateFormat('yyyyMMdd');
-          //       // String startDateText = DateFormat('Y m d').format(startDate!);
-          //       String startDateText = f.format(startDate!);
-          //       // handleSubmit(email, widget.item.id, '${startDate}', '${startDate}', 0);
-          //       Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.item, '${startDate}', '${endDate}' ))));
-          //   },
-          // ),
+
         const Expanded(child: SizedBox()),
         const Divider(height: 1, color: Colors.black),
       if (showConfirm) 
         Expanded(child: RentThisNextBar(widget.item, noOfDays, startDate!, endDate!)),
         ],
       ),
-        //     bottomNavigationBar: Container(
-        // decoration: BoxDecoration(
-        //   color: Colors.white,
-        //   border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
-        //   boxShadow: [
-        //     BoxShadow(
-        //       color: Colors.black.withOpacity(0.2),
-        //       blurRadius: 10,
-        //       spreadRadius: 3,
-        //     )
-        //   ],
-        // ),
-        //     padding: EdgeInsets.all(10),
-        //     child: Row(
-        //       // crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
-        //         // Text('Rent ${widget.item.name} for ${widget.item.rentPrice} ${globals.thb}', style: TextStyle(color: Colors.black, fontSize: 16)),
-        //         Text('${totalPrice}${globals.thb} for $noOfDays day(s)', style: TextStyle(color: Colors.black, fontSize: 18)),
-        //         SizedBox(width: 50),
-        //         Expanded(
-        //           child: OutlinedButton(
-        //             onPressed: !showConfirm ? null: () { 
-                      
-        //         String email = Provider.of<ItemStore>(context, listen: false).renters[0].email;
-        //         // String startDateText = DateFormat('Y m d').format(startDate!);
-        //         // handleSubmit(email, widget.item.id, '${startDate}', '${startDate}', 0);
-        //         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary(email, widget.item, '${startDate}', '${endDate}' ))));
-        //             },
-        //             // calculateWhetherDisabledReturnsBool() ? null : () => whatToDoOnPressed,
-        //             // onPressed: () {
-        //             //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.item)))); 
-        //             // },
-        //             child: const Text('NEXT'),
-        //             // child: const Text('NEXT', style: TextStyle(color: Colors.white)),
-        //               // style: OutlinedButton.styleFrom(
-        //               //   backgroundColor: Colors.black,
-        //               //   shape: RoundedRectangleBorder(
-        //               //   borderRadius: BorderRadius.circular(1.0),
-        //               //   )),
-        //             //   ),
-        //             //   side: BorderSide(width: 1.0, color: Colors.black),
-        //             //   ),
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),   
+
     );
   }
 }

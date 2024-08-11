@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:unearthed/main.dart';
 import 'package:unearthed/models/item.dart';
-import 'package:unearthed/screens/new_arrivals/item_card.dart';
+import 'package:unearthed/shared/item_card.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/screens/to_rent/rent_this.dart';
+import 'package:unearthed/screens/to_rent/rent_this_with_date_selecter.dart';
 import 'package:unearthed/screens/to_rent/item_widget.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:uuid/uuid.dart';
@@ -177,7 +177,7 @@ class _NewArrivalsState extends State<ToRent> {
                 (widget.item.rentPrice > 0) ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThis(widget.item)))); 
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item)))); 
                     },
                     child: const Text('RENT THIS', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(

@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/browse/designer_item_card.dart';
-import 'package:unearthed/screens/browse/occasion_item_card.dart';
 import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/screens/new_arrivals/item_card.dart';
+import 'package:unearthed/shared/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
@@ -95,10 +94,8 @@ class _OccasionItemsState extends State<OccasionItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: OccasionItemCard(occasionItems[index]),
+                        child: ItemCard(occasionItems[index]),
                         onTap: () {
-                          log(occasionItems[0].toString());
-                            // log('About to rent ${value.brandItemes[index].name}');
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(occasionItems[index]))));
                         }),
                     itemCount: occasionItems.length,

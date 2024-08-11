@@ -55,26 +55,28 @@ class _RentThisNextBarState extends State<RentThisNextBar> {
         const Expanded(child: SizedBox()),
         Padding(
           padding: const EdgeInsets.fromLTRB(10,10,20,10),
-          child: SizedBox(
-            width: 120,
-            child: OutlinedButton(
-                      onPressed: () {
-                      //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary('email', widget.item, 'start date','end date')))); 
-                      //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary())));
-                      bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-                      loggedIn ? Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => (Summary2(widget.item, widget.startDate, widget.endDate, widget.noOfDays, totalPrice))
-                      )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
-                      },
-                      child: const Text('NEXT', style: TextStyle(color: Colors.white)),
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(1.0),
-                        ),
-                        side: BorderSide(width: 1.0, color: Colors.black),
-                        ),
-                    ),
+          child: Expanded(
+            child: SizedBox(
+              width: 100,
+              child: OutlinedButton(
+                        onPressed: () {
+                        //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary('email', widget.item, 'start date','end date')))); 
+                        //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Summary())));
+                        bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                        loggedIn ? Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => (Summary2(widget.item, widget.startDate, widget.endDate, widget.noOfDays, totalPrice))
+                        )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+                        },
+                        child: const Text('NEXT', style: TextStyle(color: Colors.white)),
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(1.0),
+                          ),
+                          side: BorderSide(width: 1.0, color: Colors.black),
+                          ),
+                      ),
+            ),
           ),
         )
       ],

@@ -4,10 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/browse/category_item_card.dart';
 import 'package:unearthed/screens/browse/designer_item_card.dart';
 import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/screens/new_arrivals/item_card.dart';
+import 'package:unearthed/shared/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
@@ -95,7 +94,7 @@ class _CategoryItemsState extends State<CategoryItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: CategoryItemCard(categoryItems[index]),
+                        child: ItemCard(categoryItems[index]),
                         onTap: () {
                           log(categoryItems[0].toString());
                             // log('About to rent ${value.brandItemes[index].name}');
