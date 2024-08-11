@@ -12,6 +12,9 @@ import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:uuid/uuid.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
+import 'package:pluralize/pluralize.dart';
+
+
 
 var uuid = const Uuid();
 
@@ -53,7 +56,7 @@ class _CategoryItemsState extends State<CategoryItems> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(widget.type.toUpperCase(), style: TextStyle(fontSize: 18)),
+            Text(Pluralize().plural(widget.type).toUpperCase(), style: TextStyle(fontSize: 18)),
             // SizedBox(
             //   child: Image.asset(
             //     'assets/logos/eliya.png',
@@ -96,8 +99,6 @@ class _CategoryItemsState extends State<CategoryItems> {
                     itemBuilder: (_, index) => GestureDetector(
                         child: ItemCard(categoryItems[index]),
                         onTap: () {
-                          log(categoryItems[0].toString());
-                            // log('About to rent ${value.brandItemes[index].name}');
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(categoryItems[index]))));
                         }),
                     itemCount: categoryItems.length,

@@ -87,16 +87,16 @@ class ProfileLanding extends StatelessWidget {
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
-          Row(
-            children: [
-              SizedBox(width: 10),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.account_circle)),
-              Text('NOTIFICATIONS'),
-            ],
-          ),
-          Divider(indent: 50, color: Colors.grey[200],),
+          // Row(
+          //   children: [
+          //     SizedBox(width: 10),
+          //     IconButton(
+          //       onPressed: () {},
+          //       icon: Icon(Icons.account_circle)),
+          //     Text('NOTIFICATIONS'),
+          //   ],
+          // ),
+          // Divider(indent: 50, color: Colors.grey[200],),
            Row(
             children: [
               SizedBox(width: 10),

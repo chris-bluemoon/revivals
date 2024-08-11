@@ -75,6 +75,10 @@ class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      
+      shape: BeveledRectangleBorder(
+    borderRadius: BorderRadius.circular(10.0),
+  ),
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(8),

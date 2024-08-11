@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/category_items.dart';
+import 'package:pluralize/pluralize.dart';
+
 
 class CategoryListView extends StatelessWidget {
   const CategoryListView({super.key});

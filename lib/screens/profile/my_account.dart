@@ -53,9 +53,11 @@ class _MyAccountState extends State<MyAccount> {
     _phoneNumController = TextEditingController(text: phoneNum);
     // ValueNotifier userCredential = ValueNotifier('');
     SnackBar snackBar = SnackBar(
-  content: Center(child: Text('Data Saved', style: TextStyle(color: Colors.black, fontSize: 16))),
+  content: Center(child: Text('ACCOUNT SAVED', style: TextStyle(color: Colors.black, fontSize: 16))),
   backgroundColor: Colors.grey[100],
   behavior: SnackBarBehavior.fixed,
+  duration: const Duration(seconds: 1)
+  
 //  shape: RoundedRectangleBorder
   //  (borderRadius:BorderRadius.circular(50),
       // ),

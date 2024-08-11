@@ -104,6 +104,8 @@ class MyRentalsImageWidget extends StatelessWidget {
       greyscale = ColorFilter.mode(Colors.transparent, BlendMode.multiply);
     }
     return Card(
+      shape: BeveledRectangleBorder(
+    borderRadius: BorderRadius.circular(0.0),),
         color: Colors.white,
         child: Row(
           children: [
