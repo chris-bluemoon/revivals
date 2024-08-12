@@ -10,6 +10,7 @@ import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/summary/summary_purchase.dart';
 import 'package:unearthed/screens/to_rent/item_widget.dart';
 import 'package:unearthed/screens/to_rent/rent_this_with_date_selecter.dart';
+import 'package:unearthed/screens/to_rent/rental_days_radio_widget.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
@@ -34,7 +35,7 @@ class ToRent extends StatefulWidget {
   //   return imageName;
   // }
 
-
+  final ValueNotifier<int> rentalDays = ValueNotifier<int>(0);
 
 }
 
@@ -52,6 +53,14 @@ class _NewArrivalsState extends State<ToRent> {
 
   @override
   Widget build(BuildContext context) {
+
+    void updateRentalDays(newRentalDays) {
+      setState(() {
+        widget.rentalDays.value = newRentalDays;
+        log('Rental days: ${widget.rentalDays.value}');
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -135,9 +144,9 @@ class _NewArrivalsState extends State<ToRent> {
               padding: const EdgeInsets.only(left: 20, bottom: 10),
               child: Text(widget.item.longDescription),
             ),
-            Padding(
+            if (widget.item.rentPrice > 0) Padding(
               padding: const EdgeInsets.only(left: 20, bottom: 10),
-              child: Text(widget.item.longDescription),
+              child: RentalDaysRadioWidget(updateRentalDays),
             ),
           ],
         ),
@@ -176,7 +185,7 @@ class _NewArrivalsState extends State<ToRent> {
                 (widget.item.rentPrice > 0) ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item)))); 
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item, widget.rentalDays.value)))); 
                     },
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,

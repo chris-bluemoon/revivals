@@ -15,9 +15,10 @@ var uuid = const Uuid();
 
 
 class RentThisWithDateSelecter extends StatefulWidget {
-  const RentThisWithDateSelecter(this.item, {super.key});
+  const RentThisWithDateSelecter(this.item, this.rentalDays, {super.key});
   
   final Item item;
+  final int rentalDays;
 
   @override
   State<RentThisWithDateSelecter> createState() => _RentThisWithDateSelecterState();
@@ -30,6 +31,8 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
   late int totalPrice = 0;
   bool bothDatesSelected = false;
   bool showConfirm = false;
+  final DateTime maxDate = DateTime.now().add(const Duration(days: 60));
+  DateTime movingMaxDate = DateTime.now().add(const Duration(days: 60));
 
   // void handleSubmit(String renterId, String itemId, String startDate, String endDate, int price) {
   //   Provider.of<ItemStore>(context, listen: false).addItemRenter(ItemRenter(
@@ -46,25 +49,30 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
     // TODO: implement your code here
     startDate = args.value.startDate;
     endDate = args.value.endDate;
+    log('Selection changed');
     if (endDate != null) {
       setState(() {
         bothDatesSelected = true;
         showConfirm = true;
         noOfDays = endDate!.difference(startDate!).inDays;
         totalPrice = noOfDays * widget.item.rentPrice;
+        movingMaxDate = startDate!.add(const Duration(days: 60));
         log(noOfDays.toString());
       });
     } else {
       setState(() {
         bothDatesSelected = false;
         showConfirm = false;
+        endDate = startDate!.add(const Duration(days: 3));
+        // movingMaxDate = startDate!.add(Duration(days: widget.rentalDays));
+        // log(movingMaxDate.toString());
       });
     }
   }
 
   List<DateTime> getBlackoutDates(String itemId) {
 
-    log(itemId);
+    // log(itemId);
     List<ItemRenter> itemRenters =Provider.of<ItemStore>(context, listen: false)
       .itemRenters;
     List<DateTime> tempList = [];
@@ -138,7 +146,9 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
             ),
             height: 550,
             child: SfDateRangePicker(
-              // minDate: DateTime(2024, 7, 5),
+              // selectableDayPredicate: null,
+              maxDate: movingMaxDate,
+              initialSelectedRange: PickerDateRange(startDate, endDate),
               monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates(widget.item.id)),
               enablePastDates: false,
               navigationDirection: DateRangePickerNavigationDirection.vertical,
