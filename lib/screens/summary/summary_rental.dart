@@ -5,11 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:unearthed/screens/summary/congrats.dart';
 import 'package:unearthed/screens/summary/delivery_radio_widget.dart';
-import 'package:unearthed/screens/summary/price_summary.dart';
+import 'package:unearthed/screens/summary/rental_price_summary.dart';
 import 'package:unearthed/screens/summary/summary_image_widget.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
-import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
@@ -23,8 +22,8 @@ import 'package:unearthed/globals.dart' as globals;
 
 var uuid = const Uuid();
 
-class Summary2 extends StatefulWidget {
-  const Summary2(
+class SummaryRental extends StatefulWidget {
+  const SummaryRental(
       this.item, this.startDate, this.endDate, this.noOfDays, this.price,
       {super.key});
 
@@ -35,10 +34,10 @@ class Summary2 extends StatefulWidget {
   final int price;
 
   @override
-  State<Summary2> createState() => _Summary2State();
+  State<SummaryRental> createState() => _SummaryRentalState();
 }
 
-class _Summary2State extends State<Summary2> {
+class _SummaryRentalState extends State<SummaryRental> {
   // final int i;
   @override
   Widget build(BuildContext context) {
@@ -134,7 +133,7 @@ class _Summary2State extends State<Summary2> {
             SizedBox(height: 20),
             Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
             // SizedBox(height: 20),
-            DeliveryRadioWidget(),
+            // DeliveryRadioWidget(),
             Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
             PriceSummary(widget.price, widget.noOfDays, 0),
 

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:unearthed/main.dart';
 import 'package:unearthed/models/item.dart';
+import 'package:unearthed/screens/summary/summary_purchase.dart';
 import 'package:unearthed/shared/item_card.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/to_rent/rent_this_with_date_selecter.dart';
@@ -164,6 +165,8 @@ class _NewArrivalsState extends State<ToRent> {
                 (widget.item.buyPrice > 0) ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
+                      log('Pushing to SummaryPurchase');
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (SummaryPurchase(widget.item, DateTime.now(), DateTime.now(), 0, widget.item.buyPrice))));
                     },
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(

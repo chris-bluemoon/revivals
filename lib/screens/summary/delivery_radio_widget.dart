@@ -8,7 +8,6 @@ import 'package:unearthed/screens/summary/congrats.dart';
 import 'package:unearthed/screens/summary/summary_image_widget.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
-import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
@@ -21,7 +20,9 @@ import 'package:uuid/uuid.dart';
 import 'package:unearthed/globals.dart' as globals;
 
 class DeliveryRadioWidget extends StatefulWidget {
-  const DeliveryRadioWidget({super.key});
+  const DeliveryRadioWidget(this.updatePrice, {super.key});
+
+  final Function(int) updatePrice;
 
   @override
   State<DeliveryRadioWidget> createState() => _DeliveryRadioWidget();
@@ -51,6 +52,7 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
                 onChanged: (value) {
                   setState(() {
                     selectedOption = value!;
+                    widget.updatePrice(200);
                     log("Button value: $value");
                   });
                 },
@@ -67,6 +69,7 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
                 onChanged: (value2) {
                   setState(() {
                     selectedOption = value2!;
+                    widget.updatePrice(100);
                     log("Button value: $value2");
                   });
                 },

@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:unearthed/screens/summary/congrats.dart';
 import 'package:unearthed/screens/to_rent/confirm_rent.dart';
 import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
-import 'package:unearthed/screens/summary/summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
@@ -51,7 +50,7 @@ class SummaryImageWidget extends StatelessWidget {
             children: [
               Text('${item.name} from ${item.brand}', style: TextStyle(fontSize: 18)),
               const SizedBox(height: 5),
-              Text('Item, Size ${item.size.toString()}', style: TextStyle(fontSize: 14, color: Colors.black.withOpacity(0.5))),
+              Text('${item.type}, size ${item.size.toString()}', style: TextStyle(fontSize: 14, color: Colors.black.withOpacity(0.5))),
           ],)
         ],
       )
