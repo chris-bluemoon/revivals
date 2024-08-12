@@ -46,13 +46,13 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
               title: Text('We will deliver at 100${globals.thb}',
                   style: TextStyle(fontSize: 14)),
               trailing: Radio<int>(
-                value: 1,
+                value: 0,
                 groupValue: selectedOption,
                 // fillColor: Colors.black,
                 onChanged: (value) {
                   setState(() {
                     selectedOption = value!;
-                    widget.updatePrice(200);
+                    widget.updatePrice(100);
                     log("Button value: $value");
                   });
                 },
@@ -64,12 +64,12 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
               title: const Text('I will ararnge a collection',
                   style: TextStyle(fontSize: 14)),
               trailing: Radio<int>(
-                value: 0,
+                value: 1,
                 groupValue: selectedOption,
                 onChanged: (value2) {
                   setState(() {
                     selectedOption = value2!;
-                    widget.updatePrice(100);
+                    widget.updatePrice(0);
                     log("Button value: $value2");
                   });
                 },

@@ -12,6 +12,7 @@ import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
 
 import 'package:unearthed/screens/home/my_app_client.dart';
+import 'package:unearthed/screens/profile/my_purchases_image_widget.dart';
 import 'package:unearthed/screens/profile/my_rentals_image_widget.dart';
 import 'package:unearthed/screens/profile/profile.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
@@ -79,7 +80,7 @@ class _MyPurchasesListState extends State<MyPurchasesList> {
         itemBuilder: (BuildContext context, int index) {
           return Container(
           height: 100,
-          child: MyRentalsImageWidget(myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price),
+          child: MyPurchasesImageWidget(myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price),
         );
       }
     );

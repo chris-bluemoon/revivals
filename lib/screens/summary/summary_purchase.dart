@@ -24,7 +24,7 @@ import 'package:unearthed/globals.dart' as globals;
 var uuid = const Uuid();
 
 class SummaryPurchase extends StatefulWidget {
-  const SummaryPurchase(
+  SummaryPurchase(
       this.item, this.startDate, this.endDate, this.noOfDays, this.price,
       {super.key});
 
@@ -33,6 +33,8 @@ class SummaryPurchase extends StatefulWidget {
   final DateTime endDate;
   final int noOfDays;
   final int price;
+
+  ValueNotifier<int> deliveryPrice = ValueNotifier<int>(0);
 
   @override
   State<SummaryPurchase> createState() => _SummaryPurchaseState();
@@ -60,15 +62,15 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
       ));
     }
 
-    int _deliveryPrice = 0;
+
     
     void updateDeliveryPrice(int newDeliveryPrice) {
-      log('DELIVERY PRICE CHANGED $newDeliveryPrice');
+      log('DELIVERY PRICE CHANGED to $newDeliveryPrice');
       setState(() {
-        _deliveryPrice = newDeliveryPrice;
+        widget.deliveryPrice.value = newDeliveryPrice;
       });
-
     }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -144,7 +146,11 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
             // SizedBox(height: 20),
             DeliveryRadioWidget(updateDeliveryPrice),
             Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
-            PurchasePriceSummary(widget.price, _deliveryPrice),
+            ValueListenableBuilder(
+              valueListenable: widget.deliveryPrice,
+              builder: (BuildContext context, int val, Widget? child) {
+                return PurchasePriceSummary(widget.price, val);
+            }),
 
             Row(
               children: [
@@ -165,7 +171,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
                       String startDateText = widget.startDate.toString();
                       String endDateText = widget.endDate.toString();
                       handleSubmit(email, widget.item.id, startDateText, endDateText,
-                          widget.item.rentPrice);
+                          widget.item.buyPrice);
                       showAlertDialog(context);  
                       // Navigator.of(context).push(MaterialPageRoute(
                           // builder: (context) => (const Congrats())));
