@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/screens/new_arrivals/new_arrivals.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:provider/provider.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class NewArrivalsHomeWidget extends StatelessWidget {
   const NewArrivalsHomeWidget({super.key});

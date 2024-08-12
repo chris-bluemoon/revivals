@@ -1,25 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
 
-import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/profile/my_purchases_image_widget.dart';
-import 'package:unearthed/screens/profile/my_rentals_image_widget.dart';
-import 'package:unearthed/screens/profile/profile.dart';
-import 'package:unearthed/screens/profile/profile_landing.dart';
-import 'package:unearthed/shared/send_whatsapp.dart';
-import 'package:unearthed/shared/whatsapp.dart';
 import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/models/renter.dart';
 
 
 class MyPurchasesList extends StatefulWidget {
@@ -78,10 +65,7 @@ class _MyPurchasesListState extends State<MyPurchasesList> {
         padding: const EdgeInsets.all(8),
         itemCount: myPurchasesList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-          height: 100,
-          child: MyPurchasesImageWidget(myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price),
-        );
+          return MyPurchasesImageWidget(myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price);
       }
     );
 

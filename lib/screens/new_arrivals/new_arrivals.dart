@@ -1,16 +1,13 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/shared/item_card.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/screens/to_rent/to_rent.dart';
-import 'package:uuid/uuid.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
+import 'package:unearthed/screens/to_rent/to_rent.dart';
+import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/item_card.dart';
+import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
@@ -77,7 +74,7 @@ class _NewArrivalsState extends State<NewArrivals> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -86,7 +83,7 @@ class _NewArrivalsState extends State<NewArrivals> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close)),
+              icon: const Icon(Icons.close)),
         ],
       ),
       body: Container(
@@ -106,7 +103,7 @@ class _NewArrivalsState extends State<NewArrivals> {
                         onTap: () {
                           if (Provider.of<ItemStore>(context, listen: false).renters.length == 0) {
                             log('Not logged in, cannot rent, redirecting');
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (GoogleSignInScreen())));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                           } else {
                             log('About to rent ${value.items[index].name}');
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(value.items[index]))));

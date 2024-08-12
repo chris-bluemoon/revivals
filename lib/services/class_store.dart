@@ -3,10 +3,9 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/models/item_renter.dart';
+import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/firestore_service.dart';
-import 'package:unearthed/shared/get_current_user.dart';
 
 class ItemStore extends ChangeNotifier {
 
@@ -160,11 +159,11 @@ class ItemStore extends ChangeNotifier {
     }
   // initially fetch itemRenters
       Future<dynamic> setCurrentUser() async {
-      User? _user = await FirebaseAuth.instance.currentUser;
-      if (_user != null) {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
         List<Renter> renters = this.renters;
         for (Renter r in renters) {
-          if (r.email == _user.email) {
+          if (r.email == user.email) {
             assignUser(r);
             log('Setting current user');
             _loggedIn = true;
@@ -174,12 +173,11 @@ class ItemStore extends ChangeNotifier {
         log('Not logged in');
         _loggedIn = false;
       }
-      ;
-      return _user;
+      return user;
       // return asda;
     }
   void setLoggedIn(bool loggedIn) {
-    log('Set _loggedIn to ${loggedIn}');
+    log('Set _loggedIn to $loggedIn');
     _loggedIn = loggedIn;
   }
 

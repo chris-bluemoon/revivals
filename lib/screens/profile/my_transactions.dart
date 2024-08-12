@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/browse/category_list_view.dart';
-import 'package:unearthed/screens/browse/designer_list_view.dart';
-import 'package:unearthed/screens/browse/occasion_grid_view.dart';
-import 'package:unearthed/screens/browse/style_list_view.dart';
 import 'package:unearthed/screens/profile/my_purchases_list.dart';
-import 'package:unearthed/screens/profile/my_rentals.dart';
 import 'package:unearthed/screens/profile/my_rentals_list.dart';
-import 'package:unearthed/shared/styled_text.dart';
 
 class MyTransactions extends StatelessWidget {
   const MyTransactions({super.key});
@@ -32,7 +26,7 @@ class MyTransactions extends StatelessWidget {
               Text('TRANSACTIONS', style: TextStyle(fontSize: 22))
               ]),
                       leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -41,10 +35,10 @@ class MyTransactions extends StatelessWidget {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close)),
+              icon: const Icon(Icons.close)),
         ],
         ),
-        body:  TabBarView(
+        body:  const TabBarView(
           children: [
             MyRentalsList(),
             MyPurchasesList(),

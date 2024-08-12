@@ -1,10 +1,8 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/shared/line.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 
 class SendLine extends StatelessWidget {
@@ -25,15 +23,15 @@ class SendLine extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => CupertinoAlertDialog(
-            title: Text("Attention"),
+            title: const Text("Attention"),
             content: Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text('${e.toString()}'
+              child: Text(e.toString()
               ),
             ),
             actions: [
               CupertinoDialogAction(
-                child: Text('Close'),
+                child: const Text('Close'),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],
@@ -41,7 +39,7 @@ class SendLine extends StatelessWidget {
         );
       }
         },
-        icon: Icon(Icons.account_box),
+        icon: const Icon(Icons.account_box),
       ),
     );
   }

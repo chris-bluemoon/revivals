@@ -1,23 +1,10 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
-import 'package:unearthed/screens/sign_up/google_sign_in.dart';
-import 'package:unearthed/screens/to_rent/confirm_rent.dart';
-import 'package:unearthed/screens/summary/summary_rental.dart';
-import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
 import 'package:unearthed/globals.dart' as globals;
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/screens/sign_up/google_sign_in.dart';
+import 'package:unearthed/screens/summary/summary_rental.dart';
+import 'package:unearthed/services/class_store.dart';
 
 class RentThisNextBar extends StatefulWidget {
   const RentThisNextBar(this.item, this.noOfDays, this.startDate, this.endDate, {super.key});
@@ -49,7 +36,7 @@ class _RentThisNextBarState extends State<RentThisNextBar> {
       children: [
         Padding(
           padding: const EdgeInsets.all(20),
-          child: Text('${offSetPrice}${globals.thb}/day for ${widget.noOfDays} days', style: TextStyle(fontSize: 18),),
+          child: Text('$offSetPrice${globals.thb}/day for ${widget.noOfDays} days', style: const TextStyle(fontSize: 18),),
           // child: Text('${totalPrice}${globals.thb} for ${widget.noOfDays} days', style: TextStyle(fontSize: 18),),
         ),
         const Expanded(child: SizedBox()),
@@ -67,14 +54,14 @@ class _RentThisNextBarState extends State<RentThisNextBar> {
                           MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, widget.startDate, widget.endDate, widget.noOfDays, totalPrice))
                         )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                         },
-                        child: const Text('NEXT', style: TextStyle(color: Colors.white)),
                           style: OutlinedButton.styleFrom(
                             backgroundColor: Colors.black,
                             shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(1.0),
                           ),
-                          side: BorderSide(width: 1.0, color: Colors.black),
+                          side: const BorderSide(width: 1.0, color: Colors.black),
                           ),
+                        child: const Text('NEXT', style: TextStyle(color: Colors.white)),
                       ),
             ),
           ),

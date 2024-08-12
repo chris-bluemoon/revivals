@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/models/item.dart';
 
 class ItemWidget extends StatefulWidget {

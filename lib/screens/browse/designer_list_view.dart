@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/designer_items.dart';
 
@@ -14,7 +12,7 @@ class DesignerListView extends StatelessWidget {
     brands.sort();
     return Column(
       children: [
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
               itemCount: brands.length,
@@ -27,11 +25,11 @@ class DesignerListView extends StatelessWidget {
                       },
                       child: ListTile(
                         dense: true,
-                        visualDensity: VisualDensity(vertical: -2),
-                        title: Text(brands[index], style: TextStyle(fontSize: 12)),
+                        visualDensity: const VisualDensity(vertical: -2),
+                        title: Text(brands[index], style: const TextStyle(fontSize: 12)),
                       ),
                     ),
-                    Divider(color: Colors.grey, indent: 20, endIndent: 20,),
+                    const Divider(color: Colors.grey, indent: 20, endIndent: 20,),
                   ],
                 );
               },

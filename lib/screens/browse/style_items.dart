@@ -1,17 +1,12 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/browse/designer_item_card.dart';
-import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/shared/item_card.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
+import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/item_card.dart';
 import 'package:uuid/uuid.dart';
-import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 
 var uuid = const Uuid();
 
@@ -53,7 +48,7 @@ class _StyleItemsState extends State<StyleItems> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(widget.style.toUpperCase(), style: TextStyle(fontSize: 18)),
+            Text(widget.style.toUpperCase(), style: const TextStyle(fontSize: 18)),
 
             // SizedBox(
             //   child: Image.asset(
@@ -69,7 +64,7 @@ class _StyleItemsState extends State<StyleItems> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -78,7 +73,7 @@ class _StyleItemsState extends State<StyleItems> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close)),
+              icon: const Icon(Icons.close)),
         ],
       ),
 

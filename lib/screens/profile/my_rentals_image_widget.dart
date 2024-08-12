@@ -1,20 +1,11 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:unearthed/screens/summary/congrats.dart';
-import 'package:unearthed/screens/to_rent/confirm_rent.dart';
-import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
-import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:uuid/uuid.dart';
 import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
 import 'package:unearthed/globals.dart' as globals;
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/services/class_store.dart';
 
 class MyRentalsImageWidget extends StatelessWidget {
   MyRentalsImageWidget(this.itemId, this.startDate, this.endDate, this.price,
@@ -54,7 +45,7 @@ class MyRentalsImageWidget extends StatelessWidget {
         item = d;
       }
     } 
-    ColorFilter greyscale = ColorFilter.matrix(<double>[
+    ColorFilter greyscale = const ColorFilter.matrix(<double>[
       0.2126,
       0.7152,
       0.0722,
@@ -77,7 +68,7 @@ class MyRentalsImageWidget extends StatelessWidget {
       0,
     ]);
     if (toDate.isBefore(DateTime.now().add(const Duration(days: 10)))) {
-      greyscale = ColorFilter.matrix(<double>[
+      greyscale = const ColorFilter.matrix(<double>[
         0.2126,
         0.7152,
         0.0722,
@@ -100,7 +91,7 @@ class MyRentalsImageWidget extends StatelessWidget {
         0,
       ]);
     } else {
-      greyscale = ColorFilter.mode(Colors.transparent, BlendMode.multiply);
+      greyscale = const ColorFilter.mode(Colors.transparent, BlendMode.multiply);
     }
     return Card(
       shape: BeveledRectangleBorder(
@@ -117,17 +108,17 @@ class MyRentalsImageWidget extends StatelessWidget {
                         fit: BoxFit.fitHeight,
                         height: 100,
                         width: 80))),
-            SizedBox(width: 30),
+            const SizedBox(width: 30),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('${item.name} from ${item.brand}',
-                    style: TextStyle(fontSize: 14)),
+                    style: const TextStyle(fontSize: 14)),
                 const SizedBox(height: 5),
                 Row(
                   children: [
                     Text('From', style: TextStyle(fontSize: 12, color: Colors.black.withOpacity(0.5))),
-                    SizedBox(width: 30),
+                    const SizedBox(width: 30),
                     Text(fromDateString, style: TextStyle(
                             fontSize: 12, color: Colors.black.withOpacity(0.5))),
                   ],
@@ -135,7 +126,7 @@ class MyRentalsImageWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text('To', style: TextStyle(fontSize: 12, color: Colors.black.withOpacity(0.5))),
-                    SizedBox(width: 47),
+                    const SizedBox(width: 47),
                     Text(toDateString,
                         style: TextStyle(
                             fontSize: 12, color: Colors.black.withOpacity(0.5))),

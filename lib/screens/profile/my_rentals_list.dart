@@ -1,24 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/home/home.dart';
-import 'dart:developer';
-
-import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/profile/my_rentals_image_widget.dart';
-import 'package:unearthed/screens/profile/profile.dart';
-import 'package:unearthed/screens/profile/profile_landing.dart';
-import 'package:unearthed/shared/send_whatsapp.dart';
-import 'package:unearthed/shared/whatsapp.dart';
 import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/models/renter.dart';
 
 
 class MyRentalsList extends StatefulWidget {
@@ -75,10 +63,7 @@ class _MyRentalsListState extends State<MyRentalsList> {
         padding: const EdgeInsets.all(8),
         itemCount: myRentalsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-          height: 100,
-          child: MyRentalsImageWidget(myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price),
-        );
+          return MyRentalsImageWidget(myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price);
       }
     );
 

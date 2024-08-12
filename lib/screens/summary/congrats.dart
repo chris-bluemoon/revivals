@@ -1,15 +1,5 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/to_rent/confirm_rent.dart';
-import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
@@ -70,6 +60,6 @@ class Congrats extends StatelessWidget {
 
         ],
       ),
-    );
+   );
   }
 }

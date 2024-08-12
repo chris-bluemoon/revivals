@@ -1,21 +1,12 @@
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
 
-import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/screens/profile/profile.dart';
-import 'package:unearthed/screens/profile/profile_landing.dart';
-import 'package:unearthed/shared/send_whatsapp.dart';
-import 'package:unearthed/shared/whatsapp.dart';
-import 'package:unearthed/services/class_store.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
+import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/whatsapp.dart';
 
 
 class MyAccount extends StatefulWidget {
@@ -53,7 +44,7 @@ class _MyAccountState extends State<MyAccount> {
     _phoneNumController = TextEditingController(text: phoneNum);
     // ValueNotifier userCredential = ValueNotifier('');
     SnackBar snackBar = SnackBar(
-  content: Center(child: Text('ACCOUNT SAVED', style: TextStyle(color: Colors.black, fontSize: 16))),
+  content: const Center(child: Text('ACCOUNT SAVED', style: TextStyle(color: Colors.black, fontSize: 16))),
   backgroundColor: Colors.grey[100],
   behavior: SnackBarBehavior.fixed,
   duration: const Duration(seconds: 1)
@@ -68,7 +59,7 @@ class _MyAccountState extends State<MyAccount> {
     return Scaffold(
       appBar: AppBar(
         // centerTitle: true,
-        title: Row(
+        title: const Row(
           mainAxisSize: MainAxisSize.min,
           // TODO: Image is not centered in appbar with back arrow
           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,16 +81,16 @@ class _MyAccountState extends State<MyAccount> {
             ),
               // value: Text('NAME: ${widget.user!.displayName!}', style: const TextStyle(fontSize: 14)),
             // ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Text('EMAIL', style: TextStyle(fontSize: 12, color: Colors.grey[700]),),
             TextFormField(
               // initialValue: 'johndoe@gmail.com',
               initialValue: widget.user!.email,
               enabled: false,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
-            Text('ADDRESS', style: TextStyle(fontSize: 12, color: Colors.grey),),
+            const Text('ADDRESS', style: TextStyle(fontSize: 12, color: Colors.grey),),
                         TextFormField(
               enableInteractiveSelection: false,
               decoration: const InputDecoration(        
@@ -115,9 +106,9 @@ class _MyAccountState extends State<MyAccount> {
               controller: _addressController,
               enabled: editingMode,
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
-            Text('PHONE', style: TextStyle(fontSize: 12, color: Colors.grey),),
+            const Text('PHONE', style: TextStyle(fontSize: 12, color: Colors.grey),),
             TextFormField(
               enableInteractiveSelection: false,
               decoration: const InputDecoration(        
@@ -147,7 +138,7 @@ class _MyAccountState extends State<MyAccount> {
             )
           ],
         ),
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Row(
               children: [
                 if (!editingMode) Expanded(
@@ -157,16 +148,16 @@ class _MyAccountState extends State<MyAccount> {
                         editingMode = true; 
                       });
                     },
-                    child: const Text('EDIT', style: TextStyle(color: Colors.black)),
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1.0),
                       ),
-                      side: BorderSide(width: 1.0, color: Colors.black),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
+                    child: const Text('EDIT', style: TextStyle(color: Colors.black)),
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 if (editingMode) Expanded(
                   child: OutlinedButton(
                     onPressed: () {
@@ -189,14 +180,14 @@ class _MyAccountState extends State<MyAccount> {
                     });
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
-                    child: const Text('SAVE', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1.0),
                       ),
-                      side: BorderSide(width: 1.0, color: Colors.black),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
+                    child: const Text('SAVE', style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
@@ -218,15 +209,15 @@ void chatWithUsMessage(BuildContext context) async {
         showDialog(
           context: context,
           builder: (context) => CupertinoAlertDialog(
-            title: Text("Attention"),
+            title: const Text("Attention"),
             content: Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text('${e.toString()}'
+              child: Text(e.toString()
               ),
             ),
             actions: [
               CupertinoDialogAction(
-                child: Text('Close'),
+                child: const Text('Close'),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],
@@ -238,7 +229,7 @@ void chatWithUsMessage(BuildContext context) async {
 showAlertDialog(BuildContext context) {  
   // Create button  
   Widget okButton = ElevatedButton(  
-    child: Center(child: Text("OK")),  
+    child: const Center(child: Text("OK")),  
     onPressed: () {  
       // Navigator.of(context).pop();  
       log("Should be about to pop to first");
@@ -247,12 +238,12 @@ showAlertDialog(BuildContext context) {
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: Center(child: Text("SIGNED OUT")),
+    title: const Center(child: Text("SIGNED OUT")),
     // content: Text("      Your item is being prepared"),  
     actions: [  
       okButton,  
     ],  
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
   );  

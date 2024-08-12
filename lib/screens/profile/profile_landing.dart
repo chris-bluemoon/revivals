@@ -1,21 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/home/home.dart';
 import 'dart:developer';
-
-import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/screens/profile/my_rentals.dart';
 import 'package:unearthed/screens/profile/my_transactions.dart';
-import 'package:unearthed/screens/profile/profile.dart';
-import 'package:unearthed/screens/profile/profile_landing.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
 import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/shared/send_whatsapp.dart';
 import 'package:unearthed/shared/whatsapp.dart';
 
 class ProfileLanding extends StatelessWidget {
@@ -41,28 +33,28 @@ class ProfileLanding extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('PERSONAL (${user!.displayName!})', style: const TextStyle(fontSize: 16)),
-          SizedBox(height: 5),
+          const SizedBox(height: 10),
           Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               IconButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyAccount(user))));
                 },
-                icon: Icon(Icons.account_circle)),
-              Text('MY ACCOUNT'),
+                icon: const Icon(Icons.account_circle)),
+              const Text('MY ACCOUNT'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
           Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyTransactions())));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const MyTransactions())));
                 },
-                icon: Icon(Icons.woman_2_outlined)),
-              Text('MY TRANSACTIONS'),
+                icon: const Icon(Icons.woman_2_outlined)),
+              const Text('MY TRANSACTIONS'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
@@ -78,13 +70,13 @@ class ProfileLanding extends StatelessWidget {
           // Divider(indent: 50, color: Colors.grey[200],),
           Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               IconButton(
                 onPressed: () {
                   shareApp();
                 },
-                icon: Icon(Icons.group_add)),
-              Text('REFER A FRIEND'),
+                icon: const Icon(Icons.group_add)),
+              const Text('REFER A FRIEND'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
@@ -100,42 +92,42 @@ class ProfileLanding extends StatelessWidget {
           // Divider(indent: 50, color: Colors.grey[200],),
            Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.settings)),
-              Text('SETTINGS'),
+                icon: const Icon(Icons.settings)),
+              const Text('SETTINGS'),
             ],
           ),
 
           const SizedBox(height: 20),
           const Text('SUPPORT', style: TextStyle(fontSize: 16),),
-          SizedBox(height: 5),
+          const SizedBox(height: 10),
           Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.account_circle)),
+                icon: const Icon(Icons.account_circle)),
               const Text('FAQ'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
            Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               IconButton(
                 onPressed: () {
                   log('Pressed Chat With Us');
                   chatWithUsMessage(context);},
-                icon: Icon(Icons.chat_bubble_rounded)),
-              Text('CHAT WITH US'),
+                icon: const Icon(Icons.chat_bubble_rounded)),
+              const Text('CHAT WITH US'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
           Row(
             children: [
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               IconButton(
                 onPressed: () async {
                   bool result = await signOutFromGoogle();
@@ -145,10 +137,10 @@ class ProfileLanding extends StatelessWidget {
                   }
                   showAlertDialog(context);
                   // Navigator.of(context).popUntil((route) => route.isFirst);
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (Home())));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Home())));
                 },
-                icon: Icon(Icons.exit_to_app)),
-              Text('SIGN OUT'),
+                icon: const Icon(Icons.exit_to_app)),
+              const Text('SIGN OUT'),
             ],
           ),
         ],),
@@ -168,7 +160,7 @@ void chatWithUsMessage(BuildContext context) async {
         showDialog(
           context: context,
           builder: (context) => CupertinoAlertDialog(
-            title: Text("Attention"),
+            title: const Text("Attention"),
             content: Padding(
               padding: const EdgeInsets.only(top: 5),
               child: Text('${e.toString()}'
@@ -176,7 +168,7 @@ void chatWithUsMessage(BuildContext context) async {
             ),
             actions: [
               CupertinoDialogAction(
-                child: Text('Close'),
+                child: const Text('Close'),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],
@@ -188,7 +180,7 @@ void chatWithUsMessage(BuildContext context) async {
 showAlertDialog(BuildContext context) {  
   // Create button  
   Widget okButton = ElevatedButton(  
-    child: Center(child: Text("OK")),  
+    child: const Center(child: Text("OK")),  
     onPressed: () {  
       // Navigator.of(context).pop();  
       log("Should be about to pop to first");
@@ -197,12 +189,12 @@ showAlertDialog(BuildContext context) {
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: Center(child: Text("SIGNED OUT")),
+    title: const Center(child: Text("SIGNED OUT")),
     // content: Text("      Your item is being prepared"),  
     actions: [  
       okButton,  
     ],  
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
   );  

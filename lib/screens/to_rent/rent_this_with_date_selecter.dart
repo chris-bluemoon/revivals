@@ -1,26 +1,21 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:unearthed/screens/to_rent/confirm_rent.dart';
-import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
+import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
 import 'package:unearthed/services/class_store.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
-import 'package:unearthed/globals.dart' as globals;
 
 var uuid = const Uuid();
 
 
 class RentThisWithDateSelecter extends StatefulWidget {
-  RentThisWithDateSelecter(this.item, {super.key});
+  const RentThisWithDateSelecter(this.item, {super.key});
   
   final Item item;
 
@@ -135,8 +130,8 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(1),
-            margin: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(1),
+            margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               color: Colors.grey,

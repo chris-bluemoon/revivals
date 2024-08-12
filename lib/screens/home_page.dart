@@ -1,24 +1,18 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/browse/browse.dart';
 import 'package:unearthed/screens/favourites/favourites.dart';
 import 'package:unearthed/screens/home/home.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/shared/send_line.dart';
-import 'package:unearthed/shared/send_whatsapp.dart';
-import 'package:unearthed/shared/sms.dart';
-import 'package:unearthed/screens/sign_up/sign_up.dart';
-import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/profile/profile.dart';
-import 'package:unearthed/screens/home_page.dart';
-import 'package:provider/provider.dart';
-import 'package:unearthed/models/renter.dart';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:unearthed/screens/sign_up/google_sign_in.dart';
+import 'package:unearthed/services/class_store.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -48,10 +42,10 @@ class _HomePageState extends State<HomePage> {
   bool loggedIn = false;
 
   final _pages = [
-    Home(),
-    Browse(),
-    Favourites(),
-    Profile(),
+    const Home(),
+    const Browse(),
+    const Favourites(),
+    const Profile(),
   ];
 
 // Future<dynamic> getCurrentUser() async {
@@ -105,8 +99,8 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
-        unselectedLabelStyle: TextStyle(fontSize: 10.0, color: Colors.black),
-        selectedLabelStyle: TextStyle(fontSize: 10.0, color: Colors.grey),
+        unselectedLabelStyle: const TextStyle(fontSize: 10.0, color: Colors.black),
+        selectedLabelStyle: const TextStyle(fontSize: 10.0, color: Colors.grey),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Padding(
@@ -145,7 +139,7 @@ class _HomePageState extends State<HomePage> {
               // getCurrentUser();
               _pageIndex = index;
               bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-              log('Logged in is set to ${loggedIn}');
+              log('Logged in is set to $loggedIn');
               if (index == 3 && loggedIn == false) {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                 _pageIndex = 0;

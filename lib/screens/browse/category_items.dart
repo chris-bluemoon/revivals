@@ -1,18 +1,13 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/browse/designer_item_card.dart';
-import 'package:unearthed/screens/home/my_app_client.dart';
-import 'package:unearthed/shared/item_card.dart';
-import 'package:provider/provider.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/screens/to_rent/to_rent.dart';
-import 'package:uuid/uuid.dart';
-import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:pluralize/pluralize.dart';
+import 'package:provider/provider.dart';
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/screens/to_rent/to_rent.dart';
+import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/item_card.dart';
+import 'package:uuid/uuid.dart';
 
 
 

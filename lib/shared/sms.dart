@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/shared/send_sms.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Sms extends StatelessWidget {
   const Sms({super.key});
@@ -25,16 +24,16 @@ class Sms extends StatelessWidget {
               showDialog(
                   context: context,
                   builder: (context) => CupertinoAlertDialog(
-                        title: Text("Attention"),
-                        content: Padding(
-                          padding: const EdgeInsets.only(top: 5),
-                          child: const Text(
+                        title: const Text("Attention"),
+                        content: const Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: Text(
                             'We did not find the «SMS Messenger» application on your phone, please install it and try again»',
                           ),
                         ),
                         actions: [
                           CupertinoDialogAction(
-                            child: Text('Close'),
+                            child: const Text('Close'),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                         ],

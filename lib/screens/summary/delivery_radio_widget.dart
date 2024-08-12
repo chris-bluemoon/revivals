@@ -1,22 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
-import 'package:unearthed/screens/summary/congrats.dart';
-import 'package:unearthed/screens/summary/summary_image_widget.dart';
-import 'package:unearthed/screens/to_rent/confirm_rent.dart';
-import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
-import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
 import 'package:unearthed/globals.dart' as globals;
 
 class DeliveryRadioWidget extends StatefulWidget {
@@ -39,12 +23,12 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('DELIVERY OPTION', style: TextStyle(fontSize: 14)),
+            const Text('DELIVERY OPTION', style: TextStyle(fontSize: 14)),
             ListTile(
               dense: true,
-              visualDensity: VisualDensity(vertical: -3),
+              visualDensity: const VisualDensity(vertical: -3),
               title: Text('We will deliver at 100${globals.thb}',
-                  style: TextStyle(fontSize: 14)),
+                  style: const TextStyle(fontSize: 14)),
               trailing: Radio<int>(
                 value: 0,
                 groupValue: selectedOption,
@@ -60,7 +44,7 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
             ),
             ListTile(
               dense: true,
-              visualDensity: VisualDensity(vertical: -3),
+              visualDensity: const VisualDensity(vertical: -3),
               title: const Text('I will ararnge a collection',
                   style: TextStyle(fontSize: 14)),
               trailing: Radio<int>(

@@ -24,7 +24,7 @@ class OccasionGridTile extends StatelessWidget {
             // border: Border.all(
               // color: Colors.red,
             // ),
-            borderRadius: BorderRadius.all(Radius.circular(5))
+            borderRadius: const BorderRadius.all(Radius.circular(5))
           ),
           child: Column(
             children: [

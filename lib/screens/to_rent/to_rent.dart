@@ -1,21 +1,17 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:unearthed/main.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/screens/summary/summary_purchase.dart';
-import 'package:unearthed/shared/item_card.dart';
-import 'package:provider/provider.dart';
-import 'package:unearthed/screens/to_rent/rent_this_with_date_selecter.dart';
-import 'package:unearthed/screens/to_rent/item_widget.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:uuid/uuid.dart';
-import 'package:unearthed/shared/styled_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:unearthed/globals.dart' as globals;
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/screens/summary/summary_purchase.dart';
+import 'package:unearthed/screens/to_rent/item_widget.dart';
+import 'package:unearthed/screens/to_rent/rent_this_with_date_selecter.dart';
+import 'package:unearthed/shared/styled_text.dart';
+import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
@@ -95,7 +91,7 @@ class _NewArrivalsState extends State<ToRent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             CarouselSlider(
               carouselController: buttonCarouselController,
               options: CarouselOptions(
@@ -158,7 +154,7 @@ class _NewArrivalsState extends State<ToRent> {
             )
           ],
         ),
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Row(
               children: [
 
@@ -175,23 +171,23 @@ class _NewArrivalsState extends State<ToRent> {
                       side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
                     child: const Text('BUY PRELOVED', style: TextStyle(color: Colors.black)),
-                )) : Expanded(child: SizedBox()),
-                SizedBox(width: 5),
+                )) : const Expanded(child: SizedBox()),
+                const SizedBox(width: 5),
                 (widget.item.rentPrice > 0) ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item)))); 
                     },
-                    child: const Text('RENT THIS', style: TextStyle(color: Colors.white)),
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1.0),
                       ),
-                      side: BorderSide(width: 1.0, color: Colors.black),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
+                    child: const Text('RENT THIS', style: TextStyle(color: Colors.white)),
                   ),
-                ) : Expanded(child: SizedBox()),
+                ) : const Expanded(child: SizedBox()),
               ],
             ),
           ),      

@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/browse/category_items.dart';
 import 'package:unearthed/screens/browse/style_items.dart';
 
 class StyleListView extends StatelessWidget {
@@ -34,7 +31,7 @@ class StyleListView extends StatelessWidget {
           padding: EdgeInsets.only(left: 50),
           child: Text('CLASSIC', style: TextStyle(fontSize: 16)),
         ),
-        SizedBox(width: 50),
+        const SizedBox(width: 50),
         Padding(
           padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
           child: Image.asset('assets/img/new_items/classic_transparent.png', height: 100),
@@ -43,7 +40,7 @@ class StyleListView extends StatelessWidget {
     )
   ),
   onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (StyleItems('classic'))));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const StyleItems('classic'))));
 
   }
 ),
@@ -55,7 +52,7 @@ class StyleListView extends StatelessWidget {
              border: Border.all(color: Colors.white),
              borderRadius: BorderRadius.circular(5.0), 
              color: Colors.grey,
-             gradient: LinearGradient(
+             gradient: const LinearGradient(
                colors: [Colors.grey, Colors.white],
                stops: [0.2, 1.0],
                // stops: [0.0, 0.5, 1.0],
@@ -67,13 +64,13 @@ class StyleListView extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
           child: Image.asset('assets/img/new_items/vintage_transparent.png', height: 100),
                ),
-               SizedBox(width: 100),
-               Text('VINTAGE', style: TextStyle(fontSize: 16)),
+               const SizedBox(width: 100),
+               const Text('VINTAGE', style: TextStyle(fontSize: 16)),
              ],
            )
          ),
          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (StyleItems('vintage'))));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const StyleItems('vintage'))));
          },
        ),
        GestureDetector(
@@ -98,7 +95,7 @@ class StyleListView extends StatelessWidget {
           padding: EdgeInsets.only(left: 50),
           child: Text('ARTSY', style: TextStyle(fontSize: 16)),
         ),
-        SizedBox(width: 50),
+        const SizedBox(width: 50),
         Padding(
           padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
           child: Image.asset('assets/img/new_items/artsy_transparent.png', height: 100),
@@ -107,7 +104,7 @@ class StyleListView extends StatelessWidget {
     )
   ),
   onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (StyleItems('artsy'))));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const StyleItems('artsy'))));
 
   }
 ),
@@ -119,7 +116,7 @@ class StyleListView extends StatelessWidget {
              border: Border.all(color: Colors.white),
              borderRadius: BorderRadius.circular(5.0), 
              color: Colors.grey,
-             gradient: LinearGradient(
+             gradient: const LinearGradient(
                colors: [Colors.grey, Colors.white],
                stops: [0.2, 1.0],
                // stops: [0.0, 0.5, 1.0],
@@ -131,13 +128,13 @@ class StyleListView extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
           child: Image.asset('assets/img/new_items/resort_transparent.png', height: 100),
                ),
-               SizedBox(width: 100),
-               Text('RESORT', style: TextStyle(fontSize: 16)),
+               const SizedBox(width: 100),
+               const Text('RESORT', style: TextStyle(fontSize: 16)),
              ],
            )
          ),
          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (StyleItems('resort'))));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const StyleItems('resort'))));
          },
        ),
 

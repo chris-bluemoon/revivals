@@ -1,29 +1,22 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:unearthed/screens/summary/congrats.dart';
+import 'package:provider/provider.dart';
+import 'package:unearthed/globals.dart' as globals;
+import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/screens/summary/delivery_radio_widget.dart';
 import 'package:unearthed/screens/summary/rental_price_summary.dart';
 import 'package:unearthed/screens/summary/summary_image_widget.dart';
-import 'package:unearthed/screens/to_rent/confirm_rent.dart';
-import 'package:unearthed/screens/to_rent/rent_this_next_bar.dart';
-import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
-import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
-import 'package:unearthed/globals.dart' as globals;
 
 var uuid = const Uuid();
 
 class SummaryRental extends StatefulWidget {
-  const SummaryRental(
+  SummaryRental(
       this.item, this.startDate, this.endDate, this.noOfDays, this.price,
       {super.key});
 
@@ -32,6 +25,8 @@ class SummaryRental extends StatefulWidget {
   final DateTime endDate;
   final int noOfDays;
   final int price;
+
+  final ValueNotifier<int> deliveryPrice = ValueNotifier<int>(0);
 
   @override
   State<SummaryRental> createState() => _SummaryRentalState();
@@ -57,6 +52,13 @@ class _SummaryRentalState extends State<SummaryRental> {
         endDate: endDate,
         price: price,
       ));
+    }
+
+    void updateDeliveryPrice(int newDeliveryPrice) {
+      log('DELIVERY PRICE CHANGED to $newDeliveryPrice');
+      setState(() {
+        widget.deliveryPrice.value = newDeliveryPrice;
+      });
     }
 
     return Scaffold(
@@ -92,17 +94,17 @@ class _SummaryRentalState extends State<SummaryRental> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SummaryImageWidget(widget.item),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
-                SizedBox(width: 20),
-                Icon(Icons.calendar_month_outlined),
-                SizedBox(width: 20),
-                Text(DateFormat.yMMMd().format(widget.startDate), style: TextStyle(fontSize: 14)),
-                Text('   -   '),
-                Text(DateFormat.yMMMd().format(widget.endDate), style: TextStyle(fontSize: 14)),
+                const SizedBox(width: 20),
+                const Icon(Icons.calendar_month_outlined),
+                const SizedBox(width: 20),
+                Text(DateFormat.yMMMd().format(widget.startDate), style: const TextStyle(fontSize: 14)),
+                const Text('   -   '),
+                Text(DateFormat.yMMMd().format(widget.endDate), style: const TextStyle(fontSize: 14)),
 
               ],),
             const SizedBox(height: 20),
@@ -119,37 +121,41 @@ class _SummaryRentalState extends State<SummaryRental> {
                 color: Colors.grey[200],
                 height: 70,
                 width: 350,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Rent for ${widget.noOfDays} days at ${widget.price}${globals.thb}', style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 5),
-                    Text('(${pricePerDay}${globals.thb} per day)', style: TextStyle(fontSize: 14)),
+                    Text('Rent for ${widget.noOfDays} days at ${widget.price}${globals.thb}', style: const TextStyle(fontSize: 16)),
+                    const SizedBox(height: 5),
+                    Text('($pricePerDay${globals.thb} per day)', style: const TextStyle(fontSize: 14)),
                   ],
                 ),),
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
             // SizedBox(height: 20),
-            // DeliveryRadioWidget(),
+            DeliveryRadioWidget(updateDeliveryPrice),
             Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
-            PriceSummary(widget.price, widget.noOfDays, 0),
+            ValueListenableBuilder(
+              valueListenable: widget.deliveryPrice,
+              builder: (BuildContext context, int val, Widget? child) {
+                log('Deliver fee being sent as val to RentalPriceSummary is: $val');
+                return RentalPriceSummary(widget.price, widget.noOfDays, val);
+            }),
 
             Row(
               children: [
-                Expanded(child: SizedBox()),
+                const Expanded(child: SizedBox()),
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
-                    child: const Text('CONFIRM', style: TextStyle(color: Colors.white)),
-                        style: OutlinedButton.styleFrom(
+                    style: OutlinedButton.styleFrom(
                           backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(1.0),
                         ),
-                        side: BorderSide(width: 1.0, color: Colors.black),
+                        side: const BorderSide(width: 1.0, color: Colors.black),
                         ),
                     onPressed: () {
                       String email = Provider.of<ItemStore>(context, listen: false).renter.email;
@@ -161,6 +167,7 @@ class _SummaryRentalState extends State<SummaryRental> {
                       // Navigator.of(context).push(MaterialPageRoute(
                           // builder: (context) => (const Congrats())));
                     },
+                    child: const Text('CONFIRM', style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
@@ -173,7 +180,7 @@ class _SummaryRentalState extends State<SummaryRental> {
 showAlertDialog(BuildContext context) {  
   // Create button  
   Widget okButton = ElevatedButton(  
-    child: Center(child: Text("OK")),  
+    child: const Center(child: Text("OK")),  
     onPressed: () {  
       // Navigator.of(context).pop();  
       Navigator.of(context).popUntil((route) => route.isFirst);
@@ -181,12 +188,12 @@ showAlertDialog(BuildContext context) {
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: Center(child: Text("Congratulations")),
-    content: Text("      Your item is being prepared"),  
+    title: const Center(child: Text("Congratulations")),
+    content: const Text("      Your item is being prepared"),  
     actions: [  
       okButton,  
     ],  
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
   );  

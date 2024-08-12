@@ -4,8 +4,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
 import 'dart:developer';
-
-import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
 import 'package:unearthed/services/class_store.dart';
 
@@ -54,8 +52,7 @@ class _Profile extends State<Profile> {
     return Scaffold(
         appBar: AppBar(
         // centerTitle: true,
-        title: Row(
-          // TODO: Image is not centered in appbar with back arrow
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('PROFILE', style: TextStyle(fontSize: 22))
@@ -66,18 +63,6 @@ class _Profile extends State<Profile> {
             builder: (context, value, child) {
               final User? user = auth.currentUser;
               return ProfileLanding(user, signOutFromGoogle);
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Text(user!.displayName!),
-              //     ElevatedButton(
-              //         onPressed: () async {
-              //           bool result = await signOutFromGoogle();
-              //           if (result) userCredential.value = '';
-              //         },
-              //         child: const Text('Logout'))
-              //   ],
-              // );
             }));
   }
 
@@ -115,7 +100,7 @@ Future<bool> signOutFromGoogle() async {
 showAlertDialog(BuildContext context) {  
   // Create button  
   Widget okButton = ElevatedButton(  
-    child: Center(child: Text("OK")),  
+    child: const Center(child: Text("OK")),  
     onPressed: () {  
       // Navigator.of(context).pop();  
       Navigator.of(context).popUntil((route) => route.isFirst);
@@ -123,12 +108,12 @@ showAlertDialog(BuildContext context) {
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: Center(child: Text("SIGNED OUT")),
+    title: const Center(child: Text("SIGNED OUT")),
     // content: Text("      Your item is being prepared"),  
     actions: [  
       okButton,  
     ],  
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
   );  

@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/browse/category_items.dart';
 import 'package:unearthed/screens/browse/occasion_grid_tile.dart';
 import 'package:unearthed/screens/browse/occasion_items.dart';
 
@@ -32,11 +29,11 @@ class OccasionGridView extends StatelessWidget {
                   child: Column(
                     children: [
                       OccasionGridTile(occasions[i].toLowerCase()),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Row(
                         children: [
-                          SizedBox(width: 10),
-                          Text(occasions[i], style: TextStyle(fontSize: 14)),
+                          const SizedBox(width: 10),
+                          Text(occasions[i], style: const TextStyle(fontSize: 14)),
                         ],
                       ),
                     ],
