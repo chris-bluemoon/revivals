@@ -21,91 +21,65 @@ import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/models/renter.dart';
 
 
-class MyRentals extends StatefulWidget {
-  const MyRentals({super.key});
+class MyRentalsList extends StatefulWidget {
+  const MyRentalsList({super.key});
 
   @override
-  State<MyRentals> createState() => _MyRentalsState();
+  State<MyRentalsList> createState() => _MyRentalsListState();
 }
 
-class _MyRentalsState extends State<MyRentals> {
+class _MyRentalsListState extends State<MyRentalsList> {
   
 
-  List<ItemRenter> myRentals = [];
+  List<ItemRenter> myRentalsList = [];
   List<Item> myItems = [];
 
   @override
   void initState() {
-    loadMyRentals();
+    loadMyRentalsList();
     super.initState();
   }
   
-  void loadMyRentals() {
-    log('Loading loadMyRentals');
+  void loadMyRentalsList() {
+    log('Loading loadMyRentalsList');
     // get current user
     String userEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
     // log('User email: $userEmail');
     // List<ItemRenter> myItemRenters = Provider.of<ItemStore>(context, listen: false).itemRenters;
     List<ItemRenter> allItemRenters = List.from(Provider.of<ItemStore>(context, listen: false).itemRenters);
-    List<Item> allItems = List.from(Provider.of<ItemStore>(context, listen: false).items);
+    // List<Item> allItems = List.from(Provider.of<ItemStore>(context, listen: false).items);
     for (ItemRenter dr in allItemRenters) {
       if (dr.renterId == userEmail) {
-        myRentals.add(dr);
-        log('Rented: ${dr.itemId}');
-        for (Item d in allItems) {
-          if (d.id == dr.itemId) {
-            myItems.add(d);
-          }
+        if (dr.transactionType == 'rental') {
+          myRentalsList.add(dr);
+          log('Rented: ${dr.itemId}');
         }
+        // for (Item d in allItems) {
+        //   if (d.id == dr.itemId) {
+        //     myItems.add(d);
+        //   }
+        // }
       }
     }
-    if (myRentals.isEmpty) {
+    if (myRentalsList.isEmpty) {
       log('You have no rentals!');
     }
-    myRentals.sort((a, b) => a.startDate.compareTo(b.startDate));
+    myRentalsList.sort((a, b) => a.startDate.compareTo(b.startDate));
   }
   @override
   Widget build(BuildContext context) {
 
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('TRANSACTIONS', style: TextStyle(fontSize: 22)),
-          ],
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-              onPressed: () =>
-                  {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
-        ],
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(4.0),
-            child: Container(
-              color: Colors.grey[300],
-              height: 1.0,
-            )),
-      ),
-      body: ListView.builder(
+    return 
+      ListView.builder(
         padding: const EdgeInsets.all(8),
-        itemCount: myRentals.length,
+        itemCount: myRentalsList.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
           height: 100,
-          child: MyRentalsImageWidget(myRentals[index].itemId, myRentals[index].startDate, myRentals[index].endDate, myRentals[index].price),
+          child: MyRentalsImageWidget(myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price),
         );
       }
-    ));
+    );
 
   }}

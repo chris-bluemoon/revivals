@@ -10,6 +10,7 @@ import 'dart:developer';
 
 import 'package:unearthed/screens/home/my_app_client.dart';
 import 'package:unearthed/screens/profile/my_rentals.dart';
+import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/screens/profile/profile.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
@@ -58,10 +59,10 @@ class ProfileLanding extends StatelessWidget {
               SizedBox(width: 10),
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyRentals())));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyTransactions())));
                 },
                 icon: Icon(Icons.woman_2_outlined)),
-              Text('MY RENTALS'),
+              Text('MY TRANSACTIONS'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
