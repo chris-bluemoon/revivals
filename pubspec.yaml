@@ -24,6 +24,7 @@ dependencies:
   carousel_slider: ^4.2.1
   dots_indicator: ^2.1.1
   pluralize: ^0.0.8
+  flutter_date_range_picker: ^0.1.1
 
 dev_dependencies:
   flutter_test:
