@@ -55,7 +55,6 @@ class _SummaryRentalState extends State<SummaryRental> {
     }
 
     void updateDeliveryPrice(int newDeliveryPrice) {
-      log('DELIVERY PRICE CHANGED to $newDeliveryPrice');
       setState(() {
         widget.deliveryPrice.value = newDeliveryPrice;
       });
@@ -119,15 +118,15 @@ class _SummaryRentalState extends State<SummaryRental> {
             Center(
               child: Container(
                 color: Colors.grey[200],
-                height: 70,
-                width: 350,
+                // height: 50,
+                // width: 350,
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Rent for ${widget.noOfDays} days at ${widget.price}${globals.thb}', style: const TextStyle(fontSize: 16)),
-                    const SizedBox(height: 5),
-                    Text('($pricePerDay${globals.thb} per day)', style: const TextStyle(fontSize: 14)),
+                    (widget.noOfDays > 1) ? Text('Rent for ${widget.noOfDays} days (at $pricePerDay${globals.thb} per day)', style: const TextStyle(fontSize: 16))
+                    : Text('Rent for ${widget.price}${globals.thb}', style: const TextStyle(fontSize: 16))
+                    // Text('($pricePerDay${globals.thb} per day)', style: const TextStyle(fontSize: 14)),
                   ],
                 ),),
             ),
@@ -180,11 +179,20 @@ class _SummaryRentalState extends State<SummaryRental> {
 showAlertDialog(BuildContext context) {  
   // Create button  
   Widget okButton = ElevatedButton(  
-    child: const Center(child: Text("OK")),  
+    style: OutlinedButton.styleFrom(
+                          textStyle: const TextStyle(color: Colors.white),
+                          foregroundColor: Colors.white,//change background color of button
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        side: const BorderSide(width: 1.0, color: Colors.black),
+      ),
     onPressed: () {  
       // Navigator.of(context).pop();  
       Navigator.of(context).popUntil((route) => route.isFirst);
     },  
+    child: const Center(child: Text("OK")),  
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
