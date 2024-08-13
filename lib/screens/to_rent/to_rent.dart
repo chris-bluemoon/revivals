@@ -1,10 +1,8 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/summary/summary_purchase.dart';
@@ -21,7 +19,7 @@ class ToRent extends StatefulWidget {
   ToRent(this.item, {super.key});
 
   @override
-  State<ToRent> createState() => _NewArrivalsState();
+  State<ToRent> createState() => _ToRentState();
 
   final Item item;
   late String itemName;
@@ -39,15 +37,10 @@ class ToRent extends StatefulWidget {
 
 }
 
-class _NewArrivalsState extends State<ToRent> {
+class _ToRentState extends State<ToRent> {
   
   List items = [1, 2];
   int currentIndex = 0;
-
- String getCurrency() {
-  var format = NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'THB');
-  return format.currencySymbol;
-}
 
   CarouselController buttonCarouselController = CarouselController();
 

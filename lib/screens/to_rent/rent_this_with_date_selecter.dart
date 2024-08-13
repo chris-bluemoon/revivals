@@ -32,7 +32,6 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
   bool bothDatesSelected = false;
   bool showConfirm = false;
   final DateTime maxDate = DateTime.now().add(const Duration(days: 60));
-  DateTime movingMaxDate = DateTime.now().add(const Duration(days: 60));
 
   // void handleSubmit(String renterId, String itemId, String startDate, String endDate, int price) {
   //   Provider.of<ItemStore>(context, listen: false).addItemRenter(ItemRenter(
@@ -49,6 +48,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
     // TODO: implement your code here
     startDate = args.value.startDate;
     endDate = args.value.endDate;
+    dayToCheck = DateUtils.dateOnly(DateTime.now().add(const Duration(days: 3)));
     log('Selection changed');
     if (endDate != null) {
       setState(() {
@@ -56,16 +56,17 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
         showConfirm = true;
         noOfDays = endDate!.difference(startDate!).inDays;
         totalPrice = noOfDays * widget.item.rentPrice;
-        movingMaxDate = startDate!.add(const Duration(days: 60));
+        dayToCheck = DateUtils.dateOnly(DateTime.now().add(const Duration(days: 3)));
         log(noOfDays.toString());
       });
     } else {
       setState(() {
         bothDatesSelected = false;
         showConfirm = false;
-        endDate = startDate!.add(const Duration(days: 3));
         // movingMaxDate = startDate!.add(Duration(days: widget.rentalDays));
         // log(movingMaxDate.toString());
+        dayToCheck = DateUtils.dateOnly(DateTime.now().add(const Duration(days: 3)));
+        log('Setting dayToCheck $dayToCheck');
       });
     }
   }
@@ -94,18 +95,28 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
     return tempList;
     // return rDate;
   }
+  DateTime dayToCheck = DateUtils.dateOnly(DateTime.now().add(const Duration(days: 1)));
+
 
   @override
   Widget build(BuildContext context) {
-
-    // List<DateTime> blackOutDates = getBlackoutDates('23232321321312');
+void rebuildAllChildren(BuildContext context) {
+  void rebuild(Element el) {
+    el.markNeedsBuild();
+    el.visitChildren(rebuild);
+  log('rebuilding');
+  }
+  (context as Element).visitChildren(rebuild);
+}
+    log("building - date to check is now: $dayToCheck");
+    // rebuildAllChildren(context);
     return Scaffold(
         appBar: AppBar(
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // StyledTitle(widget.item.name.toUpperCase()),
-            StyledTitle('Select Dates'),
+            StyledTitle('Select Dates $dayToCheck'),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,
@@ -146,9 +157,16 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
             ),
             height: 550,
             child: SfDateRangePicker(
-              // selectableDayPredicate: null,
-              maxDate: movingMaxDate,
-              initialSelectedRange: PickerDateRange(startDate, endDate),
+              selectableDayPredicate: (DateTime val) { 
+                log('Comparing this day $dayToCheck');
+                if (val == dayToCheck) {
+                  log('Found a match: ${val.toString()}'); 
+                  return false;
+                } else {
+                  return true;}
+                },
+              maxDate: maxDate,
+              // initialSelectedRange: PickerDateRange(startDate, endDate),
               monthViewSettings: DateRangePickerMonthViewSettings(blackoutDates:getBlackoutDates(widget.item.id)),
               enablePastDates: false,
               navigationDirection: DateRangePickerNavigationDirection.vertical,
