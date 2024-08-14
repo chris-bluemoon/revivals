@@ -10,6 +10,30 @@ class EmailComposer extends StatefulWidget {
 
   MyStore myStore = MyStore();
 
+  Future<void> sendEmail2() async {
+    Future myToken = MyStore.readFromStore();
+    String? myvar = await MyStore.readFromStore();
+    final smtpServer = SmtpServer('smtp.gmail.com',
+        username: 'uneartheduser@gmail.com', password: myvar);
+
+    final message = Message()
+      ..from = const Address('uneartheduser@gmail.com', 'Unearthed User')
+      ..recipients.add('chris.milner@gmail.com')
+      ..subject = 'test'
+      ..text = 'test';
+
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      // print('Message sent: ${sendReport.sent}');
+      log('Message sent: ${sendReport.toString()}');
+      // Additional code for feedback to the user
+    } catch (e) {
+      log('Error occurred xwhile sending email: $e');
+      // Additional code for error handling
+    }
+  }
+
   @override
   _EmailComposerState createState() => _EmailComposerState();
 }
@@ -19,6 +43,7 @@ class _EmailComposerState extends State<EmailComposer> {
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _bodyController = TextEditingController();
   final TextEditingController _tokenController = TextEditingController();
+
 
 
   Future<void> sendEmail() async {

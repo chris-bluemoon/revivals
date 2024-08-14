@@ -10,6 +10,7 @@ import 'package:unearthed/screens/summary/delivery_radio_widget.dart';
 import 'package:unearthed/screens/summary/rental_price_summary.dart';
 import 'package:unearthed/screens/summary/summary_image_widget.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/send_email2.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
@@ -190,6 +191,7 @@ showAlertDialog(BuildContext context) {
       ),
     onPressed: () {  
       // Navigator.of(context).pop();  
+      EmailComposer2('userMessage', 'userSubject', 'chris.milner@gmail.com').sendEmail2();
       Navigator.of(context).popUntil((route) => route.isFirst);
     },  
     child: const Center(child: Text("OK")),  
