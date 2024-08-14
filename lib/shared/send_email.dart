@@ -18,7 +18,7 @@ class _EmailComposerState extends State<EmailComposer> {
 
   Future<void> sendEmail() async {
     final smtpServer = SmtpServer('smtp.gmail.com',
-        username: 'uneartheduser@gmail.com', password: 'tapg vupr alln usdf');
+        username: 'uneartheduser@gmail.com', password: '');
 
     final message = Message()
       ..from = const Address('uneartheduser@gmail.com', 'Unearthed User')
