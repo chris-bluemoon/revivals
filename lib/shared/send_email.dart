@@ -41,7 +41,7 @@ class _EmailComposerState extends State<EmailComposer> {
       log('Message sent: ${sendReport.toString()}');
       // Additional code for feedback to the user
     } catch (e) {
-      log('Error occurred while sending email: $e');
+      log('Error occurred xwhile sending email: $e');
       // Additional code for error handling
     }
   }
