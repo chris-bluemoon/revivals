@@ -25,6 +25,7 @@ dependencies:
   dots_indicator: ^2.1.1
   pluralize: ^0.0.8
   flutter_date_range_picker: ^0.1.1
+  mailer: ^6.1.2
 
 dev_dependencies:
   flutter_test:
