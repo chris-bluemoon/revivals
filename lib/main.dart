@@ -21,7 +21,7 @@ void main() async {
     child: MaterialApp(
       theme: primaryTheme,
       // home: const HomePage(),
-      home: const EmailComposer(),
+      home: EmailComposer(),
     ),
   ));
 }

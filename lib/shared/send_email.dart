@@ -3,9 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'package:unearthed/shared/secure_repo.dart';
 
 class EmailComposer extends StatefulWidget {
-  const EmailComposer({super.key});
+  EmailComposer({super.key});
+
+  MyStore myStore = MyStore();
 
   @override
   _EmailComposerState createState() => _EmailComposerState();
@@ -15,16 +18,22 @@ class _EmailComposerState extends State<EmailComposer> {
   final TextEditingController _toController = TextEditingController();
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _bodyController = TextEditingController();
+  final TextEditingController _tokenController = TextEditingController();
+
 
   Future<void> sendEmail() async {
+    Future myToken = MyStore.readFromStore();
+    String? myvar = await MyStore.readFromStore();
+    log('Token here A is: ${myToken.toString()}');
     final smtpServer = SmtpServer('smtp.gmail.com',
-        username: 'uneartheduser@gmail.com', password: 'tapg vupr alln usdf');
+        username: 'uneartheduser@gmail.com', password: myvar);
 
     final message = Message()
       ..from = const Address('uneartheduser@gmail.com', 'Unearthed User')
       ..recipients.add(_toController.text)
       ..subject = _subjectController.text
       ..text = _bodyController.text;
+
 
     try {
       final sendReport = await send(message, smtpServer);
@@ -66,6 +75,29 @@ class _EmailComposerState extends State<EmailComposer> {
               decoration: const InputDecoration(
                 labelText: 'Body',
               ),
+            ),
+            TextField(
+              controller: _tokenController,
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              decoration: const InputDecoration(
+                labelText: 'token',
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () 
+              {
+                final myToken = _tokenController.text;
+                MyStore.writeToStore(myToken);},
+              child: const Text('Store Token'),
+            ),
+            ElevatedButton(
+              onPressed: () async
+              {
+                String? myvar = await MyStore.readFromStore();
+                log(myvar!);
+              },
+              child: const Text('Get Token'),
             ),
             ElevatedButton(
               onPressed: sendEmail,
