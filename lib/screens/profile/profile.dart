@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
-import 'dart:developer';
 import 'package:unearthed/screens/profile/profile_landing.dart';
 import 'package:unearthed/services/class_store.dart';
 
@@ -31,19 +32,19 @@ class _Profile extends State<Profile> {
   String uname = '----------';
 
   Future<dynamic> getCurrentUser() async {
-    User? _user = await FirebaseAuth.instance.currentUser;
+    User? user = FirebaseAuth.instance.currentUser;
 // Firebase.Auth.FirebaseUser user = auth.CurrentUser;
     // User? asda = FirebaseAuth.instance.currentUser;
-    if (_user != null) {
-      log('Setting uname: ${_user.displayName}');
-      uname = _user.displayName.toString();
+    if (user != null) {
+      log('Setting uname: ${user.displayName}');
+      uname = user.displayName.toString();
       // Insert user to Provider here?
     } else {
       log('Not logged in');
       signInWithGoogle();
+      // const LoginPage();
     }
-    ;
-    return _user;
+    return user;
     // return asda;
   }
 

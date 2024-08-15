@@ -37,7 +37,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
     int oneDayPrice = widget.item.rentPrice;
 
     if (noOfDays == 3) {
-      int threeDayPrice = ((3 * oneDayPrice) * 0.3).toInt()-1;
+      int threeDayPrice = ((3 * oneDayPrice) * 0.8).toInt()-1;
       return (threeDayPrice ~/ 100) * 100 + 100;
     }
     if (noOfDays == 5) {
@@ -54,6 +54,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
     List<DateTime> tempList = [];
 
     for (int i = 0; i < itemRenters.length; i++) {
+      
       DateTime startDate =
           DateFormat("yyyy-MM-dd").parse(itemRenters[i].startDate);
       DateTime endDate = DateFormat("yyyy-MM-dd").parse(itemRenters[i].endDate);
@@ -186,10 +187,10 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                         log(endDate.toString());
                         log(noOfDays.toString());
                         showConfirm = true;
-                                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-                        loggedIn ? Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
-                        )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+                        // bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                        // loggedIn ? Navigator.of(context).push(
+                        //   MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
+                        // )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
 
                       });
                     }

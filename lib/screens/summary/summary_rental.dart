@@ -159,10 +159,14 @@ class _SummaryRentalState extends State<SummaryRental> {
                         ),
                     onPressed: () {
                       String email = Provider.of<ItemStore>(context, listen: false).renter.email;
+                      String name = Provider.of<ItemStore>(context, listen: false).renter.name;
                       String startDateText = widget.startDate.toString();
                       String endDateText = widget.endDate.toString();
                       handleSubmit(email, widget.item.id, startDateText, endDateText,
                           widget.item.rentPrice);
+                      String startDateTextForEmail = DateFormat('yMMMd').format(widget.startDate);
+                      String endDateTextForEmail = DateFormat('yMMMd').format(widget.endDate);
+                      EmailComposer2(email, widget.item.type, name, widget.item.name, widget.item.brand, startDateTextForEmail, endDateTextForEmail, widget.deliveryPrice.value, widget.price.toString(), widget.item.rentPrice.toString()).sendEmail2();
                       showAlertDialog(context);  
                       // Navigator.of(context).push(MaterialPageRoute(
                           // builder: (context) => (const Congrats())));
@@ -191,15 +195,14 @@ showAlertDialog(BuildContext context) {
       ),
     onPressed: () {  
       // Navigator.of(context).pop();  
-      EmailComposer2('userMessage', 'userSubject', 'chris.milner@gmail.com').sendEmail2();
       Navigator.of(context).popUntil((route) => route.isFirst);
     },  
     child: const Center(child: Text("OK")),  
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: const Center(child: Text("Congratulations")),
-    content: const Text("      Your item is being prepared"),  
+    title: const Center(child: Text("Thank You!")),
+    content: const Text("Your item is being prepared, please check your email for confirmation."),  
     actions: [  
       okButton,  
     ],  

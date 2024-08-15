@@ -3,11 +3,14 @@ import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
+import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/summary/summary_purchase.dart';
 import 'package:unearthed/screens/to_rent/item_widget.dart';
 import 'package:unearthed/screens/to_rent/rent_this_with_date_selecter.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
@@ -43,6 +46,34 @@ class _ToRentState extends State<ToRent> {
 
   CarouselController buttonCarouselController = CarouselController();
 
+  goToLogin() {
+      // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () { },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("My title"),
+    content: const Text("This is my message."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+
+  log('Alert should have been shown');
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -71,7 +102,7 @@ class _ToRentState extends State<ToRent> {
           IconButton(
               onPressed: () =>
                 {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.share)),
+              icon: const Icon(Icons.close)),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0),
@@ -170,7 +201,11 @@ class _ToRentState extends State<ToRent> {
                 (widget.item.rentPrice > 0) ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item, widget.rentalDays.value)))); 
+                        bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                        loggedIn ? Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item, widget.rentalDays.value))
+                        )) : goToLogin();
+                    //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item, widget.rentalDays.value)))); 
                     },
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,

@@ -23,7 +23,7 @@ class MyTransactions extends StatelessWidget {
           title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('TRANSACTIONS', style: TextStyle(fontSize: 22))
+              Text('BOOKINGS', style: TextStyle(fontSize: 22))
               ]),
                       leading: IconButton(
           icon: const Icon(Icons.arrow_back),

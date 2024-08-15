@@ -142,6 +142,7 @@ class _HomePageState extends State<HomePage> {
               log('Logged in is set to $loggedIn');
               if (index == 3 && loggedIn == false) {
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+                // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (LoginPage())));
                 _pageIndex = 0;
               }
             },

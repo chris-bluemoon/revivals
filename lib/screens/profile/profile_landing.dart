@@ -1,17 +1,18 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/screens/home/home.dart';
-import 'dart:developer';
-import 'package:unearthed/screens/profile/my_transactions.dart';
+import 'package:unearthed/screens/home_page.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
+import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/whatsapp.dart';
 
 class ProfileLanding extends StatelessWidget {
-  const ProfileLanding(this.user, this.signOutFromGoogle, {super.key});
+  ProfileLanding(this.user, this.signOutFromGoogle, {super.key});
 
   final User? user;
   final Function() signOutFromGoogle;
@@ -24,9 +25,27 @@ class ProfileLanding extends StatelessWidget {
         title: 'Share App', text: message, linkUrl: appLink);
   }
 
+  ValueNotifier userCredential = ValueNotifier('');
+
+  goBack(context) async {
+                      bool result = await signOutFromGoogle();
+                  log('Pressed Exit 1');
+                  if (result) {
+                    log('awaited result and signed out');
+                    userCredential.value = '';
+                    Provider.of<ItemStore>(context, listen: false).setLoggedIn(false);
+  Navigator.pushReplacement<void, void>(
+    context,
+    MaterialPageRoute<void>(
+      builder: (BuildContext context) => const HomePage(),
+    ),
+  );
+                  }
+                  log('Pressed Exit 2');
+  }
+
   @override
   Widget build(BuildContext context) {
-    ValueNotifier userCredential = ValueNotifier('');
     return Padding(
       padding: const EdgeInsets.fromLTRB(20.0,20.0,0,0),
       child: Column(
@@ -54,7 +73,7 @@ class ProfileLanding extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const MyTransactions())));
                 },
                 icon: const Icon(Icons.woman_2_outlined)),
-              const Text('MY TRANSACTIONS'),
+              const Text('MY BOOKINGS'),
             ],
           ),
           Divider(indent: 50, color: Colors.grey[200],),
@@ -129,15 +148,29 @@ class ProfileLanding extends StatelessWidget {
             children: [
               const SizedBox(width: 10),
               IconButton(
-                onPressed: () async {
-                  bool result = await signOutFromGoogle();
-                  if (result) {
-                    userCredential.value = '';
-                    Provider.of<ItemStore>(context, listen: false).setLoggedIn(false);
-                  }
-                  showAlertDialog(context);
+                onPressed: () {
+                    Future.delayed(const Duration(seconds: 2), () {
+    log('Delayed code executed');
+  });
+                  goBack(context);
+                  log('Pressed Exit 2');
+                  // showAlertDialog(context);
                   // Navigator.of(context).popUntil((route) => route.isFirst);
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Home())));
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HomePage())));
+                  // _pageIndex = 0;
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (context) {
+                  //       Future.delayed(const Duration(seconds: 5), () {
+                  //         Navigator.of(context).pop(true);
+                  //       });
+                  //       return const AlertDialog(
+                  //         title: Text('Title'),
+                  //       );
+                  //     });
+                  // Navigator.of(context).popUntil((route) => route.isFirst);
+
                 },
                 icon: const Icon(Icons.exit_to_app)),
               const Text('SIGN OUT'),
@@ -163,7 +196,7 @@ void chatWithUsMessage(BuildContext context) async {
             title: const Text("Attention"),
             content: Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text('${e.toString()}'
+              child: Text(e.toString()
               ),
             ),
             actions: [
