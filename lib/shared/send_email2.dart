@@ -54,10 +54,10 @@ class EmailComposer2 {
   Future<void> sendEmail2() async {
     String? myvar = await MyStore.readFromStore();
     final smtpServer = SmtpServer('smtp.gmail.com',
-        username: 'uneartheduser@gmail.com', password: myvar);
+        username: 'chris@unearthedcollections.com', password: myvar);
 
     final message = Message()
-      ..from = const Address('uneartheduser@gmail.com', 'Unearthed User')
+      ..from = const Address('support@unearthedcollections.com', 'Support')
       ..recipients.add(emailAddress)
       ..subject = 'Congratulations!'
       ..text = ''
