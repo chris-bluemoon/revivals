@@ -33,6 +33,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       if (r.email == email) {
         found = true;
         log('User ${r.email} already found, not adding');
+        Provider.of<ItemStore>(context, listen: false).setCurrentUser();
         break; // fixed this
       } else {
         found = false;

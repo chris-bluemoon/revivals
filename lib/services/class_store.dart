@@ -203,8 +203,7 @@ class ItemStore extends ChangeNotifier {
         }
       }
       setCurrentUser();
-      log("Renters populated with length ${_renters.length}");
-      log(_renters[0].favourites.toString());
-      notifyListeners();
+      // log("Renters populated with length ${_renters.length}");
+      // notifyListeners();
     }
 }

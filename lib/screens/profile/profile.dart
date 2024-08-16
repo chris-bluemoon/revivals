@@ -3,10 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
-import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
-import 'package:unearthed/services/class_store.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -19,15 +16,14 @@ class _Profile extends State<Profile> {
   ValueNotifier userCredential = ValueNotifier('');
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  @override
-  initState() {
-    getCurrentUser();
-    // final uid = user.uid;
-    List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
-    log('Renters in Provider DB now:');
-    log(renters.length.toString());
-    super.initState();
-  }
+  // @override
+  // initState() {
+    // getCurrentUser();
+    // List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
+    // log('Renters in Provider DB now:');
+    // log(renters.length.toString());
+    // super.initState();
+  // }
 
   String uname = '----------';
 

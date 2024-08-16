@@ -21,7 +21,6 @@ class NewArrivals extends StatefulWidget {
 class _NewArrivalsState extends State<NewArrivals> {
   void handleSubmit() {
     for (var i = 0; i < myItems.length; i++) {
-      log(myItems[i].name);
       Provider.of<ItemStore>(context, listen: false).addItem(Item(
         id: uuid.v4(),
         type: myItems[i].type,
@@ -55,10 +54,7 @@ class _NewArrivalsState extends State<NewArrivals> {
   @override
   Widget build(BuildContext context) {
     // getCurrentUser();
-    List<Item> itemList = Provider.of<ItemStore>(context, listen: false).items;
-    for (Item i in itemList) {
-      log(i.name);
-    }
+    // List<Item> itemList = Provider.of<ItemStore>(context, listen: false).items;
     return Scaffold(
       appBar: AppBar(
         title: Row(

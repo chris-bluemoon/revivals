@@ -48,51 +48,9 @@ class _HomePageState extends State<HomePage> {
     const Profile(),
   ];
 
-// Future<dynamic> getCurrentUser() async {
-//   User? _user = await FirebaseAuth.instance.currentUser;
-// // Firebase.Auth.FirebaseUser user = auth.CurrentUser;
-//     // User? asda = FirebaseAuth.instance.currentUser;
-//     if(_user != null) {
-//       loggedIn = true;
-//     List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
-    
-//     // Provider.of<ItemStore>(context, listen: false).fetchRentersOnce();
-//     for (Renter r in renters) {
-//       if (r.email == _user.email) {
-//         Provider.of<ItemStore>(context, listen: false).assignUser(r);
-//         log('User ${r.email} found in DB, just assigned to _user');
-//       } 
-//     }
-//     } else {
-//       log('Not logged in');
-//       loggedIn = false;
-//     };
-//     return _user;
-//     // return asda;
-//   }
-
-// final User user = auth.currentUser;
-// if (_user.displayName == null) 
-// log("User: ${_user.displayName ?? "None"}");
-// return _user;}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   // centerTitle: true,
-      //   title: Row(
-      //     // TODO: Image is not centered in appbar with back arrow
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //       children: [
-      //         Image.asset(
-      //           'assets/logos/unearthed_logo_2.png', 
-      //           // 'assets/logos/unearthed_collections.png', 
-      //            height: 200,
-      //                               ),
-      //         ]),
-      // ),
-
       body: _pages[_pageIndex],
 
       bottomNavigationBar: BottomNavigationBar(

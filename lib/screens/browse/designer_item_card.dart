@@ -2,15 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
-import 'package:unearthed/globals.dart' as globals;
 
 // ignore: must_be_immutable
 class DesignerItemCard extends StatefulWidget {
-  DesignerItemCard(this.item, {super.key});
+  const DesignerItemCard(this.item, {super.key});
 
   final Item item;
 
@@ -39,12 +39,8 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
   bool isAFav(Item d, List favs) {
     log(favs.toString());
     if (favs.contains(d)) {
-      log("Found a fav!");
-      log(d.id);
       return true;
     } else {
-      log("This not a fav!");
-      log(d.id);
       return false;
     }
   }
@@ -88,9 +84,9 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [
                 StyledHeading(widget.item.name),
-                Expanded(child: SizedBox()),
+                const Expanded(child: SizedBox()),
                 isFav ?  IconButton(
-                  icon: Icon(Icons.favorite), color: Colors.red,
+                  icon: const Icon(Icons.favorite), color: Colors.red,
                   onPressed: () {
                     log('Pressed Fav');
                       // isFav = false;
@@ -104,7 +100,7 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
 
                   }) : 
                   IconButton(
-                    icon: Icon(Icons.favorite_border_outlined),
+                    icon: const Icon(Icons.favorite_border_outlined),
                     onPressed: () {
                       log('Pressed empty Fav on item ID: ${widget.item.id}');
                       // isFav = true;
