@@ -207,8 +207,7 @@ class _ToRentState extends State<ToRent> {
                           MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item, widget.rentalDays.value))
                         // )) : goToLogin();
                         )); } else { 
-                          showAlertDialog(context, '');
-                          // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen()))); 
+                          showAlertDialog(context);
                         }
                     },
                       style: OutlinedButton.styleFrom(
@@ -228,7 +227,7 @@ class _ToRentState extends State<ToRent> {
   }
 }
 
-showAlertDialog(BuildContext context, String itemType) {  
+showAlertDialog(BuildContext context) {  
   // Create button  
   Widget okButton = ElevatedButton(  
     style: OutlinedButton.styleFrom(
