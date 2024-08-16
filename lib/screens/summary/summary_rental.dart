@@ -167,7 +167,7 @@ class _SummaryRentalState extends State<SummaryRental> {
                       String startDateTextForEmail = DateFormat('yMMMd').format(widget.startDate);
                       String endDateTextForEmail = DateFormat('yMMMd').format(widget.endDate);
                       EmailComposer2(email, widget.item.type, name, widget.item.name, widget.item.brand, startDateTextForEmail, endDateTextForEmail, widget.deliveryPrice.value, widget.price.toString(), widget.item.rentPrice.toString()).sendEmail2();
-                      showAlertDialog(context);  
+                      showAlertDialog(context, widget.item.type);  
                       // Navigator.of(context).push(MaterialPageRoute(
                           // builder: (context) => (const Congrats())));
                     },
@@ -181,7 +181,7 @@ class _SummaryRentalState extends State<SummaryRental> {
       ),
     );
   }
-showAlertDialog(BuildContext context) {  
+showAlertDialog(BuildContext context, String itemType) {  
   // Create button  
   Widget okButton = ElevatedButton(  
     style: OutlinedButton.styleFrom(
@@ -202,7 +202,29 @@ showAlertDialog(BuildContext context) {
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
     title: const Center(child: Text("Thank You!")),
-    content: const Text("Your item is being prepared, please check your email for confirmation."),  
+    content: Container(
+      height: 60,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Your $itemType is being prepared,"),
+              // Text("Your $itemType is being prepared,"),
+              // Text("please check your email for confirmation."),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Please check your email for details."),
+              // Text("Your $itemType is being prepared,"),
+              // Text("please check your email for confirmation."),
+            ],
+          ),
+        ],
+      ),
+    ),  
     actions: [  
       okButton,  
     ],  

@@ -187,6 +187,10 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                         log(endDate.toString());
                         log(noOfDays.toString());
                         showConfirm = true;
+                        bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                        loggedIn ? Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
+                        )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                         // bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                         // loggedIn ? Navigator.of(context).push(
                         //   MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
