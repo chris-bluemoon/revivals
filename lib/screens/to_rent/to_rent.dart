@@ -47,29 +47,30 @@ class _ToRentState extends State<ToRent> {
   CarouselController buttonCarouselController = CarouselController();
 
   goToLogin() {
-      // set up the button
-  Widget okButton = TextButton(
-    child: const Text("OK"),
-    onPressed: () { },
-  );
+  //     // set up the button
+  // Widget okButton = TextButton(
+  //   child: const Text("OK"),
+  //   onPressed: () { },
+  // );
 
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("My title"),
-    content: const Text("This is my message."),
-    actions: [
-      okButton,
-    ],
-  );
+  // // set up the AlertDialog
+  // AlertDialog alert = AlertDialog(
+  //   title: const Text("My title"),
+  //   content: const Text("This is my message."),
+  //   actions: [
+  //     okButton,
+  //   ],
+  // );
 
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
+  // // show the dialog
+  // showDialog(
+  //   context: context,
+  //   builder: (BuildContext context) {
+  //     return alert;
+  //   },
+  // );
 
+  showAlertDialog(context, '');
   log('Alert should have been shown');
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
   }
@@ -202,10 +203,13 @@ class _ToRentState extends State<ToRent> {
                   child: OutlinedButton(
                     onPressed: () {
                         bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-                        loggedIn ? Navigator.of(context).push(
+                        if (loggedIn) { Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item, widget.rentalDays.value))
-                        )) : goToLogin();
-                    //  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item, widget.rentalDays.value)))); 
+                        // )) : goToLogin();
+                        )); } else { 
+                          showAlertDialog(context, '');
+                          // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen()))); 
+                        }
                     },
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,
@@ -223,3 +227,61 @@ class _ToRentState extends State<ToRent> {
       );
   }
 }
+
+showAlertDialog(BuildContext context, String itemType) {  
+  // Create button  
+  Widget okButton = ElevatedButton(  
+    style: OutlinedButton.styleFrom(
+                          textStyle: const TextStyle(color: Colors.white),
+                          foregroundColor: Colors.white,//change background color of button
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        side: const BorderSide(width: 1.0, color: Colors.black),
+      ),
+    onPressed: () {  
+      // Navigator.of(context).pop();  
+      // Navigator.of(context).popUntil((route) => route.isFirst);
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen()))); 
+
+    },  
+    child: const Center(child: Text("OK")),  
+  ); 
+    // Create AlertDialog  
+  AlertDialog alert = AlertDialog(  
+    title: const Center(child: Text("Not Logged In")),
+    content: const SizedBox(
+      height: 60,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Please log in", style: TextStyle(fontSize: 14))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("or register to continue!", style: TextStyle(fontSize: 14))
+            ],
+          ),
+        ],
+      ),
+    ),  
+    actions: [  
+      okButton,  
+    ],  
+                shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            ),
+  );  
+    showDialog(  
+    context: context,  
+    builder: (BuildContext context) {  
+      return alert;  
+    },  
+  );   
+}
+

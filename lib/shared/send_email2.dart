@@ -57,7 +57,7 @@ class EmailComposer2 {
         username: 'chris@unearthedcollections.com', password: myvar);
 
     final message = Message()
-      ..from = const Address('info@unearthedcollections.com', 'Support')
+      ..from = const Address('example@com.com', 'Unearthed Info')
       ..recipients.add(emailAddress)
       ..subject = 'Congratulations!'
       ..text = ''
