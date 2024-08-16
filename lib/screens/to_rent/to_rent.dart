@@ -46,35 +46,6 @@ class _ToRentState extends State<ToRent> {
 
   CarouselController buttonCarouselController = CarouselController();
 
-  goToLogin() {
-  //     // set up the button
-  // Widget okButton = TextButton(
-  //   child: const Text("OK"),
-  //   onPressed: () { },
-  // );
-
-  // // set up the AlertDialog
-  // AlertDialog alert = AlertDialog(
-  //   title: const Text("My title"),
-  //   content: const Text("This is my message."),
-  //   actions: [
-  //     okButton,
-  //   ],
-  // );
-
-  // // show the dialog
-  // showDialog(
-  //   context: context,
-  //   builder: (BuildContext context) {
-  //     return alert;
-  //   },
-  // );
-
-  showAlertDialog(context, '');
-  log('Alert should have been shown');
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
-  }
-
   @override
   Widget build(BuildContext context) {
 
