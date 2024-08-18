@@ -27,6 +27,10 @@ class ProfileLanding extends StatelessWidget {
 
   ValueNotifier userCredential = ValueNotifier('');
 
+
+  cancelLogOut(context) async {
+    Navigator.pop(context);
+                  }
   goBack(context) async {
                       bool result = await signOutFromGoogle();
                   log('Pressed Exit 1');
@@ -143,25 +147,30 @@ class ProfileLanding extends StatelessWidget {
               const Text('CHAT WITH US'),
             ],
           ),
-          Divider(indent: 50, color: Colors.grey[200],),
+          Divider(
+            indent: 50,
+            color: Colors.grey[200],
+          ),
           Row(
             children: [
               const SizedBox(width: 10),
               IconButton(
-                onPressed: () => showDialog(
-    context: context,
-    builder: (_) => Dialog(
-      child: Container(
-        child: ElevatedButton(
-          child: const Text('Logging out...'),
-          onPressed: () {
-            goBack(context);
-
-          }
-        ),
-      ), //Your buttons here
-    ),
-  ),
+                  onPressed: () => showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          actions: [
+                            // ElevatedButton(
+                              // onPressed: () {cancelLogOut(context);},
+                              // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
+                            ElevatedButton(
+                              onPressed: () {goBack(context);},
+                              child: const Text('OK', style: TextStyle(color: Colors.black)),
+                            ),],
+                          backgroundColor: Colors.white,
+                          title: const Text("Successfully logged out", style: TextStyle(fontSize: 22, color: Colors.black)),
+                        ),
+                      ),
                 
                 icon: const Icon(Icons.exit_to_app)),
               const Text('SIGN OUT'),
@@ -230,6 +239,32 @@ showAlertDialog(BuildContext context) {
   );
 
 
+}
+
+showAlertDialog2(BuildContext context) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () { },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("My title"),
+    content: const Text("This is my message."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
   
 

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:unearthed/shared/html_template.dart';
+import 'package:unearthed/shared/booked_html_template.dart';
 import 'package:unearthed/shared/secure_repo.dart';
 
 class EmailComposer2 {
@@ -24,6 +24,9 @@ class EmailComposer2 {
 
   MyStore myStore = MyStore();
 
+  String gd_image_id = '1RWGJ0rszLNAdMP0etPdVQgIVOq5fFeRq';
+  
+
   String _textSelect(String str) {
     str = str.replaceAll('*|ITEM_TYPE|*!', itemType);
     str = str.replaceAll('*|FNAME|*!', '$userName,');
@@ -32,11 +35,10 @@ class EmailComposer2 {
     str = str.replaceAll('*|START_DATE|*!', startDate);
     str = str.replaceAll('*|END_DATE|*!', endDate);
     str = str.replaceAll('*|DELIVERY_OPTION|*!', setDeliveryText(deliveryPrice));
-    str = str.replaceAll('*|PRICE|*!', '$price THB');
-    str = str.replaceAll('*|DEPOSIT|*!', '$deposit THB');
+    str = str.replaceAll('*|PRICE|*!', price);
+    str = str.replaceAll('*|DEPOSIT|*!', deposit);
+    str = str.replaceAll('*|GD_IMAGE_ID|*!', gd_image_id);
     str = str.replaceAll('https://line.me/R/unearthedcollections', 'https://lin.ee/ZnlhXmE');
-    str = str.replaceAll('Hello,', 'Hello');
-    str = str.replaceAll('Thanks', 'thanks');
     // str = str.replaceAll('https://line.me/R/unearthedcollections', 'https://line.me/R/ZnlhXmE');
     // str = str.replaceAll('Screenshot 2024-07-18 161558.png', imageName)
     return str;
@@ -45,9 +47,9 @@ class EmailComposer2 {
   setDeliveryText(deliveryPrice) {
 
     if (deliveryPrice > 0) {
-      return 'We will contact you one day before the booking to arrange full payment delivery.';
+      return 'We will contact you one day before the booking to arrange full payment and delivery.';
     } else {
-      return 'Please contact us one day before the booking to arrange full payment and collection.';
+      return 'Please contact us at least one day before the booking to arrange full payment and collection.';
     }
   }
 
@@ -57,7 +59,7 @@ class EmailComposer2 {
         username: 'chris@unearthedcollections.com', password: myvar);
 
     final message = Message()
-      ..from = const Address('example@com.com', 'Unearthed Info')
+      ..from = const Address('info@unearthedcollections.com', 'Unearthed')
       ..recipients.add(emailAddress)
       ..subject = 'Congratulations!'
       ..text = ''
