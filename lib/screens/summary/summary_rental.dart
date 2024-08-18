@@ -166,7 +166,7 @@ class _SummaryRentalState extends State<SummaryRental> {
                           widget.item.rentPrice);
                       String startDateTextForEmail = DateFormat('yMMMd').format(widget.startDate);
                       String endDateTextForEmail = DateFormat('yMMMd').format(widget.endDate);
-                      EmailComposer2(email, widget.item.type, name, widget.item.name, widget.item.brand, startDateTextForEmail, endDateTextForEmail, widget.deliveryPrice.value, widget.price.toString(), widget.item.rentPrice.toString()).sendEmail2();
+                      EmailComposer2(email, widget.item.type, name, widget.item.name, widget.item.brand, startDateTextForEmail, endDateTextForEmail, widget.deliveryPrice.value, widget.price.toString(), widget.item.rentPrice.toString(), widget.item.imageId).sendEmail2();
                       showAlertDialog(context, widget.item.type);  
                       // Navigator.of(context).push(MaterialPageRoute(
                           // builder: (context) => (const Congrats())));
@@ -202,7 +202,7 @@ showAlertDialog(BuildContext context, String itemType) {
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
     title: const Center(child: Text("Thank You!")),
-    content: Container(
+    content: SizedBox(
       height: 60,
       child: Column(
         children: [
@@ -214,7 +214,7 @@ showAlertDialog(BuildContext context, String itemType) {
               // Text("please check your email for confirmation."),
             ],
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("Please check your email for details."),

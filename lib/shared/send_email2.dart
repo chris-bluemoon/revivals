@@ -6,7 +6,7 @@ import 'package:unearthed/shared/booked_html_template.dart';
 import 'package:unearthed/shared/secure_repo.dart';
 
 class EmailComposer2 {
-  EmailComposer2(this.emailAddress, this.itemType, this.userName, this.itemName, this.itemBrand, this.startDate, this.endDate, this.deliveryPrice, this.price, this.deposit);
+  EmailComposer2(this.emailAddress, this.itemType, this.userName, this.itemName, this.itemBrand, this.startDate, this.endDate, this.deliveryPrice, this.price, this.deposit, this.gd_image_id);
 
   String emailAddress;
   String itemType;
@@ -18,13 +18,13 @@ class EmailComposer2 {
   int deliveryPrice;
   String price;
   String deposit;
+  String gd_image_id;
   
   String htmlbody = body;
 
 
   MyStore myStore = MyStore();
 
-  String gd_image_id = '1RWGJ0rszLNAdMP0etPdVQgIVOq5fFeRq';
   
 
   String _textSelect(String str) {

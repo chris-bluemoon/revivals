@@ -38,6 +38,7 @@ class _NewArrivalsState extends State<NewArrivals> {
         waist: myItems[i].waist,
         hips: myItems[i].hips,
         longDescription: myItems[i].longDescription,
+        imageId: myItems[i].imageId,
         // isFav: myItems[i].isFav,
     ));
     }
