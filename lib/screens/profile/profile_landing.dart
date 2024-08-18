@@ -148,30 +148,21 @@ class ProfileLanding extends StatelessWidget {
             children: [
               const SizedBox(width: 10),
               IconButton(
-                onPressed: () {
-                    Future.delayed(const Duration(seconds: 2), () {
-    log('Delayed code executed');
-  });
-                  goBack(context);
-                  log('Pressed Exit 2');
-                  // showAlertDialog(context);
-                  // Navigator.of(context).popUntil((route) => route.isFirst);
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HomePage())));
-                  // _pageIndex = 0;
-                  // showDialog(
-                  //     context: context,
-                  //     builder: (context) {
-                  //       Future.delayed(const Duration(seconds: 5), () {
-                  //         Navigator.of(context).pop(true);
-                  //       });
-                  //       return const AlertDialog(
-                  //         title: Text('Title'),
-                  //       );
-                  //     });
-                  // Navigator.of(context).popUntil((route) => route.isFirst);
+                onPressed: () => showDialog(
+    context: context,
+    builder: (_) => Dialog(
+      child: Container(
+        child: ElevatedButton(
+          child: const Text('Logging out...'),
+          onPressed: () {
+            goBack(context);
 
-                },
+          }
+        ),
+      ), //Your buttons here
+    ),
+  ),
+                
                 icon: const Icon(Icons.exit_to_app)),
               const Text('SIGN OUT'),
             ],
