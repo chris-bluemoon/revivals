@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
+import 'package:unearthed/screens/sign_up/fb_login.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:uuid/uuid.dart';
 
@@ -100,11 +102,20 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                               },
                             ),
                             SignInButton(
+                              Buttons.Facebook,
+                              onPressed: () async {
+                                log('FAcebook Login');
+                                FBLogin().signInWithFacebook();
+                              },
+                            ),
+                            SignInButton(
                               Buttons.GoogleDark,
                               onPressed: () async {
+                                showDialogue(context);
                                 log('Google Login');
                                 userCredential.value = await signInWithGoogle();
                                 if (userCredential.value != null) {
+                                  hideProgressDialogue(context);
                                   log(userCredential.value.user!.email);
                                   log(userCredential.value.user!.displayName);
                                   handleSubmit(userCredential.value.user!.email,
@@ -193,3 +204,31 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       return false;
     }
   }
+
+  void showDialogue(BuildContext context){
+  showDialog(
+  context: context,
+  builder: (BuildContext context) => const Loading(),
+); 
+}
+
+void hideProgressDialogue(BuildContext context) {
+Navigator.of(context).pop(const Loading());}
+
+class Loading extends StatelessWidget {
+  const Loading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: const Center(
+        child: SpinKitChasingDots(
+          color: Colors.black,
+          size: 50
+        ),
+      ),
+    );
+  }
+}
+
