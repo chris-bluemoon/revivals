@@ -125,12 +125,27 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                         barrierDismissible: false,
                         context: context,
                         builder: (_) => AlertDialog(
+                              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))
+                              ), 
                           actions: [
                             // ElevatedButton(
                               // onPressed: () {cancelLogOut(context);},
                               // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
                             ElevatedButton(
-                              onPressed: () {Navigator.pop(context);},
+                              style: ButtonStyle(
+                               backgroundColor: const WidgetStatePropertyAll<Color>(Colors.white),
+  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+    const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      side: BorderSide(color: Colors.black)
+    )
+  )
+),
+                              onPressed: () {
+                                // Navigator.pop(context);
+                                Navigator.of(context).popUntil((route) => route.isFirst);
+                                // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const HomePage()));
+                              },
                               child: const Text('OK', style: TextStyle(color: Colors.black)),
                             ),],
                           backgroundColor: Colors.white,
@@ -144,39 +159,9 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                         ),
                       ); } else { 
                         // log('loggin id');
-                        return Text('Logged in');
+                        return const Text('');
                         // showSuccessfulLogin();
                       }
-                      // ) : Text('Logged In');
-                      // : Center(
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.center,
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     children: [
-                      //       Container(
-                      //         clipBehavior: Clip.antiAlias,
-                      //         decoration: BoxDecoration(
-                      //             shape: BoxShape.circle,
-                      //             border: Border.all(
-                      //                 width: 1.5, color: Colors.black54)),
-                      //         child: Image.network(
-                      //             userCredential.value.user!.photoURL.toString()),
-                      //       ),
-                      //       const SizedBox(
-                      //         height: 20,
-                      //       ),
-                      //       Text(userCredential.value.user!.displayName
-                      //           .toString()),
-                      //       const SizedBox(
-                      //         height: 20,
-                      //       ),
-                      //       Text(userCredential.value.user!.email.toString()),
-                      //       const SizedBox(
-                      //         height: 30,
-                      //       ),
-                      //     ],
-                      //   ),
-                      // );
                 }),
           ],
         ),

@@ -164,6 +164,15 @@ class ProfileLanding extends StatelessWidget {
                               // onPressed: () {cancelLogOut(context);},
                               // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
                             ElevatedButton(
+                                                            style: ButtonStyle(
+                               backgroundColor: const WidgetStatePropertyAll<Color>(Colors.white),
+  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+    const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      side: BorderSide(color: Colors.black)
+    )
+  )
+),
                               onPressed: () {goBack(context);},
                               child: const Text('OK', style: TextStyle(color: Colors.black)),
                             ),],
