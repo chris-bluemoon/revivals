@@ -71,9 +71,9 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('LOGIN', style: TextStyle(fontSize: 22, color: Colors.black)),
+          title: const Text('', style: TextStyle(fontSize: 22, color: Colors.black)),
             leading: IconButton(
-    icon: const Icon(Icons.home_outlined, color: Colors.black),
+    icon: const Icon(Icons.arrow_back, color: Colors.black),
     onPressed: () => Navigator.of(context)..popUntil((route) => route.isFirst)
     // onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HomePage())))
   )),
@@ -83,9 +83,9 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
             ValueListenableBuilder(
                 valueListenable: userCredential,
                 builder: (context, value, child) {
-                  return (userCredential.value == '' ||
+                  if (userCredential.value == '' ||
                           userCredential.value == null)
-                      ? Center(
+                      { return Center(
                         child: Column(
                           children: [
                             SignInButton(
@@ -120,62 +120,72 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                                   log(userCredential.value.user!.displayName);
                                   handleSubmit(userCredential.value.user!.email,
                                               userCredential.value.user!.displayName);
+                                  // Navigator.pop(context);
+                                showDialog(
+                        barrierDismissible: false,
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          actions: [
+                            // ElevatedButton(
+                              // onPressed: () {cancelLogOut(context);},
+                              // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
+                            ElevatedButton(
+                              onPressed: () {Navigator.pop(context);},
+                              child: const Text('OK', style: TextStyle(color: Colors.black)),
+                            ),],
+                          backgroundColor: Colors.white,
+                          title: const Text("Successfully logged in", style: TextStyle(fontSize: 22, color: Colors.black)),
+                        ),
+                      );
                                 }
                               },
                             ),
                           ],
                         ),
-                      )
-                      : Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      width: 1.5, color: Colors.black54)),
-                              child: Image.network(
-                                  userCredential.value.user!.photoURL.toString()),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(userCredential.value.user!.displayName
-                                .toString()),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Text(userCredential.value.user!.email.toString()),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                          ],
-                        ),
-                      );
+                      ); } else { 
+                        // log('loggin id');
+                        return Text('Logged in');
+                        // showSuccessfulLogin();
+                      }
+                      // ) : Text('Logged In');
+                      // : Center(
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: [
+                      //       Container(
+                      //         clipBehavior: Clip.antiAlias,
+                      //         decoration: BoxDecoration(
+                      //             shape: BoxShape.circle,
+                      //             border: Border.all(
+                      //                 width: 1.5, color: Colors.black54)),
+                      //         child: Image.network(
+                      //             userCredential.value.user!.photoURL.toString()),
+                      //       ),
+                      //       const SizedBox(
+                      //         height: 20,
+                      //       ),
+                      //       Text(userCredential.value.user!.displayName
+                      //           .toString()),
+                      //       const SizedBox(
+                      //         height: 20,
+                      //       ),
+                      //       Text(userCredential.value.user!.email.toString()),
+                      //       const SizedBox(
+                      //         height: 30,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // );
                 }),
           ],
         ),
-        floatingActionButton: userLoggedIn ? FloatingActionButton.extended(
-          
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-          onPressed: () async {
-            bool result = await signOutFromGoogle();
-            Provider.of<ItemStore>(context, listen: false).setLoggedIn(false);
-            if (result) {
-            userCredential.value = '';}
-            Provider.of<ItemStore>(context, listen: false).setLoggedIn(false);
-          }, 
-          label: const Text('LOG OUT'),
-          icon: const Icon(Icons.logout_outlined),
-          shape: RoundedRectangleBorder(side: const BorderSide(width: 1,color: Colors.black),borderRadius: BorderRadius.circular(5)),
-          ) : null,
         );
   }}
 
+  showSuccessfulLogin() {
+
+  }
   Future<dynamic> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
