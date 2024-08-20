@@ -69,7 +69,7 @@ class _FavouritesState extends State<Favourites> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('No favourites yet!'),
+            Text('No favourites yet', style: TextStyle(fontSize: 22),),
           ],
         )
       ],)
