@@ -144,7 +144,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                               onPressed: () {
                                 // Navigator.pop(context);
                                 Navigator.of(context).popUntil((route) => route.isFirst);
-                                // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => const HomePage()));
+                                // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
                               },
                               child: const Text('OK', style: TextStyle(color: Colors.black)),
                             ),],
@@ -168,9 +168,9 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
         );
   }}
 
-  showSuccessfulLogin() {
+  // showSuccessfulLogin() {
 
-  }
+  // }
   Future<dynamic> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();

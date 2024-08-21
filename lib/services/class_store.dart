@@ -179,6 +179,11 @@ class ItemStore extends ChangeNotifier {
   void setLoggedIn(bool loggedIn) {
     log('Set _loggedIn to $loggedIn');
     _loggedIn = loggedIn;
+    if (loggedIn == false) {
+      _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', phoneNum: '', favourites: []);
+      log(renter.name);
+      notifyListeners();
+    }
   }
 
   void fetchItemRentersOnce() async {

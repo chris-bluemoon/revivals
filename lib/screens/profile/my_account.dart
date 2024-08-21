@@ -85,7 +85,8 @@ class _MyAccountState extends State<MyAccount> {
             Text('EMAIL', style: TextStyle(fontSize: 12, color: Colors.grey[700]),),
             TextFormField(
               // initialValue: 'johndoe@gmail.com',
-              initialValue: widget.user!.email,
+              // initialValue: widget.user!.email,
+              initialValue: Provider.of<ItemStore>(context, listen: false).renter.email,
               enabled: false,
             ),
             const SizedBox(height: 30),
