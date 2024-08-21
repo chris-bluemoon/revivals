@@ -7,7 +7,6 @@ import 'package:unearthed/screens/browse/browse.dart';
 import 'package:unearthed/screens/favourites/favourites.dart';
 import 'package:unearthed/screens/home/home.dart';
 import 'package:unearthed/screens/profile/profile.dart';
-import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/services/class_store.dart';
 
 class HomePage extends StatefulWidget {
@@ -96,13 +95,13 @@ class _HomePageState extends State<HomePage> {
             () {
               // getCurrentUser();
               _pageIndex = index;
-              bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-              log('Logged in is set to $loggedIn');
-              if (index == 3 && loggedIn == false) {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
-                // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (LoginPage())));
-                _pageIndex = 0;
-              }
+              // bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+              // log('Logged in is set to $loggedIn');
+              // if (index == 3 && loggedIn == false) {
+              //   // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Profile())));
+              //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+              //   _pageIndex = 0;
+              // }
             },
           );
         },
