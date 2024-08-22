@@ -30,7 +30,7 @@ class CategoryListView extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
           child: Image.asset('assets/img/new_items/transparent_dress.webp', height: 100),
                ),
-               const SizedBox(width: 100),
+               const SizedBox(width: 80),
                const Text('DRESSES', style: TextStyle(fontSize: 16)),
              ],
            )
@@ -61,9 +61,9 @@ class CategoryListView extends StatelessWidget {
           padding: EdgeInsets.only(left: 50),
           child: Text('BAGS', style: TextStyle(fontSize: 16)),
         ),
-        const SizedBox(width: 20),
+        // const SizedBox(width: 0),
         Padding(
-          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
           child: Image.asset('assets/img/new_items/bag_transparent.webp', height: 100),
         ),
       ],
@@ -94,7 +94,7 @@ class CategoryListView extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
           child: Image.asset('assets/img/new_items/jacket_transparent2.webp', height: 100),
                ),
-               const SizedBox(width: 100),
+               const SizedBox(width: 50),
                const Text('JACKETS', style: TextStyle(fontSize: 16)),
              ],
            )
@@ -127,7 +127,7 @@ class CategoryListView extends StatelessWidget {
         ),
         const SizedBox(width: 50),
         Padding(
-          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: Image.asset('assets/img/new_items/pantsuit_transparent.png', height: 100),
         ),
       ],

@@ -149,7 +149,13 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                               child: const Text('OK', style: TextStyle(color: Colors.black)),
                             ),],
                           backgroundColor: Colors.white,
-                          title: const Text("Successfully logged in", style: TextStyle(fontSize: 22, color: Colors.black)),
+                          title: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(child: const Text("Successfully ogged in", style: TextStyle(fontSize: 22, color: Colors.black))),
+                            ],
+                          ),
                         ),
                       );
                                 }
