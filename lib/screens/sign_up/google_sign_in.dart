@@ -74,13 +74,10 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
           title: const Text('', style: TextStyle(fontSize: 22, color: Colors.black)),
             leading: IconButton(
     icon: const Icon(Icons.arrow_back, color: Colors.black),
-    onPressed: () => Navigator.of(context)..popUntil((route) => route.isFirst)
+    onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst)
     // onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HomePage())))
   )),
-        body: Column(
-          children: [
-            const SizedBox(height: 200),
-            ValueListenableBuilder(
+        body: ValueListenableBuilder(
                 valueListenable: userCredential,
                 builder: (context, value, child) {
                   if (userCredential.value == '' ||
@@ -88,6 +85,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                       { return Center(
                         child: Column(
                           children: [
+                            const SizedBox(height: 200),
                             SignInButton(
                               Buttons.AppleDark,
                               onPressed: () async {
@@ -101,12 +99,14 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                                 }
                               },
                             ),
-                            SignInButton(
-                              Buttons.Facebook,
-                              onPressed: () async {
-                                log('FAcebook Login');
-                                FBLogin().signInWithFacebook();
-                              },
+                            Card(
+                              child: SignInButton(
+                                Buttons.Facebook,
+                                onPressed: () async {
+                                  log('FAcebook Login');
+                                  FBLogin().signInWithFacebook();
+                                },
+                              ),
                             ),
                             SignInButton(
                               Buttons.GoogleDark,
@@ -149,11 +149,11 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                               child: const Text('OK', style: TextStyle(color: Colors.black)),
                             ),],
                           backgroundColor: Colors.white,
-                          title: Row(
+                          title: const Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Flexible(child: const Text("Successfully ogged in", style: TextStyle(fontSize: 22, color: Colors.black))),
+                              Flexible(child: Text("Successfully ogged in", style: TextStyle(fontSize: 22, color: Colors.black))),
                             ],
                           ),
                         ),
@@ -168,10 +168,8 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                         return const Text('');
                         // showSuccessfulLogin();
                       }
-                }),
-          ],
-        ),
-        );
+                },
+        ));
   }}
 
   // showSuccessfulLogin() {
