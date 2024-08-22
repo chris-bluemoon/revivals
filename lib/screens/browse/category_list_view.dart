@@ -4,9 +4,10 @@ import 'package:unearthed/screens/browse/category_items.dart';
 
 class CategoryListView extends StatelessWidget {
   const CategoryListView({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final leftRightPadding = screenWidth * 0.15;
     return ListView(
       padding: const EdgeInsets.all(8),
       children: <Widget>[
@@ -27,11 +28,14 @@ class CategoryListView extends StatelessWidget {
            child: Row(
              children: [
                Padding(
-          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+          padding: EdgeInsets.only(left: leftRightPadding),
           child: Image.asset('assets/img/new_items/transparent_dress.webp', height: 100),
                ),
-               const SizedBox(width: 80),
-               const Text('DRESSES', style: TextStyle(fontSize: 16)),
+               const Expanded(child: SizedBox(width: 0),),
+               const Padding(
+                 padding: EdgeInsets.fromLTRB(0,0,50,0),
+                 child: Text('DRESSES', style: TextStyle(fontSize: 16)),
+               ),
              ],
            )
          ),
@@ -57,14 +61,15 @@ class CategoryListView extends StatelessWidget {
     ),
     child: Row(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 50),
-          child: Text('BAGS', style: TextStyle(fontSize: 16)),
+        Padding(
+          padding: EdgeInsets.only(left: leftRightPadding),
+          child: const Text('BAGS', style: TextStyle(fontSize: 16)),
         ),
+               const Expanded(child: SizedBox(width: 0),),
         // const SizedBox(width: 0),
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          child: Image.asset('assets/img/new_items/bag_transparent.webp', height: 100),
+          padding: EdgeInsets.only(right: leftRightPadding),
+          child: Image.asset('assets/img/new_items/bag_transparent.png', height: 100),
         ),
       ],
     )
@@ -91,11 +96,14 @@ class CategoryListView extends StatelessWidget {
            child: Row(
              children: [
                Padding(
-          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+          padding: EdgeInsets.only(left: leftRightPadding),
           child: Image.asset('assets/img/new_items/jacket_transparent2.webp', height: 100),
                ),
-               const SizedBox(width: 50),
-               const Text('JACKETS', style: TextStyle(fontSize: 16)),
+               const Expanded(child: SizedBox(width: 0),),
+               Padding(
+                 padding: EdgeInsets.only(right: leftRightPadding),
+                 child: const Text('JACKETS', style: TextStyle(fontSize: 16)),
+               ),
              ],
            )
          ),
@@ -121,13 +129,13 @@ class CategoryListView extends StatelessWidget {
     ),
     child: Row(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 50),
-          child: Text('PANTSUITS', style: TextStyle(fontSize: 16)),
-        ),
-        const SizedBox(width: 50),
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          padding: EdgeInsets.only(left: leftRightPadding),
+          child: const Text('PANTSUITS', style: TextStyle(fontSize: 16)),
+        ),
+        const Expanded(child: SizedBox()),
+        Padding(
+          padding: EdgeInsets.only(right: leftRightPadding),
           child: Image.asset('assets/img/new_items/pantsuit_transparent.png', height: 100),
         ),
       ],

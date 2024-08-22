@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/occasion_grid_tile.dart';
 import 'package:unearthed/screens/browse/occasion_items.dart';
@@ -32,8 +33,8 @@ class OccasionGridView extends StatelessWidget {
                       const SizedBox(height: 5),
                       Row(
                         children: [
-                          const SizedBox(width: 10),
-                          Text(occasions[i], style: const TextStyle(fontSize: 6)),
+                          const SizedBox(width: 50),
+                          AutoSizeText(occasions[i], style: const TextStyle(fontSize: 6)),
                         ],
                       ),
                     ],
