@@ -16,8 +16,9 @@ class Browse extends StatelessWidget {
           bottom: const TabBar(
             // indicatorColor: Colors.black,
             // labelColor: Colors.black,
+            labelStyle: TextStyle(fontSize: 10),
             tabs: [
-              Tab(text: 'Occasion'),
+              Tab(text: 'Occasion',),
               Tab(text: 'Category'),
               Tab(text: 'Style'),
               Tab(text: 'Designer'),

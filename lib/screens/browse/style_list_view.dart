@@ -64,7 +64,7 @@ class StyleListView extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
           child: Image.asset('assets/img/new_items/vintage_transparent.png', height: 100),
                ),
-               const SizedBox(width: 100),
+               const SizedBox(width: 50),
                const Text('VINTAGE', style: TextStyle(fontSize: 16)),
              ],
            )

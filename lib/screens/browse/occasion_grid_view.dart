@@ -33,7 +33,7 @@ class OccasionGridView extends StatelessWidget {
                       Row(
                         children: [
                           const SizedBox(width: 10),
-                          Text(occasions[i], style: const TextStyle(fontSize: 14)),
+                          Text(occasions[i], style: const TextStyle(fontSize: 6)),
                         ],
                       ),
                     ],
