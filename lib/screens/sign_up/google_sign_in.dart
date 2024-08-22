@@ -7,7 +7,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/sign_up/fb_login.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:uuid/uuid.dart';
 
@@ -83,30 +82,30 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                   if (userCredential.value == '' ||
                           userCredential.value == null)
                       { return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          
                           const SizedBox(height: 200),
-                          SignInButton(
-                            Buttons.AppleDark,
-                            onPressed: () async {
-                              log('Apple Login');
-                              userCredential.value = await signInWithGoogle();
-                              if (userCredential.value != null) {
-                                log(userCredential.value.user!.email);
-                                log(userCredential.value.user!.displayName);
-                                handleSubmit(userCredential.value.user!.email,
-                                            userCredential.value.user!.displayName);
-                              }
-                            },
-                          ),
-                          SignInButton(
-                            Buttons.Facebook,
-                            onPressed: () async {
-                              log('FAcebook Login');
-                              FBLogin().signInWithFacebook();
-                            },
-                          ),
+                          // SignInButton(
+                          //   Buttons.AppleDark,
+                          //   onPressed: () async {
+                          //     log('Apple Login');
+                          //     userCredential.value = await signInWithGoogle();
+                          //     if (userCredential.value != null) {
+                          //       log(userCredential.value.user!.email);
+                          //       log(userCredential.value.user!.displayName);
+                          //       handleSubmit(userCredential.value.user!.email,
+                          //                   userCredential.value.user!.displayName);
+                          //     }
+                          //   },
+                          // ),
+                          // SignInButton(
+                          //   Buttons.Facebook,
+                          //   onPressed: () async {
+                          //     log('FAcebook Login');
+                          //     FBLogin().signInWithFacebook();
+                          //   },
+                          // ),
                           SignInButton(
                             Buttons.GoogleDark,
                             onPressed: () async {
