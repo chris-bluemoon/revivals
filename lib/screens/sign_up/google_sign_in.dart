@@ -82,91 +82,85 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                 builder: (context, value, child) {
                   if (userCredential.value == '' ||
                           userCredential.value == null)
-                      { return Center(
-                        child: Column(
+                      { return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 200),
+                          SignInButton(
+                            Buttons.AppleDark,
+                            onPressed: () async {
+                              log('Apple Login');
+                              userCredential.value = await signInWithGoogle();
+                              if (userCredential.value != null) {
+                                log(userCredential.value.user!.email);
+                                log(userCredential.value.user!.displayName);
+                                handleSubmit(userCredential.value.user!.email,
+                                            userCredential.value.user!.displayName);
+                              }
+                            },
+                          ),
+                          SignInButton(
+                            Buttons.Facebook,
+                            onPressed: () async {
+                              log('FAcebook Login');
+                              FBLogin().signInWithFacebook();
+                            },
+                          ),
+                          SignInButton(
+                            Buttons.GoogleDark,
+                            onPressed: () async {
+                              showDialogue(context);
+                              log('Google Login');
+                              userCredential.value = await signInWithGoogle();
+                              if (userCredential.value != null) {
+                                hideProgressDialogue(context);
+                                log(userCredential.value.user!.email);
+                                log(userCredential.value.user!.displayName);
+                                handleSubmit(userCredential.value.user!.email,
+                                            userCredential.value.user!.displayName);
+                                // Navigator.pop(context);
+                              showDialog(
+                                                  barrierDismissible: false,
+                                                  context: context,
+                                                  builder: (_) => AlertDialog(
+                            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))
+                            ), 
+                                                    actions: [
+                          // ElevatedButton(
+                            // onPressed: () {cancelLogOut(context);},
+                            // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                             backgroundColor: const WidgetStatePropertyAll<Color>(Colors.white),
+                            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                side: BorderSide(color: Colors.black)
+                              )
+                            )
+                          ),
+                            onPressed: () {
+                              // Navigator.pop(context);
+                              Navigator.of(context).popUntil((route) => route.isFirst);
+                              // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
+                            },
+                            child: const Text('OK', style: TextStyle(color: Colors.black)),
+                          ),],
+                                                    backgroundColor: Colors.white,
+                                                    title: const Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const SizedBox(height: 200),
-                            Card(
-                              child: SignInButton(
-                                Buttons.AppleDark,
-                                onPressed: () async {
-                                  log('Apple Login');
-                                  userCredential.value = await signInWithGoogle();
-                                  if (userCredential.value != null) {
-                                    log(userCredential.value.user!.email);
-                                    log(userCredential.value.user!.displayName);
-                                    handleSubmit(userCredential.value.user!.email,
-                                                userCredential.value.user!.displayName);
-                                  }
-                                },
-                              ),
-                            ),
-                            Card(
-                              child: SignInButton(
-                                Buttons.Facebook,
-                                onPressed: () async {
-                                  log('FAcebook Login');
-                                  FBLogin().signInWithFacebook();
-                                },
-                              ),
-                            ),
-                            Card(
-                              child: SignInButton(
-                                Buttons.GoogleDark,
-                                onPressed: () async {
-                                  showDialogue(context);
-                                  log('Google Login');
-                                  userCredential.value = await signInWithGoogle();
-                                  if (userCredential.value != null) {
-                                    hideProgressDialogue(context);
-                                    log(userCredential.value.user!.email);
-                                    log(userCredential.value.user!.displayName);
-                                    handleSubmit(userCredential.value.user!.email,
-                                                userCredential.value.user!.displayName);
-                                    // Navigator.pop(context);
-                                  showDialog(
-                                                      barrierDismissible: false,
-                                                      context: context,
-                                                      builder: (_) => AlertDialog(
-                                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))
-                                ), 
-                                                        actions: [
-                              // ElevatedButton(
-                                // onPressed: () {cancelLogOut(context);},
-                                // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                 backgroundColor: const WidgetStatePropertyAll<Color>(Colors.white),
-                                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                                  const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                                    side: BorderSide(color: Colors.black)
-                                  )
-                                )
-                              ),
-                                onPressed: () {
-                                  // Navigator.pop(context);
-                                  Navigator.of(context).popUntil((route) => route.isFirst);
-                                  // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
-                                },
-                                child: const Text('OK', style: TextStyle(color: Colors.black)),
-                              ),],
-                                                        backgroundColor: Colors.white,
-                                                        title: const Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(child: Text("Successfully ogged in", style: TextStyle(fontSize: 22, color: Colors.black))),
-                              ],
-                                                        ),
-                                                      ),
-                                                    );
-                                  }
-                                },
-                              ),
-                            ),
+                            Flexible(child: Text("Successfully ogged in", style: TextStyle(fontSize: 22, color: Colors.black))),
                           ],
-                        ),
+                                                    ),
+                                                  ),
+                                                );
+                              }
+                            },
+                          ),
+                        ],
                       ); } else { 
                         // log('loggin id');
                         return const Text('');
