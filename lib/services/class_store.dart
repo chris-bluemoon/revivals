@@ -6,6 +6,7 @@ import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/firestore_service.dart';
+import 'package:unearthed/shared/secure_repo.dart';
 
 class ItemStore extends ChangeNotifier {
 
@@ -135,12 +136,15 @@ class ItemStore extends ChangeNotifier {
   void fetchItemsOnce() async {
     // List favs = _user.favourites;
     if (items.length == 0) {
+      // Temporary setting of email password once
+      MyStore.writeToStore('fkwx gnet sbwl pgjb');
       final snapshot = await FirestoreService.getItemsOnce();
       for (var doc in snapshot.docs) {
         _items.add(doc.data());
       }
 
       notifyListeners();
+      
     }
 
 

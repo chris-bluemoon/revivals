@@ -3,12 +3,11 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/profile/phone_field.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/whatsapp.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 
 class MyAccount extends StatefulWidget {
@@ -38,7 +37,7 @@ class _MyAccountState extends State<MyAccount> {
   @override
   Widget build(BuildContext context) {
 
-    GlobalKey<FormState> _formKey = GlobalKey();
+    GlobalKey<FormState> formKey = GlobalKey();
     FocusNode focusNode = FocusNode();
 
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
@@ -132,7 +131,7 @@ class _MyAccountState extends State<MyAccount> {
             // ),
             Form(
       
-        key: _formKey,
+        key: formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -140,9 +139,9 @@ class _MyAccountState extends State<MyAccount> {
               // enableInteractiveSelection: false,
                             controller: _phoneNumController,
               enabled: editingMode,
-              textAlignVertical: TextAlignVertical(y: 0),
+              textAlignVertical: const TextAlignVertical(y: 0),
               focusNode: focusNode,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                               enabledBorder: UnderlineInputBorder(      
                       borderSide: BorderSide(color: Colors.grey),   
                       ),  
@@ -160,7 +159,7 @@ class _MyAccountState extends State<MyAccount> {
                 log(phone.completeNumber);
               },
               onCountryChanged: (country) {
-                log('Country changed to: ' + country.name);
+                log('Country changed to: ${country.name}');
               },
             ),
             // MaterialButton(
@@ -212,7 +211,7 @@ class _MyAccountState extends State<MyAccount> {
                 if (editingMode) Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                    _formKey.currentState?.validate();
+                    formKey.currentState?.validate();
                     Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                     log('toSave renter: ${toSave.name}');
                     log('Renters current address: ${toSave.address}');

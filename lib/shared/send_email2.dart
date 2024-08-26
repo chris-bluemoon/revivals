@@ -25,7 +25,7 @@ class EmailComposer2 {
 
   MyStore myStore = MyStore();
 
-  
+  // Latest App Password fkwx gnet sbwl pgjb 
 
   String _textSelect(String str) {
     str = str.replaceAll('*|ITEM_TYPE|*!', itemType);
@@ -55,6 +55,7 @@ class EmailComposer2 {
 
   Future<void> sendEmail2() async {
     String? myvar = await MyStore.readFromStore();
+    log('token: $myvar');
     final smtpServer = SmtpServer('smtp.gmail.com',
         username: 'chris@unearthedcollections.com', password: myvar);
 

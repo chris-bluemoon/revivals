@@ -1,4 +1,4 @@
-package com.example.unearthed
+package sg.bluemoon.unearthed
 
 import io.flutter.embedding.android.FlutterActivity
 

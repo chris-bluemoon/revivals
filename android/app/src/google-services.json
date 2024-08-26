@@ -1,0 +1,47 @@
+{
+    "project_info": {
+      "project_number": "532886439020",
+      "project_id": "unearthed2-5343a",
+      "storage_bucket": "unearthed2-5343a.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:532886439020:android:c57833641d5fefcec58449",
+          "android_client_info": {
+            "package_name": "sg.bluemoon.unearthed"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "532886439020-au4f5r1p71ve1cf99fh2ph2mkahvdc57.apps.googleusercontent.com",
+            "client_type": 1,
+            "android_info": {
+              "package_name": "sg.bluemoon.unearthed",
+              "certificate_hash": "ee789ff5fd22c10ced39e0e498c4558265853510"
+            }
+          },
+          {
+            "client_id": "532886439020-oek3eib37q6u3n7b9f2rc3a48a5st30o.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyAUL3f4EWrs0PeFt6EAB7TuuBYqJ9GDymI"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "532886439020-oek3eib37q6u3n7b9f2rc3a48a5st30o.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

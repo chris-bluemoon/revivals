@@ -50,19 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDL4DWtcSrkcQZkNzgP2GapJJDfJNhyeAw',
-    appId: '1:91177261843:android:fd6e5a474a1e6ebb0318e6',
-    messagingSenderId: '91177261843',
-    projectId: 'unearthed-collections-47157',
-    storageBucket: 'unearthed-collections-47157.appspot.com',
+    apiKey: 'AIzaSyAUL3f4EWrs0PeFt6EAB7TuuBYqJ9GDymI',
+    appId: '1:532886439020:android:c57833641d5fefcec58449',
+    messagingSenderId: '532886439020',
+    projectId: 'unearthed2-5343a',
+    storageBucket: 'unearthed2-5343a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBsrwn9m5TCKmZOWBa9gNnGu3-S-eK6gYw',
-    appId: '1:91177261843:ios:4fd5ae7e5ed03c830318e6',
-    messagingSenderId: '91177261843',
-    projectId: 'unearthed-collections-47157',
-    storageBucket: 'unearthed-collections-47157.appspot.com',
+    apiKey: 'AIzaSyCo_erOILlJmrIfAUoipR1VoYSLyxukE8k',
+    appId: '1:532886439020:ios:3198a3e9443f5809c58449',
+    messagingSenderId: '532886439020',
+    projectId: 'unearthed2-5343a',
+    storageBucket: 'unearthed2-5343a.appspot.com',
+    androidClientId: '532886439020-au4f5r1p71ve1cf99fh2ph2mkahvdc57.apps.googleusercontent.com',
+    iosClientId: '532886439020-n067nc99esfalbn0nqi8ivimjf3nmpus.apps.googleusercontent.com',
     iosBundleId: 'com.example.unearthed',
   );
 
