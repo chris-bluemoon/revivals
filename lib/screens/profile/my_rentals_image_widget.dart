@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class MyRentalsImageWidget extends StatelessWidget {
   MyRentalsImageWidget(this.itemId, this.startDate, this.endDate, this.price,
@@ -33,6 +34,7 @@ class MyRentalsImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     DateTime fromDate = DateTime.parse(startDate);
     DateTime toDate = DateTime.parse(endDate);
@@ -94,6 +96,7 @@ class MyRentalsImageWidget extends StatelessWidget {
       greyscale = const ColorFilter.mode(Colors.transparent, BlendMode.multiply);
     }
     return Card(
+      margin: EdgeInsets.only(bottom: width*0.04),
       shape: BeveledRectangleBorder(
     borderRadius: BorderRadius.circular(0.0),),
         color: Colors.white,
@@ -106,35 +109,29 @@ class MyRentalsImageWidget extends StatelessWidget {
                     child: Image.asset(
                         'assets/img/new_items/${setItemImage()}',
                         fit: BoxFit.fitHeight,
-                        height: 100,
-                        width: 80))),
+                        height: width*0.25,
+                        width: width*0.2))),
             const SizedBox(width: 30),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${item.name} from ${item.brand}',
-                    style: const TextStyle(fontSize: 14)),
+                StyledBody('${item.name} from ${item.brand}', weight: FontWeight.normal,),
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    Text('From', style: TextStyle(fontSize: 12, color: Colors.black.withOpacity(0.5))),
+                    const StyledBody('From', color: Colors.grey, weight: FontWeight.normal),
                     const SizedBox(width: 30),
-                    Text(fromDateString, style: TextStyle(
-                            fontSize: 12, color: Colors.black.withOpacity(0.5))),
+                    StyledBody(fromDateString, color: Colors.grey, weight: FontWeight.normal),
                   ],
                 ),
                 Row(
                   children: [
-                    Text('To', style: TextStyle(fontSize: 12, color: Colors.black.withOpacity(0.5))),
+                    const StyledBody('To', color: Colors.grey, weight: FontWeight.normal),
                     const SizedBox(width: 47),
-                    Text(toDateString,
-                        style: TextStyle(
-                            fontSize: 12, color: Colors.black.withOpacity(0.5))),
+                    StyledBody(toDateString, color: Colors.grey, weight: FontWeight.normal),
                   ],
                 ),
-                Text('Price ${price.toString()}${globals.thb}',
-                    style: TextStyle(
-                        fontSize: 12, color: Colors.black.withOpacity(0.5))),
+                StyledBody('Price ${price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
               ],
             )
           ],

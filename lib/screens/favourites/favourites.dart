@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/item_card.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
@@ -36,7 +37,7 @@ class _FavouritesState extends State<Favourites> {
         title: const Row(
             // TODO: Image is not centered in appbar with back arrow
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text('WISH LIST', style: TextStyle(fontSize: 22))]),
+            children: [StyledTitle('WISH LIST')]),
       ),
       body: anyFavourites ? Container(
           color: Colors.white,

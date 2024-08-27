@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/designer_items.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class DesignerListView extends StatelessWidget {
   DesignerListView({super.key});
@@ -26,7 +27,7 @@ class DesignerListView extends StatelessWidget {
                       child: ListTile(
                         dense: true,
                         visualDensity: const VisualDensity(vertical: -2),
-                        title: Text(brands[index], style: const TextStyle(fontSize: 12)),
+                        title: StyledHeading(brands[index]),
                       ),
                     ),
                     const Divider(color: Colors.grey, indent: 20, endIndent: 20,),

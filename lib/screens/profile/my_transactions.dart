@@ -7,15 +7,17 @@ class MyTransactions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          bottom: const TabBar(
+          bottom: TabBar(
             // indicatorColor: Colors.black,
             // labelColor: Colors.black,
-            tabs: [
+            labelStyle: TextStyle(fontSize: width*0.03),
+            tabs: const [
               Tab(text: 'Rentals'),
               Tab(text: 'Purchases'),
             ],

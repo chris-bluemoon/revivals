@@ -2,56 +2,102 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StyledBody extends StatelessWidget {
-  const StyledBody(this.text, {super.key});
+  const StyledBody(this.text, {this.color = Colors.black, this.weight = FontWeight.bold, super.key});
 
   final String text;
+  final Color color;
+  final FontWeight weight;
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Text(text, style: GoogleFonts.openSans(
       textStyle: Theme.of(context).textTheme.bodyMedium,
-      color: Colors.black, 
+      color: color,
+      fontWeight: weight,
+      fontSize: width*0.03,
     ));
   }
 }
 
 class StyledBodyStrikeout extends StatelessWidget {
-  const StyledBodyStrikeout(this.text, {super.key});
+  const StyledBodyStrikeout(this.text, {this.color = Colors.black, this.weight = FontWeight.bold, super.key});
 
   final String text;
+  final Color color;
+  final FontWeight weight;
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Text(text, style: GoogleFonts.openSans(
       textStyle: Theme.of(context).textTheme.bodyMedium,
       decoration: TextDecoration.lineThrough,
-      decorationColor: Colors.black, decorationThickness: 4.0
+      decorationColor: Colors.black, decorationThickness: 4.0,
+      fontSize: width*0.03,
+      color: color,
+      fontWeight: weight,
     ));
   }
 }
 
-class StyledHeading extends StatelessWidget {
-  const StyledHeading(this.text, {super.key});
+class StyledBodyCenter extends StatelessWidget {
+  const StyledBodyCenter(this.text, {this.color = Colors.black, this.weight = FontWeight.bold, super.key});
 
   final String text;
+  final Color color;
+  final FontWeight weight;
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Text(
+      text, 
+      style: GoogleFonts.openSans(
+        textStyle: Theme.of(context).textTheme.bodyMedium,
+        fontSize: width*0.03,
+        color: color,
+        fontWeight: weight,
+      ),
+      textAlign: TextAlign.center
+    );
+  }
+}
+
+class StyledHeading extends StatelessWidget {
+  const StyledHeading(this.text, {this.color = Colors.black, this.weight = FontWeight.bold, super.key});
+
+  final String text;
+  final Color color;
+  final FontWeight weight;
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Text(text, style: GoogleFonts.openSans(
-      textStyle: Theme.of(context).textTheme.headlineMedium
+      textStyle: Theme.of(context).textTheme.headlineMedium,
+      fontSize: width*0.04,
+      color: color,
+      fontWeight: weight,
     ));
   }
 }
 
 class StyledTitle extends StatelessWidget {
-  const StyledTitle(this.text, {super.key});
+  const StyledTitle(this.text, {this.color = Colors.black, this.weight = FontWeight.bold, super.key});
 
   final String text;
+  final Color color;
+  final FontWeight weight;
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Text(text, style: GoogleFonts.openSans(
-      textStyle: Theme.of(context).textTheme.titleMedium
+      textStyle: Theme.of(context).textTheme.titleMedium,
+      fontSize: width*0.05,
+      color: color,
+      fontWeight: weight,
     ));
   }
 }

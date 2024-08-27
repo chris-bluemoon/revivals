@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: _pages[_pageIndex],
 
@@ -56,34 +57,34 @@ class _HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
-        unselectedLabelStyle: const TextStyle(fontSize: 10.0, color: Colors.black),
-        selectedLabelStyle: const TextStyle(fontSize: 10.0, color: Colors.grey),
-        items: const <BottomNavigationBarItem>[
+        unselectedLabelStyle: TextStyle(fontSize: width*0.025, color: Colors.black),
+        selectedLabelStyle: TextStyle(fontSize: width*0.025, color: Colors.grey),
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: Icon(Icons.home_outlined, size: 18.0),
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Icon(Icons.home_outlined, size: width*0.05),
             ),
             label: 'HOME',
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: Icon(Icons.menu_book_outlined, size: 18.0),
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Icon(Icons.menu_book_outlined, size: width*0.05),
             ),
             label: 'BROWSE',
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: Icon(Icons.favorite_border, size: 18.0),
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Icon(Icons.favorite_border, size: width*0.05),
             ),
             label: 'FAVOURITES',
           ),
           BottomNavigationBarItem(
             icon: Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: Icon(Icons.account_circle_outlined, size: 18.0),
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Icon(Icons.account_circle_outlined, size: width*0.05),
             ),
             label: 'PROFILE'
           ),

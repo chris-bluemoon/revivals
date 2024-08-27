@@ -24,8 +24,10 @@ class NewArrivalsHomeWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  StyledHeading('SOPHISCATED'),
-                  StyledHeading('STAPLES'),
+                  // StyledHeading('SOPHISCATED'),
+                  // StyledHeading('STAPLES'),
+                  StyledBody('SOPHISTICATED'),
+                  StyledBody('STAPLES'),
                   SizedBox(height: 20),
                   StyledBody('Rent from our wide'),
                   StyledBody('selection styles'),

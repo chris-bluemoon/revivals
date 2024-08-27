@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/category_items.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 
 class CategoryListView extends StatelessWidget {
@@ -34,7 +35,7 @@ class CategoryListView extends StatelessWidget {
                const Expanded(child: SizedBox(width: 0),),
                const Padding(
                  padding: EdgeInsets.fromLTRB(0,0,50,0),
-                 child: Text('DRESSES', style: TextStyle(fontSize: 16)),
+                 child: StyledHeading('DRESSES'),
                ),
              ],
            )
@@ -63,7 +64,7 @@ class CategoryListView extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: const Text('BAGS', style: TextStyle(fontSize: 16)),
+          child: const StyledHeading('BAGS')
         ),
                const Expanded(child: SizedBox(width: 0),),
         // const SizedBox(width: 0),
@@ -102,7 +103,7 @@ class CategoryListView extends StatelessWidget {
                const Expanded(child: SizedBox(width: 0),),
                Padding(
                  padding: EdgeInsets.only(right: leftRightPadding),
-                 child: const Text('JACKETS', style: TextStyle(fontSize: 16)),
+                 child: const StyledHeading('JACKETS')
                ),
              ],
            )
@@ -131,7 +132,7 @@ class CategoryListView extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: const Text('PANTSUITS', style: TextStyle(fontSize: 16)),
+          child: const StyledHeading('PANTSUITS'),
         ),
         const Expanded(child: SizedBox()),
         Padding(

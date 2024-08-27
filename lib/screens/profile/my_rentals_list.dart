@@ -56,11 +56,11 @@ class _MyRentalsListState extends State<MyRentalsList> {
   }
   @override
   Widget build(BuildContext context) {
-
+    double width = MediaQuery.of(context).size.width;
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
     return 
       ListView.builder(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(width*0.01),
         itemCount: myRentalsList.length,
         itemBuilder: (BuildContext context, int index) {
           return MyRentalsImageWidget(myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price);

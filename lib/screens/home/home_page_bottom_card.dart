@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class HomePageBottomCard extends StatelessWidget {
   const HomePageBottomCard(this.text, {super.key});
@@ -7,20 +8,20 @@ class HomePageBottomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return SizedBox(
       // height: 120,
-      width: 150,
+      width: width*0.3,
+      // height: height*0.05,
       child: Card(
-        color: Colors.blue,
+        color: Colors.grey[300],
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Center(child: Text(
-            text, 
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16))),
-          // child: Center(child: StyledHeading(text)),
+          child: Center(child: 
+            StyledBodyCenter(text),
         ),
             ),
+      )
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class MyPurchasesImageWidget extends StatelessWidget {
   MyPurchasesImageWidget(this.itemId, this.startDate, this.endDate, this.price,
@@ -33,21 +34,69 @@ class MyPurchasesImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     DateTime fromDate = DateTime.parse(startDate);
     DateTime toDate = DateTime.parse(endDate);
     String fromDateString = DateFormat('d MMMM, y').format(fromDate);
+    String toDateString = DateFormat('d MMMM, y').format(toDate);
     // yMMMMd('en_US')
     for (Item d in allItems) {
       if (d.id == itemId) {
-        log('Found rented item, ${d.id} matches $itemId');
+        log('Found purchased item, ${d.id} matches $itemId');
         item = d;
       }
     } 
+    ColorFilter greyscale = const ColorFilter.matrix(<double>[
+      0.2126,
+      0.7152,
+      0.0722,
+      0,
+      0,
+      0.2126,
+      0.7152,
+      0.0722,
+      0,
+      0,
+      0.2126,
+      0.7152,
+      0.0722,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+    ]);
     if (toDate.isBefore(DateTime.now().add(const Duration(days: 10)))) {
+      greyscale = const ColorFilter.matrix(<double>[
+        0.2126,
+        0.7152,
+        0.0722,
+        0,
+        0,
+        0.2126,
+        0.7152,
+        0.0722,
+        0,
+        0,
+        0.2126,
+        0.7152,
+        0.0722,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+      ]);
     } else {
+      greyscale = const ColorFilter.mode(Colors.transparent, BlendMode.multiply);
     }
     return Card(
+      margin: EdgeInsets.only(bottom: width*0.04),
       shape: BeveledRectangleBorder(
     borderRadius: BorderRadius.circular(0.0),),
         color: Colors.white,
@@ -55,29 +104,34 @@ class MyPurchasesImageWidget extends StatelessWidget {
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
+                child: ColorFiltered(
+                    colorFilter: greyscale,
+                    child: Image.asset(
                         'assets/img/new_items/${setItemImage()}',
                         fit: BoxFit.fitHeight,
-                        height: 100,
-                        width: 80)),
+                        height: width*0.25,
+                        width: width*0.2))),
             const SizedBox(width: 30),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${item.name} from ${item.brand}',
-                    style: const TextStyle(fontSize: 14)),
+                StyledBody('${item.name} from ${item.brand}', weight: FontWeight.normal,),
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    Text('Purchased', style: TextStyle(fontSize: 12, color: Colors.black.withOpacity(0.5))),
+                    const StyledBody('From', color: Colors.grey, weight: FontWeight.normal),
                     const SizedBox(width: 30),
-                    Text(fromDateString, style: TextStyle(
-                            fontSize: 12, color: Colors.black.withOpacity(0.5))),
+                    StyledBody(fromDateString, color: Colors.grey, weight: FontWeight.normal),
                   ],
                 ),
-                Text('Price ${price.toString()}${globals.thb}',
-                    style: TextStyle(
-                        fontSize: 12, color: Colors.black.withOpacity(0.5))),
+                Row(
+                  children: [
+                    const StyledBody('To', color: Colors.grey, weight: FontWeight.normal),
+                    const SizedBox(width: 47),
+                    StyledBody(toDateString, color: Colors.grey, weight: FontWeight.normal),
+                  ],
+                ),
+                StyledBody('Price ${price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
               ],
             )
           ],

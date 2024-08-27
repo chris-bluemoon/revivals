@@ -9,6 +9,7 @@ import 'package:unearthed/screens/profile/my_account.dart';
 import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/shared/whatsapp.dart';
 
 class ProfileLanding extends StatefulWidget {
@@ -57,6 +58,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20.0,20.0,0,0),
       child: Consumer<ItemStore>(
@@ -65,65 +67,68 @@ class _ProfileLandingState extends State<ProfileLanding> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('PERSONAL (${Provider.of<ItemStore>(context, listen: false).renter.name})', style: const TextStyle(fontSize: 16)),
+            StyledHeading('PERSONAL (${Provider.of<ItemStore>(context, listen: false).renter.name})', weight: FontWeight.bold),
             // Text('PERSONAL (${user!.displayName!})', style: const TextStyle(fontSize: 16)),
-            const SizedBox(height: 10),
+            SizedBox(height: width*0.04),
             Row(
               children: [
-                const SizedBox(width: 10),
+                SizedBox(width: width*0.01),
                 IconButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyAccount(widget.user))));
                   },
-                  icon: const Icon(Icons.account_circle)),
-                const Text('MY ACCOUNT'),
+                  icon: const Icon(Icons.account_circle),
+                    iconSize: width*0.05,),
+                const StyledBody('MY ACCOUNT'),
               ],
             ),
-            Divider(indent: 50, color: Colors.grey[200],),
+            Divider(height: width*0.05, indent: 50, color: Colors.grey[200],),
             Row(
               children: [
-                const SizedBox(width: 10),
+                SizedBox(width: width*0.01),
                 IconButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const MyTransactions())));
                   },
-                  icon: const Icon(Icons.woman_2_outlined)),
-                const Text('MY BOOKINGS'),
+                  icon: const Icon(Icons.woman_2_outlined),
+                    iconSize: width*0.05,),
+                const StyledBody('MY BOOKINGS'),
               ],
             ),
-            Divider(indent: 50, color: Colors.grey[200],),
+            Divider(height: width*0.05, indent: 50, color: Colors.grey[200],),
             // Row(
             //   children: [
-            //     SizedBox(width: 10),
+            //     SizedBox(width: width*0.01),
             //     IconButton(
             //       onPressed: () {},
             //       icon: Icon(Icons.description)),
             //     Text('INVOICE HISTORY'),
             //   ],
             // ),
-            // Divider(indent: 50, color: Colors.grey[200],),
+            // Divider(height: width*0.05, indent: 50, color: Colors.grey[200],),
             Row(
               children: [
-                const SizedBox(width: 10),
+                SizedBox(width: width*0.01),
                 IconButton(
                   onPressed: () {
                     shareApp();
                   },
-                  icon: const Icon(Icons.group_add)),
-                const Text('REFER A FRIEND'),
+                  icon: const Icon(Icons.group_add),
+                    iconSize: width*0.05,),
+                const StyledBody('REFER A FRIEND'),
               ],
             ),
-            Divider(indent: 50, color: Colors.grey[200],),
+            Divider(height: width*0.05, indent: 50, color: Colors.grey[200],),
             // Row(
             //   children: [
-            //     SizedBox(width: 10),
+            //     SizedBox(width: width*0.01),
             //     IconButton(
             //       onPressed: () {},
             //       icon: Icon(Icons.account_circle)),
             //     Text('NOTIFICATIONS'),
             //   ],
             // ),
-            // Divider(indent: 50, color: Colors.grey[200],),
+            // Divider(height: width*0.05, indent: 50, color: Colors.grey[200],),
             // Consumer<ItemStore>(
             //         // child not required
             //         builder: (context, value, child) {           
@@ -139,45 +144,49 @@ class _ProfileLandingState extends State<ProfileLanding> {
         
              Row(
               children: [
-                const SizedBox(width: 10),
+                SizedBox(width: width*0.01),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.settings)),
-                const Text('SETTINGS'),
+                  icon: const Icon(Icons.settings),
+                    iconSize: width*0.05,),
+                const StyledBody('SETTINGS'),
               ],
             ),
         
-            const SizedBox(height: 20),
-            const Text('SUPPORT', style: TextStyle(fontSize: 16),),
-            const SizedBox(height: 10),
+            SizedBox(height: width*0.06),
+            const StyledHeading('SUPPORT', weight: FontWeight.bold),
+            SizedBox(height: width*0.04),
             Row(
               children: [
-                const SizedBox(width: 10),
+                SizedBox(width: width*0.01),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.account_circle)),
-                const Text('FAQ'),
+                  icon: const Icon(Icons.account_circle),
+                    iconSize: width*0.05,),
+                const StyledBody('FAQ'),
               ],
             ),
-            Divider(indent: 50, color: Colors.grey[200],),
+            Divider(height: width*0.05, indent: 50, color: Colors.grey[200],),
              Row(
               children: [
-                const SizedBox(width: 10),
+                SizedBox(width: width*0.01),
                 IconButton(
                   onPressed: () {
                     log('Pressed Chat With Us');
                     chatWithUsMessage(context);},
-                  icon: const Icon(Icons.chat_bubble_rounded)),
-                const Text('CHAT WITH US'),
+                  icon: const Icon(Icons.chat_bubble_rounded),
+                    iconSize: width*0.05,
+                  ),
+                const StyledBody('CHAT WITH US'),
               ],
             ),
-            Divider(
+            Divider(height: width*0.05, 
               indent: 50,
               color: Colors.grey[200],
             ),
             Row(
               children: [
-                const SizedBox(width: 10),
+                SizedBox(width: width*0.01),
                 IconButton(
                     onPressed: () => showDialog(
                           barrierDismissible: false,
@@ -203,26 +212,28 @@ class _ProfileLandingState extends State<ProfileLanding> {
                                 child: const Text('OK', style: TextStyle(color: Colors.black)),
                               ),],
                             backgroundColor: Colors.white,
-                            title: const Text("Successfully logged out", style: TextStyle(fontSize: 22, color: Colors.black)),
+                            title: const Center(child: StyledHeading("Successfully logged out")),
                           ),
                         ),
                   
-                  icon: const Icon(Icons.exit_to_app)),
-                const Text('SIGN OUT'),
+                  icon: const Icon(Icons.exit_to_app),
+                  iconSize: width*0.05,),
+                const StyledBody('SIGN OUT'),
               ],
             ),
           ],
        );} else {
         return Row(
               children: [
-                const SizedBox(width: 10),
+                SizedBox(width: width*0.01),
                 IconButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                   },
                   icon: const Icon(Icons.login_outlined),
+                  iconSize: width*0.05,
                 ),
-                const Text('SIGN IN'),
+                const StyledBody('SIGN IN'),
               ],
             );
        }

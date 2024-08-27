@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
-  static Color primaryColor = Color.fromARGB(255, 255, 255, 255);
+  static Color primaryColor = const Color.fromARGB(255, 255, 255, 255);
   static Color primaryAccent = const Color.fromRGBO(120, 14, 14, 1);
   static Color secondaryColor = const Color.fromARGB(255, 255, 255, 255);
   static Color secondaryAccent = const Color.fromARGB(255, 255, 255, 255);
@@ -37,7 +35,7 @@ ThemeData primaryTheme = ThemeData(
     bodyMedium: TextStyle(
       color: AppColors.textColor,
       fontSize: 12,
-      fontWeight: FontWeight.bold, 
+      fontWeight: FontWeight.normal, 
       letterSpacing: 1,
     ),
     headlineMedium: TextStyle(
@@ -50,7 +48,7 @@ ThemeData primaryTheme = ThemeData(
       color: AppColors.titleColor, 
       fontSize: 16, 
       fontWeight: FontWeight.bold,
-      letterSpacing: 2,
+      letterSpacing: 0.5,
     ),
     titleLarge: TextStyle(
       color: AppColors.titleColor, 

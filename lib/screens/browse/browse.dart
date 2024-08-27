@@ -3,21 +3,23 @@ import 'package:unearthed/screens/browse/category_list_view.dart';
 import 'package:unearthed/screens/browse/designer_list_view.dart';
 import 'package:unearthed/screens/browse/occasion_grid_view.dart';
 import 'package:unearthed/screens/browse/style_list_view.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class Browse extends StatelessWidget {
   const Browse({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return DefaultTabController(
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          bottom: const TabBar(
+          bottom: TabBar(
             // indicatorColor: Colors.black,
             // labelColor: Colors.black,
-            labelStyle: TextStyle(fontSize: 12),
-            tabs: [
+            labelStyle: TextStyle(fontSize: width*0.03),
+            tabs: const [
               FittedBox(fit: BoxFit.contain, child: Tab(text: 'Occasion',)),
               Tab(text: 'Category'),
               Tab(text: 'Style'),
@@ -27,7 +29,7 @@ class Browse extends StatelessWidget {
           title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('BROWSE', style: TextStyle(fontSize: 22))
+             StyledTitle('BROWSE'),
               ]),
         ),
         body:  TabBarView(

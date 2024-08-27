@@ -7,6 +7,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/shared/whatsapp.dart';
 
 
@@ -33,13 +34,14 @@ class _MyAccountState extends State<MyAccount> {
     _phoneNumController = TextEditingController(text: 'Dummy phoneNum value');
     // _aditemController = new TextEditingController(text: 'Initial value');
   }
+
+
   
   @override
   Widget build(BuildContext context) {
 
     GlobalKey<FormState> formKey = GlobalKey();
     FocusNode focusNode = FocusNode();
-
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
     String address = Provider.of<ItemStore>(context, listen: false).renter.address;
     String phoneNum = Provider.of<ItemStore>(context, listen: false).renter.phoneNum;
@@ -76,7 +78,7 @@ class _MyAccountState extends State<MyAccount> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('NAME', style: TextStyle(fontSize: 12, color: Colors.grey[700]),),
+            StyledBody('NAME', color: (Colors.grey[600])!, weight: FontWeight.bold),
             TextFormField(
               cursorColor: Colors.white,
               initialValue: widget.user!.displayName,
@@ -86,7 +88,7 @@ class _MyAccountState extends State<MyAccount> {
               // value: Text('NAME: ${widget.user!.displayName!}', style: const TextStyle(fontSize: 14)),
             // ),
             const SizedBox(height: 30),
-            Text('EMAIL', style: TextStyle(fontSize: 12, color: Colors.grey[700]),),
+            StyledBody('EMAIL', color: (Colors.grey[600])!, weight: FontWeight.bold,),
             TextFormField(
               // initialValue: 'johndoe@gmail.com',
               // initialValue: widget.user!.email,
@@ -95,7 +97,8 @@ class _MyAccountState extends State<MyAccount> {
             ),
             const SizedBox(height: 30),
 
-            const Text('ADDRESS', style: TextStyle(fontSize: 12, color: Colors.grey),),
+            editingMode ? const StyledBody('ADDRESS') 
+              : StyledBody('ADDRESS', color:(Colors.grey[600])!, weight: FontWeight.bold,),
                         TextFormField(
               enableInteractiveSelection: false,
               decoration: const InputDecoration(        
@@ -113,7 +116,10 @@ class _MyAccountState extends State<MyAccount> {
             ),
             const SizedBox(height: 30),
 
-            const Text('PHONE', style: TextStyle(fontSize: 12, color: Colors.grey),),
+            editingMode ? const StyledBody('PHONE')
+            // editingMode ? const Text('PHONE', style: TextStyle(fontSize: 12, color: Colors.black),) 
+              :  StyledBody('PHONE', color: (Colors.grey[600])!, weight: FontWeight.bold,),
+
             // TextFormField(
             //   enableInteractiveSelection: false,
             //   decoration: const InputDecoration(        
@@ -131,13 +137,18 @@ class _MyAccountState extends State<MyAccount> {
             // ),
             Form(
       
-        key: formKey,
+        // key: formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             IntlPhoneField(
+              initialCountryCode: 'TH',
+              // style: const TextStyle(fontSize: 20),
+              dropdownTextStyle: editingMode ? const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.normal) 
+                : const TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.normal),
               // enableInteractiveSelection: false,
-                            controller: _phoneNumController,
+              showDropdownIcon: editingMode,
+              controller: _phoneNumController,
               enabled: editingMode,
               textAlignVertical: const TextAlignVertical(y: 0),
               focusNode: focusNode,
@@ -155,6 +166,7 @@ class _MyAccountState extends State<MyAccount> {
                 // ),
               ),
               languageCode: "en",
+              // validator: validatePhoneNumber(phone.completeNumber),
               onChanged: (phone) {
                 log(phone.completeNumber);
               },
@@ -204,7 +216,7 @@ class _MyAccountState extends State<MyAccount> {
                       ),
                       side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
-                    child: const Text('EDIT', style: TextStyle(color: Colors.black)),
+                    child: const StyledBody('EDIT', weight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(width: 5),
@@ -248,6 +260,13 @@ class _MyAccountState extends State<MyAccount> {
   }
 }
 
+  // String? validatePhoneNumber(String value) {
+  //   if (value.length != 10) {
+  //     return 'Mobile Number must be of 10 digit';
+  //   } else {
+  //     return null;
+  //   }
+  // }
   // Send a Whatsapp
 void chatWithUsMessage(BuildContext context) async {
       log('Tapped whatsapp send');

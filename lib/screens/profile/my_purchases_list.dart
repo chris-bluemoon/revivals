@@ -1,10 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
-import 'dart:developer';
-
 import 'package:unearthed/screens/profile/my_purchases_image_widget.dart';
 import 'package:unearthed/services/class_store.dart';
 
@@ -40,29 +40,26 @@ class _MyPurchasesListState extends State<MyPurchasesList> {
       if (dr.renterId == userEmail) {
         if (dr.transactionType == 'purchase') {
           myPurchasesList.add(dr);
-          log('Purchased: ${dr.itemId}');
         }
         // for (Item d in allItems) {
         //   if (d.id == dr.itemId) {
-        //     if (dr.transactionType == 'purchase') {
-        //       myItems.add(d);
-        //     }
+        //     myItems.add(d);
         //   }
         // }
       }
     }
     if (myPurchasesList.isEmpty) {
-      log('You have no rentals!');
+      log('You have no purchases!');
     }
     myPurchasesList.sort((a, b) => a.startDate.compareTo(b.startDate));
   }
   @override
   Widget build(BuildContext context) {
-
+    double width = MediaQuery.of(context).size.width;
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
     return 
       ListView.builder(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(width*0.01),
         itemCount: myPurchasesList.length,
         itemBuilder: (BuildContext context, int index) {
           return MyPurchasesImageWidget(myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price);

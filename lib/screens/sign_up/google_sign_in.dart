@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
@@ -144,14 +145,15 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                               Navigator.of(context).popUntil((route) => route.isFirst);
                               // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
                             },
-                            child: const Text('OK', style: TextStyle(color: Colors.black)),
+                            child: const StyledHeading('OK'),
                           ),],
                                                     backgroundColor: Colors.white,
                                                     title: const Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Flexible(child: Text("Successfully ogged in", style: TextStyle(fontSize: 22, color: Colors.black))),
+                            // Flexible(child: Text("Successfully logged in", style: TextStyle(fontSize: 22, color: Colors.black))),
+                            Flexible(child: StyledTitle("Successfully logged in", weight: FontWeight.normal)),
                           ],
                                                     ),
                                                   ),

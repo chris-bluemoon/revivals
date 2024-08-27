@@ -130,7 +130,7 @@ class _ToRentState extends State<ToRent> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, bottom: 10),
-              child: Text(widget.item.longDescription),
+              child: StyledBody(widget.item.longDescription, weight: FontWeight.normal),
             ),
             // if (widget.item.rentPrice > 0) Padding(
               // padding: const EdgeInsets.only(left: 20, bottom: 10),
@@ -140,6 +140,7 @@ class _ToRentState extends State<ToRent> {
         ),
       ),
       bottomNavigationBar: Container(
+        // height: 300,
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
@@ -167,7 +168,7 @@ class _ToRentState extends State<ToRent> {
                       ),
                       side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
-                    child: const Text('BUY PRELOVED', style: TextStyle(color: Colors.black)),
+                    child: const StyledHeading('BUY PRELOVED'),
                 )) : const Expanded(child: SizedBox()),
                 const SizedBox(width: 5),
                 (widget.item.rentPrice > 0) ? Expanded(
@@ -182,13 +183,14 @@ class _ToRentState extends State<ToRent> {
                         }
                     },
                       style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.all(10),
                         backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1.0),
                       ),
                       side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
-                    child: const Text('RENT THIS', style: TextStyle(color: Colors.white)),
+                    child: const StyledHeading('RENT THIS', color: Colors.white),
                   ),
                 ) : const Expanded(child: SizedBox()),
               ],
@@ -216,11 +218,11 @@ showAlertDialog(BuildContext context) {
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen()))); 
 
     },  
-    child: const Center(child: Text("OK")),  
+    child: const Center(child: StyledHeading("OK", color: Colors.white)),  
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: const Center(child: Text("Not Logged In")),
+    title: const Center(child: StyledHeading("NOT LOGGED IN")),
     content: const SizedBox(
       height: 60,
       child: Column(
@@ -228,13 +230,13 @@ showAlertDialog(BuildContext context) {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Please log in", style: TextStyle(fontSize: 14))
+              StyledHeading("Please log in"),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("or register to continue!", style: TextStyle(fontSize: 14))
+              StyledHeading("or register to continue!"),
             ],
           ),
         ],
@@ -253,5 +255,9 @@ showAlertDialog(BuildContext context) {
       return alert;  
     },  
   );   
+}
+
+class StyledText {
+  const StyledText(String s);
 }
 

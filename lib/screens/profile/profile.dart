@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:unearthed/screens/profile/profile_landing.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class _Profile extends State<Profile> {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('PROFILE', style: TextStyle(fontSize: 22))
+              StyledTitle('PROFILE'),
               ]),
       ),
         body: ValueListenableBuilder(

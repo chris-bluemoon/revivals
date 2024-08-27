@@ -149,7 +149,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
           ListTile(
               dense: true,
               visualDensity: const VisualDensity(vertical: -3),
-              title: const Text('1 Day', style: TextStyle(fontSize: 14)),
+              title: const StyledHeading('1 Day'),
               trailing: Radio<int>(
                   value: 0,
                   groupValue: selectedOption,
@@ -202,7 +202,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
           ListTile(
             dense: true,
             visualDensity: const VisualDensity(vertical: -3),
-            title: const Text('3 Days', style: TextStyle(fontSize: 14)),
+            title: const StyledHeading('3 Days'),
             trailing: Radio<int>(
               value: 1,
               groupValue: selectedOption,
@@ -250,7 +250,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
           ListTile(
             dense: true,
             visualDensity: const VisualDensity(vertical: -3),
-            title: const Text('5 Days', style: TextStyle(fontSize: 14)),
+            title: const StyledHeading('5 Days'),
             trailing: Radio<int>(
               value: 2,
               groupValue: selectedOption,
