@@ -68,6 +68,7 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
 
   @override
   Widget build(BuildContext context) {
+        double width = MediaQuery.of(context).size.width;
     return Card(
       color: Colors.white,
       child: Padding(
@@ -86,7 +87,7 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
                 StyledHeading(widget.item.name),
                 const Expanded(child: SizedBox()),
                 isFav ?  IconButton(
-                  icon: const Icon(Icons.favorite), color: Colors.red,
+                  icon: Icon(Icons.favorite, size: width*0.06), color: Colors.red,
                   onPressed: () {
                     log('Pressed Fav');
                       // isFav = false;
@@ -100,7 +101,7 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
 
                   }) : 
                   IconButton(
-                    icon: const Icon(Icons.favorite_border_outlined),
+                    icon: Icon(Icons.favorite_border_outlined, size: width*0.06),
                     onPressed: () {
                       log('Pressed empty Fav on item ID: ${widget.item.id}');
                       // isFav = true;

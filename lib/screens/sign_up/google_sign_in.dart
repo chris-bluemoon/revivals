@@ -50,6 +50,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       name: name,
       size: 0,
       address: '',
+      countryCode: '+66',
       phoneNum: '',
       favourites: [''],
     ));
@@ -61,6 +62,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       name: name,
       size: 0,
       address: '',
+      countryCode: '+66',
       phoneNum: '',
       favourites: [''],
     ));
@@ -69,11 +71,12 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+        double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
           title: const Text('', style: TextStyle(fontSize: 22, color: Colors.black)),
             leading: IconButton(
-    icon: const Icon(Icons.arrow_back, color: Colors.black),
+    icon: Icon(Icons.arrow_back, color: Colors.black, size: width*0.06),
     onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst)
     // onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HomePage())))
   )),
@@ -153,7 +156,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             // Flexible(child: Text("Successfully logged in", style: TextStyle(fontSize: 22, color: Colors.black))),
-                            Flexible(child: StyledTitle("Successfully logged in", weight: FontWeight.normal)),
+                            Flexible(child: StyledHeading("Successfully logged in", weight: FontWeight.normal)),
                           ],
                                                     ),
                                                   ),

@@ -9,6 +9,9 @@ import 'package:unearthed/screens/home/home.dart';
 import 'package:unearthed/screens/profile/profile.dart';
 import 'package:unearthed/services/class_store.dart';
 
+double? screenWidth;
+double? screenHeight;
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 

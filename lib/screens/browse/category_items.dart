@@ -7,6 +7,7 @@ import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/item_card.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 
@@ -37,6 +38,7 @@ class _CategoryItemsState extends State<CategoryItems> {
 
   @override
   Widget build(BuildContext context) {
+        double width = MediaQuery.of(context).size.width;
     // getCurrentUser();
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     log('Size of allItems: ${allItems.length}');
@@ -51,7 +53,7 @@ class _CategoryItemsState extends State<CategoryItems> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(Pluralize().plural(widget.type).toUpperCase(), style: TextStyle(fontSize: 18)),
+            StyledTitle(Pluralize().plural(widget.type).toUpperCase()),
             // SizedBox(
             //   child: Image.asset(
             //     'assets/logos/eliya.png',
@@ -66,7 +68,7 @@ class _CategoryItemsState extends State<CategoryItems> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon:  Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -75,7 +77,7 @@ class _CategoryItemsState extends State<CategoryItems> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
       ),
 

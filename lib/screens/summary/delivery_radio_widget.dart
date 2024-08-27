@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/globals.dart' as globals;
+import 'package:unearthed/shared/styled_text.dart';
 
 class DeliveryRadioWidget extends StatefulWidget {
   const DeliveryRadioWidget(this.updatePrice, {super.key});
@@ -23,12 +24,11 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text('DELIVERY OPTION', style: TextStyle(fontSize: 14)),
+            const StyledHeading('DELIVERY OPTION'),
             ListTile(
               dense: true,
               visualDensity: const VisualDensity(vertical: -3),
-              title: Text('We will deliver at 100${globals.thb}',
-                  style: const TextStyle(fontSize: 14)),
+              title: StyledBody('We will deliver at 100${globals.thb}', weight: FontWeight.normal),
               trailing: Radio<int>(
                 value: 0,
                 groupValue: selectedOption,
@@ -45,8 +45,7 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
             ListTile(
               dense: true,
               visualDensity: const VisualDensity(vertical: -3),
-              title: const Text('I will ararnge a collection',
-                  style: TextStyle(fontSize: 14)),
+              title: const StyledBody('I will ararnge a collection', weight: FontWeight.normal),
               trailing: Radio<int>(
                 value: 1,
                 groupValue: selectedOption,

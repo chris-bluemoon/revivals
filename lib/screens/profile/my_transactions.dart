@@ -28,7 +28,7 @@ class MyTransactions extends StatelessWidget {
               Text('BOOKINGS', style: TextStyle(fontSize: 22))
               ]),
                       leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -37,7 +37,7 @@ class MyTransactions extends StatelessWidget {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
         ),
         body:  const TabBarView(

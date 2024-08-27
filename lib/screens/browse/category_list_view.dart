@@ -14,7 +14,7 @@ class CategoryListView extends StatelessWidget {
       children: <Widget>[
        GestureDetector(
          child: Container(
-           margin: const EdgeInsets.all(15.0),
+           margin: EdgeInsets.all(screenWidth*0.02),
            padding: const EdgeInsets.all(0),
            decoration: BoxDecoration(
              border: Border.all(color: Colors.white),
@@ -30,12 +30,12 @@ class CategoryListView extends StatelessWidget {
              children: [
                Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: Image.asset('assets/img/new_items/transparent_dress.webp', height: 100),
+          child: Image.asset('assets/img/new_items/transparent_dress.webp', height: screenWidth*0.2),
                ),
                const Expanded(child: SizedBox(width: 0),),
                const Padding(
                  padding: EdgeInsets.fromLTRB(0,0,50,0),
-                 child: StyledHeading('DRESSES'),
+                 child: StyledHeading('DRESSES', weight: FontWeight.normal),
                ),
              ],
            )
@@ -46,7 +46,7 @@ class CategoryListView extends StatelessWidget {
        ),
        GestureDetector(
   child: Container(
-    margin: const EdgeInsets.all(15.0),
+    margin: EdgeInsets.all(screenWidth*0.02),
     padding: const EdgeInsets.all(0),
     decoration: BoxDecoration(
       border: Border.all(color: Colors.white),
@@ -64,13 +64,13 @@ class CategoryListView extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: const StyledHeading('BAGS')
+          child: const StyledHeading('BAGS', weight: FontWeight.normal)
         ),
                const Expanded(child: SizedBox(width: 0),),
         // const SizedBox(width: 0),
         Padding(
           padding: EdgeInsets.only(right: leftRightPadding),
-          child: Image.asset('assets/img/new_items/bag_transparent.png', height: 100),
+          child: Image.asset('assets/img/new_items/bag_transparent.png', height: screenWidth*0.2),
         ),
       ],
     )
@@ -82,7 +82,7 @@ class CategoryListView extends StatelessWidget {
 ),
               GestureDetector(
          child: Container(
-           margin: const EdgeInsets.all(15.0),
+           margin: EdgeInsets.all(screenWidth*0.02),
            padding: const EdgeInsets.all(0),
            decoration: BoxDecoration(
              border: Border.all(color: Colors.white),
@@ -98,12 +98,12 @@ class CategoryListView extends StatelessWidget {
              children: [
                Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: Image.asset('assets/img/new_items/jacket_transparent2.webp', height: 100),
+          child: Image.asset('assets/img/new_items/jacket_transparent2.webp', height: screenWidth*0.2),
                ),
                const Expanded(child: SizedBox(width: 0),),
                Padding(
                  padding: EdgeInsets.only(right: leftRightPadding),
-                 child: const StyledHeading('JACKETS')
+                 child: const StyledHeading('JACKETS', weight: FontWeight.normal)
                ),
              ],
            )
@@ -114,7 +114,7 @@ class CategoryListView extends StatelessWidget {
        ),
               GestureDetector(
   child: Container(
-    margin: const EdgeInsets.all(15.0),
+    margin: EdgeInsets.all(screenWidth*0.02),
     padding: const EdgeInsets.all(0),
     decoration: BoxDecoration(
       border: Border.all(color: Colors.white),
@@ -132,12 +132,12 @@ class CategoryListView extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: const StyledHeading('PANTSUITS'),
+          child: const StyledHeading('PANTSUITS', weight: FontWeight.normal),
         ),
         const Expanded(child: SizedBox()),
         Padding(
           padding: EdgeInsets.only(right: leftRightPadding),
-          child: Image.asset('assets/img/new_items/pantsuit_transparent.png', height: 100),
+          child: Image.asset('assets/img/new_items/pantsuit_transparent.png', height: screenWidth*0.2),
         ),
       ],
     )

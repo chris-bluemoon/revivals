@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/style_items.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class StyleListView extends StatelessWidget {
   const StyleListView({super.key});
@@ -34,12 +35,12 @@ class StyleListView extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: const Text('CLASSIC', style: TextStyle(fontSize: 16)),
+          child: const StyledHeading('CLASSIC', weight: FontWeight.normal),
         ),
         const Expanded(child: SizedBox()),
         Padding(
           padding: EdgeInsets.only(right: leftRightPadding),
-          child: Image.asset('assets/img/new_items/classic_transparent.png', height: 100),
+          child: Image.asset('assets/img/new_items/classic_transparent.png', height: screenWidth*0.2),
         ),
       ],
     )
@@ -67,12 +68,12 @@ class StyleListView extends StatelessWidget {
              children: [
                Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: Image.asset('assets/img/new_items/vintage_transparent.png', height: 100),
+          child: Image.asset('assets/img/new_items/vintage_transparent.png', height: screenWidth*0.2),
                ),
                const Expanded(child: SizedBox()),
                Padding(
                  padding: EdgeInsets.only(right: leftRightPadding),
-                 child: const Text('VINTAGE', style: TextStyle(fontSize: 16)),
+                 child: const StyledHeading('VINTAGE', weight: FontWeight.normal),
                ),
              ],
            )
@@ -101,12 +102,12 @@ class StyleListView extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: const Text('ARTSY', style: TextStyle(fontSize: 16)),
+          child: const StyledHeading('ARTSY', weight: FontWeight.normal),
         ),
         const Expanded(child: SizedBox()),
         Padding(
           padding: EdgeInsets.only(right: leftRightPadding),
-          child: Image.asset('assets/img/new_items/artsy_transparent.png', height: 100),
+          child: Image.asset('assets/img/new_items/artsy_transparent.png', height: screenWidth*0.2),
         ),
       ],
     )
@@ -134,12 +135,12 @@ class StyleListView extends StatelessWidget {
              children: [
                Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: Image.asset('assets/img/new_items/resort_transparent.png', height: 100),
+          child: Image.asset('assets/img/new_items/resort_transparent.png', height: screenWidth*0.2),
                ),
                const Expanded(child: SizedBox()),
                Padding(
                  padding: EdgeInsets.only(right: leftRightPadding),
-                 child: const Text('RESORT', style: TextStyle(fontSize: 16)),
+                 child: const StyledHeading('RESORT', weight: FontWeight.normal),
                ),
              ],
            )

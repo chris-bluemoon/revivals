@@ -27,7 +27,7 @@ class DesignerListView extends StatelessWidget {
                       child: ListTile(
                         dense: true,
                         visualDensity: const VisualDensity(vertical: -2),
-                        title: StyledHeading(brands[index]),
+                        title: StyledHeading(brands[index], weight: FontWeight.normal),
                       ),
                     ),
                     const Divider(color: Colors.grey, indent: 20, endIndent: 20,),

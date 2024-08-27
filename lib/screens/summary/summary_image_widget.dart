@@ -1,5 +1,9 @@
+import 'dart:developer';
+
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class SummaryImageWidget extends StatelessWidget {
   SummaryImageWidget(this.item, {super.key});
@@ -21,6 +25,8 @@ class SummaryImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width; 
+    log('Screen width: $width.toString()');
     return Card(
       color: Colors.white,
       child: Row(
@@ -28,14 +34,15 @@ class SummaryImageWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: 
-              Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fitHeight, height: 100, width: 80)),
+              Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fitHeight, height: 0.25*width, width: 0.2*width)),
+              // Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fitHeight, height: width*0.125, width: width*0.1)),
           const SizedBox(width: 30),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${item.name} from ${item.brand}', style: const TextStyle(fontSize: 18)),
+              StyledHeading('${item.name} from ${item.brand}'),
               const SizedBox(height: 5),
-              Text('${item.type}, size ${item.size.toString()}', style: TextStyle(fontSize: 14, color: Colors.black.withOpacity(0.5))),
+              StyledBody('${StringUtils.capitalize(item.type)}, size ${item.size.toString()}', color: Colors.grey),
           ],)
         ],
       )

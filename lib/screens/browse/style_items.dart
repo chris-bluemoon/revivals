@@ -35,6 +35,7 @@ class _StyleItemsState extends State<StyleItems> {
   @override
   Widget build(BuildContext context) {
     // getCurrentUser();
+        double width = MediaQuery.of(context).size.width;
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     log('Size of allItems: ${allItems.length}');
     for (Item i in allItems) {
@@ -64,7 +65,7 @@ class _StyleItemsState extends State<StyleItems> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -73,7 +74,7 @@ class _StyleItemsState extends State<StyleItems> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
       ),
 

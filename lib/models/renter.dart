@@ -7,6 +7,7 @@ class Renter {
           required this.name, 
           required this.size, 
           required this.address, 
+          required this.countryCode,
           required this.phoneNum,
           required this.favourites,
         }); 
@@ -16,6 +17,7 @@ class Renter {
     String name;
     int size;
     String address;
+    String countryCode;
     String phoneNum;
     List favourites;
 
@@ -26,6 +28,7 @@ class Renter {
       'name': name,
       'size': size,
       'address': address,
+      'countryCode': countryCode,
       'phoneNum': phoneNum,
       'favourites': favourites,
     };
@@ -47,6 +50,7 @@ class Renter {
       name: data['name'],
       size: data['size'],
       address: data['address'],
+      countryCode: data['countryCode'],
       phoneNum: data['phoneNum'],
       favourites: data['favourites'],
     );

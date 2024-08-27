@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_date_range_picker/flutter_date_range_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
@@ -33,15 +34,15 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
   bool bothDatesSelected = false;
   bool showConfirm = false;
 
-  int totalPrice(int noOfDays) {
+  int getPricePerDay(noOfDays) {
     int oneDayPrice = widget.item.rentPrice;
 
     if (noOfDays == 3) {
-      int threeDayPrice = ((3 * oneDayPrice) * 0.8).toInt()-1;
+      int threeDayPrice = ((oneDayPrice) * 0.8).toInt()-1;
       return (threeDayPrice ~/ 100) * 100 + 100;
     }
     if (noOfDays == 5) {
-      int fiveDayPrice = ((5 * oneDayPrice) * 0.6).toInt()-1;
+      int fiveDayPrice = ((oneDayPrice) * 0.6).toInt()-1;
       return (fiveDayPrice ~/ 100) * 100 + 100;
     }
     return oneDayPrice;
@@ -106,6 +107,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
   @override
   Widget build(BuildContext context) {
     // rebuildAllChildren(context);
+        double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -123,7 +125,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -132,7 +134,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0),
@@ -141,168 +143,173 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
               height: 1.0,
             )),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          // const Text('RENTAL TERM', style: TextStyle(fontSize: 12)),
-          const SizedBox(height: 30),
-          ListTile(
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(40,10,40,0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // const Text('RENTAL TERM', style: TextStyle(fontSize: 12)),
+            const SizedBox(height: 30),
+            ListTile(
+                dense: true,
+                visualDensity: const VisualDensity(vertical: -3),
+                title: StyledHeading('1 Day (${(getPricePerDay(1))}${globals.thb} per day)', weight: FontWeight.normal),
+                trailing: Radio<int>(
+                    value: 0,
+                    groupValue: selectedOption,
+                    // fillColor: Colors.black,
+                    onChanged: (value) async {
+                                          setState(() {
+                        selectedOption = value!;
+                      });
+                      noOfDays = 1;
+                      final DateTime? pickedDate = await showDatePicker(
+                        helpText: 'SELECT START DATE',
+                        context: context,
+                        // initialDate: DateTime.now(),
+                        // initialDate: DateTime(2024, 8, 25),
+                        // initialDate: DateTime.now().add(const Duration(days: -100)),
+                        // firstDate: DateTime.now().add(const Duration(days: -1)),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(const Duration(days: 60)),
+                        selectableDayPredicate: (DateTime day) =>
+                            !getBlackoutDates(
+                                    widget.item.id, noOfDays)
+                                .contains(day),
+                        // day.isAfter(DateTime.now()),
+                      );
+        
+        
+        
+                      if (pickedDate != null) {
+                        setState(() {
+                          startDate = pickedDate;
+                          endDate = pickedDate
+                              .add(Duration(days: noOfDays));
+                          log("Button value: $pickedDate");
+                          log('state of showConfirm: $showConfirm');
+                          log(startDate.toString());
+                          log(endDate.toString());
+                          log(noOfDays.toString());
+                          showConfirm = true;
+                          bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                          loggedIn ? Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays))
+                          )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+                          // bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                          // loggedIn ? Navigator.of(context).push(
+                          //   MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
+                          // )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+        
+                        });
+                      }
+                    })),
+            ListTile(
               dense: true,
               visualDensity: const VisualDensity(vertical: -3),
-              title: const StyledHeading('1 Day'),
+              title: StyledHeading('3 Days (${getPricePerDay(3)}${globals.thb} per day)', weight: FontWeight.normal),
               trailing: Radio<int>(
-                  value: 0,
-                  groupValue: selectedOption,
-                  // fillColor: Colors.black,
-                  onChanged: (value) async {
-                                        setState(() {
-                      selectedOption = value!;
-                    });
-                    noOfDays = 1;
-                    final DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      // initialDate: DateTime.now(),
-                      // initialDate: DateTime(2024, 8, 25),
-                      // initialDate: DateTime.now().add(const Duration(days: -100)),
-                      // firstDate: DateTime.now().add(const Duration(days: -1)),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(const Duration(days: 60)),
-                      selectableDayPredicate: (DateTime day) =>
-                          !getBlackoutDates(
-                                  widget.item.id, noOfDays)
-                              .contains(day),
-                      // day.isAfter(DateTime.now()),
-                    );
-
-
-
-                    if (pickedDate != null) {
-                      setState(() {
-                        startDate = pickedDate;
-                        endDate = pickedDate
-                            .add(Duration(days: noOfDays));
-                        log("Button value: $pickedDate");
-                        log('state of showConfirm: $showConfirm');
-                        log(startDate.toString());
-                        log(endDate.toString());
-                        log(noOfDays.toString());
-                        showConfirm = true;
-                        bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-                        loggedIn ? Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
-                        )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
-                        // bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-                        // loggedIn ? Navigator.of(context).push(
-                        //   MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
-                        // )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
-
-                      });
-                    }
-                  })),
-          ListTile(
-            dense: true,
-            visualDensity: const VisualDensity(vertical: -3),
-            title: const StyledHeading('3 Days'),
-            trailing: Radio<int>(
-              value: 1,
-              groupValue: selectedOption,
-              onChanged: (value2) async {
-                setState(() {
-                  selectedOption = value2!;
-                });
-                noOfDays = 3;
-                final DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  // initialDate: DateTime.now(),
-                  // initialDate: DateTime(2024, 8, 25),
-                  // initialDate: DateTime.now().add(const Duration(days: -100)),
-                  // firstDate: DateTime.now().add(const Duration(days: -1)),
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime.now().add(const Duration(days: 60)),
-                  selectableDayPredicate: (DateTime day) => !getBlackoutDates(
-                          widget.item.id, noOfDays)
-                      .contains(day),
-                  // day.isAfter(DateTime.now()),
-                );
-
-
-                if (pickedDate != null) {
+                value: 1,
+                groupValue: selectedOption,
+                onChanged: (value2) async {
                   setState(() {
                     selectedOption = value2!;
-                    startDate = pickedDate;
-                    endDate = pickedDate
-                        .add(Duration(days: noOfDays));
-                    log("Button value: $pickedDate");
-                    log('state of showConfirm: $showConfirm');
-                    log(startDate.toString());
-                    log(endDate.toString());
-                    log(noOfDays.toString());
-                    showConfirm = true;
-                                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-                        loggedIn ? Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
-                        )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                   });
-                }
-              },
+                  noOfDays = 3;
+                  final DateTime? pickedDate = await showDatePicker(
+                    helpText: 'SELECT START DATE',
+                    context: context,
+                    // initialDate: DateTime.now(),
+                    // initialDate: DateTime(2024, 8, 25),
+                    // initialDate: DateTime.now().add(const Duration(days: -100)),
+                    // firstDate: DateTime.now().add(const Duration(days: -1)),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime.now().add(const Duration(days: 60)),
+                    selectableDayPredicate: (DateTime day) => !getBlackoutDates(
+                            widget.item.id, noOfDays)
+                        .contains(day),
+                  );
+        
+        
+                  if (pickedDate != null) {
+                    setState(() {
+                      selectedOption = value2!;
+                      startDate = pickedDate;
+                      endDate = pickedDate
+                          .add(Duration(days: noOfDays));
+                      log("Button value: $pickedDate");
+                      log('state of showConfirm: $showConfirm');
+                      log(startDate.toString());
+                      log(endDate.toString());
+                      log(noOfDays.toString());
+                      showConfirm = true;
+                                             bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                          loggedIn ? Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays))
+                          )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+                    });
+                  }
+                },
+              ),
             ),
-          ),
-          ListTile(
-            dense: true,
-            visualDensity: const VisualDensity(vertical: -3),
-            title: const StyledHeading('5 Days'),
-            trailing: Radio<int>(
-              value: 2,
-              groupValue: selectedOption,
-              onChanged: (value3) async {
-                setState(() {
-                  selectedOption = value3!;
-                });
-                noOfDays = 5;
-                final DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  // initialDate: DateTime.now(),
-                  // initialDate: DateTime(2024, 8, 25),
-                  // initialDate: DateTime.now().add(const Duration(days: -100)),
-                  // firstDate: DateTime.now().add(const Duration(days: -1)),
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime.now().add(const Duration(days: 60)),
-                  selectableDayPredicate: (DateTime day) => !getBlackoutDates(
-                          widget.item.id, noOfDays)
-                      .contains(day),
-                  // day.isAfter(DateTime.now()),
-                );
-
-
-                if (pickedDate != null) {
+            ListTile(
+              dense: false,
+              visualDensity: const VisualDensity(vertical: -3),
+              title: StyledHeading('5 Days (${getPricePerDay(5)}${globals.thb} per day)', weight: FontWeight.normal),
+              trailing: Radio<int>(
+                value: 2,
+                groupValue: selectedOption,
+                onChanged: (value3) async {
                   setState(() {
-                    startDate = pickedDate;
-                    endDate = pickedDate
-                        .add(Duration(days: noOfDays));
-                    log("Button value: $pickedDate");
-                    log('state of showConfirm: $showConfirm');
-                    log(startDate.toString());
-                    log(endDate.toString());
-                    log(noOfDays.toString());
-                    showConfirm = true;
-                        bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
-                        loggedIn ? Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, totalPrice(noOfDays)))
-                        )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+                    selectedOption = value3!;
                   });
-                }
-                // if (pickedDate == null) {
-                //   return;
-                // } else {
-                //  setState(() {
-                //   newDate = pickedDate;
-                //   log("2nd Button value: $pickedDate");
-                //  });
-                // }
-              },
+                  noOfDays = 5;
+                  final DateTime? pickedDate = await showDatePicker(
+                    helpText: 'SELECT START DATE',
+                    context: context,
+                    // initialDate: DateTime.now(),
+                    // initialDate: DateTime(2024, 8, 25),
+                    // initialDate: DateTime.now().add(const Duration(days: -100)),
+                    // firstDate: DateTime.now().add(const Duration(days: -1)),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime.now().add(const Duration(days: 60)),
+                    selectableDayPredicate: (DateTime day) => !getBlackoutDates(
+                            widget.item.id, noOfDays)
+                        .contains(day),
+                    // day.isAfter(DateTime.now()),
+                  );
+        
+        
+                  if (pickedDate != null) {
+                    setState(() {
+                      startDate = pickedDate;
+                      endDate = pickedDate
+                          .add(Duration(days: noOfDays));
+                      log("Button value: $pickedDate");
+                      log('state of showConfirm: $showConfirm');
+                      log(startDate.toString());
+                      log(endDate.toString());
+                      log(noOfDays.toString());
+                      showConfirm = true;
+                          bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                          loggedIn ? Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays))
+                          )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
+                    });
+                  }
+                  // if (pickedDate == null) {
+                  //   return;
+                  // } else {
+                  //  setState(() {
+                  //   newDate = pickedDate;
+                  //   log("2nd Button value: $pickedDate");
+                  //  });
+                  // }
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

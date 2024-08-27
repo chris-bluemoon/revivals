@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/globals.dart' as globals;
+import 'package:unearthed/shared/styled_text.dart';
 
 class RentalPriceSummary extends StatelessWidget {
   const RentalPriceSummary(this.price, this.noOfDays, this.deliveryPrice, {super.key});
@@ -18,15 +19,15 @@ class RentalPriceSummary extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('PRICE DETAILS', style: TextStyle(fontSize: 14)),
+          const StyledHeading('PRICE DETAILS'),
           const SizedBox(height: 5),
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Row(
               children: [
-                Text('$pricePerDay x $noOfDays days',style: TextStyle(fontSize: 14, color: Colors.grey[700]) ),
+                StyledBody('$pricePerDay x $noOfDays days', color: Colors.black, weight: FontWeight.normal),
                 const Expanded(child: SizedBox()),
-                Text('$price${globals.thb}', style: TextStyle(fontSize: 14, color: Colors.grey[700])),
+                StyledBody('$price${globals.thb}', color: Colors.black, weight: FontWeight.normal),
               ],
             ),
           ),
@@ -34,9 +35,9 @@ class RentalPriceSummary extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10),
             child: Row(
               children: [
-                Text('Delivery fee', style: TextStyle(fontSize: 14, color: Colors.grey[700])),
+                const StyledBody('Delivery fee', color: Colors.black, weight: FontWeight.normal),
                 const Expanded(child: SizedBox()),
-                Text('$deliveryPrice${globals.thb}', style: TextStyle(fontSize: 14, color: Colors.grey[700])),
+                StyledBody('$deliveryPrice${globals.thb}', color: Colors.black, weight: FontWeight.normal),
             
               ],
             ),
@@ -46,10 +47,9 @@ class RentalPriceSummary extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10),
             child: Row(
               children: [
-                const Text('Total', style: TextStyle(fontSize: 16, color: Colors.black)),
+                const StyledHeading('Total'),
                 const Expanded(child: SizedBox()),
-                Text('$finalPrice${globals.thb}', style: const TextStyle(fontSize: 16, color: Colors.black)),
-            
+                StyledHeading('$finalPrice${globals.thb}'),
               ],
             ),
           ),

@@ -70,6 +70,7 @@ class _ItemCardState extends State<ItemCard> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Card(
       
       shape: BeveledRectangleBorder(
@@ -92,7 +93,7 @@ class _ItemCardState extends State<ItemCard> {
                 StyledHeading(widget.item.name),
                 const Expanded(child: SizedBox()),
                 isFav ?  IconButton(
-                  icon: const Icon(Icons.favorite), color: Colors.red,
+                  icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,
                   onPressed: () {
                     log('Pressed Fav');
                       // isFav = false;
@@ -106,7 +107,7 @@ class _ItemCardState extends State<ItemCard> {
 
                   }) : 
                   IconButton(
-                    icon: const Icon(Icons.favorite_border_outlined),
+                    icon: Icon(Icons.favorite_border_outlined, size: width*0.05),
                     onPressed: () {
                       log('Pressed empty Fav on item ID: ${widget.item.id}');
                       // isFav = true;
@@ -123,9 +124,9 @@ class _ItemCardState extends State<ItemCard> {
               ],
             ),
             // StyledText('Size: ${item.size.toString()}'),
-            if (widget.item.rentPrice > 0) StyledBody('Rent for ${widget.item.rentPrice.toString()}${globals.thb} per day'),
-            if (widget.item.buyPrice > 0) StyledBody('Buy for ${widget.item.buyPrice.toString()}${globals.thb}'),
-            StyledBodyStrikeout('RRP ${widget.item.rrp.toString()}${globals.thb}'),
+            if (widget.item.rentPrice > 0) StyledBody('Rent for ${widget.item.rentPrice.toString()}${globals.thb} per day', weight: FontWeight.normal),
+            if (widget.item.buyPrice > 0) StyledBody('Buy for ${widget.item.buyPrice.toString()}${globals.thb}', weight: FontWeight.normal),
+            StyledBodyStrikeout('RRP ${widget.item.rrp.toString()}${globals.thb}', weight: FontWeight.normal),
           ],
         ),
       ),

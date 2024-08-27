@@ -75,7 +75,11 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 SizedBox(width: width*0.01),
                 IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyAccount(widget.user))));
+                    // log('Google user widget.user = ${widget.user!.displayName}');
+                    // log('Lets send this user instead = ${widget.user!.displayName}');
+                    String userN = Provider.of<ItemStore>(context, listen: false).renter.name;
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyAccount(userN))));
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (MyAccount(widget.user))));
                   },
                   icon: const Icon(Icons.account_circle),
                     iconSize: width*0.05,),

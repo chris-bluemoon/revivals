@@ -48,6 +48,7 @@ class _ToRentState extends State<ToRent> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +66,7 @@ class _ToRentState extends State<ToRent> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -74,7 +75,7 @@ class _ToRentState extends State<ToRent> {
           IconButton(
               onPressed: () =>
                 {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0),
@@ -163,6 +164,7 @@ class _ToRentState extends State<ToRent> {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => (SummaryPurchase(widget.item, DateTime.now(), DateTime.now(), 0, widget.item.buyPrice))));
                     },
                       style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.all(10),
                         shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1.0),
                       ),

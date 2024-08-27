@@ -34,6 +34,7 @@ class _OccasionItemsState extends State<OccasionItems> {
 
   @override
   Widget build(BuildContext context) {
+        double width = MediaQuery.of(context).size.width;
     // getCurrentUser();
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     log('Size of allItems: ${allItems.length}');
@@ -63,7 +64,7 @@ class _OccasionItemsState extends State<OccasionItems> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -72,7 +73,7 @@ class _OccasionItemsState extends State<OccasionItems> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
       ),
 

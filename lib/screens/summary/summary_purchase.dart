@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
@@ -36,6 +35,8 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
   // final int i;
   @override
   Widget build(BuildContext context) {
+      double width = MediaQuery.of(context).size.width;
+
     
     // int pricePerDay = widget.price~/widget.noOfDays;
 
@@ -63,7 +64,6 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
       });
     }
 
-
     return Scaffold(
       appBar: AppBar(
         title: const Row(
@@ -75,7 +75,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -84,7 +84,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0),
@@ -93,103 +93,170 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
               height: 1.0,
             )),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 10),
-            SummaryImageWidget(widget.item),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                const SizedBox(width: 20),
-                const Icon(Icons.calendar_month_outlined),
-                const SizedBox(width: 20),
-                Text(DateFormat.yMMMd().format(widget.startDate), style: const TextStyle(fontSize: 14)),
-
-              ],),
-            const SizedBox(height: 20),
-            const Row(
-              children: [
-                SizedBox(width: 20),
-                Icon(Icons.location_pin),
-                SizedBox(width: 20),
-                Text('Bangkok, Thailand', style: TextStyle(fontSize: 14)),
-              ],),
-            const SizedBox(height: 40),
-            Center(
-              child: Container(
-                color: Colors.grey[200],
-                height: 70,
-                width: 350,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Buy for ${widget.price}${globals.thb}', style: const TextStyle(fontSize: 16)),
-                    // SizedBox(height: 5),
-                    // Text('(${pricePerDay}${globals.thb} per day)', style: TextStyle(fontSize: 14)),
-                  ],
-                ),),
-            ),
-
-            const SizedBox(height: 20),
-            Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
-            // SizedBox(height: 20),
-            DeliveryRadioWidget(updateDeliveryPrice),
-            Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
-            ValueListenableBuilder(
-              valueListenable: widget.deliveryPrice,
-              builder: (BuildContext context, int val, Widget? child) {
-                return PurchasePriceSummary(widget.price, val);
-            }),
-
-            Row(
-              children: [
-                const Expanded(child: SizedBox()),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: ElevatedButton(
-                    style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(1.0),
-                        ),
-                        side: const BorderSide(width: 1.0, color: Colors.black),
-                        ),
-                    onPressed: () {
-                      String email = Provider.of<ItemStore>(context, listen: false).renter.email;
-                      String startDateText = widget.startDate.toString();
-                      String endDateText = widget.endDate.toString();
-                      handleSubmit(email, widget.item.id, startDateText, endDateText,
-                          widget.item.buyPrice);
-                      showAlertDialog(context);  
-                      // Navigator.of(context).push(MaterialPageRoute(
-                          // builder: (context) => (const Congrats())));
-                    },
-                    child: const Text('CONFIRM', style: TextStyle(color: Colors.white)),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          SummaryImageWidget(widget.item),
+          const SizedBox(height: 20),
+          // Row(
+          //   children: [
+          //     const SizedBox(width: 20),
+          //     const Icon(Icons.calendar_month_outlined),
+          //     const SizedBox(width: 20),
+          //     StyledBody(DateFormat.yMMMd().format(widget.startDate)),
+      
+          //   ],),
+          // const SizedBox(height: 20),
+          // const Row(
+          //   children: [
+          //     SizedBox(width: 20),
+          //     Icon(Icons.location_pin),
+          //     SizedBox(width: 20),
+          //     Text('Bangkok, Thailand', style: TextStyle(fontSize: 14)),
+          //   ],),
+          const SizedBox(height: 40),
+          Center(
+            child: Container(
+              color: Colors.grey[200],
+              height: 70,
+              width: 350,
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(child: StyledHeading('Buying for ${widget.price}${globals.thb}', weight: FontWeight.normal)),
+                  // SizedBox(height: 5),
+                  // Text('(${pricePerDay}${globals.thb} per day)', style: TextStyle(fontSize: 14)),
+                ],
+              ),),
+          ),
+      
+          const SizedBox(height: 20),
+          Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
+          // SizedBox(height: 20),
+          DeliveryRadioWidget(updateDeliveryPrice),
+          Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
+          ValueListenableBuilder(
+            valueListenable: widget.deliveryPrice,
+            builder: (BuildContext context, int val, Widget? child) {
+              return PurchasePriceSummary(widget.price, val);
+          }),
+          const Expanded(child: SizedBox()),
+          Row(
+            children: [
+              const Expanded(child: SizedBox()),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                  onPressed: () {
+                    String email = Provider.of<ItemStore>(context, listen: false).renter.email;
+                    String startDateText = widget.startDate.toString();
+                    String endDateText = widget.endDate.toString();
+                    handleSubmit(email, widget.item.id, startDateText, endDateText,
+                        widget.item.buyPrice);
+                    showAlertDialog(context, widget.item.type, width);  
+                    // Navigator.of(context).push(MaterialPageRoute(
+                        // builder: (context) => (const Congrats())));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: StyledHeading('CONFIRM', color: Colors.white),
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
-showAlertDialog(BuildContext context) {  
+//showAlertDialog(BuildContext context) {  
+//  // Create button  
+//  Widget okButton = ElevatedButton(  
+//    child: const Center(child: Text("OK")),  
+//    onPressed: () {  
+//      // Navigator.of(context).pop();  
+//      Navigator.of(context).popUntil((route) => route.isFirst);
+//    },  
+//  ); 
+//    // Create AlertDialog  
+//  AlertDialog alert = AlertDialog(  
+//    title: const Center(child: Text("Congratulations")),
+//    content: const Text("      Your item is being prepared"),  
+//    actions: [  
+//      okButton,  
+//    ],  
+//                shape: const RoundedRectangleBorder(
+//              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+//            ),
+//  );  
+//    showDialog(  
+//    context: context,  
+//    builder: (BuildContext context) {  
+//      return alert;  
+//    },  
+//  );   
+//}
+showAlertDialog(BuildContext context, String itemType, double width) {  
   // Create button  
   Widget okButton = ElevatedButton(  
-    child: const Center(child: Text("OK")),  
+    style: OutlinedButton.styleFrom(
+                          textStyle: const TextStyle(color: Colors.white),
+                          foregroundColor: Colors.white,//change background color of button
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        side: const BorderSide(width: 1.0, color: Colors.black),
+      ),
     onPressed: () {  
       // Navigator.of(context).pop();  
       Navigator.of(context).popUntil((route) => route.isFirst);
     },  
+    child: const Center(child: StyledBody("OK", color: Colors.white)),  
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: const Center(child: Text("Congratulations")),
-    content: const Text("      Your item is being prepared"),  
+    title: const Center(child: StyledHeading("Thank you!")),
+    content: SizedBox(
+      height: width*0.15,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StyledBody("Your $itemType is being prepared,", weight: FontWeight.normal),
+              // Text("Your $itemType is being prepared,"),
+              // Text("please check your email for confirmation."),
+            ],
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StyledBody("Please check your", weight: FontWeight.normal),
+              // Text("Your $itemType is being prepared,"),
+              // Text("please check your email for confirmation."),
+            ],
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StyledBody("email for details.", weight: FontWeight.normal),
+              // Text("Your $itemType is being prepared,"),
+              // Text("please check your email for confirmation."),
+            ],
+          ),
+        ],
+      ),
+    ),  
     actions: [  
       okButton,  
     ],  

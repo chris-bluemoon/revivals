@@ -60,6 +60,8 @@ class _SummaryRentalState extends State<SummaryRental> {
         widget.deliveryPrice.value = newDeliveryPrice;
       });
     }
+    
+    double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -72,7 +74,7 @@ class _SummaryRentalState extends State<SummaryRental> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -81,7 +83,7 @@ class _SummaryRentalState extends State<SummaryRental> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0),
@@ -90,98 +92,99 @@ class _SummaryRentalState extends State<SummaryRental> {
               height: 1.0,
             )),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 10),
-            SummaryImageWidget(widget.item),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                const SizedBox(width: 20),
-                const Icon(Icons.calendar_month_outlined),
-                const SizedBox(width: 20),
-                Text(DateFormat.yMMMd().format(widget.startDate), style: const TextStyle(fontSize: 14)),
-                const Text('   -   '),
-                Text(DateFormat.yMMMd().format(widget.endDate), style: const TextStyle(fontSize: 14)),
-
-              ],),
-            const SizedBox(height: 20),
-            const Row(
-              children: [
-                SizedBox(width: 20),
-                Icon(Icons.location_pin),
-                SizedBox(width: 20),
-                Text('Bangkok, Thailand', style: TextStyle(fontSize: 14)),
-              ],),
-            const SizedBox(height: 40),
-            Center(
-              child: Container(
-                color: Colors.grey[200],
-                // height: 50,
-                // width: 350,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    (widget.noOfDays > 1) ? Text('Rent for ${widget.noOfDays} days (at $pricePerDay${globals.thb} per day)', style: const TextStyle(fontSize: 16))
-                    : Text('Rent for ${widget.price}${globals.thb}', style: const TextStyle(fontSize: 16))
-                    // Text('($pricePerDay${globals.thb} per day)', style: const TextStyle(fontSize: 14)),
-                  ],
-                ),),
-            ),
-
-            const SizedBox(height: 20),
-            Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
-            // SizedBox(height: 20),
-            DeliveryRadioWidget(updateDeliveryPrice),
-            Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
-            ValueListenableBuilder(
-              valueListenable: widget.deliveryPrice,
-              builder: (BuildContext context, int val, Widget? child) {
-                log('Deliver fee being sent as val to RentalPriceSummary is: $val');
-                return RentalPriceSummary(widget.price, widget.noOfDays, val);
-            }),
-
-            Row(
-              children: [
-                const Expanded(child: SizedBox()),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: ElevatedButton(
-                    style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(1.0),
-                        ),
-                        side: const BorderSide(width: 1.0, color: Colors.black),
-                        ),
-                    onPressed: () {
-                      String email = Provider.of<ItemStore>(context, listen: false).renter.email;
-                      String name = Provider.of<ItemStore>(context, listen: false).renter.name;
-                      String startDateText = widget.startDate.toString();
-                      String endDateText = widget.endDate.toString();
-                      handleSubmit(email, widget.item.id, startDateText, endDateText,
-                          widget.item.rentPrice);
-                      String startDateTextForEmail = DateFormat('yMMMd').format(widget.startDate);
-                      String endDateTextForEmail = DateFormat('yMMMd').format(widget.endDate);
-                      EmailComposer2(email, widget.item.type, name, widget.item.name, widget.item.brand, startDateTextForEmail, endDateTextForEmail, widget.deliveryPrice.value, widget.price.toString(), widget.item.rentPrice.toString(), widget.item.imageId).sendEmail2();
-                      showAlertDialog(context, widget.item.type);  
-                      // Navigator.of(context).push(MaterialPageRoute(
-                          // builder: (context) => (const Congrats())));
-                    },
-                    child: const Text('CONFIRM', style: TextStyle(color: Colors.white)),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          SummaryImageWidget(widget.item),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              const SizedBox(width: 20),
+              Icon(Icons.calendar_month_outlined, size: width*0.06 ),
+              const SizedBox(width: 20),
+              StyledBody(DateFormat.yMMMd().format(widget.startDate)),
+              const StyledBody('   -   '),
+              StyledBody(DateFormat.yMMMd().format(widget.endDate)),
+      
+            ],),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              const SizedBox(width: 20),
+              Icon(Icons.location_pin, size: width*0.06),
+              const SizedBox(width: 20),
+              const StyledBody('Bangkok, Thailand'),
+            ],),
+          const SizedBox(height: 40),
+          Center(
+            child: Container(
+              color: Colors.grey[200],
+              // height: 50,
+              // width: 350,
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  (widget.noOfDays > 1) ? StyledHeading('Renting for ${widget.noOfDays} days (at $pricePerDay${globals.thb} per day)', weight: FontWeight.normal,)
+                  : StyledHeading('Renting for ${widget.price}${globals.thb}', weight: FontWeight.normal)
+                  // Text('($pricePerDay${globals.thb} per day)', style: const TextStyle(fontSize: 14)),
+                ],
+              ),),
+          ),
+      
+          const SizedBox(height: 20),
+          Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
+          // SizedBox(height: 20),
+          DeliveryRadioWidget(updateDeliveryPrice),
+          Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
+          ValueListenableBuilder(
+            valueListenable: widget.deliveryPrice,
+            builder: (BuildContext context, int val, Widget? child) {
+              log('Deliver fee being sent as val to RentalPriceSummary is: $val');
+              return RentalPriceSummary(widget.price, widget.noOfDays, val);
+          }),
+          const Expanded(child: SizedBox()),
+          Row(
+            children: [
+              const Expanded(child: SizedBox()),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                  onPressed: () {
+                    String email = Provider.of<ItemStore>(context, listen: false).renter.email;
+                    String name = Provider.of<ItemStore>(context, listen: false).renter.name;
+                    String startDateText = widget.startDate.toString();
+                    String endDateText = widget.endDate.toString();
+                    handleSubmit(email, widget.item.id, startDateText, endDateText,
+                        widget.item.rentPrice);
+                    String startDateTextForEmail = DateFormat('yMMMd').format(widget.startDate);
+                    String endDateTextForEmail = DateFormat('yMMMd').format(widget.endDate);
+                    EmailComposer2(email, widget.item.type, name, widget.item.name, widget.item.brand, startDateTextForEmail, endDateTextForEmail, widget.deliveryPrice.value, widget.price.toString(), widget.item.rentPrice.toString(), widget.item.imageId).sendEmail2();
+                    showAlertDialog(context, widget.item.type, width);  
+                    // Navigator.of(context).push(MaterialPageRoute(
+                        // builder: (context) => (const Congrats())));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: StyledHeading('CONFIRM', color: Colors.white),
                   ),
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
-showAlertDialog(BuildContext context, String itemType) {  
+showAlertDialog(BuildContext context, String itemType, double width) {  
   // Create button  
   Widget okButton = ElevatedButton(  
     style: OutlinedButton.styleFrom(
@@ -197,19 +200,19 @@ showAlertDialog(BuildContext context, String itemType) {
       // Navigator.of(context).pop();  
       Navigator.of(context).popUntil((route) => route.isFirst);
     },  
-    child: const Center(child: Text("OK")),  
+    child: const Center(child: StyledBody("OK", color: Colors.white)),  
   ); 
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
-    title: const Center(child: Text("Thank You!")),
+    title: const Center(child: StyledHeading("Thank You!")),
     content: SizedBox(
-      height: 60,
+      height: width*0.15,
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Your $itemType is being prepared,"),
+              StyledBody("Your $itemType is being prepared,", weight: FontWeight.normal),
               // Text("Your $itemType is being prepared,"),
               // Text("please check your email for confirmation."),
             ],
@@ -217,7 +220,15 @@ showAlertDialog(BuildContext context, String itemType) {
           const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Please check your email for details."),
+              StyledBody("Please check your", weight: FontWeight.normal),
+              // Text("Your $itemType is being prepared,"),
+              // Text("please check your email for confirmation."),
+            ],
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StyledBody("email for details.", weight: FontWeight.normal),
               // Text("Your $itemType is being prepared,"),
               // Text("please check your email for confirmation."),
             ],

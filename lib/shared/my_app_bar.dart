@@ -17,7 +17,7 @@ class MyAppBar extends AppBar {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -26,7 +26,7 @@ class MyAppBar extends AppBar {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
           );
 }

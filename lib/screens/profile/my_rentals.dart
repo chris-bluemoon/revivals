@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
-import 'dart:developer';
-
 import 'package:unearthed/screens/profile/my_rentals_image_widget.dart';
 import 'package:unearthed/services/class_store.dart';
 
@@ -55,6 +54,7 @@ class _MyRentalsState extends State<MyRentals> {
   @override
   Widget build(BuildContext context) {
 
+        double width = MediaQuery.of(context).size.width;
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +67,7 @@ class _MyRentalsState extends State<MyRentals> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -76,7 +76,7 @@ class _MyRentalsState extends State<MyRentals> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(4.0),

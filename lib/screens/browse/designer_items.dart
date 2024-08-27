@@ -38,6 +38,7 @@ class _DesignerItemsState extends State<DesignerItems> {
   @override
   Widget build(BuildContext context) {
     // getCurrentUser();
+        double width = MediaQuery.of(context).size.width;
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     for (Item item in allItems) {
       if (widget.brand == item.brand) {
@@ -64,7 +65,7 @@ class _DesignerItemsState extends State<DesignerItems> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -73,7 +74,7 @@ class _DesignerItemsState extends State<DesignerItems> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: const Icon(Icons.close)),
+              icon: Icon(Icons.close, size: width*0.06)),
         ],
       ),
 

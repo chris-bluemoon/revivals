@@ -16,7 +16,7 @@ class ItemStore extends ChangeNotifier {
   final List<ItemRenter> _itemRenters = [];
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
-  Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', phoneNum: '', favourites: []);
+  Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: []);
   bool _loggedIn = false;
   // final List<Item> _Items = [
   //   Item(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
@@ -184,7 +184,7 @@ class ItemStore extends ChangeNotifier {
     log('Set _loggedIn to $loggedIn');
     _loggedIn = loggedIn;
     if (loggedIn == false) {
-      _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', phoneNum: '', favourites: []);
+      _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, countryCode: '', address: '', phoneNum: '', favourites: []);
       log(renter.name);
       notifyListeners();
     }

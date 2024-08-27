@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -12,9 +11,10 @@ import 'package:unearthed/shared/whatsapp.dart';
 
 
 class MyAccount extends StatefulWidget {
-  const MyAccount(this.user, {super.key});
+  const MyAccount(this.userN, {super.key});
 
-  final User? user;
+  final String userN;
+  // final User? user;
 
   @override
   State<MyAccount> createState() => _MyAccountState();
@@ -27,11 +27,16 @@ class _MyAccountState extends State<MyAccount> {
   late TextEditingController _phoneNumController;
   bool editingMode = false;
 
+  String tempCountryField = '+66';
+
   @override
   void initState() {
     super.initState();
-    _addressController = TextEditingController(text: 'Dummy address value');
-    _phoneNumController = TextEditingController(text: 'Dummy phoneNum value');
+    String address = Provider.of<ItemStore>(context, listen: false).renter.address;
+    String phoneNum = Provider.of<ItemStore>(context, listen: false).renter.phoneNum;
+    _addressController = TextEditingController(text: address);
+    _phoneNumController = TextEditingController(text: phoneNum);
+    tempCountryField = Provider.of<ItemStore>(context, listen: false).renter.countryCode;
     // _aditemController = new TextEditingController(text: 'Initial value');
   }
 
@@ -39,15 +44,13 @@ class _MyAccountState extends State<MyAccount> {
   
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
 
     GlobalKey<FormState> formKey = GlobalKey();
     FocusNode focusNode = FocusNode();
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
-    String address = Provider.of<ItemStore>(context, listen: false).renter.address;
-    String phoneNum = Provider.of<ItemStore>(context, listen: false).renter.phoneNum;
 
-    _addressController = TextEditingController(text: address);
-    _phoneNumController = TextEditingController(text: phoneNum);
     // ValueNotifier userCredential = ValueNotifier('');
     SnackBar snackBar = SnackBar(
   content: const Center(child: Text('ACCOUNT SAVED', style: TextStyle(color: Colors.black, fontSize: 16))),
@@ -70,7 +73,7 @@ class _MyAccountState extends State<MyAccount> {
           // TODO: Image is not centered in appbar with back arrow
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('ACCOUNT', style: TextStyle(fontSize: 22))
+              StyledTitle('ACCOUNT'),
               ]),
       ),
       body: Padding(
@@ -80,8 +83,9 @@ class _MyAccountState extends State<MyAccount> {
           children: [
             StyledBody('NAME', color: (Colors.grey[600])!, weight: FontWeight.bold),
             TextFormField(
+              style: TextStyle(fontSize: width*0.04),
               cursorColor: Colors.white,
-              initialValue: widget.user!.displayName,
+              initialValue: widget.userN,
               // initialValue: 'John Doe',
               enabled: false,
             ),
@@ -92,6 +96,7 @@ class _MyAccountState extends State<MyAccount> {
             TextFormField(
               // initialValue: 'johndoe@gmail.com',
               // initialValue: widget.user!.email,
+              style: TextStyle(fontSize: width*0.04),
               initialValue: Provider.of<ItemStore>(context, listen: false).renter.email,
               enabled: false,
             ),
@@ -100,6 +105,7 @@ class _MyAccountState extends State<MyAccount> {
             editingMode ? const StyledBody('ADDRESS') 
               : StyledBody('ADDRESS', color:(Colors.grey[600])!, weight: FontWeight.bold,),
                         TextFormField(
+              style: TextStyle(fontSize: width*0.04),
               enableInteractiveSelection: false,
               decoration: const InputDecoration(        
               // counterText: '1111', 
@@ -141,39 +147,50 @@ class _MyAccountState extends State<MyAccount> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            IntlPhoneField(
-              initialCountryCode: 'TH',
-              // style: const TextStyle(fontSize: 20),
-              dropdownTextStyle: editingMode ? const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.normal) 
-                : const TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.normal),
-              // enableInteractiveSelection: false,
-              showDropdownIcon: editingMode,
-              controller: _phoneNumController,
-              enabled: editingMode,
-              textAlignVertical: const TextAlignVertical(y: 0),
-              focusNode: focusNode,
-              decoration: const InputDecoration(
-                              enabledBorder: UnderlineInputBorder(      
-                      borderSide: BorderSide(color: Colors.grey),   
-                      ),  
-              focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                   ),  
-                
-                // labelText: 'Phone Number',
-                // border: OutlineInputBorder(
-                  // borderSide: BorderSide(),
-                // ),
-              ),
-              languageCode: "en",
-              // validator: validatePhoneNumber(phone.completeNumber),
-              onChanged: (phone) {
-                log(phone.completeNumber);
-              },
-              onCountryChanged: (country) {
-                log('Country changed to: ${country.name}');
-              },
-            ),
+//             IntlPhoneField(
+//         dropdownTextStyle: editingMode ? const TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.normal) 
+//           : const TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.normal),
+//     controller: _phoneNumController,
+//     decoration: const InputDecoration(
+//         labelText: 'Phone Number',
+//         border: OutlineInputBorder(
+//             borderSide: BorderSide(),
+//         ),
+//     ),
+//     initialCountryCode: 'TH',
+//     onChanged: (phone) {
+//         print(phone.completeNumber);
+//     },
+// )
+           IntlPhoneField(
+              style: TextStyle(fontSize: width*0.04),
+             initialCountryCode: 'TH',
+             dropdownTextStyle: editingMode ? TextStyle(fontSize: width*0.04, color: Colors.black, fontWeight: FontWeight.normal) 
+               : TextStyle(fontSize: width*0.04, color: Colors.grey, fontWeight: FontWeight.normal),
+             showDropdownIcon: editingMode,
+             controller: _phoneNumController,
+             enabled: editingMode,
+             textAlignVertical: const TextAlignVertical(y: 0),
+             // focusNode: focusNode,
+             decoration: const InputDecoration(
+                             enabledBorder: UnderlineInputBorder(      
+                     borderSide: BorderSide(color: Colors.grey),   
+                     ),  
+             focusedBorder: UnderlineInputBorder(
+                     borderSide: BorderSide(color: Colors.grey),
+                  ),  
+             ),
+             languageCode: "en",
+             onChanged: (phone) {
+               log(phone.completeNumber);
+              //  log(tempPhoneField);
+             },
+             onCountryChanged: (country) {
+               log('Country changed to: ${country.code}');
+               tempCountryField = country.name;
+             },
+           ),
+           
             // MaterialButton(
             //   child: Text('Submit'),
             //   color: Theme.of(context).primaryColor,
@@ -216,7 +233,10 @@ class _MyAccountState extends State<MyAccount> {
                       ),
                       side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
-                    child: const StyledBody('EDIT', weight: FontWeight.bold),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('EDIT', weight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 5),
@@ -233,8 +253,11 @@ class _MyAccountState extends State<MyAccount> {
                     log(_phoneNumController.value.text);
                     log('Renters NEW address: ${_addressController.value.text}');
                     log('Renters NEW phoneNum: ${_phoneNumController.value.text}');
+                    log('Renters NEW countryCode: $tempCountryField');
                     toSave.address = _addressController.value.text;
                     toSave.phoneNum = _phoneNumController.value.text;
+                    toSave.countryCode = tempCountryField;
+                    // toSave.phoneNum = tempPhoneField;
                     log('Showing the id of the user');
                     log(toSave.id);
                         Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
@@ -250,7 +273,10 @@ class _MyAccountState extends State<MyAccount> {
                       ),
                       side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
-                    child: const Text('SAVE', style: TextStyle(color: Colors.white)),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('SAVE', color: Colors.white),
+                    ),
                   ),
                 ),
               ],
