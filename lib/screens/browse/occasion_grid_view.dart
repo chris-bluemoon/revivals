@@ -1,7 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/occasion_grid_tile.dart';
 import 'package:unearthed/screens/browse/occasion_items.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class OccasionGridView extends StatelessWidget {
   OccasionGridView({super.key});
@@ -10,6 +10,8 @@ class OccasionGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return GridView.builder(
           padding: const EdgeInsets.all(4.0),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -24,7 +26,7 @@ class OccasionGridView extends StatelessWidget {
                   // decoration: BoxDecoration(
                     // border: Border.all(color: Colors.blueAccent)
                   // ),
-                  margin: const EdgeInsets.all(10),
+                  margin: EdgeInsets.all(width*0.03),
                   // color: Colors.white,
                   // child: Text('TEST')
                   child: Column(
@@ -33,8 +35,8 @@ class OccasionGridView extends StatelessWidget {
                       const SizedBox(height: 5),
                       Row(
                         children: [
-                          const SizedBox(width: 50),
-                          AutoSizeText(occasions[i], style: const TextStyle(fontSize: 6)),
+                          SizedBox(width: width*0.065),
+                          StyledBody(occasions[i], weight: FontWeight.normal),
                         ],
                       ),
                     ],

@@ -13,12 +13,14 @@ class OccasionGridTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 150,
-          height: 80,
+          width: width*0.3,
+          height: width*0.16,
           decoration: BoxDecoration(
             color: Colors.grey[300],
             // border: Border.all(
@@ -28,7 +30,7 @@ class OccasionGridTile extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Image.asset(setItemImage(), height: 80),
+              Image.asset(setItemImage(), height: width*0.16),
             ],
           )
 

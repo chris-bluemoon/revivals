@@ -6,6 +6,7 @@ import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/item_card.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
@@ -49,7 +50,7 @@ class _OccasionItemsState extends State<OccasionItems> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(widget.occasion.toUpperCase(), style: const TextStyle(fontSize: 18)),
+            StyledTitle(widget.occasion.toUpperCase()),
             // SizedBox(
             //   child: Image.asset(
             //     'assets/logos/eliya.png',
