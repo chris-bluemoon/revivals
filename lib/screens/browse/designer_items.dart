@@ -52,8 +52,8 @@ class _DesignerItemsState extends State<DesignerItems> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 50,
-              width: 100,
+              height: width*0.15,
+              // width: 100,
               child: Image.asset(
                 setBrandLogo(widget.brand),
                 // fit: BoxFit.contain,

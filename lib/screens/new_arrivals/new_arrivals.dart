@@ -59,13 +59,14 @@ class _NewArrivalsState extends State<NewArrivals> {
     // List<Item> itemList = Provider.of<ItemStore>(context, listen: false).items;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.15,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/logos/unearthed_logo_2.png',
-              fit: BoxFit.contain,
-              height: 200,
+              'assets/logos/unearthed_logo_3.png',
+              // height: 200,
+              height: width * 0.15,
             ),
           ],
         ),

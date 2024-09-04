@@ -25,15 +25,17 @@ class _HomeState extends State<Home> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: width*0.15,
           // centerTitle: true,
           title: SizedBox(
               // TODO: Image is not centered in appbar with back arrow
               // mainAxisAlignment: MainAxisAlignment.center,
               child: Image.asset(
-                  'assets/logos/unearthed_logo_2.png',
+                  'assets/logos/unearthed_logo_3.png',
                   // 'assets/logos/unearthed_collections.png',
-                  fit: BoxFit.contain,
-                  height: 200,
+                  fit: BoxFit.fill,
+                  height: width * 0.15,
+                  // width: width * 0.4,
                 ),
               ),
         ),
