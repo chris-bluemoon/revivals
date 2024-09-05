@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/profile/my_purchases_list.dart';
 import 'package:unearthed/screens/profile/my_rentals_list.dart';
+import 'package:unearthed/shared/styled_text.dart';
 
 class MyTransactions extends StatelessWidget {
   const MyTransactions({super.key});
@@ -18,27 +19,23 @@ class MyTransactions extends StatelessWidget {
             // labelColor: Colors.black,
             labelStyle: TextStyle(fontSize: width*0.03),
             tabs: const [
-              Tab(text: 'Rentals'),
-              Tab(text: 'Purchases'),
+              Tab(text: 'RENTALS'),
+              Tab(text: 'PURCHASES'),
             ],
           ),
-          title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('BOOKINGS', style: TextStyle(fontSize: 22))
-              ]),
+          title: const StyledTitle('BOOKINGS'),
                       leading: IconButton(
           icon: Icon(Icons.arrow_back, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-              onPressed: () =>
-                  {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () =>
+        //           {Navigator.of(context).popUntil((route) => route.isFirst)},
+        //       icon: Icon(Icons.close, size: width*0.06)),
+        // ],
         ),
         body:  const TabBarView(
           children: [

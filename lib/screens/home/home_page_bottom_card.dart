@@ -14,6 +14,9 @@ class HomePageBottomCard extends StatelessWidget {
       width: width*0.3,
       // height: height*0.05,
       child: Card(
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0),
+      ),
         color: Colors.black,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
