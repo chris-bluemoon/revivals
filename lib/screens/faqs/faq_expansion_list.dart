@@ -14,6 +14,9 @@ List<Item> faqs = [
   Item(headerValue: "Do you provide alterations?", expandedValue: "Unfortunately we cannot provide alterations, but we offer a wide range of dresses to suit most body shapes and heights."),
   Item(headerValue: "How do you clean your garments?", expandedValue: "A lot of care goes into ensuring our dresses fresh and clean. Our expert cleaning fairies use a variety of techniques to ensure that each style is dry cleaned, steamed and pressed, inspected for quality, and packaged with care so that it’s ready for another lucky lady to wear."),
   Item(headerValue: "Can I cancel/exhange my order?", expandedValue: "You sure can girl. All cancelations bear an additional charge of x. After, you’ll receive a credit to your RENTADELLA account with the full dress rental with a year expiry.  Dress exchanges will incur an additional fee of x for keeping the dress booked. If the new dress is less than the previous, the remaining credits will go into your RENTADELLA account with a year expiry. If it's more, the surplus will be an additional charge (seperate to the x dress exchange fee)"),
+  Item(headerValue: "Can I cancel/exhange my order?", expandedValue: "You sure can girl. All cancelations bear an additional charge of x. After, you’ll receive a credit to your RENTADELLA account with the full dress rental with a year expiry.  Dress exchanges will incur an additional fee of x for keeping the dress booked. If the new dress is less than the previous, the remaining credits will go into your RENTADELLA account with a year expiry. If it's more, the surplus will be an additional charge (seperate to the x dress exchange fee)"),
+  Item(headerValue: "Can I cancel/exhange my order?", expandedValue: "You sure can girl. All cancelations bear an additional charge of x. After, you’ll receive a credit to your RENTADELLA account with the full dress rental with a year expiry.  Dress exchanges will incur an additional fee of x for keeping the dress booked. If the new dress is less than the previous, the remaining credits will go into your RENTADELLA account with a year expiry. If it's more, the surplus will be an additional charge (seperate to the x dress exchange fee)"),
+  Item(headerValue: "Can I cancel/exhange my order?", expandedValue: "You sure can girl. All cancelations bear an additional charge of x. After, you’ll receive a credit to your RENTADELLA account with the full dress rental with a year expiry.  Dress exchanges will incur an additional fee of x for keeping the dress booked. If the new dress is less than the previous, the remaining credits will go into your RENTADELLA account with a year expiry. If it's more, the surplus will be an additional charge (seperate to the x dress exchange fee)"),
 ];
 
 class Item {
@@ -41,14 +44,22 @@ class _FaqExpansionListState extends State<FaqExpansionList> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        child: _buildPanel(),
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Container(
+          child: _buildPanel(),
+        ),
       ),
     );
   }
 
   Widget _buildPanel() {
+    // return const Column(children: [
+    //   SizedBox(height:500),
+    //   SizedBox(height:600),
+    //   Text('fdesfsd'),
+    //   SizedBox(height:600)
+    // ],);
     return ExpansionPanelList(
       // materialGapSize: 40,
       expandedHeaderPadding: const EdgeInsets.all(1),

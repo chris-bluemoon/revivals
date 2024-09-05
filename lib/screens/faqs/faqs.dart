@@ -39,23 +39,21 @@ class FAQs extends StatelessWidget {
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
 
-        return SingleChildScrollView(
-          
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-                  maxHeight: 3*viewportConstraints.maxHeight,
-                ),
-            child: Column(
-              children: [
-                SizedBox(height: width * 0.02),
-                const Center(
-                  child: StyledTitle("Frequently Asked Questions")),
-                SizedBox(height: width * 0.05),
-                // const FaqExpansionList()
-                FaqAccordion()
-              ],
-            ),
-          ),
+        return Column(
+          children: [
+            SizedBox(height: width * 0.02),
+            const Center(
+              child: StyledTitle("Frequently Asked Questions")),
+            SizedBox(height: width * 0.05),
+            // const FaqExpansionList()
+            FaqAccordion()
+            // const FaqExpansionList()
+            // const ScrollTest(),
+            // const SizedBox(
+            //   height: 900,
+            //   child: AccordionPage()
+            // )
+          ],
         );
         }
       )
