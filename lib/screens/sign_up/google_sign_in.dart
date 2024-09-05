@@ -11,6 +11,10 @@ import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
+// Join millions of Happy Users
+// Rest assured, your data remains secure, and you will not be subjected to any spam!
+// Continue with one of these:
+
 var uuid = const Uuid();
 
 class GoogleSignInScreen extends StatefulWidget {

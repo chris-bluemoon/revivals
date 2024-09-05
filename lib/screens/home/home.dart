@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:unearthed/screens/faqs/faqs.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
 import 'package:unearthed/screens/home/new_arrivals_home_widget.dart';
 import 'package:unearthed/screens/home/offer_home_widget.dart';
@@ -44,7 +45,7 @@ class _HomeState extends State<Home> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Display first column object, the carousel
-              const SizedBox(height: 20),
+              SizedBox(height: height*0.01),
               CarouselSlider(
                 carouselController: buttonCarouselController,
                 options: CarouselOptions(
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
                         currentIndex = index;
                       });
                     },
-                    height: 250,
+                    height: height * 0.2,
                     autoPlay: true),
                 items: items.map((i) {
                   return Builder(
@@ -102,14 +103,28 @@ class _HomeState extends State<Home> {
                 child: ListView(
                   // This next line does the trick.
                   scrollDirection: Axis.horizontal,
-                  children: const <Widget>[
-                    SizedBox(width: 4),
-                    HomePageBottomCard('Our Hygiene Policy'),
-                    HomePageBottomCard('General FAQ'),
-                    HomePageBottomCard('What Is Unearthed Collections?'),
-                    HomePageBottomCard('How It Works'),
-                    HomePageBottomCard('Sizing Guide FAQ'),
-                    SizedBox(width: 4),
+                  children: <Widget>[
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: () {},
+                      child: const HomePageBottomCard('Our Hygiene Policy')),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const FAQs())));
+                      },
+                      child: const HomePageBottomCard('General FAQ')),
+                    GestureDetector(
+                      onTap: () {
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const FAQs())));
+                      },
+                      child: const HomePageBottomCard('What Is Unearthed Collections?')),
+                    GestureDetector(
+                      onTap: () {},
+                      child: const HomePageBottomCard('How It Works')),
+                    GestureDetector(
+                      onTap: () {},
+                      child: const HomePageBottomCard('Sizing Guide FAQ')),
+                    const SizedBox(width: 4),
                   ],
                 ),
               ),
