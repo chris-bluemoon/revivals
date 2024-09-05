@@ -19,8 +19,8 @@ class Item {
 
 
 
-  Color headerColor = Colors.white;
-  Color contentColor = Colors.teal.shade900;
+  Color headerColor = Colors.black;
+  Color contentColor = Colors.black;
 
 class FaqAccordion extends StatelessWidget //__
 {
@@ -66,12 +66,12 @@ class FaqAccordion extends StatelessWidget //__
 
     return Expanded(
       child: Accordion(
-            rightIcon: Icon(Icons.keyboard_arrow_down, color: Colors.white, size: width * 0.07),
-            headerBorderColor: Colors.grey,
+            rightIcon: Icon(Icons.keyboard_arrow_down, color: Colors.black, size: width * 0.07),
+            headerBorderColor: Colors.white,
             headerBorderColorOpened: Colors.transparent,
             // headerBorderWidth: 1,
-            headerBackgroundColor: Colors.teal[900],
-            headerBackgroundColorOpened: Colors.teal[900],
+            headerBackgroundColor: Colors.white,
+            headerBackgroundColorOpened: Colors.white,
             contentBackgroundColor: Colors.white,
             contentBorderColor: Colors.transparent,
             // contentBorderColor: Colors.grey[300],

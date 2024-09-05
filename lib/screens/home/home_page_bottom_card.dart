@@ -14,11 +14,11 @@ class HomePageBottomCard extends StatelessWidget {
       width: width*0.3,
       // height: height*0.05,
       child: Card(
-        color: Colors.grey[300],
+        color: Colors.black,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(child: 
-            StyledBodyCenter(text),
+            StyledBodyCenter(text, color: Colors.white),
         ),
             ),
       )

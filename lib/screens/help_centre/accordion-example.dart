@@ -112,7 +112,7 @@ class AccordionPage extends StatelessWidget //__
                 contentBackgroundColor: Colors.amber,
                 contentBorderColor: Colors.black54,
                 contentBorderWidth: 1,
-                contentVerticalPadding: 30,
+                // contentVerticalPadding: 10,
                 header: const Text('Custom: Header with Border',
                     style: TextStyle(
                         color: Colors.black54,

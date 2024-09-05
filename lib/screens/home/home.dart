@@ -1,7 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/faqs/faqs.dart';
+import 'package:unearthed/screens/help_centre/faqs.dart';
+import 'package:unearthed/screens/help_centre/how_it_works.dart';
+import 'package:unearthed/screens/help_centre/hygiene_policy.dart';
+import 'package:unearthed/screens/help_centre/sizing_guide.dart';
+import 'package:unearthed/screens/help_centre/what_is.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
 import 'package:unearthed/screens/home/new_arrivals_home_widget.dart';
 import 'package:unearthed/screens/home/offer_home_widget.dart';
@@ -90,7 +94,14 @@ class _HomeState extends State<Home> {
               ),
               const NewArrivalsHomeWidget(),
 
-              // A sixed box now follows which contrains the horizontal listview, otherwise we get a renderflex error
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: StyledHeading(
+                  'TO BUY',
+                ),
+              ),
+              const NewArrivalsHomeWidget(),
 
               const SizedBox(height: 20),
               const Padding(
@@ -106,23 +117,29 @@ class _HomeState extends State<Home> {
                   children: <Widget>[
                     const SizedBox(width: 4),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HygienePolicy())));
+                      },
                       child: const HomePageBottomCard('Our Hygiene Policy')),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const FAQs())));
                       },
-                      child: const HomePageBottomCard('General FAQ')),
+                      child: const HomePageBottomCard('FAQs')),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const FAQs())));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const WhatIs())));
                       },
                       child: const HomePageBottomCard('What Is Unearthed Collections?')),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HowItWorks())));
+                      },
                       child: const HomePageBottomCard('How It Works')),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const SizingGuide())));
+                      },
                       child: const HomePageBottomCard('Sizing Guide FAQ')),
                     const SizedBox(width: 4),
                   ],
