@@ -69,7 +69,7 @@ class MyRentalsImageWidget extends StatelessWidget {
       1,
       0,
     ]);
-    if (toDate.isBefore(DateTime.now().add(const Duration(days: 10)))) {
+    if (fromDate.isBefore(DateTime.now().add(const Duration(days: 1)))) {
       greyscale = const ColorFilter.matrix(<double>[
         0.2126,
         0.7152,

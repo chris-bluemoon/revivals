@@ -24,19 +24,7 @@ class Item {
 
 class FaqAccordion extends StatelessWidget //__
 {
-  // static const headerStyle = TextStyle(
-  //     color: Color(0xffffffff), fontSize: 18, fontWeight: FontWeight.bold);
-  // static const contentStyleHeader = TextStyle(
-  //     color: Color(0xff999999), fontSize: 14, fontWeight: FontWeight.w700);
-  // static const contentStyle = TextStyle(
-  //     color: Color(0xff999999), fontSize: 14, fontWeight: FontWeight.bold);
-  // static const loremIpsum =
-  //     '''Lorem ipsum is typically a corrupted version of 'De finibus bonorum et malorum', a 1st century BC text by the Roman statesman and philosopher Cicero, with words altered, added, and removed to make it nonsensical and improper Latin.''';
-  // static const slogan =
-  //     'Do not forget to play around with all sorts of colors, backgrounds, borders, etc.';
-
   FaqAccordion({super.key});
-
 
   final List<Item> faqs = [
   Item(header: StyledHeading("Does Unearthed have a studio?", color: headerColor, weight: FontWeight.bold), content: StyledHeading("Want to try something on? Click on the 'APPOINTMENTS' tab under Contact Us in our header menu to arrange a 45 minute fitting session in our boutique.", color: contentColor, weight: FontWeight.normal)),
