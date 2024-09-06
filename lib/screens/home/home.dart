@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
               ),
               const SizedBox(height: 10),
               SizedBox(
-                height: height * 0.1,
+                height: height * 0.14,
                 child: ListView(
                   // This next line does the trick.
                   scrollDirection: Axis.horizontal,
