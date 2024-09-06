@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
               ),
               const SizedBox(height: 10),
               SizedBox(
-                // height: height * 0.14,
+                height: height * 0.14,
                 // width: height * 0.3,
                 child: ListView(
                   // This next line does the trick.
