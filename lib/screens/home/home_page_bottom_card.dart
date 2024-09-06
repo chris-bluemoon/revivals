@@ -12,6 +12,7 @@ class HomePageBottomCard extends StatelessWidget {
     return SizedBox(
       // height: 120,
       width: width*0.3,
+      // height: width*0.7,
       // height: height*0.05,
       child: Card(
         shape: RoundedRectangleBorder(
