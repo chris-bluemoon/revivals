@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
               ),
               const SizedBox(height: 10),
               SizedBox(
-                height: height * 0.14,
+                height: height * 0.10,
                 child: ListView(
                   // This next line does the trick.
                   scrollDirection: Axis.horizontal,
@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const WhatIs())));
                       },
-                      child: const HomePageBottomCard('What Is Unearthed Collections?')),
+                      child: const HomePageBottomCard('Who Are We?')),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HowItWorks())));
