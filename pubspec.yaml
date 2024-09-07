@@ -38,6 +38,10 @@ dependencies:
   accordion: ^2.6.0
   flutter_rounded_date_picker: ^3.0.4
   calendar_date_picker2: ^1.1.6
+  country_picker: ^2.0.26
+  country_flags: ^3.0.0
+  country_icons: ^3.0.0
+  flutter_switch: ^0.3.2
 
 dev_dependencies:
   flutter_test:

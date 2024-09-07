@@ -18,6 +18,8 @@ class ItemStore extends ChangeNotifier {
   // late final _user;
   Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: []);
   bool _loggedIn = false;
+  String _region = 'BANGKOK';
+
   // final List<Item> _Items = [
   //   Item(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
   //   Item(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
@@ -34,6 +36,7 @@ class ItemStore extends ChangeNotifier {
   get itemRenters => _itemRenters;
   get renter => _user;
   get loggedIn => _loggedIn;
+  get region => _region;
 
   // add item
   // void addCharacter(Item item) {
@@ -188,6 +191,12 @@ class ItemStore extends ChangeNotifier {
       log(renter.name);
       notifyListeners();
     }
+  }
+
+  void setRegion(String region) {
+    log('Set _region to $region');
+    _region = region;
+    notifyListeners();
   }
 
   void fetchItemRentersOnce() async {
