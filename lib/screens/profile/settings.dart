@@ -85,7 +85,7 @@ List<Widget> weights = <Widget>[
                       children: [
                         SizedBox(width: width * 0.03),
                         const StyledBody('LENGTH', weight: FontWeight.normal),
-                        const Expanded(child: SizedBox(width: 100)),
+                        const Expanded(child: SizedBox()),
                         ToggleButtons(
                           direction: Axis.horizontal,
                           onPressed: (int index) {
@@ -96,16 +96,16 @@ List<Widget> weights = <Widget>[
                               }
                             });
                           },
-                          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          textStyle: TextStyle(fontSize: width * 0.03, fontWeight: FontWeight.bold),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(0)),
                           selectedBorderColor: Colors.black,
                           selectedColor: Colors.black,
                           fillColor: Colors.grey[300],
                           color: Colors.grey,
-                          constraints: const BoxConstraints(
-                            minHeight: 40.0,
-                            minWidth: 80.0,
+                          constraints: BoxConstraints(
+                            minHeight: width * 0.08,
+                            minWidth: width * 0.16
                           ),
                           isSelected: selectedLength,
                           children: lengths,
@@ -119,7 +119,7 @@ List<Widget> weights = <Widget>[
                   children: [
                       SizedBox(width: width * 0.03),
                     const StyledBody('HEIGHT', weight: FontWeight.normal),
-                    const Expanded(child: SizedBox(width: 100)),
+                    const Expanded(child: SizedBox()),
                     ToggleButtons(
                       direction: Axis.horizontal,
                       onPressed: (int index) {
@@ -130,16 +130,16 @@ List<Widget> weights = <Widget>[
                           }
                         });
                       },
-                      textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      textStyle: TextStyle(fontSize: width * 0.03, fontWeight: FontWeight.bold),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(0)),
                       selectedBorderColor: Colors.black,
                       selectedColor: Colors.black,
                       fillColor: Colors.grey[300],
                       color: Colors.grey,
-                      constraints: const BoxConstraints(
-                        minHeight: 40.0,
-                        minWidth: 80.0,
+                      constraints: BoxConstraints(
+                        minHeight: width * 0.08,
+                        minWidth: width * 0.16
                       ),
                       isSelected: selectedHeight,
                       children: heights,
@@ -162,16 +162,16 @@ List<Widget> weights = <Widget>[
                           }
                         });
                       },
-                      textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      textStyle: TextStyle(fontSize: width * 0.03, fontWeight: FontWeight.bold),
                       borderRadius:
                           const BorderRadius.all(Radius.circular(0)),
                       selectedBorderColor: Colors.black,
                       selectedColor: Colors.black,
                       fillColor: Colors.grey[300],
                       color: Colors.grey,
-                      constraints: const BoxConstraints(
-                        minHeight: 40.0,
-                        minWidth: 80.0,
+                      constraints: BoxConstraints(
+                        minHeight: width * 0.08,
+                        minWidth: width * 0.16
                       ),
                       isSelected: selectedWeight,
                       children: weights,
@@ -179,7 +179,7 @@ List<Widget> weights = <Widget>[
                   ],
                 ),
                 const Divider(),
-                const SizedBox(height: 80),
+                SizedBox(height: width * 0.1),
                 const StyledBody('COUNTRY', color: Colors.grey, weight: FontWeight.normal),
                 const SizedBox(height: 20),
                 GestureDetector(
