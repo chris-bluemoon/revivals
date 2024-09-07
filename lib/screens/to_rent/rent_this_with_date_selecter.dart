@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_date_range_picker/flutter_date_range_picker.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
@@ -208,37 +209,89 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                     selectedOption = value2!;
                   });
                   noOfDays = 3;
-                  final DateTime? pickedDate = await showDatePicker(
-                    builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Colors.yellow, // header background color
-              onPrimary: Colors.black, // header text color
-              onSurface: Colors.green, // body text color
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.red, // button text color
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },
-                    helpText: 'SELECT START DATE',
-                    context: context,
-                    // initialDate: DateTime.now(),
-                    // initialDate: DateTime(2024, 8, 25),
-                    // initialDate: DateTime.now().add(const Duration(days: -100)),
-                    // firstDate: DateTime.now().add(const Duration(days: -1)),
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(const Duration(days: 60)),
-                    selectableDayPredicate: (DateTime day) => !getBlackoutDates(
-                            widget.item.id, noOfDays)
-                        .contains(day),
-                  );
-        
+                  final DateTime? pickedDate = await showRoundedDatePicker(
+                  // final DateTime? pickedDate = await showDatePicker(
+                    
+                    // NEED TO IMPLEMENT THIS TO STYLE DATE PICKER
+
+
+                    // helpText: 'SELECT START DATE',
+                    theme: ThemeData(primarySwatch: Colors.deepPurple),
+                        styleDatePicker: MaterialRoundedDatePickerStyle(
+                          textStyleDayButton: const TextStyle(fontSize: 36, color: Colors.white),
+                          textStyleYearButton: const TextStyle(
+                            fontSize: 52,
+                            color: Colors.white,
+                          ),
+                          textStyleDayHeader: const TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                          ),
+                          textStyleCurrentDayOnCalendar:
+                              const TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
+                          textStyleDayOnCalendar: const TextStyle(fontSize: 28, color: Colors.white),
+                          textStyleDayOnCalendarSelected:
+                              const TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
+                          textStyleDayOnCalendarDisabled: TextStyle(fontSize: 28, color: Colors.white.withOpacity(0.1)),
+                          textStyleMonthYearHeader:
+                              const TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.bold),
+                          paddingDatePicker: const EdgeInsets.all(0),
+                          paddingMonthHeader: const EdgeInsets.all(32),
+                          paddingActionBar: const EdgeInsets.all(16),
+                          paddingDateYearHeader: const EdgeInsets.all(32),
+                          sizeArrow: 50,
+                          colorArrowNext: Colors.white,
+                          colorArrowPrevious: Colors.white,
+                          marginLeftArrowPrevious: 16,
+                          marginTopArrowPrevious: 16,
+                          marginTopArrowNext: 16,
+                          marginRightArrowNext: 32,
+                          textStyleButtonAction: const TextStyle(fontSize: 28, color: Colors.white),
+                          textStyleButtonPositive:
+                              const TextStyle(fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold),
+                          textStyleButtonNegative: TextStyle(fontSize: 28, color: Colors.white.withOpacity(0.5)),
+                          decorationDateSelected: BoxDecoration(color: Colors.orange[600], shape: BoxShape.circle),
+                          backgroundPicker: Colors.deepPurple[400],
+                          backgroundActionBar: Colors.deepPurple[300],
+                          backgroundHeaderMonth: Colors.deepPurple[300],
+                        ),
+                        styleYearPicker: MaterialRoundedYearPickerStyle(
+                          textStyleYear: const TextStyle(fontSize: 40, color: Colors.white),
+                          textStyleYearSelected:
+                              const TextStyle(fontSize: 56, color: Colors.white, fontWeight: FontWeight.bold),
+                          heightYearRow: 100,
+                          backgroundPicker: Colors.deepPurple[400],
+                        ),
+
+                    height: width*1,
+                    borderRadius: 0,
+                    description: "fsddfsd",
+                      context: context,
+                      // initialDate: DateTime.now(),
+                      // initialDate: DateTime(2024, 8, 25),
+                      // initialDate: DateTime.now().add(const Duration(days: -100)),
+                      // firstDate: DateTime.now().add(const Duration(days: -1)),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(const Duration(days: 60)),
+                      selectableDayPredicate: (DateTime day) =>
+                          !getBlackoutDates(widget.item.id, noOfDays)
+                              .contains(day),);
+                      // NEED TO MODIDFY THIS
+
+                      // builder: (context, child) {
+                      //   return Column(
+                      //     children: <Widget>[
+                      //       Padding(
+                      //         padding: const EdgeInsets.only(top: 5.0),
+                      //         child: SizedBox(
+                      //           height: 850,
+                      //           width: 1000,
+                      //           child: child,
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   );
+                      // });
         
                   if (pickedDate != null) {
                     setState(() {
