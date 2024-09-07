@@ -118,7 +118,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: width*0.06),
+          icon: Icon(Icons.chevron_left, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -216,6 +216,14 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
 
 
                     // helpText: 'SELECT START DATE',
+                    onTapDay: (DateTime dateTime, bool available) {
+                          if (!available) {
+                            setState(() {
+                              log('Setting state');
+                            }); 
+                          }
+                          return available;
+                        },
                     theme: ThemeData(primarySwatch: Colors.deepPurple),
                         styleDatePicker: MaterialRoundedDatePickerStyle(
                           textStyleDayButton: const TextStyle(fontSize: 36, color: Colors.white),

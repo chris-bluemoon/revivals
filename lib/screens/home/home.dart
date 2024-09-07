@@ -3,7 +3,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/help_centre/faqs.dart';
 import 'package:unearthed/screens/help_centre/how_it_works.dart';
-import 'package:unearthed/screens/help_centre/hygiene_policy.dart';
 import 'package:unearthed/screens/help_centre/sizing_guide.dart';
 import 'package:unearthed/screens/help_centre/what_is.dart';
 import 'package:unearthed/screens/home/all_items_home_widget.dart';
@@ -136,16 +135,16 @@ class _HomeState extends State<Home> {
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
                     const SizedBox(width: 4),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HygienePolicy())));
-                      },
-                      child: const HomePageBottomCard('Our Hygiene Policy')),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HygienePolicy())));
+                    //   },
+                    //   child: const HomePageBottomCard('Our Hygiene Policy')),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const FAQs())));
                       },
-                      child: const HomePageBottomCard('FAQs')),
+                      child: const HomePageBottomCard('General FAQs')),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const WhatIs())));

@@ -37,6 +37,7 @@ dependencies:
   basic_utils: ^5.7.0
   accordion: ^2.6.0
   flutter_rounded_date_picker: ^3.0.4
+  calendar_date_picker2: ^1.1.6
 
 dev_dependencies:
   flutter_test:

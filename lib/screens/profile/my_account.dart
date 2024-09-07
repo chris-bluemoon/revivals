@@ -75,9 +75,14 @@ class _MyAccountState extends State<MyAccount> {
             children: [
               StyledTitle('ACCOUNT'),
               ]),
-      ),
+        leading: IconButton(
+          icon: Icon(Icons.chevron_left, size: width*0.06),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+      ),),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20.0,20.0,0,0),
+        padding: EdgeInsets.fromLTRB(width * 0.05, width * 0.1, 0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -62,7 +62,7 @@ class _AllItemsState extends State<AllItems> {
     // List<Item> itemList = Provider.of<ItemStore>(context, listen: false).items;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.15,
+        // toolbarHeight: width * 0.15,
         title: const StyledTitle("ALL ITEMS"),
         // Image.asset(
           // 'assets/logos/unearthed_logo_3.png',
@@ -71,7 +71,7 @@ class _AllItemsState extends State<AllItems> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: width*0.06),
+          icon: Icon(Icons.chevron_left, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },

@@ -53,7 +53,7 @@ class _BookingItemsState extends State<BookingTypeItems> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon:  Icon(Icons.arrow_back, size: width*0.06),
+          icon:  Icon(Icons.chevron_left, size: width*0.06),
           onPressed: () {
             Navigator.pop(context);
           },

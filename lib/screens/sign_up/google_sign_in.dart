@@ -80,7 +80,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
         appBar: AppBar(
           title: const Text('', style: TextStyle(fontSize: 22, color: Colors.black)),
             leading: IconButton(
-    icon: Icon(Icons.arrow_back, color: Colors.black, size: width*0.06),
+    icon: Icon(Icons.chevron_left, color: Colors.black, size: width*0.06),
     onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst)
     // onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HomePage())))
   )),
