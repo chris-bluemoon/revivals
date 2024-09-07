@@ -76,42 +76,48 @@ List<Widget> weights = <Widget>[
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const StyledBody('DEFAULT MEASUREMENTS UNIT', color: Colors.grey,
+                const StyledBody('DEFAULT MEASUREMENT UNITS', color: Colors.grey,
                     weight: FontWeight.normal),
                 SizedBox(height: width * 0.02),
-                Row(
+                Column(
                   children: [
-                    const StyledBody('LENGTH', weight: FontWeight.normal),
-                    const Expanded(child: SizedBox(width: 100)),
-                    ToggleButtons(
-                      direction: Axis.horizontal,
-                      onPressed: (int index) {
-                        setState(() {
-                          // The button that is tapped is set to true, and the others to false.
-                          for (int i = 0; i < selectedLength.length; i++) {
-                            selectedLength[i] = i == index;
-                          }
-                        });
-                      },
-                      textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(0)),
-                      selectedBorderColor: Colors.black,
-                      selectedColor: Colors.black,
-                      fillColor: Colors.grey[300],
-                      color: Colors.black,
-                      constraints: const BoxConstraints(
-                        minHeight: 40.0,
-                        minWidth: 80.0,
-                      ),
-                      isSelected: selectedLength,
-                      children: lengths,
+                    Row(
+                      children: [
+                        SizedBox(width: width * 0.03),
+                        const StyledBody('LENGTH', weight: FontWeight.normal),
+                        const Expanded(child: SizedBox(width: 100)),
+                        ToggleButtons(
+                          direction: Axis.horizontal,
+                          onPressed: (int index) {
+                            setState(() {
+                              // The button that is tapped is set to true, and the others to false.
+                              for (int i = 0; i < selectedLength.length; i++) {
+                                selectedLength[i] = i == index;
+                              }
+                            });
+                          },
+                          textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
+                          selectedBorderColor: Colors.black,
+                          selectedColor: Colors.black,
+                          fillColor: Colors.grey[300],
+                          color: Colors.grey,
+                          constraints: const BoxConstraints(
+                            minHeight: 40.0,
+                            minWidth: 80.0,
+                          ),
+                          isSelected: selectedLength,
+                          children: lengths,
+                        ),
+                      ],
                     ),
                   ],
                 ),
                 const Divider(),
                                 Row(
                   children: [
+                      SizedBox(width: width * 0.03),
                     const StyledBody('HEIGHT', weight: FontWeight.normal),
                     const Expanded(child: SizedBox(width: 100)),
                     ToggleButtons(
@@ -130,7 +136,7 @@ List<Widget> weights = <Widget>[
                       selectedBorderColor: Colors.black,
                       selectedColor: Colors.black,
                       fillColor: Colors.grey[300],
-                      color: Colors.black,
+                      color: Colors.grey,
                       constraints: const BoxConstraints(
                         minHeight: 40.0,
                         minWidth: 80.0,
@@ -143,6 +149,7 @@ List<Widget> weights = <Widget>[
                 const Divider(),
                                 Row(
                   children: [
+                      SizedBox(width: width * 0.03),
                     const StyledBody('WEIGHT', weight: FontWeight.normal),
                     const Expanded(child: SizedBox(width: 100)),
                     ToggleButtons(
@@ -161,7 +168,7 @@ List<Widget> weights = <Widget>[
                       selectedBorderColor: Colors.black,
                       selectedColor: Colors.black,
                       fillColor: Colors.grey[300],
-                      color: Colors.black,
+                      color: Colors.grey,
                       constraints: const BoxConstraints(
                         minHeight: 40.0,
                         minWidth: 80.0,
@@ -184,6 +191,7 @@ List<Widget> weights = <Widget>[
                     children: [
                       // Image.asset('icons/flags/png100/de.png', package: 'country_icons'),
                       // Image.asset('icons/flags/svg/de.svg', package: 'country_icons'),
+                      SizedBox(width: width * 0.03),
                       SizedBox(
                         height: width * 0.04,
                         child: flag,
