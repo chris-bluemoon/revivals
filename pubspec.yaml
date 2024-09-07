@@ -61,5 +61,5 @@ flutter:
   assets:
       - assets/login/
       - assets/logos/
-      - assets/img/new_items/
+      - assets/img/items/
       - assets/img/backgrounds/

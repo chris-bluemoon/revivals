@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:pluralize/pluralize.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
@@ -14,25 +14,25 @@ import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class CategoryItems extends StatefulWidget {
-  const CategoryItems(this.type, {super.key});
+class DateAddedItems extends StatefulWidget {
+  const DateAddedItems(this.dateAdded, {super.key});
 
-  final String type;
+  final String dateAdded;
 
   @override
-  State<CategoryItems> createState() => _CategoryItemsState();
+  State<DateAddedItems> createState() => _DateAddedItemsState();
 }
 
-class _CategoryItemsState extends State<CategoryItems> {
+class _DateAddedItemsState extends State<DateAddedItems> {
 
 
  
-    List<Item> categoryItems = [];
+    List<Item> dateAddedItems = [];
 
     @override
     initState() {
       // getCurrentUser();
-      categoryItems = [];
+      dateAddedItems = [];
       super.initState();
     }
 
@@ -42,28 +42,17 @@ class _CategoryItemsState extends State<CategoryItems> {
     // getCurrentUser();
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     for (Item i in allItems) {
-      log('checking: ${widget.type} vs database stored type: ${i.type}');
-      if (widget.type == i.type) {
-        categoryItems.add(i);
+      log('checking: ${widget.dateAdded} vs database stored type: ${i.dateAdded}');
+      DateFormat format = DateFormat("dd-MM-yyyy");
+      DateTime dateSupplied = format.parse(widget.dateAdded);
+      DateTime dateAdded = format.parse(i.dateAdded);
+      if (dateAdded.isAfter(dateSupplied)) {
+        dateAddedItems.add(i);
       }
     }
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            StyledTitle(Pluralize().plural(widget.type).toUpperCase()),
-            // SizedBox(
-            //   child: Image.asset(
-            //     'assets/logos/eliya.png',
-            //     // fit: BoxFit.contain,
-            //     // height: 40,
-            //   ),
-            //   height: 50,
-            //   width: 100
-            // ),
-          ],
-        ),
+        title: const StyledTitle('LATEST ADDITIONS'),
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
@@ -72,12 +61,12 @@ class _CategoryItemsState extends State<CategoryItems> {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-              onPressed: () =>
-                  {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () =>
+        //           {Navigator.of(context).popUntil((route) => route.isFirst)},
+        //       icon: Icon(Icons.close, size: width*0.06)),
+        // ],
       ),
 
       body: Container(
@@ -93,11 +82,11 @@ class _CategoryItemsState extends State<CategoryItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: ItemCard(categoryItems[index]),
+                        child: ItemCard(dateAddedItems[index]),
                         onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(categoryItems[index]))));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(dateAddedItems[index]))));
                         }),
-                    itemCount: categoryItems.length,
+                    itemCount: dateAddedItems.length,
                   ),
                 );
               }),

@@ -26,7 +26,7 @@ class FaqAccordion extends StatelessWidget //__
 {
   FaqAccordion({super.key});
 
-  final List<Item> faqs = [
+  final List<Item> general_faqs = [
   Item(header: StyledHeading("Does Unearthed have a studio?", color: headerColor, weight: FontWeight.bold), content: StyledHeading("Want to try something on? Click on the 'APPOINTMENTS' tab under Contact Us in our header menu to arrange a 45 minute fitting session in our boutique.", color: contentColor, weight: FontWeight.normal)),
   Item(header: StyledHeading("Do you deliver?", color: headerColor, weight: FontWeight.bold), content: StyledHeading("Yes, we can arrange delivery for a small fee, usually 100 within the Bangkok area, alternatively you can arrange your own collection, just contact us to arrange.", color: contentColor, weight: FontWeight.normal)),
   Item(header: StyledHeading("Do you ship internationally?", color: headerColor, weight: FontWeight.bold), content: StyledHeading("We can ship to most SE Asian countries, please contact us to arrange international shipment.", color: contentColor, weight: FontWeight.normal)),
@@ -45,11 +45,25 @@ class FaqAccordion extends StatelessWidget //__
   // Item(header: const StyledHeader("", content: ""),
 ];
 
+final List<Item> renting_faqs = [
+  Item(header: StyledHeading("What if the dress I ordered doesn't fit/don't like it?", color: headerColor, weight: FontWeight.bold), content: const StyledHeading("")),
+  Item(header: StyledHeading("What time can I collect my dress?", color: headerColor, weight: FontWeight.bold), content: const StyledHeading("")),
+  Item(header: StyledHeading("Do I need to my wash my dress before returning?", color: headerColor, weight: FontWeight.bold), content: const StyledHeading("")),
+  Item(header: StyledHeading("Can I buy the dress I rented?", color: headerColor, weight: FontWeight.bold), content: const StyledHeading("")),
+  Item(header: StyledHeading("I've stained/damaged my dress!", color: headerColor, weight: FontWeight.bold), content: const StyledHeading("")),
+  Item(header: StyledHeading("What is your late fee policy?", color: headerColor, weight: FontWeight.bold), content: const StyledHeading("")),
+];
+
+final List<Item> covid_faqs = [
+  Item(header: StyledHeading("What if my event gets cancelled because of COVID?", color: headerColor, weight: FontWeight.bold), content: const StyledHeading("")),
+];
+
 
 
   @override
   build(context) {
-     final List<Item> data = faqs;
+     final List<Item> dataGeneral = general_faqs;
+     final List<Item> dataRenting = renting_faqs;
      double width = MediaQuery.of(context).size.width;
 
     return Expanded(
@@ -71,13 +85,14 @@ class FaqAccordion extends StatelessWidget //__
                 const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
             sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,
             sectionClosingHapticFeedback: SectionHapticFeedback.light,
-            children: data.map<AccordionSection>((Item item) {
+            children: dataGeneral.map<AccordionSection>((Item item) {
               return AccordionSection(
                 header: item.header, 
                 content: item.content, 
                 contentVerticalPadding: 20,
               );
             }).toList(),
+            // }).toList().add(AccordionSection(header: Text("1"), content: Text("2"))),
             // children: [
             //   AccordionSection(
             //     isOpen: true,

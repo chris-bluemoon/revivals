@@ -6,9 +6,12 @@ import 'package:unearthed/screens/help_centre/how_it_works.dart';
 import 'package:unearthed/screens/help_centre/hygiene_policy.dart';
 import 'package:unearthed/screens/help_centre/sizing_guide.dart';
 import 'package:unearthed/screens/help_centre/what_is.dart';
+import 'package:unearthed/screens/home/all_items_home_widget.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
 import 'package:unearthed/screens/home/new_arrivals_home_widget.dart';
 import 'package:unearthed/screens/home/offer_home_widget.dart';
+import 'package:unearthed/screens/home/rentals_home_widget.dart';
+import 'package:unearthed/screens/home/to_buy_home_widget.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class Home extends StatefulWidget {
@@ -84,15 +87,32 @@ class _HomeState extends State<Home> {
               ),
 
               // Now display the first home page widget, for now a simple icon button
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: StyledHeading(
+                  'ALL ITEMS',
+                ),
+              ),
+              const AllItemsHomeWidget(),
 
               const SizedBox(height: 20),
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: StyledHeading(
-                  'NEW RENTALS',
+                  'NEW ARRIVALS',
                 ),
               ),
               const NewArrivalsHomeWidget(),
+
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: StyledHeading(
+                  'TO RENT',
+                ),
+              ),
+              const RentalHomeWidget(),
 
               const SizedBox(height: 20),
               const Padding(
@@ -101,7 +121,7 @@ class _HomeState extends State<Home> {
                   'TO BUY',
                 ),
               ),
-              const NewArrivalsHomeWidget(),
+              const ToBuyHomeWidget(),
 
               const SizedBox(height: 20),
               const Padding(

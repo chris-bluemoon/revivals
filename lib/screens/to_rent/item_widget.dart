@@ -26,13 +26,13 @@ class _ItemWidgetState extends State<ItemWidget> {
     itemType = widget.item.type.replaceAll(RegExp(' +'), '_');
     itemName = widget.item.name.replaceAll(RegExp(' +'), '_');
     brandName = widget.item.brand.replaceAll(RegExp(' +'), '_');
-    imageName = 'assets/img/new_items/${brandName}_${itemName}_${itemType}_${widget.itemNumber}.jpg';
+    imageName = 'assets/img/items/${brandName}_${itemName}_${itemType}_${widget.itemNumber}.jpg';
     return imageName;
   }
 
   @override
   Widget build(BuildContext context) {
-                      // String itemImage = 'assets/img/new_items/${widget.item.brand}_${widget.item.name}_Item_${widget.itemNumber}.jpg';
+                      // String itemImage = 'assets/img/items/${widget.item.brand}_${widget.item.name}_Item_${widget.itemNumber}.jpg';
                       // return FittedBox(
                         
                         return Image.asset(setItemImage(), fit: BoxFit.contain);

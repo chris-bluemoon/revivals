@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/items_grid_page/date_added_items.dart';
+import 'package:unearthed/screens/items_grid_page/booking_type_items.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
-class NewArrivalsHomeWidget extends StatelessWidget {
-  const NewArrivalsHomeWidget({super.key});
+class RentalHomeWidget extends StatelessWidget {
+  const RentalHomeWidget({super.key});
 
 
 
@@ -17,14 +17,14 @@ class NewArrivalsHomeWidget extends StatelessWidget {
           GestureDetector(
             child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const DateAddedItems('01-01-2020'))));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const BookingTypeItems('rental'))));
             }
           ),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const DateAddedItems('01-01-2020'))));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const BookingTypeItems('rental'))));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

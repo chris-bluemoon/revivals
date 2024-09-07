@@ -98,7 +98,7 @@ class _ToRentState extends State<ToRent> {
                       currentIndex = index;
                     });
                   },
-                  height: 400,
+                  height: width * 1,
                   autoPlay: true),
               items: items.map((i) {
                 return Builder(
@@ -157,7 +157,7 @@ class _ToRentState extends State<ToRent> {
             child: Row(
               children: [
 
-                (widget.item.buyPrice > 0) ? Expanded(
+                (widget.item.bookingType == 'buy' || widget.item.bookingType == 'both') ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
                       log('Pushing to SummaryPurchase');
@@ -173,7 +173,7 @@ class _ToRentState extends State<ToRent> {
                     child: const StyledHeading('BUY PRELOVED'),
                 )) : const Expanded(child: SizedBox()),
                 const SizedBox(width: 5),
-                (widget.item.rentPrice > 0) ? Expanded(
+                (widget.item.bookingType == 'rental' || widget.item.bookingType == 'both') ? Expanded(
                   child: OutlinedButton(
                     onPressed: () {
                         bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;

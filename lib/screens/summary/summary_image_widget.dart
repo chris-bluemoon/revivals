@@ -34,8 +34,8 @@ class SummaryImageWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: 
-              Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fitHeight, height: 0.25*width, width: 0.2*width)),
-              // Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fitHeight, height: width*0.125, width: width*0.1)),
+              Image.asset('assets/img/items/${setItemImage()}', fit: BoxFit.fitHeight, height: 0.25*width, width: 0.2*width)),
+              // Image.asset('assets/img/items/${setItemImage()}', fit: BoxFit.fitHeight, height: width*0.125, width: width*0.1)),
           const SizedBox(width: 30),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

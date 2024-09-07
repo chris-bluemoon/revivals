@@ -8,7 +8,7 @@ class OccasionGridTile extends StatelessWidget {
 
   String setItemImage() {
     formattedOccasion = occasion.replaceAll(RegExp(' +'), '_');
-    return 'assets/img/new_items/${formattedOccasion}_transparent.png';
+    return 'assets/img/items/${formattedOccasion}_transparent.png';
   }
 
   @override

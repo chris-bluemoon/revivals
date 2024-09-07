@@ -107,7 +107,7 @@ class MyPurchasesImageWidget extends StatelessWidget {
                 child: ColorFiltered(
                     colorFilter: greyscale,
                     child: Image.asset(
-                        'assets/img/new_items/${setItemImage()}',
+                        'assets/img/items/${setItemImage()}',
                         fit: BoxFit.fitHeight,
                         height: width*0.25,
                         width: width*0.2))),

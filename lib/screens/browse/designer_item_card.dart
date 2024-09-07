@@ -78,9 +78,9 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
           children: [
             
             // Center(child: StyledHeading(widget.item.brand)),
-            // Image.asset('assets/img/new_items/${setItemImage()}', width: 200, height: 600),
-            Expanded(child: Image.asset('assets/img/new_items/${setItemImage()}'),),
-            // Image.asset('assets/img/new_items/${setItemImage()}', fit: BoxFit.fill),
+            // Image.asset('assets/img/items/${setItemImage()}', width: 200, height: 600),
+            Expanded(child: Image.asset('assets/img/items/${setItemImage()}'),),
+            // Image.asset('assets/img/items/${setItemImage()}', fit: BoxFit.fill),
             Row(
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [

@@ -40,7 +40,7 @@ class StyleListView extends StatelessWidget {
         const Expanded(child: SizedBox()),
         Padding(
           padding: EdgeInsets.only(right: leftRightPadding),
-          child: Image.asset('assets/img/new_items/classic_transparent.png', height: screenWidth*0.2),
+          child: Image.asset('assets/img/items/classic_transparent.png', height: screenWidth*0.2),
         ),
       ],
     )
@@ -68,7 +68,7 @@ class StyleListView extends StatelessWidget {
              children: [
                Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: Image.asset('assets/img/new_items/vintage_transparent.png', height: screenWidth*0.2),
+          child: Image.asset('assets/img/items/vintage_transparent.png', height: screenWidth*0.2),
                ),
                const Expanded(child: SizedBox()),
                Padding(
@@ -107,7 +107,7 @@ class StyleListView extends StatelessWidget {
         const Expanded(child: SizedBox()),
         Padding(
           padding: EdgeInsets.only(right: leftRightPadding),
-          child: Image.asset('assets/img/new_items/artsy_transparent.png', height: screenWidth*0.2),
+          child: Image.asset('assets/img/items/artsy_transparent.png', height: screenWidth*0.2),
         ),
       ],
     )
@@ -135,7 +135,7 @@ class StyleListView extends StatelessWidget {
              children: [
                Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: Image.asset('assets/img/new_items/resort_transparent.png', height: screenWidth*0.2),
+          child: Image.asset('assets/img/items/resort_transparent.png', height: screenWidth*0.2),
                ),
                const Expanded(child: SizedBox()),
                Padding(

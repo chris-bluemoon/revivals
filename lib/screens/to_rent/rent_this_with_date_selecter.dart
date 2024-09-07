@@ -74,15 +74,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
       }
     }
 
-    // DateTime formattedDate = DateFormat("yyyy-MM-dd").parse(rDate);
-    // log(formattedDate.toString());
-    // return DateFormat("yyyy-MM-dd").parse(rDate);
-    // return [DateFormat("yyyy-MM-dd").parse('2024-07-31')];
-    if (tempList.isEmpty) {
-      log('tempList is empty');
-    }
     return tempList;
-    // return rDate;
   }
 
   DateTimeRange dateRange = DateTimeRange(
@@ -217,6 +209,23 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                   });
                   noOfDays = 3;
                   final DateTime? pickedDate = await showDatePicker(
+                    builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Colors.yellow, // header background color
+              onPrimary: Colors.black, // header text color
+              onSurface: Colors.green, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.red, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
                     helpText: 'SELECT START DATE',
                     context: context,
                     // initialDate: DateTime.now(),

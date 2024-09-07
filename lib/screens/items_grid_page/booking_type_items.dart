@@ -14,25 +14,25 @@ import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class CategoryItems extends StatefulWidget {
-  const CategoryItems(this.type, {super.key});
+class BookingTypeItems extends StatefulWidget {
+  const BookingTypeItems(this.booking_type, {super.key});
 
-  final String type;
+  final String booking_type;
 
   @override
-  State<CategoryItems> createState() => _CategoryItemsState();
+  State<BookingTypeItems> createState() => _BookingItemsState();
 }
 
-class _CategoryItemsState extends State<CategoryItems> {
+class _BookingItemsState extends State<BookingTypeItems> {
 
 
  
-    List<Item> categoryItems = [];
+    List<Item> bookingItems = [];
 
     @override
     initState() {
       // getCurrentUser();
-      categoryItems = [];
+      bookingItems = [];
       super.initState();
     }
 
@@ -42,28 +42,14 @@ class _CategoryItemsState extends State<CategoryItems> {
     // getCurrentUser();
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     for (Item i in allItems) {
-      log('checking: ${widget.type} vs database stored type: ${i.type}');
-      if (widget.type == i.type) {
-        categoryItems.add(i);
+      log('checking: ${widget.booking_type} vs database stored type: ${i.bookingType}');
+      if (widget.booking_type == i.bookingType) {
+        bookingItems.add(i);
       }
     }
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            StyledTitle(Pluralize().plural(widget.type).toUpperCase()),
-            // SizedBox(
-            //   child: Image.asset(
-            //     'assets/logos/eliya.png',
-            //     // fit: BoxFit.contain,
-            //     // height: 40,
-            //   ),
-            //   height: 50,
-            //   width: 100
-            // ),
-          ],
-        ),
+        title: StyledTitle(Pluralize().plural(widget.booking_type).toUpperCase()),
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
@@ -72,12 +58,12 @@ class _CategoryItemsState extends State<CategoryItems> {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-              onPressed: () =>
-                  {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () =>
+        //           {Navigator.of(context).popUntil((route) => route.isFirst)},
+        //       icon: Icon(Icons.close, size: width*0.06)),
+        // ],
       ),
 
       body: Container(
@@ -93,11 +79,11 @@ class _CategoryItemsState extends State<CategoryItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: ItemCard(categoryItems[index]),
+                        child: ItemCard(bookingItems[index]),
                         onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(categoryItems[index]))));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ToRent(bookingItems[index]))));
                         }),
-                    itemCount: categoryItems.length,
+                    itemCount: bookingItems.length,
                   ),
                 );
               }),

@@ -7,39 +7,42 @@ import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/item_card.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class NewArrivals extends StatefulWidget {
-  const NewArrivals({super.key});
+class AllItems extends StatefulWidget {
+  const AllItems({super.key});
 
   @override
-  State<NewArrivals> createState() => _NewArrivalsState();
+  State<AllItems> createState() => _AllItemsState();
 }
 
-class _NewArrivalsState extends State<NewArrivals> {
+class _AllItemsState extends State<AllItems> {
   void handleSubmit() {
-    for (var i = 0; i < myItems.length; i++) {
+    for (var i = 0; i < allItems.length; i++) {
       Provider.of<ItemStore>(context, listen: false).addItem(Item(
         id: uuid.v4(),
-        type: myItems[i].type,
-        occasion: myItems[i].occasion,
-        style: myItems[i].style,
-        name: myItems[i].name,
-        brand: myItems[i].brand,
-        colour: myItems[i].colour,
-        size: myItems[i].size,
-        rentPrice: myItems[i].rentPrice,
-        buyPrice: myItems[i].buyPrice,
-        rrp: myItems[i].rrp,
-        description: myItems[i].description,
-        bust: myItems[i].bust,
-        waist: myItems[i].waist,
-        hips: myItems[i].hips,
-        longDescription: myItems[i].longDescription,
-        imageId: myItems[i].imageId,
-        // isFav: myItems[i].isFav,
+        type: allItems[i].type,
+        bookingType: allItems[i].bookingType,
+        occasion: allItems[i].occasion,
+        dateAdded: allItems[i].dateAdded,
+        style: allItems[i].style,
+        name: allItems[i].name,
+        brand: allItems[i].brand,
+        colour: allItems[i].colour,
+        size: allItems[i].size,
+        rentPrice: allItems[i].rentPrice,
+        buyPrice: allItems[i].buyPrice,
+        rrp: allItems[i].rrp,
+        description: allItems[i].description,
+        bust: allItems[i].bust,
+        waist: allItems[i].waist,
+        hips: allItems[i].hips,
+        longDescription: allItems[i].longDescription,
+        imageId: allItems[i].imageId,
+        // isFav: allItems[i].isFav,
     ));
     }
 
@@ -60,16 +63,11 @@ class _NewArrivalsState extends State<NewArrivals> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: width * 0.15,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/logos/unearthed_logo_3.png',
-              // height: 200,
-              height: width * 0.15,
-            ),
-          ],
-        ),
+        title: const StyledTitle("ALL ITEMS"),
+        // Image.asset(
+          // 'assets/logos/unearthed_logo_3.png',
+          // height: 200,
+          // height: width * 0.15,
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
@@ -78,12 +76,12 @@ class _NewArrivalsState extends State<NewArrivals> {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-              onPressed: () =>
-                  {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () =>
+        //           {Navigator.of(context).popUntil((route) => route.isFirst)},
+        //       icon: Icon(Icons.close, size: width*0.06)),
+        // ],
       ),
       body: Container(
           color: Colors.white,
