@@ -12,11 +12,12 @@ class ItemStore extends ChangeNotifier {
 
   final List<Item> _items = [];
   final List<Item> _favourites = [];
+  final List<Item> _settings = [];
   final List<Renter> _renters = [];
   final List<ItemRenter> _itemRenters = [];
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
-  Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: []);
+  Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: [], settings: []);
   bool _loggedIn = false;
   String _region = 'BANGKOK';
 
@@ -32,6 +33,7 @@ class ItemStore extends ChangeNotifier {
 
   get items => _items;
   get favourites => _favourites;
+  get settings => _settings;
   get renters => _renters;
   get itemRenters => _itemRenters;
   get renter => _user;
@@ -60,6 +62,11 @@ class ItemStore extends ChangeNotifier {
     log(_user.favourites.toString());
     log('Showing user id');
     log(_user.id);
+  }
+
+  void addSettings(settings) async {
+    _user.settings.add(settings);
+    saveRenter(_user);
   }
 
   // void addAllFavourites() {
@@ -164,6 +171,18 @@ class ItemStore extends ChangeNotifier {
         }
       }
     }
+    void populateSettings() {
+      List settingsList = _user.settings;
+      _favourites.clear();
+      log('Favourties...');
+      log(settingsList.toString());
+      for (Item d in _items) {
+        if (settingsList.contains(d.id)) {
+          log('Adding a setting');
+          _settings.add(d);
+        }
+      }
+    }
   // initially fetch itemRenters
       Future<dynamic> setCurrentUser() async {
       User? user = FirebaseAuth.instance.currentUser;
@@ -187,7 +206,7 @@ class ItemStore extends ChangeNotifier {
     log('Set _loggedIn to $loggedIn');
     _loggedIn = loggedIn;
     if (loggedIn == false) {
-      _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, countryCode: '', address: '', phoneNum: '', favourites: []);
+      _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, countryCode: '', address: '', phoneNum: '', favourites: [], settings: []);
       log(renter.name);
       notifyListeners();
     }

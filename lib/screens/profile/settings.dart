@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/profile/country_selector.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -15,25 +18,46 @@ late Container flag;
 
 class _SettingsState extends State<Settings> {
 
-List<Widget> lengths = <Widget>[
+List<Text> lengths = <Text>[
   const Text('CM'),
   const Text('INCH')
 ];
-List<Widget> heights = <Widget>[
+List<Text> heights = <Text>[
   const Text('CM'),
   const Text('FT')
 ];
-List<Widget> weights = <Widget>[
+List<Text> weights = <Text>[
   const Text('KG'),
   const Text('LBS')
 ];
+  bool editingMode = false;
+
+
+
 
     final List<bool> selectedLength = <bool>[true, false];
     final List<bool> selectedHeight = <bool>[true, false];
     final List<bool> selectedWeight = <bool>[true, false];
-
+    SnackBar snackBar = SnackBar(
+  content: const Center(child: StyledHeading('SETTINGS SAVED')),
+  backgroundColor: Colors.grey[100],
+  behavior: SnackBarBehavior.fixed,
+  duration: const Duration(seconds: 1)
+  
+//  shape: RoundedRectangleBorder
+  //  (borderRadius:BorderRadius.circular(50),
+      // ),
+);
   @override
   Widget build(BuildContext context) {
+  void setEditingMode(editMode) {
+                            setState(() {
+                              log('Setting edit mode to $editMode');
+    // editingMode = editMode;
+                              // The button that is tapped is set to true, and the others to false.
+                              editingMode = editMode;
+                            });
+  }
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -48,7 +72,8 @@ List<Widget> weights = <Widget>[
       ),
       body: Consumer<ItemStore>(
         builder: (context, value, child) {
-          String region = Provider.of<ItemStore>(context, listen: false).region;
+          String region = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+          // log(Provider.of<ItemStore>(context, listen: false).renter.settings[0]);
           if (region == 'BANGKOK') {
             flag = Container(
               decoration: BoxDecoration(
@@ -91,6 +116,8 @@ List<Widget> weights = <Widget>[
                           onPressed: (int index) {
                             setState(() {
                               // The button that is tapped is set to true, and the others to false.
+                              setEditingMode(true);
+                              // editingMode = true;
                               for (int i = 0; i < selectedLength.length; i++) {
                                 selectedLength[i] = i == index;
                               }
@@ -124,6 +151,7 @@ List<Widget> weights = <Widget>[
                       direction: Axis.horizontal,
                       onPressed: (int index) {
                         setState(() {
+                              setEditingMode(true);
                           // The button that is tapped is set to true, and the others to false.
                           for (int i = 0; i < selectedHeight.length; i++) {
                             selectedHeight[i] = i == index;
@@ -156,6 +184,7 @@ List<Widget> weights = <Widget>[
                       direction: Axis.horizontal,
                       onPressed: (int index) {
                         setState(() {
+                              setEditingMode(true);
                           // The button that is tapped is set to true, and the others to false.
                           for (int i = 0; i < selectedWeight.length; i++) {
                             selectedWeight[i] = i == index;
@@ -185,7 +214,7 @@ List<Widget> weights = <Widget>[
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => (const CountrySelector())));
+                        builder: (context) => (CountrySelector(callback: setEditingMode))));
                   },
                   child: Row(
                     children: [
@@ -202,11 +231,115 @@ List<Widget> weights = <Widget>[
                   ),
                 ),
                 const Divider(),
+ 
               ],
             ),
           );
         },
       ),
+                bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              spreadRadius: 3,
+            )
+          ],
+        ),
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                if (!editingMode) Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                    },
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('SAVE', weight: FontWeight.bold, color: Colors.grey),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5),
+                if (editingMode) Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                          log('SAVED PRESSED');
+                          for (int i = 0; i < selectedLength.length; i++) {
+                                  if (selectedLength[i] == true) {
+                                  Renter toSave = Provider.of<ItemStore>(
+                                          context,
+                                          listen: false)
+                                      .renter;
+                                  log('Saving Length: ${lengths[i].data}');
+                                  toSave.settings[1] = lengths[i].data;
+                                  Provider.of<ItemStore>(context, listen: false)
+                                      .saveRenter(toSave);
+                                  }
+                          }
+                          for (int i = 0; i < selectedHeight.length; i++) {
+                                  if (selectedHeight[i] == true) {
+                                  Renter toSave = Provider.of<ItemStore>(
+                                          context,
+                                          listen: false)
+                                      .renter;
+                                  log('Saving Height: ${heights[i].data}');
+                                  toSave.settings[2] = heights[i].data;
+                                  Provider.of<ItemStore>(context, listen: false)
+                                      .saveRenter(toSave);
+                                  }
+                          }
+                          for (int i = 0; i < selectedWeight.length; i++) {
+                                  log('Weight values are: ${selectedWeight[i].toString()}');
+                                  if (selectedWeight[i] == true) {
+                                  Renter toSave = Provider.of<ItemStore>(
+                                          context,
+                                          listen: false)
+                                      .renter;
+                                  log('Saving Weight: ${weights[i].data}');
+                                  toSave.settings[3] = weights[i].data;
+                                  Provider.of<ItemStore>(context, listen: false)
+                                      .saveRenter(toSave);
+                                  }
+                          }
+                                  Renter toSave = Provider.of<ItemStore>(
+                                          context,
+                                          listen: false)
+                                      .renter;
+                                  toSave.settings[0] = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+
+                                  Provider.of<ItemStore>(context, listen: false)
+                                      .saveRenter(toSave);
+                    // setState(() {
+                      // setEditingMode(false);
+                    // });
+                    setEditingMode(false);
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('SAVE', color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),   
     );
   }
 }

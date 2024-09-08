@@ -6,6 +6,7 @@ import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/get_country_price.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 // ignore: must_be_immutable
@@ -68,9 +69,21 @@ class _ItemCardState extends State<ItemCard> {
      super.initState();
     }
 
+    List convertedRentPriceList = [];
+    int convertedRentPrice = -1;
+    String symbol = '?';
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] != 'BANGKOK') {
+      convertedRentPriceList = convertFromTHB(widget.item.rentPrice, 'SGD');
+      convertedRentPrice = convertedRentPriceList[0];
+      symbol = convertedRentPriceList[1];
+    } else {
+      convertedRentPrice = widget.item.rentPrice;
+      symbol = globals.thb;
+    }
     return Card(
       
       shape: BeveledRectangleBorder(
@@ -124,7 +137,8 @@ class _ItemCardState extends State<ItemCard> {
               ],
             ),
             // StyledText('Size: ${item.size.toString()}'),
-            if (widget.item.rentPrice > 0) StyledBody('Rent for ${widget.item.rentPrice.toString()}${globals.thb} per day', weight: FontWeight.normal),
+            // int convertedRentPrice = convertFromTHB(${widget.item.rentPrice}, 'SGD');
+            if (widget.item.rentPrice > 0) StyledBody('Rent for ${convertedRentPrice.toString()}$symbol per day', weight: FontWeight.normal),
             if (widget.item.buyPrice > 0) StyledBody('Buy for ${widget.item.buyPrice.toString()}${globals.thb}', weight: FontWeight.normal),
             StyledBodyStrikeout('RRP ${widget.item.rrp.toString()}${globals.thb}', weight: FontWeight.normal),
           ],

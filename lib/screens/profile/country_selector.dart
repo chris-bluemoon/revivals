@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class CountrySelector extends StatelessWidget {
-  const CountrySelector({super.key});
+  const CountrySelector({required this.callback, super.key});
 
+  final Function callback; 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -33,7 +37,12 @@ class CountrySelector extends StatelessWidget {
             SizedBox(height: width* 0.08),
             GestureDetector(
               onTap: () {
+                Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
+                log('toSave renter: ${toSave.name}');
+                toSave.settings[0] = 'BANGKOK';
+                Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
                 Provider.of<ItemStore>(context, listen: false).setRegion('BANGKOK');
+                callback(true);
                 Navigator.pop(context);
               },
               child: Padding(
@@ -44,7 +53,12 @@ class CountrySelector extends StatelessWidget {
             SizedBox(height: width * 0.04),
             GestureDetector(
               onTap: () {
+                Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
+                toSave.settings[0] = 'SINGAPORE';
+                log('toSave renter: ${toSave.name} with new region: SINGAPORE');
+                Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
                 Provider.of<ItemStore>(context, listen: false).setRegion('SINGAPORE');
+                callback(true);
                 Navigator.pop(context);
 
               },

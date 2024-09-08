@@ -10,6 +10,7 @@ class Renter {
           required this.countryCode,
           required this.phoneNum,
           required this.favourites,
+          required this.settings,
         }); 
 
     String id;
@@ -20,6 +21,7 @@ class Renter {
     String countryCode;
     String phoneNum;
     List favourites;
+    List settings;
 
   // item to firestore (map)
   Map<String, dynamic> toFirestore() {
@@ -31,6 +33,7 @@ class Renter {
       'countryCode': countryCode,
       'phoneNum': phoneNum,
       'favourites': favourites,
+      'settings': settings,
     };
   }
 
@@ -53,6 +56,7 @@ class Renter {
       countryCode: data['countryCode'],
       phoneNum: data['phoneNum'],
       favourites: data['favourites'],
+      settings: data['settings'],
     );
 
     return renter;

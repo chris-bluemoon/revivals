@@ -48,6 +48,7 @@ class FirestoreService {
         'address': renter.address,
         'phoneNum': renter.phoneNum,
         'favourites': renter.favourites,
+        'settings': renter.settings,
      }
     );
   }
