@@ -35,21 +35,10 @@ List<Text> weights = <Text>[
 
 
 
-    final List<bool> selectedLength = <bool>[true, false];
-    final List<bool> selectedHeight = <bool>[true, false];
-    final List<bool> selectedWeight = <bool>[true, false];
-    SnackBar snackBar = SnackBar(
-  content: const Center(child: StyledHeading('SETTINGS SAVED')),
-  backgroundColor: Colors.grey[100],
-  behavior: SnackBarBehavior.fixed,
-  duration: const Duration(seconds: 1)
-  
-//  shape: RoundedRectangleBorder
-  //  (borderRadius:BorderRadius.circular(50),
-      // ),
-);
-  @override
-  Widget build(BuildContext context) {
+    List<bool> selectedLength = <bool>[true, false];
+    List<bool> selectedHeight = <bool>[true, false];
+    List<bool> selectedWeight = <bool>[true, false];
+
   void setEditingMode(editMode) {
                             setState(() {
                               log('Setting edit mode to $editMode');
@@ -58,6 +47,28 @@ List<Text> weights = <Text>[
                               editingMode = editMode;
                             });
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    String lengthMetric = Provider.of<ItemStore>(context, listen: false).renter.settings[1];
+    String heightMetric = Provider.of<ItemStore>(context, listen: false).renter.settings[2];
+    String weightMetric = Provider.of<ItemStore>(context, listen: false).renter.settings[3];
+    if (lengthMetric == 'INCH') {
+      selectedLength = [false, true];
+    }
+    if (heightMetric == 'FT') {
+      selectedHeight = [false, true];
+    }
+    if (weightMetric == 'LBS') {
+      selectedWeight = [false, true];
+    }
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+
+    log("Building...");
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -101,7 +112,7 @@ List<Text> weights = <Text>[
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const StyledBody('DEFAULT MEASUREMENT UNITS', color: Colors.grey,
+                const StyledHeading('MEASUREMENT UNITS', color: Colors.grey,
                     weight: FontWeight.normal),
                 SizedBox(height: width * 0.02),
                 Column(
@@ -209,7 +220,7 @@ List<Text> weights = <Text>[
                 ),
                 const Divider(),
                 SizedBox(height: width * 0.1),
-                const StyledBody('COUNTRY', color: Colors.grey, weight: FontWeight.normal),
+                const StyledHeading('COUNTRY', color: Colors.grey, weight: FontWeight.normal),
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {

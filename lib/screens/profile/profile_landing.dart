@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:provider/provider.dart';
+import 'package:unearthed/screens/help_centre/faqs.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
 import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/screens/profile/settings.dart';
@@ -152,7 +153,10 @@ class _ProfileLandingState extends State<ProfileLanding> {
               const StyledHeading('SUPPORT', weight: FontWeight.normal, color: Colors.grey),
               SizedBox(height: width * 0.04),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => (const FAQs())));
+                },
                 child: Row(
                   children: [
                     SizedBox(width: width * 0.01),

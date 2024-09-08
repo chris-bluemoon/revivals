@@ -33,12 +33,12 @@ class FAQs extends StatelessWidget {
           // const FaqExpansionList()
           FaqAccordion(),
           SizedBox(height: width * 0.03),
-          const StyledTitle('Still have questions?'),
+          const StyledHeading('Still have questions?'),
           SizedBox(height: width * 0.02),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const StyledTitle('Contact us on LINE'),
+              const StyledHeading('Contact us on LINE'),
               const SizedBox(width: 10),
               Image.asset('assets/logos/LINE_logo.png', height: 40),
             ],
