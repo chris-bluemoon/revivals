@@ -1,10 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/help_centre/faqs.dart';
-import 'package:unearthed/screens/help_centre/how_it_works.dart';
-import 'package:unearthed/screens/help_centre/sizing_guide.dart';
-import 'package:unearthed/screens/help_centre/what_is.dart';
 import 'package:unearthed/screens/home/all_items_home_widget.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
 import 'package:unearthed/screens/home/new_arrivals_home_widget.dart';
@@ -142,22 +138,26 @@ class _HomeState extends State<Home> {
                     //   child: const HomePageBottomCard('Our Hygiene Policy')),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const FAQs())));
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const FAQs())));
+                        Navigator.pushNamed(context, '/faqs');
                       },
                       child: const HomePageBottomCard('General FAQs')),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const WhatIs())));
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const WhatIs())));
+                        Navigator.pushNamed(context, '/whatIs');
                       },
                       child: const HomePageBottomCard('Who Are We?')),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HowItWorks())));
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HowItWorks())));
+                        Navigator.pushNamed(context, '/howItWorks');
                       },
                       child: const HomePageBottomCard('How It Works')),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const SizingGuide())));
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const SizingGuide())));
+                        Navigator.pushNamed(context, '/sizingGuide');
                       },
                       child: const HomePageBottomCard('Sizing Guide FAQ')),
                     const SizedBox(width: 4),

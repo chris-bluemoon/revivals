@@ -25,6 +25,7 @@ class NewArrivalsHomeWidget extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const DateAddedItems('01-01-2020'))));
+                  Navigator.pushNamed(context, '/dateAddedItems');
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

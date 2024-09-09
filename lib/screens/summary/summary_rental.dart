@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/screens/summary/delivery_radio_widget.dart';
@@ -18,14 +17,14 @@ var uuid = const Uuid();
 
 class SummaryRental extends StatefulWidget {
   SummaryRental(
-      this.item, this.startDate, this.endDate, this.noOfDays, this.price,
-      {super.key});
+      this.item, this.startDate, this.endDate, this.noOfDays, this.price, this.symbol, {super.key});
 
   final Item item;
   final DateTime startDate;
   final DateTime endDate;
   final int noOfDays;
   final int price;
+  final String symbol;
 
   final ValueNotifier<int> deliveryPrice = ValueNotifier<int>(0);
 
@@ -126,8 +125,8 @@ class _SummaryRentalState extends State<SummaryRental> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  (widget.noOfDays > 1) ? StyledHeading('Renting for ${widget.noOfDays} days (at $pricePerDay${globals.thb} per day)', weight: FontWeight.normal,)
-                  : StyledHeading('Renting for ${widget.price}${globals.thb}', weight: FontWeight.normal)
+                  (widget.noOfDays > 1) ? StyledHeading('Renting for ${widget.noOfDays} days (at $pricePerDay${widget.symbol} per day)', weight: FontWeight.normal,)
+                  : StyledHeading('Renting for ${widget.price}${widget.symbol}', weight: FontWeight.normal)
                   // Text('($pricePerDay${globals.thb} per day)', style: const TextStyle(fontSize: 14)),
                 ],
               ),),
@@ -136,13 +135,13 @@ class _SummaryRentalState extends State<SummaryRental> {
           const SizedBox(height: 20),
           Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
           // SizedBox(height: 20),
-          DeliveryRadioWidget(updateDeliveryPrice),
+          DeliveryRadioWidget(updateDeliveryPrice, widget.symbol),
           Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
           ValueListenableBuilder(
             valueListenable: widget.deliveryPrice,
             builder: (BuildContext context, int val, Widget? child) {
               log('Deliver fee being sent as val to RentalPriceSummary is: $val');
-              return RentalPriceSummary(widget.price, widget.noOfDays, val);
+              return RentalPriceSummary(widget.price, widget.noOfDays, val, widget.symbol);
           }),
           const Expanded(child: SizedBox()),
           Row(

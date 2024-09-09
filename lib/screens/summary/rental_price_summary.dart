@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/shared/styled_text.dart';
 
 class RentalPriceSummary extends StatelessWidget {
-  const RentalPriceSummary(this.price, this.noOfDays, this.deliveryPrice, {super.key});
+  const RentalPriceSummary(this.price, this.noOfDays, this.deliveryPrice, this.symbol, {super.key});
 
   final int price;
   final int noOfDays;
   final int deliveryPrice;
+  final String symbol;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class RentalPriceSummary extends StatelessWidget {
               children: [
                 StyledBody('$pricePerDay x $noOfDays days', color: Colors.black, weight: FontWeight.normal),
                 const Expanded(child: SizedBox()),
-                StyledBody('$price${globals.thb}', color: Colors.black, weight: FontWeight.normal),
+                StyledBody('$price$symbol', color: Colors.black, weight: FontWeight.normal),
               ],
             ),
           ),
@@ -37,7 +37,7 @@ class RentalPriceSummary extends StatelessWidget {
               children: [
                 const StyledBody('Delivery fee', color: Colors.black, weight: FontWeight.normal),
                 const Expanded(child: SizedBox()),
-                StyledBody('$deliveryPrice${globals.thb}', color: Colors.black, weight: FontWeight.normal),
+                StyledBody('$deliveryPrice$symbol', color: Colors.black, weight: FontWeight.normal),
             
               ],
             ),
@@ -49,7 +49,7 @@ class RentalPriceSummary extends StatelessWidget {
               children: [
                 const StyledHeading('Total'),
                 const Expanded(child: SizedBox()),
-                StyledHeading('$finalPrice${globals.thb}'),
+                StyledHeading('$finalPrice$symbol'),
               ],
             ),
           ),

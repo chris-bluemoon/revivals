@@ -16,7 +16,7 @@ var uuid = const Uuid();
 
 class SummaryPurchase extends StatefulWidget {
   SummaryPurchase(
-      this.item, this.startDate, this.endDate, this.noOfDays, this.price,
+      this.item, this.startDate, this.endDate, this.noOfDays, this.price, this.symbol,
       {super.key});
 
   final Item item;
@@ -24,6 +24,7 @@ class SummaryPurchase extends StatefulWidget {
   final DateTime endDate;
   final int noOfDays;
   final int price;
+  final String symbol;
 
   final ValueNotifier<int> deliveryPrice = ValueNotifier<int>(0);
 
@@ -135,7 +136,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
           const SizedBox(height: 20),
           Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[200],),
           // SizedBox(height: 20),
-          DeliveryRadioWidget(updateDeliveryPrice),
+          DeliveryRadioWidget(updateDeliveryPrice, widget.symbol),
           Divider(height:1, indent: 50, endIndent: 50, color: Colors.grey[300],),
           ValueListenableBuilder(
             valueListenable: widget.deliveryPrice,

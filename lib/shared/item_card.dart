@@ -62,28 +62,49 @@ class _ItemCardState extends State<ItemCard> {
       }
     });}
 
-    @override
-    void initState() {
-    List currListOfFavs = Provider.of<ItemStore>(context, listen: false).favourites;
-    isFav = isAFav(widget.item, currListOfFavs);
-     super.initState();
-    }
+  String convertedRentPrice = '-1';
+  String convertedBuyPrice = '-1';
+  String convertedRRPPrice = '-1';
+  String symbol = '?';
 
-    List convertedRentPriceList = [];
-    int convertedRentPrice = -1;
-    String symbol = '?';
+  @override
+  void initState() {
+    List currListOfFavs =
+        Provider.of<ItemStore>(context, listen: false).favourites;
+    isFav = isAFav(widget.item, currListOfFavs);
+    setPrice();
+    super.initState();
+  }
+
+
+
+  void setPrice() {
+    if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] !=
+        'BANGKOK') {
+      String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+      convertedRentPrice = convertFromTHB(widget.item.rentPrice, country);
+      convertedBuyPrice = convertFromTHB(widget.item.buyPrice, country);
+      convertedRRPPrice = convertFromTHB(widget.item.rrp, country);
+      symbol = getCurrencySymbol(country);
+    } else {
+      convertedRentPrice = widget.item.rentPrice.toString();
+      convertedBuyPrice = widget.item.buyPrice.toString();
+      convertedRRPPrice = widget.item.rrp.toString();
+      symbol = globals.thb;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] != 'BANGKOK') {
-      convertedRentPriceList = convertFromTHB(widget.item.rentPrice, 'SGD');
-      convertedRentPrice = convertedRentPriceList[0];
-      symbol = convertedRentPriceList[1];
-    } else {
-      convertedRentPrice = widget.item.rentPrice;
-      symbol = globals.thb;
-    }
+    // if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] != 'BANGKOK') {
+    //   convertedRentPriceList = convertFromTHB(widget.item.rentPrice, 'SGD');
+    //   convertedRentPrice = convertedRentPriceList[0];
+    //   symbol = convertedRentPriceList[1];
+    // } else {
+    //   convertedRentPrice = widget.item.rentPrice;
+    //   symbol = globals.thb;
+    // }
     return Card(
       
       shape: BeveledRectangleBorder(
@@ -138,9 +159,9 @@ class _ItemCardState extends State<ItemCard> {
             ),
             // StyledText('Size: ${item.size.toString()}'),
             // int convertedRentPrice = convertFromTHB(${widget.item.rentPrice}, 'SGD');
-            if (widget.item.rentPrice > 0) StyledBody('Rent for ${convertedRentPrice.toString()}$symbol per day', weight: FontWeight.normal),
-            if (widget.item.buyPrice > 0) StyledBody('Buy for ${widget.item.buyPrice.toString()}${globals.thb}', weight: FontWeight.normal),
-            StyledBodyStrikeout('RRP ${widget.item.rrp.toString()}${globals.thb}', weight: FontWeight.normal),
+            if (widget.item.rentPrice > 0) StyledBody('Rent for $convertedRentPrice$symbol per day', weight: FontWeight.normal),
+            if (widget.item.buyPrice > 0) StyledBody('Buy for $convertedBuyPrice$symbol', weight: FontWeight.normal),
+            StyledBodyStrikeout('RRP $convertedRRPPrice$symbol', weight: FontWeight.normal),
           ],
         ),
       ),

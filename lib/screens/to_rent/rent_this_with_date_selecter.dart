@@ -5,22 +5,22 @@ import 'package:flutter_date_range_picker/flutter_date_range_picker.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/summary/summary_rental.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/get_country_price.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
 class RentThisWithDateSelecter extends StatefulWidget {
-  const RentThisWithDateSelecter(this.item, this.rentalDays, {super.key});
+  const RentThisWithDateSelecter(this.item, {super.key});
 
   final Item item;
-  final int rentalDays;
+  // final int rentalDays;
 
   @override
   State<RentThisWithDateSelecter> createState() =>
@@ -36,15 +36,31 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
   bool showConfirm = false;
 
   int getPricePerDay(noOfDays) {
+    String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+    
     int oneDayPrice = widget.item.rentPrice;
 
+    if (country == 'BANGKOK') {
+      oneDayPrice = widget.item.rentPrice;
+    } else {
+      oneDayPrice = int.parse(convertFromTHB(widget.item.rentPrice, country));
+    }
+
     if (noOfDays == 3) {
-      int threeDayPrice = ((oneDayPrice) * 0.8).toInt()-1;
-      return (threeDayPrice ~/ 100) * 100 + 100;
+      int threeDayPrice = (oneDayPrice * 0.8).toInt()-1;
+      if (country == 'BANGKOK') {
+        return (threeDayPrice ~/ 100) * 100 + 100;
+      } else {
+        return (threeDayPrice ~/ 5) * 5 + 5;
+      }
     }
     if (noOfDays == 5) {
-      int fiveDayPrice = ((oneDayPrice) * 0.6).toInt()-1;
-      return (fiveDayPrice ~/ 100) * 100 + 100;
+      int fiveDayPrice = (oneDayPrice * 0.6).toInt()-1;
+      if (country == 'BANGKOK') {
+        return (fiveDayPrice ~/ 100) * 100 + 100;
+      } else {
+        return (fiveDayPrice ~/ 5) * 5 + 5;
+      }
     }
     return oneDayPrice;
   }
@@ -97,6 +113,14 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
   DateRange selectedDateRange = DateRange(DateTime.now(), DateTime.now());
 
   int selectedOption = -1;
+  String symbol = '?';
+
+  @override
+  void initState() {
+    String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+    symbol = getCurrencySymbol(country);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     // rebuildAllChildren(context);
@@ -146,7 +170,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
             ListTile(
                 dense: true,
                 visualDensity: const VisualDensity(vertical: -3),
-                title: StyledHeading('1 Day (${(getPricePerDay(1))}${globals.thb} per day)', weight: FontWeight.normal),
+                title: StyledHeading('1 Day (${(getPricePerDay(1))}$symbol per day)', weight: FontWeight.normal),
                 trailing: Radio<int>(
                     value: 0,
                     groupValue: selectedOption,
@@ -187,7 +211,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                           showConfirm = true;
                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays))
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, symbol))
                           )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                           // bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           // loggedIn ? Navigator.of(context).push(
@@ -200,7 +224,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
             ListTile(
               dense: true,
               visualDensity: const VisualDensity(vertical: -3),
-              title: StyledHeading('3 Days (${getPricePerDay(3)}${globals.thb} per day)', weight: FontWeight.normal),
+              title: StyledHeading('3 Days (${getPricePerDay(3)}$symbol per day)', weight: FontWeight.normal),
               trailing: Radio<int>(
                 value: 1,
                 groupValue: selectedOption,
@@ -315,7 +339,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                       showConfirm = true;
                                              bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays))
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, symbol))
                           )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                     });
                   }
@@ -325,7 +349,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
             ListTile(
               dense: false,
               visualDensity: const VisualDensity(vertical: -3),
-              title: StyledHeading('5 Days (${getPricePerDay(5)}${globals.thb} per day)', weight: FontWeight.normal),
+              title: StyledHeading('5 Days (${getPricePerDay(5)}$symbol per day)', weight: FontWeight.normal),
               trailing: Radio<int>(
                 value: 2,
                 groupValue: selectedOption,
@@ -363,7 +387,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                       showConfirm = true;
                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays))
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, symbol))
                           )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                     });
                   }

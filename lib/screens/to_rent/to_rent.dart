@@ -11,6 +11,7 @@ import 'package:unearthed/screens/summary/summary_purchase.dart';
 import 'package:unearthed/screens/to_rent/item_widget.dart';
 import 'package:unearthed/screens/to_rent/rent_this_with_date_selecter.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/get_country_price.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
@@ -35,7 +36,7 @@ class ToRent extends StatefulWidget {
   //   return imageName;
   // }
 
-  final ValueNotifier<int> rentalDays = ValueNotifier<int>(0);
+  // final ValueNotifier<int> rentalDays = ValueNotifier<int>(0);
 
 }
 
@@ -45,6 +46,36 @@ class _ToRentState extends State<ToRent> {
   int currentIndex = 0;
 
   CarouselController buttonCarouselController = CarouselController();
+
+  String convertedRentPrice = '-1';
+  String convertedBuyPrice = '-1';
+  String convertedRRPPrice = '-1';
+  String symbol = '?';
+
+  @override
+  void initState() {
+    setPrice();
+    super.initState();
+  }
+
+
+
+  void setPrice() {
+    if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] !=
+        'BANGKOK') {
+      String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+      log(widget.item.rentPrice.toString());
+      convertedRentPrice = convertFromTHB(widget.item.rentPrice, country);
+      convertedBuyPrice = convertFromTHB(widget.item.buyPrice, country);
+      convertedRRPPrice = convertFromTHB(widget.item.rrp, country);
+      symbol = getCurrencySymbol(country);
+    } else {
+      convertedRentPrice = widget.item.rentPrice.toString();
+      convertedBuyPrice = widget.item.buyPrice.toString();
+      convertedRRPPrice = widget.item.rrp.toString();
+      symbol = globals.thb;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +157,7 @@ class _ToRentState extends State<ToRent> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0, bottom: 10),
-              child: StyledBody('Rental price: ${widget.item.rentPrice.toString()} ${globals.thb}'),
+              child: StyledBody('Rental price: $convertedRentPrice$symbol'),
               // child: StyledBody('Rental price: ${widget.item.rentPrice.toString()} ${getCurrency()}'),
             ),
             Padding(
@@ -161,7 +192,7 @@ class _ToRentState extends State<ToRent> {
                   child: OutlinedButton(
                     onPressed: () {
                       log('Pushing to SummaryPurchase');
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (SummaryPurchase(widget.item, DateTime.now(), DateTime.now(), 0, widget.item.buyPrice))));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (SummaryPurchase(widget.item, DateTime.now(), DateTime.now(), 0, widget.item.buyPrice, symbol))));
                     },
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.all(10),
@@ -178,7 +209,7 @@ class _ToRentState extends State<ToRent> {
                     onPressed: () {
                         bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                         if (loggedIn) { Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item, widget.rentalDays.value))
+                          MaterialPageRoute(builder: (context) => (RentThisWithDateSelecter(widget.item))
                         // )) : goToLogin();
                         )); } else { 
                           showAlertDialog(context);

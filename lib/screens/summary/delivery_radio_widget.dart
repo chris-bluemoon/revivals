@@ -1,13 +1,15 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:unearthed/globals.dart' as globals;
+import 'package:provider/provider.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class DeliveryRadioWidget extends StatefulWidget {
-  const DeliveryRadioWidget(this.updatePrice, {super.key});
+  const DeliveryRadioWidget(this.updatePrice, this.symbol, {super.key});
 
   final Function(int) updatePrice;
+  final String symbol;
 
   @override
   State<DeliveryRadioWidget> createState() => _DeliveryRadioWidget();
@@ -15,6 +17,20 @@ class DeliveryRadioWidget extends StatefulWidget {
 
 class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
   int selectedOption = 1;
+ 
+  int deliveryPrice = 0;
+
+
+  @override
+  void initState() {
+
+    if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] == 'BANGKOK') {
+      deliveryPrice = 100;
+    } else {
+      deliveryPrice = 20;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +44,7 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
             ListTile(
               dense: true,
               visualDensity: const VisualDensity(vertical: -3),
-              title: StyledBody('We will deliver at 100${globals.thb}', weight: FontWeight.normal),
+              title: StyledBody('We will deliver at $deliveryPrice${widget.symbol}', weight: FontWeight.normal),
               trailing: Radio<int>(
                 value: 0,
                 groupValue: selectedOption,
@@ -36,7 +52,7 @@ class _DeliveryRadioWidget extends State<DeliveryRadioWidget> {
                 onChanged: (value) {
                   setState(() {
                     selectedOption = value!;
-                    widget.updatePrice(100);
+                    widget.updatePrice(deliveryPrice);
                     log("Button value: $value");
                   });
                 },
