@@ -6,6 +6,7 @@ import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/get_country_price.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 // ignore: must_be_immutable
@@ -59,12 +60,37 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
       }
     });}
 
-    @override
-    void initState() {
-    List currListOfFavs = Provider.of<ItemStore>(context, listen: false).favourites;
+  String convertedRentPrice = '-1';
+  String convertedBuyPrice = '-1';
+  String convertedRRPPrice = '-1';
+  String symbol = '?';
+
+  @override
+  void initState() {
+    List currListOfFavs =
+        Provider.of<ItemStore>(context, listen: false).favourites;
     isFav = isAFav(widget.item, currListOfFavs);
-     super.initState();
+    setPrice();
+    super.initState();
+  }
+
+
+
+  void setPrice() {
+    if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] !=
+        'BANGKOK') {
+      String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+      convertedRentPrice = convertFromTHB(widget.item.rentPrice, country);
+      convertedBuyPrice = convertFromTHB(widget.item.buyPrice, country);
+      convertedRRPPrice = convertFromTHB(widget.item.rrp, country);
+      symbol = getCurrencySymbol(country);
+    } else {
+      convertedRentPrice = widget.item.rentPrice.toString();
+      convertedBuyPrice = widget.item.buyPrice.toString();
+      convertedRRPPrice = widget.item.rrp.toString();
+      symbol = globals.thb;
     }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +144,8 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
               ],
             ),
             // StyledText('Size: ${item.size.toString()}'),
-            StyledBody('Rent for ${widget.item.rentPrice.toString()} ${globals.thb} per day'),
-            StyledBodyStrikeout('RRP ${widget.item.rrp.toString()} ${globals.thb}'),
+            StyledBody('Rent for $convertedRentPrice$symbol per day', weight: FontWeight.normal),
+            StyledBodyStrikeout('RRP $convertedRRPPrice$symbol', weight: FontWeight.normal),
           ],
         ),
       ),
