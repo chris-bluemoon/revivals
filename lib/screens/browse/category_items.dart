@@ -49,6 +49,7 @@ class _CategoryItemsState extends State<CategoryItems> {
     }
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.15,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

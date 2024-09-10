@@ -47,8 +47,11 @@ class _Profile extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+            double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
         appBar: AppBar(
+        toolbarHeight: width * 0.15,
         // centerTitle: true,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,

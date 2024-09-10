@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: width*0.15,
+          toolbarHeight: width*0.2,
           // centerTitle: true,
           title: SizedBox(
               // TODO: Image is not centered in appbar with back arrow

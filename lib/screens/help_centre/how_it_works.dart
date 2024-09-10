@@ -12,7 +12,7 @@ class HowItWorks extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          // toolbarHeight: width * 0.15,
+          toolbarHeight: width * 0.15,
           title: const StyledTitle("How It Works"),
           centerTitle: true,
           backgroundColor: Colors.white,

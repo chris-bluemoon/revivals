@@ -47,6 +47,7 @@ class _OccasionItemsState extends State<OccasionItems> {
     }
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.15,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

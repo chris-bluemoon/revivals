@@ -48,6 +48,7 @@ class _DesignerItemsState extends State<DesignerItems> {
     log(widget.brand);
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.15,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

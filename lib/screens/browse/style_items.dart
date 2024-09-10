@@ -6,6 +6,7 @@ import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/item_card.dart';
+import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
@@ -46,10 +47,11 @@ class _StyleItemsState extends State<StyleItems> {
     }
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.15,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(widget.style.toUpperCase(), style: const TextStyle(fontSize: 18)),
+            StyledTitle(widget.style.toUpperCase()),
 
             // SizedBox(
             //   child: Image.asset(

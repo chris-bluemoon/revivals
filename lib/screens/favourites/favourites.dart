@@ -26,6 +26,8 @@ class _FavouritesState extends State<Favourites> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     if (Provider.of<ItemStore>(context, listen: false).favourites.length > 0) {
       anyFavourites = true;
     } else {
@@ -33,6 +35,7 @@ class _FavouritesState extends State<Favourites> {
     }
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.15,
         // centerTitle: true,
         title: const Row(
             // TODO: Image is not centered in appbar with back arrow
