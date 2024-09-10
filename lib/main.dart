@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:unearthed/screens/help_centre/faqs.dart';
 import 'package:unearthed/screens/help_centre/how_it_works.dart';
 import 'package:unearthed/screens/help_centre/sizing_guide.dart';
-import 'package:unearthed/screens/help_centre/what_is.dart';
+import 'package:unearthed/screens/help_centre/who_are_we.dart';
 import 'package:unearthed/screens/home_page.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/theme.dart';
@@ -43,7 +43,7 @@ void main() async {
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/faqs': (context) => const FAQs(),
         '/howItWorks': (context) => const HowItWorks(),
-        '/whatIs': (context) => const WhatIs(),
+        '/whatIs': (context) => const WhoAreWe(),
         '/sizingGuide': (context) => const SizingGuide(),
         // '/dateAddedItems': (context) => const DateAddedItems(),
       },

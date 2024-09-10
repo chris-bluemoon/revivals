@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
                         // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const SizingGuide())));
                         Navigator.pushNamed(context, '/sizingGuide');
                       },
-                      child: const HomePageBottomCard('Sizing Guide FAQ')),
+                      child: const HomePageBottomCard('Sizing Guide')),
                     const SizedBox(width: 4),
                   ],
                 ),
