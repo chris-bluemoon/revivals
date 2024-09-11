@@ -111,13 +111,13 @@ class _AllItemsState extends State<AllItems> {
                   ),
                 );
               }),
-              TextButton(
-                onPressed: () {
-                  handleSubmit();
-                  // addItemsAll();
-                },
-                child: const Text('ADD'),
-              )
+              // TextButton(
+              //   onPressed: () {
+              //     handleSubmit();
+              //     // addItemsAll();
+              //   },
+              //   child: const Text('ADD'),
+              // )
             ],
           )),
     );

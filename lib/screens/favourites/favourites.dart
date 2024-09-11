@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/item_card.dart';
+import 'package:unearthed/shared/neumorphic_button.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
@@ -74,6 +75,7 @@ class _FavouritesState extends State<Favourites> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('No favourites yet', style: TextStyle(fontSize: 22),),
+            NeumorphismButtonDemo()
           ],
         )
       ],)

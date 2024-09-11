@@ -79,6 +79,7 @@ class _ItemCardState extends State<ItemCard> {
 
 
   void setPrice() {
+    log(Provider.of<ItemStore>(context, listen: false).renter.settings.toString());
     if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] !=
         'BANGKOK') {
       String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];

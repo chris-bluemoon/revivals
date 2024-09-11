@@ -11,6 +11,7 @@ import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/screens/profile/settings.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/line.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:unearthed/shared/whatsapp.dart';
 
@@ -173,7 +174,8 @@ class _ProfileLandingState extends State<ProfileLanding> {
               ),
               GestureDetector(
                 onTap: () {
-                  chatWithUsMessage(context);
+                  // chatWithUsWhatsApp(context);
+                  chatWithUsLine(context);
                 },
                 child: Row(
                   children: [
@@ -257,7 +259,33 @@ class _ProfileLandingState extends State<ProfileLanding> {
 }
 
 // Send a Whatsapp
-void chatWithUsMessage(BuildContext context) async {
+void chatWithUsLine(BuildContext context) async {
+  log('Tapped LINE send');
+  try {
+    await openLineApp(
+      phone: '+65 91682725',
+      text: 'Hello Unearthed Support...',
+    );
+  } on Exception catch (e) {
+    showDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: const Text("Attention"),
+              content: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Text(e.toString()),
+              ),
+              actions: [
+                CupertinoDialogAction(
+                  child: const Text('Close'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ],
+            ));
+  }
+}
+// Send a Whatsapp
+void chatWithUsWhatsApp(BuildContext context) async {
   log('Tapped whatsapp send');
   try {
     await openWhatsApp(

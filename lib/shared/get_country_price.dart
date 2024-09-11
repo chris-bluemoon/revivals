@@ -1,13 +1,20 @@
 import 'dart:developer';
+import 'dart:io';
+
+import 'package:intl/intl.dart';
 
 double sgdthb = 25.76;
 String symbol = '?';
+String thb  = NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'THB').currencySymbol;
 
 String getCurrencySymbol (String country) {
   switch (country) {
     case 'SINGAPORE':
       symbol = '\$';
-  }
+      break;
+      case 'BANGKOK':
+        symbol = thb ;
+    }
 
   return symbol;
 }

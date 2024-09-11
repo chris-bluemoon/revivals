@@ -15,7 +15,7 @@ class NewArrivalsHomeWidget extends StatelessWidget {
       child: Stack(
         children: [
           GestureDetector(
-            child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
+            child: Image.asset('assets/img/backgrounds/latest_additions_home_page.png'),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const DateAddedItems('01-01-2020'))));
             }

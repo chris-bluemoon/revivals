@@ -83,6 +83,7 @@ class _ToRentState extends State<ToRent> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.15,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -235,6 +236,9 @@ class _ToRentState extends State<ToRent> {
 
 showAlertDialog(BuildContext context) {  
   // Create button  
+  double width = MediaQuery.of(context).size.width;
+
+
   Widget okButton = ElevatedButton(  
     style: OutlinedButton.styleFrom(
                           textStyle: const TextStyle(color: Colors.white),
@@ -256,9 +260,9 @@ showAlertDialog(BuildContext context) {
     // Create AlertDialog  
   AlertDialog alert = AlertDialog(  
     title: const Center(child: StyledHeading("NOT LOGGED IN")),
-    content: const SizedBox(
-      height: 60,
-      child: Column(
+    content: SizedBox(
+      height: width * 0.2,
+      child: const Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -269,7 +273,7 @@ showAlertDialog(BuildContext context) {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              StyledHeading("or register to continue!"),
+              StyledHeading("or register to continue"),
             ],
           ),
         ],

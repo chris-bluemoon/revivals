@@ -3,7 +3,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/home/all_items_home_widget.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
-import 'package:unearthed/screens/home/new_arrivals_home_widget.dart';
+import 'package:unearthed/screens/home/new_arrivals_carousel.dart';
 import 'package:unearthed/screens/home/offer_home_widget.dart';
 import 'package:unearthed/screens/home/rentals_home_widget.dart';
 import 'package:unearthed/screens/home/to_buy_home_widget.dart';
@@ -51,6 +51,7 @@ class _HomeState extends State<Home> {
               CarouselSlider(
                 carouselController: buttonCarouselController,
                 options: CarouselOptions(
+                    viewportFraction: 1,
                     onPageChanged: (index, reason) {
                       setState(() {
                         currentIndex = index;
@@ -82,7 +83,7 @@ class _HomeState extends State<Home> {
               ),
 
               // Now display the first home page widget, for now a simple icon button
-              const SizedBox(height: 20),
+              SizedBox(height: width * 0.02),
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: StyledHeading(
@@ -91,16 +92,18 @@ class _HomeState extends State<Home> {
               ),
               const AllItemsHomeWidget(),
 
-              const SizedBox(height: 20),
+              SizedBox(height: width * 0.02),
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: StyledHeading(
                   'NEW ARRIVALS',
                 ),
               ),
-              const NewArrivalsHomeWidget(),
+              // const NewArrivalsHomeWidget(),
+              SizedBox(height: width * 0.02),
+              const NewArrivalsCarousel(),
 
-              const SizedBox(height: 20),
+              SizedBox(height: width * 0.03),
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: StyledHeading(
@@ -109,7 +112,7 @@ class _HomeState extends State<Home> {
               ),
               const RentalHomeWidget(),
 
-              const SizedBox(height: 20),
+              SizedBox(height: width * 0.02),
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: StyledHeading(

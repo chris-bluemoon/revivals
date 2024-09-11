@@ -117,16 +117,18 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
 
   @override
   void initState() {
-    String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
-    symbol = getCurrencySymbol(country);
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     // rebuildAllChildren(context);
+    String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+    symbol = getCurrencySymbol(country);
+        log('Symbol: $symbol');
         double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.15,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -43,7 +43,7 @@ class _BookingItemsState extends State<BookingTypeItems> {
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     for (Item i in allItems) {
       log('checking: ${widget.booking_type} vs database stored type: ${i.bookingType}');
-      if (widget.booking_type == i.bookingType) {
+      if (widget.booking_type == i.bookingType || i.bookingType == 'both') {
         bookingItems.add(i);
       }
     }

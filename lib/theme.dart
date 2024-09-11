@@ -58,7 +58,10 @@ ThemeData primaryTheme = ThemeData(
     ),
     
   ),
-   
+  buttonBarTheme: const ButtonBarThemeData(
+    buttonHeight: 100,
+      buttonTextTheme: ButtonTextTheme.primary,
+    ), 
         tabBarTheme: TabBarTheme(
           labelColor: Colors.black,
           indicatorColor: Colors.black,
