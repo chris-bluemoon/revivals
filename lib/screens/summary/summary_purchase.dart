@@ -215,7 +215,7 @@ showAlertDialog(BuildContext context, String itemType, double width) {
                           foregroundColor: Colors.white,//change background color of button
                           backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(0.0),
                         ),
                         side: const BorderSide(width: 1.0, color: Colors.black),
       ),
@@ -263,7 +263,7 @@ showAlertDialog(BuildContext context, String itemType, double width) {
       okButton,  
     ],  
                 shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderRadius: BorderRadius.all(Radius.circular(0.0)),
             ),
   );  
     showDialog(  

@@ -134,7 +134,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                                                     barrierDismissible: false,
                                                     context: context,
                                                     builder: (_) => AlertDialog(
-                              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))
+                              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(0))
                               ), 
                                                       actions: [
                             // ElevatedButton(
@@ -142,10 +142,10 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                               // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
                             ElevatedButton(
                               style: ButtonStyle(
-                               backgroundColor: const WidgetStatePropertyAll<Color>(Colors.white),
+                               backgroundColor: const WidgetStatePropertyAll<Color>(Colors.black),
                               shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                                 const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  borderRadius: BorderRadius.all(Radius.circular(0)),
                                   side: BorderSide(color: Colors.black)
                                 )
                               )
@@ -155,7 +155,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                                 Navigator.of(context).popUntil((route) => route.isFirst);
                                 // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
                               },
-                              child: const StyledHeading('OK', weight: FontWeight.normal),
+                              child: const StyledHeading('OK', weight: FontWeight.normal, color: Colors.white),
                             ),],
                                                       backgroundColor: Colors.white,
                                                       title: const Row(

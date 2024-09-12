@@ -196,20 +196,24 @@ class _ProfileLandingState extends State<ProfileLanding> {
                         barrierDismissible: false,
                         context: context,
                         builder: (_) => AlertDialog(
+                          shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(0))),
                           actions: [
                             // ElevatedButton(
                             // onPressed: () {cancelLogOut(context);},
                             // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
                             ElevatedButton(
                               style: ButtonStyle(
+                                  foregroundColor: WidgetStateProperty.all(Colors.white),
                                   backgroundColor:
                                       const WidgetStatePropertyAll<Color>(
-                                          Colors.white),
+                                          Colors.black),
                                   shape: WidgetStateProperty.all<
                                           RoundedRectangleBorder>(
                                       const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
+                                              Radius.circular(0)),
                                           side:
                                               BorderSide(color: Colors.black)))),
                               onPressed: () {
@@ -217,7 +221,8 @@ class _ProfileLandingState extends State<ProfileLanding> {
                                 goBack(context);
                               },
                               child: const StyledHeading('OK',
-                                  weight: FontWeight.normal
+                                  weight: FontWeight.normal,
+                                  color: Colors.white,
                                   ),
                             ),
                           ],
@@ -329,7 +334,7 @@ showAlertDialog(BuildContext context) {
       okButton,
     ],
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+      borderRadius: BorderRadius.all(Radius.circular(0.0)),
     ),
   );
   showDialog(
@@ -340,27 +345,3 @@ showAlertDialog(BuildContext context) {
   );
 }
 
-showAlertDialog2(BuildContext context) {
-  // set up the button
-  Widget okButton = TextButton(
-    child: const Text("OK"),
-    onPressed: () {},
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("My title"),
-    content: const Text("This is my message."),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
-}

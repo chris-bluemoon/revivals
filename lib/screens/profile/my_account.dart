@@ -345,7 +345,7 @@ showAlertDialog(BuildContext context) {
       okButton,  
     ],  
                 shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              borderRadius: BorderRadius.all(Radius.circular(0.0)),
             ),
   );  
     showDialog(  

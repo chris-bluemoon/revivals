@@ -112,7 +112,7 @@ class _SummaryRentalState extends State<SummaryRental> {
               const SizedBox(width: 20),
               Icon(Icons.location_pin, size: width * 0.06),
               const SizedBox(width: 20),
-              (Provider.of<ItemStore>(context, listen: false) == 'BANGKOK') ? const StyledBody('Bangkok, Thailand')
+              (Provider.of<ItemStore>(context, listen: false).renter.settings[0] == 'BANGKOK') ? const StyledBody('Bangkok, Thailand')
                 : const StyledBody('Singapore')
             ],
           ),
