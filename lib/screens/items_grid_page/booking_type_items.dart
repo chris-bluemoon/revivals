@@ -49,7 +49,7 @@ class _BookingItemsState extends State<BookingTypeItems> {
     }
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.15,
+        toolbarHeight: width * 0.1,
         title: StyledTitle(Pluralize().plural(widget.booking_type).toUpperCase()),
         centerTitle: true,
         backgroundColor: Colors.white,

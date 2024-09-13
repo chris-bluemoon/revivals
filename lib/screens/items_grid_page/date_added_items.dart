@@ -78,7 +78,7 @@ class _DateAddedItemsState extends State<DateAddedItems> {
     }
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.15,
+        toolbarHeight: width * 0.1,
         title: const StyledTitle('LATEST ADDITIONS'),
         centerTitle: true,
         backgroundColor: Colors.white,

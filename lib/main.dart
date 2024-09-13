@@ -1,7 +1,6 @@
 // firebase
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/help_centre/faqs.dart';
 import 'package:unearthed/screens/help_centre/how_it_works.dart';
@@ -22,7 +21,8 @@ void main() async {
 
   runApp(ChangeNotifierProvider(
     create: (context) => ItemStore(),
-    child: GetMaterialApp(
+    child: MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: primaryTheme,
       // home: const HomePage(),
       // home: const HomeTest(),

@@ -67,7 +67,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.15,
+        toolbarHeight: width * 0.1,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

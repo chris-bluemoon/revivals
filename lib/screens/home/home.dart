@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
                   );
                 }).toList(),
               ),
-
+              SizedBox(height: width * 0.02),
               // Display dot indicators for carousel
 
               Center(

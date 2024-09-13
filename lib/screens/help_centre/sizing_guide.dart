@@ -12,7 +12,7 @@ class SizingGuide extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: width * 0.15,
+          toolbarHeight: width * 0.1,
           title: const StyledTitle("Sizing Guide"),
           centerTitle: true,
           backgroundColor: Colors.white,
@@ -38,7 +38,9 @@ class SizingGuide extends StatelessWidget {
                 'Welcome to Unearthed Collections! To ensure you have the perfect fit for your special occasion, please refer to our detailed sizing guide below. If you need any assistance, don’t hesitate to contact our customer service team.',
                 weight: FontWeight.normal),
             SizedBox(height: width * 0.02),
-            Divider(height: width * 0.03, indent: width * 0.25, endIndent: width * 0.25,),
+            // Divider(height: width * 0.03, indent: width * 0.25, endIndent: width * 0.25,),
+                        Center(child: Image.asset('assets/img/backgrounds/curly_seperator_1.png')),
+
             SizedBox(height: width * 0.02),
             const StyledHeading('1. How to Measure Yourself'),
             SizedBox(height: width * 0.01),
@@ -54,7 +56,7 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'Bust: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: 'Measure around the fullest part of your bust, keeping the tape measure level and snug but not tight.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),
@@ -62,6 +64,7 @@ class SizingGuide extends StatelessWidget {
                             ]))
                     ),
                   ]),
+            SizedBox(height: width * 0.01),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -69,7 +72,7 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'Hips: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: 'Measure around the fullest part of your hips, keeping the tape measure level.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),
@@ -77,6 +80,7 @@ class SizingGuide extends StatelessWidget {
                             ]))
                     ),
                   ]),
+            SizedBox(height: width * 0.01),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -84,13 +88,14 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'Waist: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: 'Measure around the narrowest part of your waist, usually just above your belly button. Ensure the tape measure is parallel to the floor.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),
                             ]))
                     ),
                   ]),
+            SizedBox(height: width * 0.01),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -98,7 +103,7 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'Length: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: 'For full-length dresses, measure from the top of your shoulder to where you want the hem to fall. For knee-length or shorter dresses, measure from the top of your shoulder to your desired hem length.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),
@@ -106,6 +111,7 @@ class SizingGuide extends StatelessWidget {
                             ]))
                     ),
                   ]),
+            SizedBox(height: width * 0.01),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -113,7 +119,7 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'Shoulder to Shoulder: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: 'Measure across the back from one shoulder to the other, keeping the tape measure straight and level.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),
@@ -121,6 +127,7 @@ class SizingGuide extends StatelessWidget {
                             ]))
                     ),
                   ]),
+            SizedBox(height: width * 0.01),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -128,7 +135,7 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'Inseam: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: '(for pants or jumpsuits): Measure from the crotch seam to the bottom of the leg.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),
@@ -294,7 +301,7 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'A-Line Dresses: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: 'These are generally flattering on most body types and can accommodate a range of sizes.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),
@@ -303,6 +310,7 @@ class SizingGuide extends StatelessWidget {
                             ]))
                     ),
                   ]),
+            SizedBox(height: width * 0.01),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -310,7 +318,7 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'Bodycon Dresses: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: 'For a more fitted look, consider sizing up if you’re between sizes.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),
@@ -318,6 +326,7 @@ class SizingGuide extends StatelessWidget {
                             ]))
                     ),
                   ]),
+            SizedBox(height: width * 0.01),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -325,7 +334,7 @@ class SizingGuide extends StatelessWidget {
                       child: 
                         RichText(
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 12),
+                            style: TextStyle(fontSize: width * 0.01),
                             children: [
                               TextSpan(text: 'Empire Waist Dresses: ', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.bold,),),
                               TextSpan(text: 'These are great for accentuating the bust and are usually more forgiving in the waist area.', style: GoogleFonts.openSans(textStyle: Theme.of(context).textTheme.bodyMedium, fontSize: width*0.03, color: Colors.black, fontWeight: FontWeight.normal,),),

@@ -36,7 +36,7 @@ class _FavouritesState extends State<Favourites> {
     }
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.15,
+        toolbarHeight: width * 0.1,
         // centerTitle: true,
         title: const Row(
             // TODO: Image is not centered in appbar with back arrow

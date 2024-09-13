@@ -51,7 +51,7 @@ class _Profile extends State<Profile> {
 
     return Scaffold(
         appBar: AppBar(
-        toolbarHeight: width * 0.15,
+        toolbarHeight: width * 0.1,
         // centerTitle: true,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
