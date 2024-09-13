@@ -37,11 +37,11 @@ class WhoAreWe extends StatelessWidget {
             const StyledBody(
                 'Welcome to Unearthed Collections, where style meets convenience! We’re more than just a dress rental service, we’re your go-to destination for unforgettable fashion experiences.',
                 weight: FontWeight.normal),
-            SizedBox(height: width * 0.02),
+            SizedBox(height: width * 0.03),
             // Divider(height: width * 0.03, indent: width * 0.25, endIndent: width * 0.25,),
             Center(child: Image.asset('assets/img/backgrounds/curly_seperator_1.png')),
 
-            SizedBox(height: width * 0.02),
+            SizedBox(height: width * 0.03),
             const StyledHeading('Our Mission'),
             SizedBox(height: width * 0.01),
             Padding(

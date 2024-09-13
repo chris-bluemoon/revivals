@@ -83,7 +83,7 @@ class _DateAddedItemsState extends State<DateAddedItems> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon:  Icon(Icons.chevron_left, size: width*0.06),
+          icon:  Icon(Icons.chevron_left, size: width*0.08),
           onPressed: () {
             Navigator.pop(context);
           },

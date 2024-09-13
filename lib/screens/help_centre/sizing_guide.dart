@@ -37,11 +37,11 @@ class SizingGuide extends StatelessWidget {
             const StyledBody(
                 'Welcome to Unearthed Collections! To ensure you have the perfect fit for your special occasion, please refer to our detailed sizing guide below. If you need any assistance, don’t hesitate to contact our customer service team.',
                 weight: FontWeight.normal),
-            SizedBox(height: width * 0.02),
+            SizedBox(height: width * 0.03),
             // Divider(height: width * 0.03, indent: width * 0.25, endIndent: width * 0.25,),
                         Center(child: Image.asset('assets/img/backgrounds/curly_seperator_1.png')),
 
-            SizedBox(height: width * 0.02),
+            SizedBox(height: width * 0.03),
             const StyledHeading('1. How to Measure Yourself'),
             SizedBox(height: width * 0.01),
             Padding(

@@ -37,10 +37,10 @@ class HowItWorks extends StatelessWidget {
             const StyledBody(
                 'At Unearthed Collections, we make finding and renting the perfect dress easy and enjoyable. Here’s a step-by-step guide to help you navigate our rental process.',
                 weight: FontWeight.normal),
-            SizedBox(height: width * 0.02),
+            SizedBox(height: width * 0.03),
             // Divider(height: width * 0.03, indent: width * 0.25, endIndent: width * 0.25,),
             Center(child: Image.asset('assets/img/backgrounds/curly_seperator_1.png')),
-            SizedBox(height: width * 0.02),
+            SizedBox(height: width * 0.03),
             const StyledHeading('1. Browse Our Collection'),
             SizedBox(height: width * 0.01),
             Padding(

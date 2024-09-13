@@ -25,7 +25,7 @@ class MyTransactions extends StatelessWidget {
           ),
           title: const StyledTitle('BOOKINGS'),
                       leading: IconButton(
-          icon: Icon(Icons.chevron_left, size: width*0.06),
+          icon: Icon(Icons.chevron_left, size: width*0.08),
           onPressed: () {
             Navigator.pop(context);
           },
