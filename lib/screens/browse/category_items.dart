@@ -38,14 +38,23 @@ class _MultiSelectState extends State<MultiSelect> {
   }
   searchItemColour(List<String> query) {
     categoryItems = Provider.of<ItemStore>(context, listen: false).items;
-    final suggestions = categoryItems.where((item) {
-      final String dressColour = item.colour.toString();
-      String colour;
-      for (colour in query) {
+    List<Item> suggestions = [];
+    // List<Item> suggestions = categoryItems;
+    for (String colour in query) {
+      log('Getting $colour');
+      suggestions = suggestions +
+        categoryItems.where((item) {
+        final String dressColour = item.colour.toString();
         return dressColour.contains(colour);
-      }
-      return dressColour.contains('No Colour Dummy');
     }).toList();
+
+
+
+    }
+    // suggestions = categoryItems.where((item) {
+    //   final String dressColour = item.colour.toString();
+    //   return dressColour.contains(query[0]) || dressColour.contains(query[1]);
+    // }).toList();
 
     setState(() => categoryItems = suggestions);
   }

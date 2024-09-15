@@ -81,7 +81,7 @@ class _ItemCardState extends State<ItemCard> {
     String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
     
     int oneDayPrice = widget.item.rentPrice;
-    log('oneDayPrice: ${widget.item.rentPrice}');
+    // log('oneDayPrice: ${widget.item.rentPrice}');
 
     if (country == 'BANGKOK') {
       oneDayPrice = widget.item.rentPrice;
@@ -109,7 +109,6 @@ class _ItemCardState extends State<ItemCard> {
   }
 
   void setPrice() {
-    log(Provider.of<ItemStore>(context, listen: false).renter.settings.toString());
     if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] !=
         'BANGKOK') {
       String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
