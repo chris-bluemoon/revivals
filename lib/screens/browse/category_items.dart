@@ -33,20 +33,23 @@ class _CategoryItemsState extends State<CategoryItems> {
     initState() {
       // getCurrentUser();
       categoryItems = [];
-      super.initState();
-    }
-
-  @override
-  Widget build(BuildContext context) {
-        double width = MediaQuery.of(context).size.width;
-    // getCurrentUser();
-    List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
+          List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     for (Item i in allItems) {
       log('checking: ${widget.type} vs database stored type: ${i.type}');
       if (widget.type == i.type) {
         categoryItems.add(i);
       }
     }
+      super.initState();
+    }
+
+  final controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+        double width = MediaQuery.of(context).size.width;
+    // getCurrentUser();
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: width * 0.1,
@@ -54,15 +57,6 @@ class _CategoryItemsState extends State<CategoryItems> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             StyledTitle(Pluralize().plural(widget.type).toUpperCase()),
-            // SizedBox(
-            //   child: Image.asset(
-            //     'assets/logos/eliya.png',
-            //     // fit: BoxFit.contain,
-            //     // height: 40,
-            //   ),
-            //   height: 50,
-            //   width: 100
-            // ),
           ],
         ),
         centerTitle: true,
@@ -85,10 +79,21 @@ class _CategoryItemsState extends State<CategoryItems> {
           color: Colors.white,
           child: Column(
             children: [
-              Consumer<ItemStore>(
-                  // child not required
-                  builder: (context, value, child) {
-                return Expanded(
+              Container(
+                margin: const EdgeInsets.fromLTRB(16,16,16,16),
+                child: TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.search),
+                    hintText: 'Name',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: const BorderSide(color: Colors.black))
+                  ),
+                  onChanged: searchItem,
+                )
+              ),
+                Expanded(
                   child: GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -100,11 +105,20 @@ class _CategoryItemsState extends State<CategoryItems> {
                         }),
                     itemCount: categoryItems.length,
                   ),
-                );
-              }),
- 
-            ],
+                )]
           )),
     );
+  }
+
+  searchItem(String query) {
+    categoryItems = Provider.of<ItemStore>(context, listen: false).items;
+    final suggestions = categoryItems.where((item) {
+      final dressName = item.name.toLowerCase();
+      final input = query.toLowerCase();
+
+      return dressName.contains(input);
+    }).toList();
+
+    setState(() => categoryItems = suggestions);
   }
 }

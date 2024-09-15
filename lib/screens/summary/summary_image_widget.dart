@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -22,7 +21,16 @@ class SummaryImageWidget extends StatelessWidget {
     imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
     return imageName;
   }
-
+ 
+  String getSize(int size) {
+    String sizeString = size.toString();
+    if (size.isOdd) {
+      int lowerFigure = size - 1;
+      int upperFigure = size + 1;
+      sizeString = '$lowerFigure-$upperFigure';
+    }
+    return sizeString;
+  }
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width; 
@@ -42,7 +50,7 @@ class SummaryImageWidget extends StatelessWidget {
             children: [
               StyledHeading('${item.name} from ${item.brand}'),
               const SizedBox(height: 5),
-              StyledBody('${StringUtils.capitalize(item.type)}, size ${item.size.toString()}', color: Colors.grey),
+              StyledBody('Size UK ${getSize(item.size)}', color: Colors.grey),
           ],)
         ],
       )

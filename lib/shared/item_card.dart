@@ -55,6 +55,7 @@ class _ItemCardState extends State<ItemCard> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
+      log('Toggled Fav');
       if (isFav == true) {
         isFav = false;
       } else {
@@ -69,26 +70,55 @@ class _ItemCardState extends State<ItemCard> {
 
   @override
   void initState() {
-    List currListOfFavs =
-        Provider.of<ItemStore>(context, listen: false).favourites;
-    isFav = isAFav(widget.item, currListOfFavs);
+    // List currListOfFavs =
+    //     Provider.of<ItemStore>(context, listen: false).favourites;
+    // isFav = isAFav(widget.item, currListOfFavs);
     setPrice();
     super.initState();
   }
 
+  int getPricePerDay(noOfDays) {
+    String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+    
+    int oneDayPrice = widget.item.rentPrice;
+    log('oneDayPrice: ${widget.item.rentPrice}');
 
+    if (country == 'BANGKOK') {
+      oneDayPrice = widget.item.rentPrice;
+    } else {
+      oneDayPrice = int.parse(convertFromTHB(widget.item.rentPrice, country));
+    }
+
+    if (noOfDays == 3) {
+      int threeDayPrice = (oneDayPrice * 0.8).toInt()-1;
+      if (country == 'BANGKOK') {
+        return (threeDayPrice ~/ 100) * 100 + 100;
+      } else {
+        return (threeDayPrice ~/ 5) * 5 + 5;
+      }
+    }
+    if (noOfDays == 5) {
+      int fiveDayPrice = (oneDayPrice * 0.6).toInt()-1;
+      if (country == 'BANGKOK') {
+        return (fiveDayPrice ~/ 100) * 100 + 100;
+      } else {
+        return (fiveDayPrice ~/ 5) * 5 + 5;
+      }
+    }
+    return oneDayPrice;
+  }
 
   void setPrice() {
     log(Provider.of<ItemStore>(context, listen: false).renter.settings.toString());
     if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] !=
         'BANGKOK') {
       String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
-      convertedRentPrice = convertFromTHB(widget.item.rentPrice, country);
+      convertedRentPrice = getPricePerDay(5).toString();
       convertedBuyPrice = convertFromTHB(widget.item.buyPrice, country);
       convertedRRPPrice = convertFromTHB(widget.item.rrp, country);
       symbol = getCurrencySymbol(country);
     } else {
-      convertedRentPrice = widget.item.rentPrice.toString();
+      convertedRentPrice = getPricePerDay(5).toString();
       convertedBuyPrice = widget.item.buyPrice.toString();
       convertedRRPPrice = widget.item.rrp.toString();
       symbol = globals.thb;
@@ -98,6 +128,9 @@ class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    List currListOfFavs =
+        Provider.of<ItemStore>(context, listen: false).favourites;
+    isFav = isAFav(widget.item, currListOfFavs);
     // if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] != 'BANGKOK') {
     //   convertedRentPriceList = convertFromTHB(widget.item.rentPrice, 'SGD');
     //   convertedRentPrice = convertedRentPriceList[0];
@@ -139,6 +172,8 @@ class _ItemCardState extends State<ItemCard> {
                       log('toSave renter: ${toSave.name}');
                       toSave.favourites.remove(widget.item.id);
                       Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
+                      Provider.of<ItemStore>(context, listen: false).removeFavourite(widget.item);
+                      log('Removing Favourite item ${widget.item.name}');
 
                   }) : 
                   IconButton(
@@ -153,6 +188,7 @@ class _ItemCardState extends State<ItemCard> {
                       log('toSave renter: ${toSave.name}');
                       toSave.favourites.add(widget.item.id);
                       Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
+                      Provider.of<ItemStore>(context, listen: false).addFavourite(widget.item);
                     }
                   )
                   
@@ -160,8 +196,8 @@ class _ItemCardState extends State<ItemCard> {
             ),
             // StyledText('Size: ${item.size.toString()}'),
             // int convertedRentPrice = convertFromTHB(${widget.item.rentPrice}, 'SGD');
-            if (widget.item.rentPrice > 0) StyledBody('Rent for $convertedRentPrice$symbol per day', weight: FontWeight.normal),
-            if (widget.item.buyPrice > 0) StyledBody('Buy for $convertedBuyPrice$symbol', weight: FontWeight.normal),
+            if (widget.item.bookingType == 'rental') StyledBody('Rent for $convertedRentPrice$symbol per day', weight: FontWeight.normal),
+            if (widget.item.bookingType == 'both' || widget.item.bookingType == 'buy') StyledBody('Buy for $convertedBuyPrice$symbol', weight: FontWeight.normal),
             StyledBodyStrikeout('RRP $convertedRRPPrice$symbol', weight: FontWeight.normal),
           ],
         ),

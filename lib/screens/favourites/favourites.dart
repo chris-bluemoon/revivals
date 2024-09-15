@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/item_card.dart';
-import 'package:unearthed/shared/neumorphic_button.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
@@ -44,42 +45,53 @@ class _FavouritesState extends State<Favourites> {
             children: [StyledTitle('WISH LIST')]),
       ),
       body: anyFavourites ? Container(
-          color: Colors.white,
-          child: Consumer<ItemStore>(
-              // child not required
-              builder: (context, value, child) {return 
-                GridView.builder(
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, childAspectRatio: 0.5),
-                  itemBuilder: (_, index) => GestureDetector(
-                      child: ItemCard(value.favourites[index]),
-                      onTap: () {
-                        // if (Provider.of<ItemStore>(context, listen: false).renters.length == 0) {
-                        // log('Not logged in, cannot rent, redirecting');
-                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (GoogleSignInScreen())));
-                        // } else {
-                        // log('About to rent ${value.items[index].name}');
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                (ToRent(value.favourites[index]))));
-                        // }
-                      }),
-                  itemCount: value.favourites.length,
-    );})
-    ) : Container(
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('No favourites yet', style: TextStyle(fontSize: 22),),
-            NeumorphismButtonDemo()
-          ],
-        )
-      ],)
-    )
+            color: Colors.white,
+            child: Consumer<ItemStore>(
+                // child not required
+                builder: (context, value, child) {
+                  log('Building Favourites');
+                  log('Favs size: ${value.favourites.length}');
+                  return (value.favourites.length != 0) ? GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 0.5),
+                    itemBuilder: (_, index) => GestureDetector(
+                        child: ItemCard(value.favourites[index]),
+                        onTap: () {
+                          // if (Provider.of<ItemStore>(context, listen: false).renters.length == 0) {
+                          // log('Not logged in, cannot rent, redirecting');
+                          // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (GoogleSignInScreen())));
+                          // } else {
+                          // log('About to rent ${value.items[index].name}');
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  (ToRent(value.favourites[index]))));
+                          // }
+                        }),
+                    itemCount: value.favourites.length,
+            ) : const 
+              NoFavWidget();
+            }
+            )
+            )
+       : const NoFavWidget()
     );
+  }
+}
+class NoFavWidget extends StatelessWidget {
+  const NoFavWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Column(
+      mainAxisAlignment:  MainAxisAlignment.center,
+      children: [
+      Icon(Icons.favorite_outline, size: width*0.1), 
+      const Center(child: StyledHeading('No Favourites Yet')),
+      SizedBox(height: width * 0.05),
+      const StyledBody('Browse our extensive range of gorgeous dresses', weight: FontWeight.normal),
+      const StyledBody('and hit that love icon to save here!', weight: FontWeight.normal),
+    ]); 
   }
 }

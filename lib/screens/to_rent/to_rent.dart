@@ -42,7 +42,7 @@ class ToRent extends StatefulWidget {
 
 class _ToRentState extends State<ToRent> {
   
-  List items = [1, 2];
+  List items = [1, 2, 3];
   int currentIndex = 0;
 
   CarouselController buttonCarouselController = CarouselController();
@@ -52,25 +52,55 @@ class _ToRentState extends State<ToRent> {
   String convertedRRPPrice = '-1';
   String symbol = '?';
 
+  int getPricePerDay(noOfDays) {
+    String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+    
+    int oneDayPrice = widget.item.rentPrice;
+    log('oneDayPrice: ${widget.item.rentPrice}');
+
+    if (country == 'BANGKOK') {
+      oneDayPrice = widget.item.rentPrice;
+    } else {
+      oneDayPrice = int.parse(convertFromTHB(widget.item.rentPrice, country));
+    }
+
+    if (noOfDays == 3) {
+      int threeDayPrice = (oneDayPrice * 0.8).toInt()-1;
+      if (country == 'BANGKOK') {
+        return (threeDayPrice ~/ 100) * 100 + 100;
+      } else {
+        return (threeDayPrice ~/ 5) * 5 + 5;
+      }
+    }
+    if (noOfDays == 5) {
+      int fiveDayPrice = (oneDayPrice * 0.6).toInt()-1;
+      if (country == 'BANGKOK') {
+        return (fiveDayPrice ~/ 100) * 100 + 100;
+      } else {
+        return (fiveDayPrice ~/ 5) * 5 + 5;
+      }
+    }
+    return oneDayPrice;
+  }
+
   @override
   void initState() {
     setPrice();
     super.initState();
   }
 
-
-
   void setPrice() {
     if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] !=
         'BANGKOK') {
       String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
-      log(widget.item.rentPrice.toString());
-      convertedRentPrice = convertFromTHB(widget.item.rentPrice, country);
+      // log(widget.item.rentPrice.toString());
+      convertedRentPrice = getPricePerDay(5).toString();
+      // convertedRentPrice = convertFromTHB(getPricePerDay(1), country);
       convertedBuyPrice = convertFromTHB(widget.item.buyPrice, country);
       convertedRRPPrice = convertFromTHB(widget.item.rrp, country);
       symbol = getCurrencySymbol(country);
     } else {
-      convertedRentPrice = widget.item.rentPrice.toString();
+      convertedRentPrice = getPricePerDay(5).toString();
       convertedBuyPrice = widget.item.buyPrice.toString();
       convertedRRPPrice = widget.item.rrp.toString();
       symbol = globals.thb;
@@ -121,7 +151,7 @@ class _ToRentState extends State<ToRent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 10),
+            SizedBox(height: width * 0.01),
             CarouselSlider(
               carouselController: buttonCarouselController,
               options: CarouselOptions(
@@ -146,23 +176,23 @@ class _ToRentState extends State<ToRent> {
                 dotsCount: items.length,
                 position: currentIndex.toDouble(),
                 decorator: const DotsDecorator(
-                  colors: [Colors.grey, Colors.grey],
+                  colors: [Colors.grey, Colors.grey, Colors.grey],
                   activeColor: Colors.black,
                   // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(width * 0.05),
               child: StyledHeading(widget.item.description),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, bottom: 10),
-              child: StyledBody('Rental price: $convertedRentPrice$symbol'),
+              padding: EdgeInsets.only(left: width * 0.05, bottom: width * 0.05),
+              child: StyledBody('Rental price: From $convertedRentPrice$symbol'),
               // child: StyledBody('Rental price: ${widget.item.rentPrice.toString()} ${getCurrency()}'),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, bottom: 10),
+              padding: EdgeInsets.only(left: width * 0.05, bottom: width * 0.05),
               child: StyledBody(widget.item.longDescription, weight: FontWeight.normal),
             ),
             // if (widget.item.rentPrice > 0) Padding(

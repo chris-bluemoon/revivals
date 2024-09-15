@@ -168,9 +168,9 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
                     // Navigator.of(context).push(MaterialPageRoute(
                         // builder: (context) => (const Congrats())));
                   },
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: StyledHeading('CONFIRM', color: Colors.white),
+                  child: Padding(
+                    padding: EdgeInsets.all(width * 0.01),
+                    child: const StyledHeading('CONFIRM', color: Colors.white),
                   ),
                 ),
               ),

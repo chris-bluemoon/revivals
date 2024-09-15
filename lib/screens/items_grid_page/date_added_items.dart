@@ -67,6 +67,7 @@ class _DateAddedItemsState extends State<DateAddedItems> {
         double width = MediaQuery.of(context).size.width;
     // getCurrentUser();
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
+    
     for (Item i in allItems) {
       log('checking: ${widget.dateAdded} vs database stored type: ${i.dateAdded}');
       DateFormat format = DateFormat("dd-MM-yyyy");

@@ -49,20 +49,20 @@ class ItemStore extends ChangeNotifier {
   //   _loggedIn = loggedIn;
   // }
 
-  void addFavourite(Item item) async {
-    // await FirestoreService.addItem(item);
-    _favourites.add(item);
-    notifyListeners();
-  }
+  // void addFavourite(Item item) async {
+  //   // await FirestoreService.addItem(item);
+  //   _favourites.add(item);
+  //   notifyListeners();
+  // }
 
-  void addFavourite2(Item item) async {
-    _user.favourites.add(item.id);
-    saveRenter(_user);
-    log('New user with favourite added:');
-    log(_user.favourites.toString());
-    log('Showing user id');
-    log(_user.id);
-  }
+  // void addFavourite2(Item item) async {
+  //   _user.favourites.add(item.id);
+  //   saveRenter(_user);
+  //   log('New user with favourite added:');
+  //   log(_user.favourites.toString());
+  //   log('Showing user id');
+  //   log(_user.id);
+  // }
 
   void addSettings(settings) async {
     _user.settings.add(settings);
@@ -129,6 +129,7 @@ class ItemStore extends ChangeNotifier {
     await FirestoreService.updateRenter(renter);
     // _renters[0].aditem = renter.aditem;
       // _user.aditem = renter.aditem;
+    notifyListeners();
     return;
   }
 
@@ -146,6 +147,7 @@ class ItemStore extends ChangeNotifier {
   void fetchItemsOnce() async {
     // List favs = _user.favourites;
     if (items.length == 0) {
+      log('Adding Items once');
       // Temporary setting of email password once
       MyStore.writeToStore('fkwx gnet sbwl pgjb');
       final snapshot = await FirestoreService.getItemsOnce();
@@ -171,6 +173,17 @@ class ItemStore extends ChangeNotifier {
         }
       }
     }
+    void addFavourite(item) {
+      _favourites.add(item);
+      log('Removing favourite');
+      notifyListeners();
+    }
+    void removeFavourite(item) {
+      _favourites.remove(item);
+      log('Removing favourite');
+      notifyListeners();
+    }
+
     void populateSettings() {
       List settingsList = _user.settings;
       _favourites.clear();

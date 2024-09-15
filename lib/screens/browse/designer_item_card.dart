@@ -74,18 +74,47 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
     super.initState();
   }
 
+  int getPricePerDay(noOfDays) {
+    String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
+    
+    int oneDayPrice = widget.item.rentPrice;
+    log('oneDayPrice: ${widget.item.rentPrice}');
 
+    if (country == 'BANGKOK') {
+      oneDayPrice = widget.item.rentPrice;
+    } else {
+      oneDayPrice = int.parse(convertFromTHB(widget.item.rentPrice, country));
+    }
+
+    if (noOfDays == 3) {
+      int threeDayPrice = (oneDayPrice * 0.8).toInt()-1;
+      if (country == 'BANGKOK') {
+        return (threeDayPrice ~/ 100) * 100 + 100;
+      } else {
+        return (threeDayPrice ~/ 5) * 5 + 5;
+      }
+    }
+    if (noOfDays == 5) {
+      int fiveDayPrice = (oneDayPrice * 0.6).toInt()-1;
+      if (country == 'BANGKOK') {
+        return (fiveDayPrice ~/ 100) * 100 + 100;
+      } else {
+        return (fiveDayPrice ~/ 5) * 5 + 5;
+      }
+    }
+    return oneDayPrice;
+  }
 
   void setPrice() {
     if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] !=
         'BANGKOK') {
       String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
-      convertedRentPrice = convertFromTHB(widget.item.rentPrice, country);
+      convertedRentPrice = getPricePerDay(5).toString();
       convertedBuyPrice = convertFromTHB(widget.item.buyPrice, country);
       convertedRRPPrice = convertFromTHB(widget.item.rrp, country);
       symbol = getCurrencySymbol(country);
     } else {
-      convertedRentPrice = widget.item.rentPrice.toString();
+      convertedRentPrice = getPricePerDay(5).toString();
       convertedBuyPrice = widget.item.buyPrice.toString();
       convertedRRPPrice = widget.item.rrp.toString();
       symbol = globals.thb;
@@ -144,7 +173,7 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
               ],
             ),
             // StyledText('Size: ${item.size.toString()}'),
-            StyledBody('Rent for $convertedRentPrice$symbol per day', weight: FontWeight.normal),
+            StyledBody('Rent from $convertedRentPrice$symbol per day', weight: FontWeight.normal),
             StyledBodyStrikeout('RRP $convertedRRPPrice$symbol', weight: FontWeight.normal),
           ],
         ),
