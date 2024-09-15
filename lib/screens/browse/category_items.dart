@@ -10,6 +10,7 @@ import 'package:unearthed/shared/item_card.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
+    List<Item> categoryItems = [];
 class MultiSelect extends StatefulWidget {
   final List<String> items;
   const MultiSelect({Key? key, required this.items}) : super(key: key);
@@ -34,8 +35,20 @@ class _MultiSelectState extends State<MultiSelect> {
   void _cancel() {
     Navigator.pop;
   }
+  searchItem(String query) {
+    categoryItems = Provider.of<ItemStore>(context, listen: false).items;
+    final suggestions = categoryItems.where((item) {
+      final String dressSize = item.size.toString();
+      final input = query.toLowerCase();
+
+      return dressSize.contains(input);
+    }).toList();
+
+    setState(() => categoryItems = suggestions);
+  }
 
   void _submit() {
+    searchItem('4');
     Navigator.pop(context, selectedItems);
   }
 
@@ -100,7 +113,6 @@ class _CategoryItemsState extends State<CategoryItems> {
   }
 
     
-    List<Item> categoryItems = [];
 
     @override
     initState() {
