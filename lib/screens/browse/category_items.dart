@@ -21,21 +21,22 @@ class MultiSelect extends StatefulWidget {
 }
 
 class _MultiSelectState extends State<MultiSelect> {
-  final List<String> selectedItems = [];
+  final List<String> selectedColours = [];
 
-  void itemChange(String itemValue, bool isSelected) {
+  void colourChange(String itemValue, bool isSelected) {
     setState(() {
       if (isSelected) {
-        selectedItems.add(itemValue);
+        selectedColours.add(itemValue);
       } else {
-        selectedItems.remove(itemValue);
+        selectedColours.remove(itemValue);
       }
     });
   }
 
   void _cancel() {
-    Navigator.pop;
+    Navigator.pop(context);
   }
+
   searchItemColour(List<String> colours, List<String> sizes) {
     categoryItems = Provider.of<ItemStore>(context, listen: false).items;
     List<Item> suggestions = [];
@@ -47,10 +48,7 @@ class _MultiSelectState extends State<MultiSelect> {
         final String dressColour = item.colour.toString();
         return dressColour.contains(colour);
     }).toList();
-
-
-
-    }
+  }
     // suggestions = categoryItems.where((item) {
     //   final String dressColour = item.colour.toString();
     //   return dressColour.contains(query[0]) || dressColour.contains(query[1]);
@@ -60,24 +58,27 @@ class _MultiSelectState extends State<MultiSelect> {
   }
 
   void _submit() {
-    searchItemColour(selectedColours);
+    searchItemColour(selectedColours, ['0']);
     Navigator.pop(context, selectedColours);
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Select sizes'),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: widget.items.map((item) => CheckboxListTile(
-            value: selectedColours.contains(item), 
-            title: Text(item),
-            controlAffinity: ListTileControlAffinity.leading,
-            onChanged: (isChecked) => itemChange(item, isChecked!),
-            )).toList(),
-          ),
-        ),
+      title: const Text('Select colours'),
+      content: Column(
+        children: [
+          ListBody(
+            mainAxis: Axis.vertical,
+            children: widget.items.map((item) => CheckboxListTile(
+              value: selectedColours.contains(item), 
+              title: Text(item),
+              controlAffinity: ListTileControlAffinity.leading,
+              onChanged: (isChecked) => colourChange(item, isChecked!),
+              )).toList(),
+            ),
+        ],
+      ),
         actions: [
           TextButton(
             onPressed: _cancel, 
@@ -108,7 +109,7 @@ class _CategoryItemsState extends State<CategoryItems> {
 
   List<String> selectedColours = [];
   void _showMultiSelect() async {
-    final List<String> colours = ['Black', 'Red', 'Blue', 'Yellow'];
+    final List<String> colours = ['Black', 'White', 'Red', 'Blue', 'Yellow'];
 
     final List<String>? results = await showDialog(
       context: context,
@@ -215,7 +216,7 @@ String dropdownValue = list.first;
               onPressed: _showMultiSelect, 
               child: const Icon(Icons.filter_alt_outlined, color: Colors.black)),
               Wrap(
-                children: selectedItems.map((e) => Chip(
+                children: selectedColours.map((e) => Chip(
                     label: Text(e),
                 )).toList(),
               ),
