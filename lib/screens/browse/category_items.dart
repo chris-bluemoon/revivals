@@ -36,11 +36,11 @@ class _MultiSelectState extends State<MultiSelect> {
   void _cancel() {
     Navigator.pop;
   }
-  searchItemColour(List<String> query) {
+  searchItemColour(List<String> colours, List<String> sizes) {
     categoryItems = Provider.of<ItemStore>(context, listen: false).items;
     List<Item> suggestions = [];
     // List<Item> suggestions = categoryItems;
-    for (String colour in query) {
+    for (String colour in colours) {
       log('Getting $colour');
       suggestions = suggestions +
         categoryItems.where((item) {
@@ -60,8 +60,8 @@ class _MultiSelectState extends State<MultiSelect> {
   }
 
   void _submit() {
-    searchItemColour(selectedItems);
-    Navigator.pop(context, selectedItems);
+    searchItemColour(selectedColours);
+    Navigator.pop(context, selectedColours);
   }
 
   @override
@@ -71,7 +71,7 @@ class _MultiSelectState extends State<MultiSelect> {
       content: SingleChildScrollView(
         child: ListBody(
           children: widget.items.map((item) => CheckboxListTile(
-            value: selectedItems.contains(item), 
+            value: selectedColours.contains(item), 
             title: Text(item),
             controlAffinity: ListTileControlAffinity.leading,
             onChanged: (isChecked) => itemChange(item, isChecked!),
@@ -106,7 +106,7 @@ class CategoryItems extends StatefulWidget {
 class _CategoryItemsState extends State<CategoryItems> {
 
 
-  List<String> selectedItems = [];
+  List<String> selectedColours = [];
   void _showMultiSelect() async {
     final List<String> colours = ['Black', 'Red', 'Blue', 'Yellow'];
 
@@ -119,7 +119,7 @@ class _CategoryItemsState extends State<CategoryItems> {
 
     if (results != null) {
       setState(() {
-        selectedItems = results;
+        selectedColours = results;
       });
     }
   }
