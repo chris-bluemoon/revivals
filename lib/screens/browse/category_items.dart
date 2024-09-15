@@ -10,7 +10,8 @@ import 'package:unearthed/shared/item_card.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
-    List<Item> categoryItems = [];
+List<Item> categoryItems = [];
+
 class MultiSelect extends StatefulWidget {
   final List<String> items;
   const MultiSelect({Key? key, required this.items}) : super(key: key);
@@ -35,20 +36,22 @@ class _MultiSelectState extends State<MultiSelect> {
   void _cancel() {
     Navigator.pop;
   }
-  searchItem(String query) {
+  searchItemColour(List<String> query) {
     categoryItems = Provider.of<ItemStore>(context, listen: false).items;
     final suggestions = categoryItems.where((item) {
-      final String dressSize = item.size.toString();
-      final input = query.toLowerCase();
-
-      return dressSize.contains(input);
+      final String dressColour = item.colour.toString();
+      String colour;
+      for (colour in query) {
+        return dressColour.contains(colour);
+      }
+      return dressColour.contains('No Colour Dummy');
     }).toList();
 
     setState(() => categoryItems = suggestions);
   }
 
   void _submit() {
-    searchItem('4');
+    searchItemColour(selectedItems);
     Navigator.pop(context, selectedItems);
   }
 
@@ -96,12 +99,12 @@ class _CategoryItemsState extends State<CategoryItems> {
 
   List<String> selectedItems = [];
   void _showMultiSelect() async {
-    final List<String> items = ['4', '6', '8', '10'];
+    final List<String> colours = ['Black', 'Red', 'Blue', 'Yellow'];
 
     final List<String>? results = await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return MultiSelect(items: items);
+        return MultiSelect(items: colours);
       },
     );
 
