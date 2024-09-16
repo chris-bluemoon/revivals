@@ -15,7 +15,7 @@ List<Item> categoryItems = [];
 var uuid = const Uuid();
 // final List<String> list = <String>['ALilL', '4', '6', '8', '10'];
     final List<String> sizes = ['ALL', '4', '6', '8', '10'];
-    final List<String> colours = ['Black', 'White', 'Red', 'Blue', 'Yellow'];
+    final List<String> colours = ['All Colours', 'Black', 'White', 'Red', 'Blue', 'Yellow'];
   List<String> selectedColours = [];
   final List<String> selectedSizes = [];
 
@@ -387,7 +387,7 @@ class _MultiSelectState extends State<MultiSelect> {
     return AlertDialog(
       // title: const Text('Filter'),
       content: SizedBox(
-        height: 400,
+        height: 500,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
