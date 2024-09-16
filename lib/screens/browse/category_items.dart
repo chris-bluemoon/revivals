@@ -13,7 +13,9 @@ import 'package:uuid/uuid.dart';
 List<Item> categoryItems = [];
 
 var uuid = const Uuid();
-final List<String> list = <String>['4', '6', '8', '10'];
+// final List<String> list = <String>['ALilL', '4', '6', '8', '10'];
+    final List<String> sizes = ['ALL', '4', '6', '8', '10'];
+    final List<String> colours = ['Black', 'White', 'Red', 'Blue', 'Yellow'];
 
 class CategoryItems extends StatefulWidget {
   const CategoryItems(this.type, {super.key});
@@ -28,8 +30,6 @@ class _CategoryItemsState extends State<CategoryItems> {
   List<String> selectedColours = [];
   List<String> selectedSizes = [];
   void _showMultiSelect() async {
-    final List<String> colours = ['Black', 'White', 'Red', 'Blue', 'Yellow'];
-    final List<String> sizes = ['4', '6', '8', '10'];
 
     final List<String>? results = await showDialog(
       context: context,
@@ -62,7 +62,7 @@ class _CategoryItemsState extends State<CategoryItems> {
     super.initState();
   }
 
-  String dropdownValue = list.first;
+  String dropdownValue = sizes.first;
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -134,10 +134,53 @@ class _CategoryItemsState extends State<CategoryItems> {
             // //   )
             // // ),
 
-            ElevatedButton(
-                onPressed: _showMultiSelect,
-                child:
-                    const Icon(Icons.filter_alt_outlined, color: Colors.black)),
+            Row(
+              children: [
+              SizedBox(width: width * 0.1),
+                ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                  // textStyle: const TextStyle(color: Colors.white),
+                  foregroundColor:
+                      Colors.white, //change background color of button
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0.0),
+                  ),
+                  side: const BorderSide(width: 1.0, color: Colors.white),
+                ),
+                    onPressed: _showMultiSelect,
+                    child:
+                        const Row(
+                          children: [
+                            Icon(Icons.filter_list, color: Colors.black),
+                            SizedBox(width: 10),
+                            StyledBody('Filters')
+                          ],
+                        )),
+                const SizedBox(width: 50),
+                ElevatedButton(
+                  style: OutlinedButton.styleFrom(
+                  // textStyle: const TextStyle(color: Colors.white),
+                  foregroundColor:
+                      Colors.white, //change background color of button
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0.0),
+                  ),
+                  side: const BorderSide(width: 1.0, color: Colors.white),
+                ),
+                    onPressed: _showMultiSelect,
+                    child:
+                        const Row(
+                          children: [
+                            Icon(Icons.swap_vert , color: Colors.black),
+                            SizedBox(width: 10),
+                            StyledBody('Sort Price')
+                          ],
+                        )),
+              ],
+            ),
+            const Divider(indent: 50, endIndent: 50,),
             // Wrap(
             //   children: selectedColours
             //       .map((e) => Chip(
@@ -310,6 +353,9 @@ class _MultiSelectState extends State<MultiSelect> {
             return dressColour.contains(colour);
           }).toList();
     }
+    // if (sizes[0] == 'ALL') {
+      // sizes = ['4', '6', '8', '10'];
+    // }
     for (String size in sizes) {
       // log('Getting size $size');
       sizeSuggestions = sizeSuggestions +
@@ -319,7 +365,6 @@ class _MultiSelectState extends State<MultiSelect> {
             return dressSize.contains(size);
           }).toList();
     }
-
     final colourSet = {...colourSuggestions};
     final sizeSet = {...sizeSuggestions};
     final intersectionSet = colourSet.intersection(sizeSet);
@@ -329,73 +374,107 @@ class _MultiSelectState extends State<MultiSelect> {
     categoryItems = suggestions;
   }
 
-  void _submit() {
+  void submit() {
     searchItemColour(selectedColours, selectedSizes);
     Navigator.pop(context, selectedColours);
   }
 
-  String dropdownValue = list.first;
+  String dropdownValue = sizes.first;
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Filter'),
-      content: Column(
-        children: [
-          const StyledBody('Select colours'),
-          // ListBody(
-          //   mainAxis: Axis.vertical,
-          //   children: widget.sizes
-          //       .map((item) => CheckboxListTile(
-          //             value: selectedSizes.contains(item),
-          //             title: Text(item),
-          //             controlAffinity: ListTileControlAffinity.leading,
-          //             onChanged: (isChecked) => sizeChange(item, isChecked!),
-          //           ))
-          //       .toList(),
-          // ),
-          ListBody(
-            mainAxis: Axis.vertical,
-            children: widget.colours
-                .map((item) => CheckboxListTile(
-                      value: selectedColours.contains(item),
-                      title: Text(item),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      onChanged: (isChecked) => colourChange(item, isChecked!),
-                    ))
-                .toList(),
-          ),
-          const StyledBody('Select size'),
-                      DropdownButton<String>(
-              hint: const Text('HINT'),
-              value: dropdownValue,
-              icon: const Icon(Icons.arrow_downward),
-              elevation: 16,
-              style: const TextStyle(color: Colors.black),
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-              onChanged: (String? value) {
-                // This is called when the user selects an item.
-                setState(() {
-                  dropdownValue = value!;
-                  // searchItem(value);
-                  selectedSizes.add(value);
-                });
-              },
-              items: list.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
+      // title: const Text('Filter'),
+      content: SizedBox(
+        height: 400,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const StyledBody('Select colours'),
+            // ListBody(
+            //   mainAxis: Axis.vertical,
+            //   children: widget.sizes
+            //       .map((item) => CheckboxListTile(
+            //             value: selectedSizes.contains(item),
+            //             title: Text(item),
+            //             controlAffinity: ListTileControlAffinity.leading,
+            //             onChanged: (isChecked) => sizeChange(item, isChecked!),
+            //           ))
+            //       .toList(),
+            // ),
+            ListBody(
+              mainAxis: Axis.vertical,
+              children: widget.colours
+                  .map((item) => CheckboxListTile(
+                        value: selectedColours.contains(item),
+                        title: StyledBody(item, weight: FontWeight.normal,),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        onChanged: (isChecked) => colourChange(item, isChecked!),
+                      ))
+                  .toList(),
             ),
-        ],
+            // const SizedBox(height: 10),
+            const StyledBody('Select size'),
+                        Row(
+                          children: [
+                            const SizedBox(width: 30),
+                            DropdownButton<String>(
+                                            // hint: const Text('HINT'),
+                                            value: dropdownValue,
+                                            icon: const Icon(Icons.arrow_downward),
+                                            elevation: 16,
+                                            style: const TextStyle(fontSize: 24, color: Colors.black),
+                                            underline: Container(
+                                              height: 2,
+                                              color: Colors.black,
+                                            ),
+                                            onChanged: (String? value) {
+                                              // This is called when the user selects an item.
+                                              setState(() {
+                                                dropdownValue = value!;
+                                                // searchItem(value);
+                                                selectedSizes.add(value);
+                                              });
+                                            },
+                                            items: sizes.map<DropdownMenuItem<String>>((String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                          ),
+                          ],
+                        ),
+          ],
+        ),
       ),
       actions: [
-        TextButton(onPressed: _cancel, child: const Text('Cancel')),
-        ElevatedButton(onPressed: _submit, child: const Text('Submit')),
+        ElevatedButton(
+                          style: OutlinedButton.styleFrom(
+                  textStyle: const TextStyle(color: Colors.white),
+                  foregroundColor:
+                      Colors.white, //change background color of button
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0.0),
+                  ),
+                  side: const BorderSide(width: 1.0, color: Colors.black),
+                ),
+          onPressed: _cancel, 
+          child: const StyledBody('Cancel', color: Colors.white)),
+        ElevatedButton(
+                          style: OutlinedButton.styleFrom(
+                  textStyle: const TextStyle(color: Colors.white),
+                  foregroundColor:
+                      Colors.white, //change background color of button
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(0.0),
+                  ),
+                  side: const BorderSide(width: 1.0, color: Colors.black),
+                ),
+          onPressed: submit, 
+          child: const StyledBody('Submit', color: Colors.white)),
       ],
     );
   }
