@@ -95,56 +95,56 @@ class _CategoryItemsState extends State<CategoryItems> {
       body: Container(
           color: Colors.white,
           child: Column(children: [
-            DropdownButton<String>(
-              hint: const Text('HINT'),
-              value: dropdownValue,
-              icon: const Icon(Icons.arrow_downward),
-              elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
-              underline: Container(
-                height: 2,
-                color: Colors.deepPurpleAccent,
-              ),
-              onChanged: (String? value) {
-                // This is called when the user selects an item.
-                setState(() {
-                  dropdownValue = value!;
-                  searchItem(value);
-                });
-              },
-              items: list.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            // Container(
-            //   margin: const EdgeInsets.fromLTRB(16,16,16,16),
-            //   child: TextField(
-            //     controller: controller,
-            //     decoration: InputDecoration(
-            //       prefixIcon: const Icon(Icons.search),
-            //       hintText: 'Name',
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(5),
-            //         borderSide: const BorderSide(color: Colors.black))
-            //     ),
-            //     onChanged: searchItem,
-            //   )
+            // DropdownButton<String>(
+            //   hint: const Text('HINT'),
+            //   value: dropdownValue,
+            //   icon: const Icon(Icons.arrow_downward),
+            //   elevation: 16,
+            //   style: const TextStyle(color: Colors.deepPurple),
+            //   underline: Container(
+            //     height: 2,
+            //     color: Colors.deepPurpleAccent,
+            //   ),
+            //   onChanged: (String? value) {
+            //     // This is called when the user selects an item.
+            //     setState(() {
+            //       dropdownValue = value!;
+            //       searchItem(value);
+            //     });
+            //   },
+            //   items: list.map<DropdownMenuItem<String>>((String value) {
+            //     return DropdownMenuItem<String>(
+            //       value: value,
+            //       child: Text(value),
+            //     );
+            //   }).toList(),
             // ),
+            // // Container(
+            // //   margin: const EdgeInsets.fromLTRB(16,16,16,16),
+            // //   child: TextField(
+            // //     controller: controller,
+            // //     decoration: InputDecoration(
+            // //       prefixIcon: const Icon(Icons.search),
+            // //       hintText: 'Name',
+            // //       border: OutlineInputBorder(
+            // //         borderRadius: BorderRadius.circular(5),
+            // //         borderSide: const BorderSide(color: Colors.black))
+            // //     ),
+            // //     onChanged: searchItem,
+            // //   )
+            // // ),
 
             ElevatedButton(
                 onPressed: _showMultiSelect,
                 child:
                     const Icon(Icons.filter_alt_outlined, color: Colors.black)),
-            Wrap(
-              children: selectedColours
-                  .map((e) => Chip(
-                        label: Text(e),
-                      ))
-                  .toList(),
-            ),
+            // Wrap(
+            //   children: selectedColours
+            //       .map((e) => Chip(
+            //             label: Text(e),
+            //           ))
+            //       .toList(),
+            // ),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -163,17 +163,17 @@ class _CategoryItemsState extends State<CategoryItems> {
     );
   }
 
-  searchItem(String query) {
-    categoryItems = Provider.of<ItemStore>(context, listen: false).items;
-    final suggestions = categoryItems.where((item) {
-      final String dressSize = item.size.toString();
-      final input = query.toLowerCase();
+  // searchItem(String query) {
+  //   categoryItems = Provider.of<ItemStore>(context, listen: false).items;
+  //   final suggestions = categoryItems.where((item) {
+  //     final String dressSize = item.size.toString();
+  //     final input = query.toLowerCase();
 
-      return dressSize.contains(input);
-    }).toList();
+  //     return dressSize.contains(input);
+  //   }).toList();
 
-    setState(() => categoryItems = suggestions);
-  }
+  //   setState(() => categoryItems = suggestions);
+  // }
 }
 
 // class MultiSelectSize extends StatefulWidget {
@@ -297,11 +297,13 @@ class _MultiSelectState extends State<MultiSelect> {
 
   searchItemColour(List<String> colours, List<String> sizes) {
     categoryItems = Provider.of<ItemStore>(context, listen: false).items;
+    List<Item> colourSuggestions = [];
+    List<Item> sizeSuggestions = [];
     List<Item> suggestions = [];
     // List<Item> suggestions = categoryItems;
     for (String colour in colours) {
-      log('Getting $colour');
-      suggestions = suggestions +
+      // log('Getting $colour');
+      colourSuggestions = colourSuggestions +
           categoryItems.where((item) {
             final String dressColour = item.colour.toString();
             log(dressColour);
@@ -309,8 +311,8 @@ class _MultiSelectState extends State<MultiSelect> {
           }).toList();
     }
     for (String size in sizes) {
-      log('Getting size $size');
-      suggestions = suggestions +
+      // log('Getting size $size');
+      sizeSuggestions = sizeSuggestions +
           categoryItems.where((item) {
             final String dressSize = item.size.toString();
             log(dressSize);
@@ -318,7 +320,12 @@ class _MultiSelectState extends State<MultiSelect> {
           }).toList();
     }
 
+    final colourSet = {...colourSuggestions};
+    final sizeSet = {...sizeSuggestions};
+    final intersectionSet = colourSet.intersection(sizeSet);
     // setState(() => categoryItems = suggestions);
+    // log(intersectionSet.toString());
+    suggestions = intersectionSet.toList();
     categoryItems = suggestions;
   }
 
@@ -332,20 +339,21 @@ class _MultiSelectState extends State<MultiSelect> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Select colours'),
+      title: const Text('Filter'),
       content: Column(
         children: [
-          ListBody(
-            mainAxis: Axis.vertical,
-            children: widget.sizes
-                .map((item) => CheckboxListTile(
-                      value: selectedSizes.contains(item),
-                      title: Text(item),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      onChanged: (isChecked) => sizeChange(item, isChecked!),
-                    ))
-                .toList(),
-          ),
+          const StyledBody('Select colours'),
+          // ListBody(
+          //   mainAxis: Axis.vertical,
+          //   children: widget.sizes
+          //       .map((item) => CheckboxListTile(
+          //             value: selectedSizes.contains(item),
+          //             title: Text(item),
+          //             controlAffinity: ListTileControlAffinity.leading,
+          //             onChanged: (isChecked) => sizeChange(item, isChecked!),
+          //           ))
+          //       .toList(),
+          // ),
           ListBody(
             mainAxis: Axis.vertical,
             children: widget.colours
@@ -357,15 +365,16 @@ class _MultiSelectState extends State<MultiSelect> {
                     ))
                 .toList(),
           ),
+          const StyledBody('Select size'),
                       DropdownButton<String>(
               hint: const Text('HINT'),
               value: dropdownValue,
               icon: const Icon(Icons.arrow_downward),
               elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
+              style: const TextStyle(color: Colors.black),
               underline: Container(
                 height: 2,
-                color: Colors.deepPurpleAccent,
+                color: Colors.black,
               ),
               onChanged: (String? value) {
                 // This is called when the user selects an item.
