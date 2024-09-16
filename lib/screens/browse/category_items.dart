@@ -16,6 +16,8 @@ var uuid = const Uuid();
 // final List<String> list = <String>['ALilL', '4', '6', '8', '10'];
     final List<String> sizes = ['ALL', '4', '6', '8', '10'];
     final List<String> colours = ['Black', 'White', 'Red', 'Blue', 'Yellow'];
+  List<String> selectedColours = [];
+  final List<String> selectedSizes = [];
 
 class CategoryItems extends StatefulWidget {
   const CategoryItems(this.type, {super.key});
@@ -27,7 +29,6 @@ class CategoryItems extends StatefulWidget {
 }
 
 class _CategoryItemsState extends State<CategoryItems> {
-  List<String> selectedColours = [];
   List<String> selectedSizes = [];
   void _showMultiSelect() async {
 
@@ -62,7 +63,7 @@ class _CategoryItemsState extends State<CategoryItems> {
     super.initState();
   }
 
-  String dropdownValue = sizes.first;
+  // String dropdownValue = sizes.first;
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -311,8 +312,8 @@ class MultiSelect extends StatefulWidget {
 }
 
 class _MultiSelectState extends State<MultiSelect> {
-  final List<String> selectedColours = [];
-  final List<String> selectedSizes = [];
+  // final List<String> selectedColours = [];
+  // final List<String> selectedSizes = [];
 
   void sizeChange(String sizeValue, bool isSelected) {
     setState(() {
@@ -353,9 +354,6 @@ class _MultiSelectState extends State<MultiSelect> {
             return dressColour.contains(colour);
           }).toList();
     }
-    // if (sizes[0] == 'ALL') {
-      // sizes = ['4', '6', '8', '10'];
-    // }
     for (String size in sizes) {
       // log('Getting size $size');
       sizeSuggestions = sizeSuggestions +
@@ -364,6 +362,9 @@ class _MultiSelectState extends State<MultiSelect> {
             log(dressSize);
             return dressSize.contains(size);
           }).toList();
+    }
+    for (Item i in sizeSuggestions) {
+      log('${i.name} being added to suggestions as size is: ${i.size}');
     }
     final colourSet = {...colourSuggestions};
     final sizeSet = {...sizeSuggestions};
@@ -407,6 +408,7 @@ class _MultiSelectState extends State<MultiSelect> {
               children: widget.colours
                   .map((item) => CheckboxListTile(
                         value: selectedColours.contains(item),
+                        // value: selectedColours.contains(item),
                         title: StyledBody(item, weight: FontWeight.normal,),
                         controlAffinity: ListTileControlAffinity.leading,
                         onChanged: (isChecked) => colourChange(item, isChecked!),
@@ -430,6 +432,7 @@ class _MultiSelectState extends State<MultiSelect> {
                                             ),
                                             onChanged: (String? value) {
                                               // This is called when the user selects an item.
+                                              selectedSizes.clear();
                                               setState(() {
                                                 dropdownValue = value!;
                                                 // searchItem(value);
