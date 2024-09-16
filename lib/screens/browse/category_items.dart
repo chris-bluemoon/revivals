@@ -12,89 +12,9 @@ import 'package:uuid/uuid.dart';
 
 List<Item> categoryItems = [];
 
-class MultiSelect extends StatefulWidget {
-  final List<String> items;
-  const MultiSelect({Key? key, required this.items}) : super(key: key);
-
-  @override
-  State<MultiSelect> createState() => _MultiSelectState();
-}
-
-class _MultiSelectState extends State<MultiSelect> {
-  final List<String> selectedColours = [];
-
-  void colourChange(String itemValue, bool isSelected) {
-    setState(() {
-      if (isSelected) {
-        selectedColours.add(itemValue);
-      } else {
-        selectedColours.remove(itemValue);
-      }
-    });
-  }
-
-  void _cancel() {
-    Navigator.pop(context);
-  }
-
-  searchItemColour(List<String> colours, List<String> sizes) {
-    categoryItems = Provider.of<ItemStore>(context, listen: false).items;
-    List<Item> suggestions = [];
-    // List<Item> suggestions = categoryItems;
-    for (String colour in colours) {
-      log('Getting $colour');
-      suggestions = suggestions +
-        categoryItems.where((item) {
-        final String dressColour = item.colour.toString();
-        return dressColour.contains(colour);
-    }).toList();
-  }
-    // suggestions = categoryItems.where((item) {
-    //   final String dressColour = item.colour.toString();
-    //   return dressColour.contains(query[0]) || dressColour.contains(query[1]);
-    // }).toList();
-
-    setState(() => categoryItems = suggestions);
-  }
-
-  void _submit() {
-    searchItemColour(selectedColours, ['0']);
-    Navigator.pop(context, selectedColours);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Select colours'),
-      content: Column(
-        children: [
-          ListBody(
-            mainAxis: Axis.vertical,
-            children: widget.items.map((item) => CheckboxListTile(
-              value: selectedColours.contains(item), 
-              title: Text(item),
-              controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (isChecked) => colourChange(item, isChecked!),
-              )).toList(),
-            ),
-        ],
-      ),
-        actions: [
-          TextButton(
-            onPressed: _cancel, 
-            child: const Text('Cancel')
-          ),
-          ElevatedButton(
-            onPressed: _submit, 
-            child: const Text('Submit')
-          ),
-         ],);
-  }
-
-}
-
 var uuid = const Uuid();
 final List<String> list = <String>['4', '6', '8', '10'];
+
 class CategoryItems extends StatefulWidget {
   const CategoryItems(this.type, {super.key});
 
@@ -105,46 +25,48 @@ class CategoryItems extends StatefulWidget {
 }
 
 class _CategoryItemsState extends State<CategoryItems> {
-
-
   List<String> selectedColours = [];
+  List<String> selectedSizes = [];
   void _showMultiSelect() async {
     final List<String> colours = ['Black', 'White', 'Red', 'Blue', 'Yellow'];
+    final List<String> sizes = ['4', '6', '8', '10'];
 
     final List<String>? results = await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return MultiSelect(items: colours);
+        return MultiSelect(colours: colours, sizes: sizes);
       },
     );
 
     if (results != null) {
       setState(() {
+        log(selectedColours.toString());
+        // selectedColours = results[0];
         selectedColours = results;
+        // selectedSizes = resultsSizes;
       });
     }
   }
 
-    
-
-    @override
-    initState() {
-      // getCurrentUser();
-      categoryItems = [];
-          List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
+  @override
+  initState() {
+    // getCurrentUser();
+    categoryItems = [];
+    List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     for (Item i in allItems) {
       log('checking: ${widget.type} vs database stored type: ${i.type}');
       if (widget.type == i.type) {
         categoryItems.add(i);
       }
     }
-      super.initState();
-    }
-String dropdownValue = list.first;
+    super.initState();
+  }
+
+  String dropdownValue = list.first;
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-        double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     // getCurrentUser();
     return Scaffold(
       appBar: AppBar(
@@ -158,7 +80,7 @@ String dropdownValue = list.first;
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon:  Icon(Icons.chevron_left, size: width*0.08),
+          icon: Icon(Icons.chevron_left, size: width * 0.08),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -167,36 +89,36 @@ String dropdownValue = list.first;
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
+              icon: Icon(Icons.close, size: width * 0.06)),
         ],
       ),
-
       body: Container(
           color: Colors.white,
           child: Column(children: [
             DropdownButton<String>(
-      hint: const Text('HINT'),
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-        setState(() {
-          dropdownValue = value!;
-          searchItem(value);
-        });
-      },
-      items: list.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),),
+              hint: const Text('HINT'),
+              value: dropdownValue,
+              icon: const Icon(Icons.arrow_downward),
+              elevation: 16,
+              style: const TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String? value) {
+                // This is called when the user selects an item.
+                setState(() {
+                  dropdownValue = value!;
+                  searchItem(value);
+                });
+              },
+              items: list.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
             // Container(
             //   margin: const EdgeInsets.fromLTRB(16,16,16,16),
             //   child: TextField(
@@ -213,13 +135,16 @@ String dropdownValue = list.first;
             // ),
 
             ElevatedButton(
-              onPressed: _showMultiSelect, 
-              child: const Icon(Icons.filter_alt_outlined, color: Colors.black)),
-              Wrap(
-                children: selectedColours.map((e) => Chip(
-                    label: Text(e),
-                )).toList(),
-              ),
+                onPressed: _showMultiSelect,
+                child:
+                    const Icon(Icons.filter_alt_outlined, color: Colors.black)),
+            Wrap(
+              children: selectedColours
+                  .map((e) => Chip(
+                        label: Text(e),
+                      ))
+                  .toList(),
+            ),
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -248,5 +173,221 @@ String dropdownValue = list.first;
     }).toList();
 
     setState(() => categoryItems = suggestions);
+  }
+}
+
+// class MultiSelectSize extends StatefulWidget {
+//   final List<String> items;
+//   const MultiSelectSize({Key? key, required this.items}) : super(key: key);
+
+//   @override
+//   State<MultiSelectSize> createState() => _MultiSelectSizeState();
+// }
+
+// class _MultiSelectSizeState extends State<MultiSelectSize> {
+//   final List<String> selectedColours = [];
+
+//   void colourChange(String itemValue, bool isSelected) {
+//     setState(() {
+//       if (isSelected) {
+//         selectedColours.add(itemValue);
+//       } else {
+//         selectedColours.remove(itemValue);
+//       }
+//     });
+//   }
+
+//   void _cancel() {
+//     Navigator.pop(context);
+//   }
+
+//   searchItemColour(List<String> colours, List<String> sizes) {
+//     categoryItems = Provider.of<ItemStore>(context, listen: false).items;
+//     List<Item> suggestions = [];
+//     // List<Item> suggestions = categoryItems;
+//     for (String colour in colours) {
+//       log('Getting $colour');
+//       suggestions = suggestions +
+//         categoryItems.where((item) {
+//         final String dressColour = item.colour.toString();
+//         return dressColour.contains(colour);
+//     }).toList();
+//   }
+//     // suggestions = categoryItems.where((item) {
+//     //   final String dressColour = item.colour.toString();
+//     //   return dressColour.contains(query[0]) || dressColour.contains(query[1]);
+//     // }).toList();
+
+//     setState(() => categoryItems = suggestions);
+//   }
+
+//   void _submit() {
+//     searchItemColour(selectedColours, ['0']);
+//     Navigator.pop(context, selectedColours);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return AlertDialog(
+//       title: const Text('Select colours'),
+//       content: Column(
+//         children: [
+//           ListBody(
+//             mainAxis: Axis.vertical,
+//             children: widget.items.map((item) => CheckboxListTile(
+//               value: selectedColours.contains(item),
+//               title: Text(item),
+//               controlAffinity: ListTileControlAffinity.leading,
+//               onChanged: (isChecked) => colourChange(item, isChecked!),
+//               )).toList(),
+//             ),
+//         ],
+//       ),
+//         actions: [
+//           TextButton(
+//             onPressed: _cancel,
+//             child: const Text('Cancel')
+//           ),
+//           ElevatedButton(
+//             onPressed: _submit,
+//             child: const Text('Submit')
+//           ),
+//          ],);
+//   }
+
+// }
+
+class MultiSelect extends StatefulWidget {
+  final List<String> colours;
+  final List<String> sizes;
+  const MultiSelect({Key? key, required this.colours, required this.sizes})
+      : super(key: key);
+
+  @override
+  State<MultiSelect> createState() => _MultiSelectState();
+}
+
+class _MultiSelectState extends State<MultiSelect> {
+  final List<String> selectedColours = [];
+  final List<String> selectedSizes = [];
+
+  void sizeChange(String sizeValue, bool isSelected) {
+    setState(() {
+      if (isSelected) {
+        selectedSizes.add(sizeValue);
+      } else {
+        selectedSizes.remove(sizeValue);
+      }
+    });
+  }
+
+  void colourChange(String colourValue, bool isSelected) {
+    setState(() {
+      if (isSelected) {
+        selectedColours.add(colourValue);
+      } else {
+        selectedColours.remove(colourValue);
+      }
+    });
+  }
+
+  void _cancel() {
+    Navigator.pop(context);
+  }
+
+  searchItemColour(List<String> colours, List<String> sizes) {
+    categoryItems = Provider.of<ItemStore>(context, listen: false).items;
+    List<Item> suggestions = [];
+    // List<Item> suggestions = categoryItems;
+    for (String colour in colours) {
+      log('Getting $colour');
+      suggestions = suggestions +
+          categoryItems.where((item) {
+            final String dressColour = item.colour.toString();
+            log(dressColour);
+            return dressColour.contains(colour);
+          }).toList();
+    }
+    for (String size in sizes) {
+      log('Getting size $size');
+      suggestions = suggestions +
+          categoryItems.where((item) {
+            final String dressSize = item.size.toString();
+            log(dressSize);
+            return dressSize.contains(size);
+          }).toList();
+    }
+
+    // setState(() => categoryItems = suggestions);
+    categoryItems = suggestions;
+  }
+
+  void _submit() {
+    searchItemColour(selectedColours, selectedSizes);
+    Navigator.pop(context, selectedColours);
+  }
+
+  String dropdownValue = list.first;
+  final controller = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Select colours'),
+      content: Column(
+        children: [
+          ListBody(
+            mainAxis: Axis.vertical,
+            children: widget.sizes
+                .map((item) => CheckboxListTile(
+                      value: selectedSizes.contains(item),
+                      title: Text(item),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (isChecked) => sizeChange(item, isChecked!),
+                    ))
+                .toList(),
+          ),
+          ListBody(
+            mainAxis: Axis.vertical,
+            children: widget.colours
+                .map((item) => CheckboxListTile(
+                      value: selectedColours.contains(item),
+                      title: Text(item),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (isChecked) => colourChange(item, isChecked!),
+                    ))
+                .toList(),
+          ),
+                      DropdownButton<String>(
+              hint: const Text('HINT'),
+              value: dropdownValue,
+              icon: const Icon(Icons.arrow_downward),
+              elevation: 16,
+              style: const TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String? value) {
+                // This is called when the user selects an item.
+                setState(() {
+                  dropdownValue = value!;
+                  // searchItem(value);
+                  selectedSizes.add(value);
+                });
+              },
+              items: list.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+        ],
+      ),
+      actions: [
+        TextButton(onPressed: _cancel, child: const Text('Cancel')),
+        ElevatedButton(onPressed: _submit, child: const Text('Submit')),
+      ],
+    );
   }
 }
