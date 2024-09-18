@@ -1,0 +1,21 @@
+class ColourFilter {
+  String colour;
+  bool status;
+}
+class SizeFilter {
+  String size;
+  bool status;
+}
+class PriceFilter {
+  int lowerPrice;
+  int upperPrice;
+  bool status;
+}
+class ColourFilter {
+  String name;
+  bool status;
+}
+class ColourFilter {
+  String name;
+  bool status;
+}

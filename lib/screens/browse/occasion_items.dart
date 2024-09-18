@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/filters_page.dart';
 import 'package:unearthed/shared/item_card.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
@@ -22,7 +23,7 @@ class OccasionItems extends StatefulWidget {
 
 class _OccasionItemsState extends State<OccasionItems> {
 
-
+    Badge myBadge = const Badge(child: Icon(Icons.filter));
  
     List<Item> occasionItems = [];
 
@@ -33,17 +34,46 @@ class _OccasionItemsState extends State<OccasionItems> {
       super.initState();
     }
 
+  late List<String> sizes = [];
+  late Set coloursSet = <String>{};
+  late bool filterOn = false;
+
+  void setValues(List<String> filterColours, List<String> filterSizes) {
+    log('OCCASSION_PAGE - filterOn set to $filterOn');
+    sizes = filterSizes;
+    coloursSet = {...filterColours};
+
+    // TODO: IS THIS NEEDED?
+    setState(() {});
+  }
+
+  void setFilter(bool filter) {
+    filterOn = filter;
+    // TODO: IS THIS NEEDED?
+    setState(() {});
+  }
+
+
   @override
   Widget build(BuildContext context) {
         double width = MediaQuery.of(context).size.width;
     // getCurrentUser();
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
-    log('Size of allItems: ${allItems.length}');
+    occasionItems.clear();
+    if (filterOn == true) {
     for (Item i in allItems) {
-      log('checking: ${widget.occasion} vs database stored type: ${i.occasion}');
-      if (widget.occasion == i.occasion) {
-        occasionItems.add(i);
-      }
+      if (i.occasion.contains(widget.occasion) 
+            && sizes.contains(i.size.toString()) 
+            && coloursSet.intersection({...i.colour}).isNotEmpty) {
+          occasionItems.add(i);
+        }
+    }
+    } else {
+    for (Item i in allItems) {
+      if (i.occasion.contains(widget.occasion)) {
+          occasionItems.add(i);
+        }
+    }
     }
     return Scaffold(
       appBar: AppBar(
@@ -72,10 +102,16 @@ class _OccasionItemsState extends State<OccasionItems> {
           },
         ),
         actions: [
-          IconButton(
-              onPressed: () =>
-                  {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
+          Badge(
+            label: Text(filterOn.toString()),
+            child: IconButton(
+                onPressed: () 
+                  {
+                    log('Going to filter');
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (FiltersPage(setFilter: setFilter, setValues: setValues))));
+                  },
+                icon: Icon(Icons.filter_list_sharp, size: width*0.06)),
+          ),
         ],
       ),
 

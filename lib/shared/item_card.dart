@@ -73,7 +73,6 @@ class _ItemCardState extends State<ItemCard> {
     // List currListOfFavs =
     //     Provider.of<ItemStore>(context, listen: false).favourites;
     // isFav = isAFav(widget.item, currListOfFavs);
-    setPrice();
     super.initState();
   }
 
@@ -130,14 +129,7 @@ class _ItemCardState extends State<ItemCard> {
     List currListOfFavs =
         Provider.of<ItemStore>(context, listen: false).favourites;
     isFav = isAFav(widget.item, currListOfFavs);
-    // if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] != 'BANGKOK') {
-    //   convertedRentPriceList = convertFromTHB(widget.item.rentPrice, 'SGD');
-    //   convertedRentPrice = convertedRentPriceList[0];
-    //   symbol = convertedRentPriceList[1];
-    // } else {
-    //   convertedRentPrice = widget.item.rentPrice;
-    //   symbol = globals.thb;
-    // }
+    setPrice();
     return Card(
       
       shape: BeveledRectangleBorder(
@@ -196,7 +188,7 @@ class _ItemCardState extends State<ItemCard> {
             ),
             // StyledText('Size: ${item.size.toString()}'),
             // int convertedRentPrice = convertFromTHB(${widget.item.rentPrice}, 'SGD');
-            if (widget.item.bookingType == 'rental') StyledBody('Rent for $convertedRentPrice$symbol per day', weight: FontWeight.normal),
+            if (widget.item.bookingType == 'rental') StyledBody('Rent from $convertedRentPrice$symbol per day', weight: FontWeight.normal),
             if (widget.item.bookingType == 'both' || widget.item.bookingType == 'buy') StyledBody('Buy for $convertedBuyPrice$symbol', weight: FontWeight.normal),
             StyledBodyStrikeout('RRP $convertedRRPPrice$symbol', weight: FontWeight.normal),
           ],

@@ -70,7 +70,6 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
     List currListOfFavs =
         Provider.of<ItemStore>(context, listen: false).favourites;
     isFav = isAFav(widget.item, currListOfFavs);
-    setPrice();
     super.initState();
   }
 
@@ -124,6 +123,7 @@ class _DesignerItemCardState extends State<DesignerItemCard> {
   @override
   Widget build(BuildContext context) {
         double width = MediaQuery.of(context).size.width;
+    setPrice();
     return Card(
       color: Colors.white,
       child: Padding(

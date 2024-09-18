@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:unearthed/models/filter.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
@@ -15,21 +16,12 @@ class ItemStore extends ChangeNotifier {
   final List<Item> _settings = [];
   final List<Renter> _renters = [];
   final List<ItemRenter> _itemRenters = [];
+  final Filter _filter = Filter();
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
   Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: [], settings: ['BANGKOK','CM','CM','KG']);
   bool _loggedIn = false;
   String _region = 'BANGKOK';
-
-  // final List<Item> _Items = [
-  //   Item(id: '1', name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Item(id: '2', name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Item(id: '3', name: 'Elinor', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Item(id: '4', name: 'Francesca Mini', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Item(id: '5', name: 'Dione', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Item(id: '6', name: 'Riley Chiffon', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
-  //   Item(id: '7', name: 'Sheena', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000),
-  // ];
 
   get items => _items;
   get favourites => _favourites;
@@ -39,30 +31,11 @@ class ItemStore extends ChangeNotifier {
   get renter => _user;
   get loggedIn => _loggedIn;
   get region => _region;
+  get filter => _filter;
 
-  // add item
-  // void addCharacter(Item item) {
-  //   _Items.add(item);
-  //   notifyListeners();
-  // }
-  // void setLoggedIn(loggedIn) {
-  //   _loggedIn = loggedIn;
-  // }
-
-  // void addFavourite(Item item) async {
-  //   // await FirestoreService.addItem(item);
-  //   _favourites.add(item);
-  //   notifyListeners();
-  // }
-
-  // void addFavourite2(Item item) async {
-  //   _user.favourites.add(item.id);
-  //   saveRenter(_user);
-  //   log('New user with favourite added:');
-  //   log(_user.favourites.toString());
-  //   log('Showing user id');
-  //   log(_user.id);
-  // }
+  void setFilters() {
+    _filter.setFilters();
+  }
 
   void addSettings(settings) async {
     _user.settings.add(settings);
