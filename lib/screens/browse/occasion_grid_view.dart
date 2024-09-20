@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/browse/occasion_grid_tile.dart';
-import 'package:unearthed/screens/browse/occasion_items.dart';
+import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class OccasionGridView extends StatelessWidget {
@@ -20,7 +20,7 @@ class OccasionGridView extends StatelessWidget {
           itemBuilder: (_, i) => 
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (OccasionItems(occasions[i].toLowerCase()))));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ItemResults('occasion', occasions[i].toLowerCase()))));
                 },
                 child: Container(
                   // decoration: BoxDecoration(

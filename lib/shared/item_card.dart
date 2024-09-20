@@ -137,7 +137,7 @@ class _ItemCardState extends State<ItemCard> {
   ),
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(width * 0.02),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -150,7 +150,6 @@ class _ItemCardState extends State<ItemCard> {
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [
                 StyledHeading(widget.item.name),
-                StyledBody(', size UK ${widget.item.size.toString()}', weight: FontWeight.normal),
                 const Expanded(child: SizedBox()),
                 isFav ?  IconButton(
                   icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,
@@ -186,6 +185,7 @@ class _ItemCardState extends State<ItemCard> {
                   
               ],
             ),
+            StyledBody('Size UK ${widget.item.size.toString()}', weight: FontWeight.normal),
             // StyledText('Size: ${item.size.toString()}'),
             // int convertedRentPrice = convertFromTHB(${widget.item.rentPrice}, 'SGD');
             if (widget.item.bookingType == 'rental') StyledBody('Rent from $convertedRentPrice$symbol per day', weight: FontWeight.normal),

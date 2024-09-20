@@ -10,12 +10,45 @@ import 'package:unearthed/shared/secure_repo.dart';
 
 class ItemStore extends ChangeNotifier {
 
+  final double width = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.width;
+
   final List<Item> _items = [];
   final List<Item> _favourites = [];
   final List<Item> _settings = [];
   final List<Renter> _renters = [];
   final List<ItemRenter> _itemRenters = [];
-  List _filters = []; 
+  Map<String, bool> _sizesFilter = {
+    '4': false,
+    '6': false,
+    '8': false,
+    '10': false,
+  };
+  Map<Color, bool> _coloursFilter = {
+    Colors.black: false,
+    Colors.white: false,
+    Colors.blue: false,
+    Colors.green: false,
+    Colors.pink: false,
+    Colors.grey: false,
+    Colors.brown: false,
+    Colors.yellow: false,
+    Colors.purple: false,
+    Colors.red: false,
+    Colors.lime: false,
+    Colors.cyan: false,
+    Colors.teal: false
+  };
+    Map<String, bool> _lengthsFilter = {
+    'mini': false,
+    'midi': false,
+    'long': false
+  };
+  Map<String, bool> _printsFilter = {'enthic': false, 'boho': false, 'preppy': false, 'floral' : false, 'abstract': false, 'stripes': false, 'dots': false, 'textured': false, 'none': false};
+  Map<String, bool> _sleevesFilter = {'sleeveless': false, 'short sleeve': false, '3/4 sleeve': false, 'long sleeve': false};
+  RangeValues _rangeValuesFilter = const RangeValues(0, 9000);
+
+  // final List<bool> _sizesFilter = [true, true, false, false];
+  // final List<bool> _sizesFilter = [true, true, false, false];
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
   Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: [], settings: ['BANGKOK','CM','CM','KG']);
@@ -30,20 +63,41 @@ class ItemStore extends ChangeNotifier {
   get renter => _user;
   get loggedIn => _loggedIn;
   get region => _region;
-  get filters => _filters;
+  get sizesFilter => _sizesFilter;
+  get coloursFilter => _coloursFilter;
+  get lengthsFilter => _lengthsFilter;
+  get printsFilter => _printsFilter;
+  get sleevesFilter => _sleevesFilter;
+  get rangeValuesFilter => _rangeValuesFilter;
+  
+  void sizesFilterSetter(sizeF) {
+    _sizesFilter = sizeF;
+  }
+  void coloursFilterSetter(colourF) {
+    _coloursFilter = colourF;
+  }
+  void lengthsFilterSetter(lengthsF) {
+    _lengthsFilter = lengthsF;
+  }
+  void printsFilterSetter(printsF) {
+    _printsFilter = printsF;
+  }
+  void sleevesFilterSetter(sleevesF) {
+    _sleevesFilter = sleevesF;
+  }
+  void rangeValuesFilterSetter(rangeValuesF) {
+    _rangeValuesFilter = rangeValuesF;
+  }
 
-  void loadFilters(filters) {
-    Map<String, bool> sizeMap = {
-    '4': false,
-    '6': false,
-    '8': false,
-    '10': false,
-  };
-    filters.add(sizeMap);
+  void resetFilters() {
+    sizesFilter.updateAll((name, value) => value = false);
+    rangeValuesFilterSetter(const RangeValues(0,10000));
+    coloursFilter.updateAll((name, value) => value = false);
+    lengthsFilter.updateAll((name, value) => value = false);
+    printsFilter.updateAll((name, value) => value = false);
+    sleevesFilter.updateAll((name, value) => value = false);
   }
-  void saveFilters(filters) {
-    _filters = filters;
-  }
+ 
 
   void addSettings(settings) async {
     _user.settings.add(settings);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/browse/category_items.dart';
+import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 
@@ -41,7 +41,7 @@ class CategoryListView extends StatelessWidget {
            )
          ),
          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const CategoryItems('dress'))));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('type','dress'))));
          },
        ),
        GestureDetector(
@@ -76,7 +76,7 @@ class CategoryListView extends StatelessWidget {
     )
   ),
   onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const CategoryItems('bag'))));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('type', 'bag'))));
 
   }
 ),
@@ -109,7 +109,7 @@ class CategoryListView extends StatelessWidget {
            )
          ),
          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const CategoryItems('jacket'))));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('type','jacket'))));
          },
        ),
               GestureDetector(
@@ -143,7 +143,7 @@ class CategoryListView extends StatelessWidget {
     )
   ),
   onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const CategoryItems('pantsuit'))));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('type','pantsuit'))));
 
   }
 ),
