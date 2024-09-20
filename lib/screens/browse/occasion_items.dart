@@ -7,6 +7,7 @@ import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/filters_page.dart';
 import 'package:unearthed/shared/item_card.dart';
+import 'package:unearthed/shared/no_items_found.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
@@ -35,21 +36,26 @@ class _OccasionItemsState extends State<OccasionItems> {
     }
 
   late List<String> sizes = [];
+  late List<String> lengths = [];
+  late List<String> prints = [];
+  late List<String> sleeves = [];
   late Set coloursSet = <String>{};
   late bool filterOn = false;
+  late int numOfFilters = 0;
 
-  void setValues(List<String> filterColours, List<String> filterSizes) {
-    log('OCCASSION_PAGE - filterOn set to $filterOn');
+  void setValues(List<String> filterColours, List<String> filterSizes, List<String> filterLengths, List<String> filterPrints, List<String> filterSleeves) {
     sizes = filterSizes;
+    lengths = filterLengths;
+    prints = filterPrints;
+    sleeves = filterSleeves;
     coloursSet = {...filterColours};
-
-    // TODO: IS THIS NEEDED?
     setState(() {});
   }
 
-  void setFilter(bool filter) {
+  void setFilter(bool filter, int noOfFilters) {
     filterOn = filter;
-    // TODO: IS THIS NEEDED?
+    log('OCCASSION_PAGE - filterOn set to $filterOn');
+    numOfFilters = noOfFilters;
     setState(() {});
   }
 
@@ -61,10 +67,18 @@ class _OccasionItemsState extends State<OccasionItems> {
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     occasionItems.clear();
     if (filterOn == true) {
+      log(sizes.toString());
+      log(sleeves.toString());
+      log(lengths.toString());
     for (Item i in allItems) {
       if (i.occasion.contains(widget.occasion) 
-            && sizes.contains(i.size.toString()) 
-            && coloursSet.intersection({...i.colour}).isNotEmpty) {
+             && sizes.contains(i.size.toString()) 
+             && lengths.contains(i.length.toString()) 
+             && prints.contains(i.print.toString()) 
+             && sleeves.contains(i.sleeve.toString()) 
+            && coloursSet.intersection({...i.colour}).isNotEmpty
+            ) 
+          {
           occasionItems.add(i);
         }
     }
@@ -75,6 +89,8 @@ class _OccasionItemsState extends State<OccasionItems> {
         }
     }
     }
+    bool itemsFound = false;
+    if (occasionItems.isEmpty) {itemsFound = false;} else {itemsFound = true;}
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: width * 0.1,
@@ -103,7 +119,9 @@ class _OccasionItemsState extends State<OccasionItems> {
         ),
         actions: [
           Badge(
-            label: Text(filterOn.toString()),
+            offset: const Offset(-40, 10),
+            isLabelVisible: (numOfFilters > 0) ? true : false,
+            label: Text(numOfFilters.toString()),
             child: IconButton(
                 onPressed: () 
                   {
@@ -115,7 +133,7 @@ class _OccasionItemsState extends State<OccasionItems> {
         ],
       ),
 
-      body: Container(
+      body: (itemsFound) ? Container(
           color: Colors.white,
           child: Column(
             children: [
@@ -138,7 +156,7 @@ class _OccasionItemsState extends State<OccasionItems> {
               }),
  
             ],
-          )),
+          )) : const NoItemsFound()
     );
   }
 }

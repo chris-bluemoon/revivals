@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
@@ -20,33 +19,34 @@ class AllItems extends StatefulWidget {
 }
 
 class _AllItemsState extends State<AllItems> {
-  void handleSubmit() {
-    for (var i = 0; i < allItems.length; i++) {
-      Provider.of<ItemStore>(context, listen: false).addItem(Item(
-        id: uuid.v4(),
-        type: allItems[i].type,
-        bookingType: allItems[i].bookingType,
-        occasion: allItems[i].occasion,
-        dateAdded: allItems[i].dateAdded,
-        style: allItems[i].style,
-        name: allItems[i].name,
-        brand: allItems[i].brand,
-        colour: allItems[i].colour,
-        size: allItems[i].size,
-        rentPrice: allItems[i].rentPrice,
-        buyPrice: allItems[i].buyPrice,
-        rrp: allItems[i].rrp,
-        description: allItems[i].description,
-        bust: allItems[i].bust,
-        waist: allItems[i].waist,
-        hips: allItems[i].hips,
-        longDescription: allItems[i].longDescription,
-        imageId: allItems[i].imageId,
-        // isFav: allItems[i].isFav,
-    ));
-    }
+  // void handleSubmit() {
+  //   for (var i = 0; i < allItems.length; i++) {
+  //     Provider.of<ItemStore>(context, listen: false).addItem(Item(
+  //       id: uuid.v4(),
+  //       type: allItems[i].type,
+  //       bookingType: allItems[i].bookingType,
+  //       occasion: allItems[i].occasion,
+  //       dateAdded: allItems[i].dateAdded,
+  //       style: allItems[i].style,
+  //       name: allItems[i].name,
+  //       brand: allItems[i].brand,
+  //       colour: allItems[i].colour,
+  //       size: allItems[i].size,
+  //       length: allItems[i].length,
+  //       rentPrice: allItems[i].rentPrice,
+  //       buyPrice: allItems[i].buyPrice,
+  //       rrp: allItems[i].rrp,
+  //       description: allItems[i].description,
+  //       bust: allItems[i].bust,
+  //       waist: allItems[i].waist,
+  //       hips: allItems[i].hips,
+  //       longDescription: allItems[i].longDescription,
+  //       imageId: allItems[i].imageId,
+  //       // isFav: allItems[i].isFav,
+  //   ));
+  //   }
 
-  }
+  // }
 
 
     @override

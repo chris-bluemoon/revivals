@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/filter.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
@@ -16,7 +15,7 @@ class ItemStore extends ChangeNotifier {
   final List<Item> _settings = [];
   final List<Renter> _renters = [];
   final List<ItemRenter> _itemRenters = [];
-  final Filter _filter = Filter();
+  List _filters = []; 
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
   Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: [], settings: ['BANGKOK','CM','CM','KG']);
@@ -31,10 +30,19 @@ class ItemStore extends ChangeNotifier {
   get renter => _user;
   get loggedIn => _loggedIn;
   get region => _region;
-  get filter => _filter;
+  get filters => _filters;
 
-  void setFilters() {
-    _filter.setFilters();
+  void loadFilters(filters) {
+    Map<String, bool> sizeMap = {
+    '4': false,
+    '6': false,
+    '8': false,
+    '10': false,
+  };
+    filters.add(sizeMap);
+  }
+  void saveFilters(filters) {
+    _filters = filters;
   }
 
   void addSettings(settings) async {
