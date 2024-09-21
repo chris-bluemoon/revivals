@@ -85,9 +85,9 @@ class _FiltersPage extends State<FiltersPage> {
           child: (selected)
               ? Center(
                   child:
-                      StyledBody(length, color: Colors.white, weight: FontWeight.normal))
+                      StyledBody(length.toUpperCase(), color: Colors.white, weight: FontWeight.normal))
               : Center(
-                  child: StyledBody(length, weight: FontWeight.normal))),
+                  child: StyledBody(length.toUpperCase(), weight: FontWeight.normal))),
     );
   }
 
@@ -111,9 +111,9 @@ class _FiltersPage extends State<FiltersPage> {
           child: (selected)
               ? Center(
                   child:
-                      StyledBody(print, color: Colors.white, weight: FontWeight.normal))
+                      StyledBody(print.toUpperCase(), color: Colors.white, weight: FontWeight.normal))
               : Center(
-                  child: StyledBody(print, weight: FontWeight.normal))),
+                  child: StyledBody(print.toUpperCase(), weight: FontWeight.normal))),
     );
   }
 
@@ -138,10 +138,10 @@ class _FiltersPage extends State<FiltersPage> {
           child: (selected)
               ? Center(
                   child:
-                      StyledBody(sleeve, color: Colors.white, weight: FontWeight.normal),
+                      StyledBody(sleeve.toUpperCase(), color: Colors.white, weight: FontWeight.normal),
               )
               : Center(
-                  child: StyledBody(sleeve, weight: FontWeight.normal,),
+                  child: StyledBody(sleeve.toUpperCase(), weight: FontWeight.normal,),
                   )
     ));
   }
