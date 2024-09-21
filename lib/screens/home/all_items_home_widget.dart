@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/items_grid_page/all_items.dart';
+import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class AllItemsHomeWidget extends StatelessWidget {
@@ -17,14 +18,14 @@ class AllItemsHomeWidget extends StatelessWidget {
           GestureDetector(
             child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const AllItems())));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('occasion','party'))));
             }
           ),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const AllItems())));
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('occasion','party'))));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

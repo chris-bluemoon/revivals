@@ -15,7 +15,7 @@ class ToBuyHomeWidget extends StatelessWidget {
       child: Stack(
         children: [
           GestureDetector(
-            child: Image.asset('assets/img/backgrounds/to_buy_home_page.png'),
+            child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const BookingTypeItems('buy'))));
             }
