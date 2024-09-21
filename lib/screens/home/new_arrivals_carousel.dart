@@ -19,7 +19,7 @@ class _NewArrivalsCarouselState extends State<NewArrivalsCarousel> {
     double width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('dateAdded', '01-01-2025'))));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('dateAdded', '01-01-2020'))));
       },
       child: Container(
         child: CarouselSlider(

@@ -93,6 +93,7 @@ class _ItemResultsState extends State<ItemResults> {
             }
           }
         case 'dateAdded':
+        log('dateAdded');
           for (Item i in allItems) {
             DateFormat format = DateFormat("dd-MM-yyyy");
             DateTime dateSupplied = format.parse(widget.value);
@@ -128,12 +129,15 @@ class _ItemResultsState extends State<ItemResults> {
               finalItems.add(i);
           }
         case 'dateAdded':
+          log('dataAdded no filter');
           for (Item i in allItems) {
             DateFormat format = DateFormat("dd-MM-yyyy");
             DateTime dateSupplied = format.parse(widget.value);
             DateTime dateAdded = format.parse(i.dateAdded);
+            log('Is ${dateAdded.toString()} after ${dateSupplied.toString()}');
             if (dateAdded.isAfter(dateSupplied)) {
-              filteredItems.add(i);
+              log('ADDED');
+              finalItems.add(i);
             }
           }
           break;
