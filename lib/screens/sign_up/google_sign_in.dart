@@ -187,11 +187,15 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
   // }
   Future<dynamic> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-
+      // Commented out below 2 lines and replaced with profile/email googleAuth, seems to work and no longer getting platform exception
+      // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      // final GoogleSignInAuthentication? googleAuth =
+      //     await googleUser?.authentication;
+GoogleSignInAuthentication? googleAuth =
+    await (await GoogleSignIn(
+    scopes: ["profile", "email"],
+).signIn())
+    ?.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,

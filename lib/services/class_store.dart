@@ -45,7 +45,7 @@ class ItemStore extends ChangeNotifier {
   };
   Map<String, bool> _printsFilter = {'enthic': false, 'boho': false, 'preppy': false, 'floral' : false, 'abstract': false, 'stripes': false, 'dots': false, 'textured': false, 'none': false};
   Map<String, bool> _sleevesFilter = {'sleeveless': false, 'short sleeve': false, '3/4 sleeve': false, 'long sleeve': false};
-  RangeValues _rangeValuesFilter = const RangeValues(0, 9000);
+  RangeValues _rangeValuesFilter = const RangeValues(0, 10000);
 
   // final List<bool> _sizesFilter = [true, true, false, false];
   // final List<bool> _sizesFilter = [true, true, false, false];

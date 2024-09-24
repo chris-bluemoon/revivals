@@ -59,7 +59,7 @@ class _FiltersPage extends State<FiltersPage> {
             color: colour,
             border: Border.all(color: Colors.black)),
         child: (selected)
-            ? const Icon(Icons.check_circle_rounded, color: Colors.white)
+            ? const Icon(Icons.check, color: Colors.white)
             : null,
       ),
     );
@@ -100,7 +100,7 @@ class _FiltersPage extends State<FiltersPage> {
       },
       child: Container(
           margin: const EdgeInsets.all(10),
-          width: width * 0.08,
+          width: width * 0.09,
           height: width * 0.03,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,

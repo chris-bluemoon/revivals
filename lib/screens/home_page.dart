@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/browse/browse.dart';
 import 'package:unearthed/screens/favourites/favourites.dart';
 import 'package:unearthed/screens/home/home.dart';
@@ -31,9 +28,6 @@ class _HomePageState extends State<HomePage> {
       .fetchRentersOnce();
       
     // Provider.of<ItemStore>(context, listen: false).addAllFavourites();
-    List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
-    log('Renters list:');
-    log(renters.toString());
     
     // getCurrentUser();
     super.initState();
