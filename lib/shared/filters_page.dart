@@ -18,7 +18,6 @@ class FiltersPage extends StatefulWidget {
 class _FiltersPage extends State<FiltersPage> {
   int noOfFilters = 0;
   final double width = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.width;
-
   Widget mySize(String size, bool selected) {
     return GestureDetector(
       onTap: () {
@@ -59,7 +58,8 @@ class _FiltersPage extends State<FiltersPage> {
             color: colour,
             border: Border.all(color: Colors.black)),
         child: (selected)
-            ? const Icon(Icons.check, color: Colors.white)
+            ? (colour == Colors.white) ? const Icon(Icons.check_circle_outline, color: Colors.black)
+            : const Icon(Icons.check_circle_outline, color: Colors.white)
             : null,
       ),
     );
@@ -150,13 +150,13 @@ class _FiltersPage extends State<FiltersPage> {
     Colors.black: false,
     Colors.white: false,
     Colors.blue: false,
+  Colors.red: false,
     Colors.green: false,
-    Colors.pink: false,
     Colors.grey: false,
     Colors.brown: false,
     Colors.yellow: false,
     Colors.purple: false,
-    Colors.red: false,
+    Colors.pink: false,
     Colors.lime: false,
     Colors.cyan: false,
     Colors.teal: false
@@ -447,6 +447,7 @@ class _FiltersPage extends State<FiltersPage> {
 
   @override
   void initState() {
+    // resetValues();
     Map<String, bool> sizesFromStore = Provider.of<ItemStore>(context, listen: false).sizesFilter;
     Map<Color, bool> coloursFromStore = Provider.of<ItemStore>(context, listen: false).coloursFilter;
     Map<String, bool> lengthsFromStore = Provider.of<ItemStore>(context, listen: false).lengthsFilter;
@@ -459,7 +460,6 @@ class _FiltersPage extends State<FiltersPage> {
     printMap = Map<String, bool>.from(printsFromStore);
     sleeveMap = Map<String, bool>.from(sleevesFromStore);
     rangeVals = rangeValuesFromStore;
-    log(rangeVals.toString());
     super.initState();
 
   }
@@ -592,12 +592,12 @@ class _FiltersPage extends State<FiltersPage> {
                   resetValues();
                   widget.setValues(getColours(), getSizes(), getPrices(), getLengths(), getPrints(), getSleeves());
                   widget.setFilter(getFilterOn(), noOfFilters);
-                  Provider.of<ItemStore>(context, listen: false).sizesFilterSetter(sizeMap);
-                  Provider.of<ItemStore>(context, listen: false).rangeValuesFilterSetter(rangeVals);
-                  Provider.of<ItemStore>(context, listen: false).coloursFilterSetter(colourMap);
-                  Provider.of<ItemStore>(context, listen: false).lengthsFilterSetter(lengthMap);
-                  Provider.of<ItemStore>(context, listen: false).printsFilterSetter(printMap);
-                  Provider.of<ItemStore>(context, listen: false).sleevesFilterSetter(sleeveMap);
+                  // Provider.of<ItemStore>(context, listen: false).sizesFilterSetter(sizeMap);
+                  // Provider.of<ItemStore>(context, listen: false).rangeValuesFilterSetter(rangeVals);
+                  // Provider.of<ItemStore>(context, listen: false).coloursFilterSetter(colourMap);
+                  // Provider.of<ItemStore>(context, listen: false).lengthsFilterSetter(lengthMap);
+                  // Provider.of<ItemStore>(context, listen: false).printsFilterSetter(printMap);
+                  // Provider.of<ItemStore>(context, listen: false).sleevesFilterSetter(sleeveMap);
                   // noOfFilters = 0;
                 });
               },
