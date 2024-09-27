@@ -477,6 +477,7 @@ class _FiltersPage extends State<FiltersPage> {
         leading: IconButton(
           icon: Icon(Icons.close, size: width * 0.08),
           onPressed: () {
+            resetValues();
             Navigator.pop(context);
           },
         ),
