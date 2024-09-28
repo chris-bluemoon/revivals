@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/filters_page.dart';
 import 'package:unearthed/shared/item_card.dart';
 import 'package:unearthed/shared/no_items_found.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -180,19 +181,31 @@ class _ItemResultsState extends State<ItemResults> {
             Padding(
               padding: EdgeInsets.fromLTRB(0, width*0.0, width*0.03, 0),
               child: Badge(
-                // offset: Offset(-width*0.07, width*0.015),
+                offset: Offset(-width*0.01, width*0.001),
                 // smallSize: width*0.03,
+                // largeSize: width*0.03,
                 alignment: Alignment.topLeft,
                 isLabelVisible: (numOfFilters > 0) ? true : false,
                 label: Text(numOfFilters.toString()),
-                child: Image.asset('assets/img/icons/icons8-slider-50.png', height: width*0.05)
+                // child: GestureDetector(
+                //   onTap: () {
+                //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (FiltersPage(setFilter: setFilter, setValues: setValues))));
+                //   },
+                //   child: Image.asset('assets/img/icons/icons8-slider-50.png', height: width*0.05))
                 // child: IconButton(
                 //     onPressed: () {
-                //       Navigator.of(context).push(MaterialPageRoute(
+                //       Navigator.of(context).push(MaterialPageRoute( 
                 //           builder: (context) => (FiltersPage(
                 //               setFilter: setFilter, setValues: setValues))));
                 //     },
                 //     icon: Icon(Icons.filter_list_sharp, size: width * 0.06)),
+                child: GestureDetector(
+                  onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute( 
+                          builder: (context) => (FiltersPage(
+                              setFilter: setFilter, setValues: setValues))));
+                  },
+                  child: Icon(Icons.filter_list_sharp, size: width*0.05)),
               ),
             ),
           ],
