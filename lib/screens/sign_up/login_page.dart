@@ -29,6 +29,7 @@ class LoginPage extends StatelessWidget {
           // ),
           // const Divider(),
           SignInButton(
+            mini: true,
             Buttons.Google,
             onPressed: () {
               _showButtonPressDialog(context, 'Google');

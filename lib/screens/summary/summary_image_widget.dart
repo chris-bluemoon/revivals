@@ -50,7 +50,8 @@ class SummaryImageWidget extends StatelessWidget {
             children: [
               StyledHeading('${item.name} from ${item.brand}'),
               const SizedBox(height: 5),
-              StyledBody('Size UK ${getSize(item.size)}', color: Colors.grey),
+              // TODO Sort this out
+              StyledBody('Size UK ${getSize(item.size[0])}', color: Colors.grey),
           ],)
         ],
       )

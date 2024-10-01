@@ -80,7 +80,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
         double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('', style: TextStyle(fontSize: 22, color: Colors.black)),
+          // title: const Text('', style: TextStyle(fontSize: 22, color: Colors.black)),
             leading: IconButton(
     icon: Icon(Icons.chevron_left, color: Colors.black, size: width*0.06),
     onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst)
@@ -121,7 +121,6 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
                               Buttons.GoogleDark,
                               onPressed: () async {
                                 showDialogue(context);
-                                log('Google Login');
                                 userCredential.value = await signInWithGoogle();
                                 if (userCredential.value != null) {
                                   hideProgressDialogue(context);

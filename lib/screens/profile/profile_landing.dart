@@ -71,7 +71,8 @@ class _ProfileLandingState extends State<ProfileLanding> {
             children: [
               StyledHeading(
                   'PERSONAL (${Provider.of<ItemStore>(context, listen: false).renter.name})',
-                  weight: FontWeight.normal, color: Colors.grey),
+                  weight: FontWeight.normal,
+                  color: Colors.grey),
               // Text('PERSONAL (${user!.displayName!})', style: const TextStyle(fontSize: 16)),
               SizedBox(height: width * 0.04),
               GestureDetector(
@@ -85,7 +86,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 child: Row(
                   children: [
                     SizedBox(width: width * 0.01),
-                    Icon(Icons.account_circle_outlined, size: width*0.05),
+                    Icon(Icons.account_circle_outlined, size: width * 0.05),
                     SizedBox(width: width * 0.01),
                     const StyledBody('MY ACCOUNT', weight: FontWeight.normal),
                   ],
@@ -104,7 +105,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 child: Row(
                   children: [
                     SizedBox(width: width * 0.01),
-                    Icon(Icons.fact_check_outlined, size: width*0.05),
+                    Icon(Icons.fact_check_outlined, size: width * 0.05),
                     SizedBox(width: width * 0.01),
                     const StyledBody('MY BOOKINGS', weight: FontWeight.normal),
                   ],
@@ -123,9 +124,10 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 child: Row(
                   children: [
                     SizedBox(width: width * 0.01),
-                   Icon(Icons.group_add_outlined, size: width*0.05),
+                    Icon(Icons.group_add_outlined, size: width * 0.05),
                     SizedBox(width: width * 0.01),
-                    const StyledBody('REFER A FRIEND', weight: FontWeight.normal),
+                    const StyledBody('REFER A FRIEND',
+                        weight: FontWeight.normal),
                   ],
                 ),
               ),
@@ -143,7 +145,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 child: Row(
                   children: [
                     SizedBox(width: width * 0.01),
-                    Icon(Icons.settings_outlined, size: width*0.05),
+                    Icon(Icons.settings_outlined, size: width * 0.05),
                     SizedBox(width: width * 0.01),
                     const StyledBody('SETTINGS', weight: FontWeight.normal),
                   ],
@@ -151,17 +153,18 @@ class _ProfileLandingState extends State<ProfileLanding> {
               ),
 
               SizedBox(height: width * 0.06),
-              const StyledHeading('SUPPORT', weight: FontWeight.normal, color: Colors.grey),
+              const StyledHeading('SUPPORT',
+                  weight: FontWeight.normal, color: Colors.grey),
               SizedBox(height: width * 0.04),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => (const FAQs())));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => (const FAQs())));
                 },
                 child: Row(
                   children: [
                     SizedBox(width: width * 0.01),
-                    Icon(Icons.help_outline, size: width*0.05),
+                    Icon(Icons.help_outline, size: width * 0.05),
                     SizedBox(width: width * 0.01),
                     const StyledBody('FAQ', weight: FontWeight.normal),
                   ],
@@ -179,9 +182,9 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 },
                 child: Row(
                   children: [
-                   SizedBox(width: width * 0.01),
-                   Icon(Icons.chat_bubble_outline, size: width*0.05),
-                   SizedBox(width: width * 0.01),
+                    SizedBox(width: width * 0.01),
+                    Icon(Icons.chat_bubble_outline, size: width * 0.05),
+                    SizedBox(width: width * 0.01),
                     const StyledBody('CHAT WITH US', weight: FontWeight.normal),
                   ],
                 ),
@@ -193,48 +196,49 @@ class _ProfileLandingState extends State<ProfileLanding> {
               ),
               GestureDetector(
                 onTap: () => showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (_) => AlertDialog(
-                          shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(0))),
-                          actions: [
-                            // ElevatedButton(
-                            // onPressed: () {cancelLogOut(context);},
-                            // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                  foregroundColor: WidgetStateProperty.all(Colors.white),
-                                  backgroundColor:
-                                      const WidgetStatePropertyAll<Color>(
-                                          Colors.black),
-                                  shape: WidgetStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(0)),
-                                          side:
-                                              BorderSide(color: Colors.black)))),
-                              onPressed: () {
-                                setState(() {});
-                                goBack(context);
-                              },
-                              child: const StyledHeading('OK',
-                                  weight: FontWeight.normal,
-                                  color: Colors.white,
-                                  ),
-                            ),
-                          ],
-                          backgroundColor: Colors.white,
-                          title: const Center(
-                              child: StyledHeading("Successfully logged out", weight: FontWeight.normal)),
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(0))),
+                    actions: [
+                      // ElevatedButton(
+                      // onPressed: () {cancelLogOut(context);},
+                      // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                            foregroundColor:
+                                WidgetStateProperty.all(Colors.white),
+                            backgroundColor:
+                                const WidgetStatePropertyAll<Color>(
+                                    Colors.black),
+                            shape: WidgetStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(0)),
+                                    side: BorderSide(color: Colors.black)))),
+                        onPressed: () {
+                          setState(() {});
+                          goBack(context);
+                        },
+                        child: const StyledHeading(
+                          'OK',
+                          weight: FontWeight.normal,
+                          color: Colors.white,
                         ),
                       ),
+                    ],
+                    backgroundColor: Colors.white,
+                    title: const Center(
+                        child: StyledHeading("Successfully logged out",
+                            weight: FontWeight.normal)),
+                  ),
+                ),
                 child: Row(
                   children: [
                     SizedBox(width: width * 0.01),
-                    Icon(Icons.exit_to_app, size: width*0.05),
+                    Icon(Icons.exit_to_app, size: width * 0.05),
                     SizedBox(width: width * 0.01),
                     const StyledBody('SIGN OUT', weight: FontWeight.normal),
                   ],
@@ -246,7 +250,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
           return GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => (const GoogleSignInScreen())));
+                  builder: (context) => (const GoogleSignInScreen())));
             },
             child: Row(
               children: [

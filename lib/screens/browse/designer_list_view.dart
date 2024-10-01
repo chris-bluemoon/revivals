@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/browse/designer_items.dart';
+import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class DesignerListView extends StatelessWidget {
@@ -22,7 +22,7 @@ class DesignerListView extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (DesignerItems(brands[index])))); 
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (ItemResults('brand', brands[index])))); 
                       },
                       child: ListTile(
                         dense: true,

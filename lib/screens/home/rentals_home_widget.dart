@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/items_grid_page/booking_type_items.dart';
+import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class RentalHomeWidget extends StatelessWidget {
@@ -18,14 +18,14 @@ class RentalHomeWidget extends StatelessWidget {
             child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
             // child: Image.asset('assets/img/backgrounds/to_rent_home_page.png'),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const BookingTypeItems('rental'))));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType', 'rental'))));
             }
           ),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const BookingTypeItems('rental'))));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType', 'rental'))));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
