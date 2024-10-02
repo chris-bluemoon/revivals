@@ -29,6 +29,7 @@ class SummaryImageWidget extends StatelessWidget {
       int upperFigure = size + 1;
       sizeString = '$lowerFigure-$upperFigure';
     }
+    log('SIZE STRING: $sizeString');
     return sizeString;
   }
   @override

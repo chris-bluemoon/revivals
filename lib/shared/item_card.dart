@@ -123,6 +123,21 @@ class _ItemCardState extends State<ItemCard> {
     }
   }
 
+  String getSize(sizeArray) {
+    String formattedSize = 'N/A';
+    if (sizeArray.length == 1) {
+      formattedSize = sizeArray.first;
+    }
+    if (sizeArray.length == 2) {
+      String firstSize;
+      String secondSize;
+      firstSize = sizeArray.elementAt(0);
+      secondSize = sizeArray.elementAt(1);
+       formattedSize = '$firstSize-$secondSize';
+    }
+    return formattedSize;
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -185,7 +200,8 @@ class _ItemCardState extends State<ItemCard> {
                   
               ],
             ),
-            StyledBody('Size UK ${widget.item.size.toString()}', weight: FontWeight.normal),
+            // StyledBody('Size UK ${widget.item.size.toString()}', weight: FontWeight.normal),
+            StyledBody('Size UK ${getSize(widget.item.size)}', weight: FontWeight.normal),
             // StyledText('Size: ${item.size.toString()}'),
             // int convertedRentPrice = convertFromTHB(${widget.item.rentPrice}, 'SGD');
             if (widget.item.bookingType == 'rental') StyledBody('Rent from $convertedRentPrice$symbol per day', weight: FontWeight.normal),
