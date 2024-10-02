@@ -86,7 +86,6 @@ class _ItemResultsState extends State<ItemResults> {
     sleeves = filterSleeves;
     coloursSet = {...filterColours};
     sizesSet = {...filterSizes};
-    log(coloursSet.toString());
     setState(() {});
   }
 
@@ -125,7 +124,6 @@ class _ItemResultsState extends State<ItemResults> {
             }
           }
         case 'bookingType':
-          log('Found bookingType');
           for (Item i in allItems) {
             if (i.bookingType.contains(widget.value)) {
               filteredItems.add(i);
@@ -145,17 +143,6 @@ class _ItemResultsState extends State<ItemResults> {
         // if (i.filteredItems.contains(widget.value)
         Set colourSet = {...i.colour};
         Set sizeSet = {...i.size};
-        log(coloursSet.toString());
-        log(colourSet.toString());
-        log(sizeSet.toString());
-        log(sizesSet.toString());
-        if (coloursSet.intersection(colourSet).isNotEmpty) {
-          log('Adding colour set ${coloursSet.intersection(colourSet).toString()}');
-        }
-        log(sizesSet.intersection(sizeSet).toString());
-        if (sizesSet.intersection(sizeSet).isNotEmpty) {
-          log('Adding size set ${sizesSet.intersection(sizeSet).toString()}');
-        }
         if (lengths.contains(i.length.toString()) &&
             prints.contains(i.print.toString()) &&
             sleeves.contains(i.sleeve.toString()) &&
@@ -163,7 +150,6 @@ class _ItemResultsState extends State<ItemResults> {
             sizesSet.intersection(sizeSet).isNotEmpty &&
             i.rentPrice > ranges.start &&
             i.rentPrice < ranges.end) {
-              log('Adding item ${i.name}');
               finalItems.add(i);
         }
       }
@@ -226,7 +212,6 @@ class _ItemResultsState extends State<ItemResults> {
 
       return title;
     }
-    log(filteredItems.length.toString());
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: width * 0.1,

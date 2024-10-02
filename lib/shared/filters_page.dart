@@ -172,7 +172,6 @@ class _FiltersPage extends State<FiltersPage> {
   bool filterOn = false;
   bool getFilterOn() {
     if (colourFilter == false && sizeFilter == false && (rangeVals.start == 0 && rangeVals.end == 10000) && lengthFilter == false && printFilter == false && sleeveFilter == false) {
-      log('FILTER_PAGE: Set filter to false');
       filterOn = false;
       return filterOn;
     }
@@ -279,14 +278,12 @@ class _FiltersPage extends State<FiltersPage> {
     List<String> returnSizes = [];
     sizeMap.forEach((key, value) {
       if (value == true) {
-        log('FILTER_PAGE Setting sizeFilter to true');
         sizeFilter = true;
         returnSizes.add(key);
       }
     });
     if (sizeFilter == true) {noOfFilters++;}
     if (returnSizes.isEmpty) {
-        log('FILTER_PAGE!!!!!!!!!!!! Setting sizeFilter to false');
       sizeFilter = false;
       sizeMap.forEach((key, value) {
         returnSizes.add(key);
@@ -300,7 +297,6 @@ class _FiltersPage extends State<FiltersPage> {
     // RangeValues rangeValues = const RangeValues(0, 10000);
     if (rangeVals.start > 0 || rangeVals.end < 10000) {
       noOfFilters++;
-      log('noOfFilters: $noOfFilters');
       priceFilter = true;
       }
     if (rangeVals.start == 0 && rangeVals.end == 10000) {
@@ -616,9 +612,7 @@ class _FiltersPage extends State<FiltersPage> {
           Expanded(
             child: OutlinedButton(
               onPressed: () {
-                log(filterOn.toString());
                 widget.setValues(getColours(), getSizes(), getPrices(), getLengths(), getPrints(), getSleeves());
-                log(filterOn.toString());
                 widget.setFilter(getFilterOn(), noOfFilters);
                 Provider.of<ItemStore>(context, listen: false).sizesFilterSetter(sizeMap);
                 Provider.of<ItemStore>(context, listen: false).rangeValuesFilterSetter(rangeVals);
