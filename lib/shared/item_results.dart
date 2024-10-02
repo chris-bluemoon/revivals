@@ -29,13 +29,6 @@ class ItemResults extends StatefulWidget {
 class _ItemResultsState extends State<ItemResults> {
   Badge myBadge = const Badge(child: Icon(Icons.filter));
 
-
-  @override
-  initState() {
-    // getCurrentUser();
-    super.initState();
-  }
-
   List<Item> filteredItems = [];
 
   late List<String> sizes = [];
@@ -47,6 +40,37 @@ class _ItemResultsState extends State<ItemResults> {
   late Set sizesSet = <String>{};
   late bool filterOn = false;
   late int numOfFilters = 0;
+
+  void handleSubmit() {
+    for (var i = 0; i < allItems.length; i++) {
+      Provider.of<ItemStore>(context, listen: false).addItem(Item(
+        id: uuid.v4(),
+        type: allItems[i].type,
+        bookingType: allItems[i].bookingType,
+        occasion: allItems[i].occasion,
+        dateAdded: allItems[i].dateAdded,
+        style: allItems[i].style,
+        name: allItems[i].name,
+        brand: allItems[i].brand,
+        colour: allItems[i].colour,
+        size: allItems[i].size,
+        length: allItems[i].length,
+        print: allItems[i].print,
+        sleeve: allItems[i].sleeve,
+        rentPrice: allItems[i].rentPrice,
+        buyPrice: allItems[i].buyPrice,
+        rrp: allItems[i].rrp,
+        description: allItems[i].description,
+        bust: allItems[i].bust,
+        waist: allItems[i].waist,
+        hips: allItems[i].hips,
+        longDescription: allItems[i].longDescription,
+        imageId: allItems[i].imageId,
+        // isFav: allItems[i].isFav,
+    ));
+    }
+
+  }
 
   void setValues(
       List<String> filterColours,
@@ -119,17 +143,24 @@ class _ItemResultsState extends State<ItemResults> {
       }
       for (Item i in filteredItems) {
         // if (i.filteredItems.contains(widget.value)
-        Set myset = {...i.colour};
-        log(myset.toString());
-        if (coloursSet.intersection(myset).isNotEmpty) {
-          log('Adding colour set ${coloursSet.intersection(myset).toString()}');
+        Set colourSet = {...i.colour};
+        Set sizeSet = {...i.size};
+        log(coloursSet.toString());
+        log(colourSet.toString());
+        log(sizeSet.toString());
+        log(sizesSet.toString());
+        if (coloursSet.intersection(colourSet).isNotEmpty) {
+          log('Adding colour set ${coloursSet.intersection(colourSet).toString()}');
         }
-        if (sizes.contains(i.size.toString()) &&
-            lengths.contains(i.length.toString()) &&
+        log(sizesSet.intersection(sizeSet).toString());
+        if (sizesSet.intersection(sizeSet).isNotEmpty) {
+          log('Adding size set ${sizesSet.intersection(sizeSet).toString()}');
+        }
+        if (lengths.contains(i.length.toString()) &&
             prints.contains(i.print.toString()) &&
             sleeves.contains(i.sleeve.toString()) &&
-            coloursSet.intersection(myset).isNotEmpty &&
-            sizesSet.intersection({...i.size}).isNotEmpty &&
+            coloursSet.intersection(colourSet).isNotEmpty &&
+            sizesSet.intersection(sizeSet).isNotEmpty &&
             i.rentPrice > ranges.start &&
             i.rentPrice < ranges.end) {
               log('Adding item ${i.name}');
@@ -216,6 +247,9 @@ class _ItemResultsState extends State<ItemResults> {
           ),
           actions: [
             GestureDetector(
+              onDoubleTap: () {
+                handleSubmit();
+              },
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
