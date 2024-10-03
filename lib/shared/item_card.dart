@@ -158,6 +158,7 @@ class _ItemCardState extends State<ItemCard> {
           children: [
             
             Center(child: StyledHeading(widget.item.brand)),
+            SizedBox(height: width * 0.02),
             // Image.asset('assets/img/items/${setItemImage()}', width: 200, height: 600),
             Expanded(child: Center(child: Image.asset('assets/img/items/${setItemImage()}')),),
             // Image.asset('assets/img/items/${setItemImage()}', fit: BoxFit.fill),

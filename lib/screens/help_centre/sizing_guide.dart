@@ -39,7 +39,7 @@ class SizingGuide extends StatelessWidget {
                 weight: FontWeight.normal),
             SizedBox(height: width * 0.03),
             // Divider(height: width * 0.03, indent: width * 0.25, endIndent: width * 0.25,),
-                        Center(child: Image.asset('assets/img/backgrounds/curly_seperator_1.png')),
+                        Center(child: Image.asset('assets/img/backgrounds/seperator_2.png')),
 
             SizedBox(height: width * 0.03),
             const StyledHeading('1. How to Measure Yourself'),
