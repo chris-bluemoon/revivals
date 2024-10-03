@@ -241,14 +241,14 @@ class _ItemResultsState extends State<ItemResults> {
               },
               child: Padding(
                 padding: EdgeInsets.fromLTRB(0, width*0.0, width*0.03, 0),
-                child: (numOfFilters == 0) ? Image.asset('assets/img/icons/1.png', height: width * 0.15) :
-                  (numOfFilters == 1) ? Image.asset('assets/img/icons/2.png', height: width * 0.15) :
-                  (numOfFilters == 2 ) ? Image.asset('assets/img/icons/3.png', height: width * 0.15) :
-                  (numOfFilters == 3 ) ? Image.asset('assets/img/icons/4.png', height: width * 0.15) :
-                  (numOfFilters == 4 ) ? Image.asset('assets/img/icons/5.png', height: width * 0.15) :
-                  (numOfFilters == 5 ) ? Image.asset('assets/img/icons/6.png', height: width * 0.15) :
-                  (numOfFilters == 6 ) ? Image.asset('assets/img/icons/7.png', height: width * 0.15) :
-                  Image.asset('assets/img/icons/1.png', height: width * 0.15)
+                child: (numOfFilters == 0) ? Image.asset('assets/img/icons/1.png', height: width * 0.1) :
+                  (numOfFilters == 1) ? Image.asset('assets/img/icons/2.png', height: width * 0.1) :
+                  (numOfFilters == 2 ) ? Image.asset('assets/img/icons/3.png', height: width * 0.1) :
+                  (numOfFilters == 3 ) ? Image.asset('assets/img/icons/4.png', height: width * 0.1) :
+                  (numOfFilters == 4 ) ? Image.asset('assets/img/icons/5.png', height: width * 0.1) :
+                  (numOfFilters == 5 ) ? Image.asset('assets/img/icons/6.png', height: width * 0.1) :
+                  (numOfFilters == 6 ) ? Image.asset('assets/img/icons/7.png', height: width * 0.1) :
+                  Image.asset('assets/img/icons/1.png', width: width * 0.01)
               ),
             ),
           ],
