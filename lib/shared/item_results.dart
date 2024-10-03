@@ -214,12 +214,7 @@ class _ItemResultsState extends State<ItemResults> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: width * 0.2,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              StyledTitle(setTitle(widget.attribute))
-            ],
-          ),
+          title: StyledTitle(setTitle(widget.attribute)),
           centerTitle: true,
           backgroundColor: Colors.white,
           leading: IconButton(
