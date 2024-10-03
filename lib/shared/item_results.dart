@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pluralize/pluralize.dart';
@@ -170,11 +168,9 @@ class _ItemResultsState extends State<ItemResults> {
               finalItems.add(i);
           }
         case 'bookingType':
-          for (Item i in allItems) {
             if (i.bookingType.contains(widget.value)) {
               finalItems.add(i);
             }
-          }
         case 'dateAdded':
           for (Item i in allItems) {
             DateFormat format = DateFormat("dd-MM-yyyy");

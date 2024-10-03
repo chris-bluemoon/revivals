@@ -41,7 +41,7 @@ class CountrySelector extends StatelessWidget {
                 log('toSave renter: ${toSave.name}');
                 toSave.settings[0] = 'BANGKOK';
                 Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
-                Provider.of<ItemStore>(context, listen: false).setRegion('BANGKOK');
+                // Provider.of<ItemStore>(context, listen: false).setRegion('BANGKOK');
                 callback(true);
                 Navigator.pop(context);
               },
@@ -57,7 +57,7 @@ class CountrySelector extends StatelessWidget {
                 toSave.settings[0] = 'SINGAPORE';
                 log('toSave renter: ${toSave.name} with new region: SINGAPORE');
                 Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
-                Provider.of<ItemStore>(context, listen: false).setRegion('SINGAPORE');
+                // Provider.of<ItemStore>(context, listen: false).setRegion('SINGAPORE');
                 callback(true);
                 Navigator.pop(context);
 

@@ -22,15 +22,29 @@ class SummaryImageWidget extends StatelessWidget {
     return imageName;
   }
  
-  String getSize(int size) {
-    String sizeString = size.toString();
-    if (size.isOdd) {
-      int lowerFigure = size - 1;
-      int upperFigure = size + 1;
-      sizeString = '$lowerFigure-$upperFigure';
+  // String getSize(int size) {
+  //   String sizeString = size.toString();
+  //   if (size.isOdd) {
+  //     int lowerFigure = size - 1;
+  //     int upperFigure = size + 1;
+  //     sizeString = '$lowerFigure-$upperFigure';
+  //   }
+  //   log('SIZE STRING: $sizeString');
+  //   return sizeString;
+  // }
+    String getSize(sizeArray) {
+    String formattedSize = 'N/A';
+    if (sizeArray.length == 1) {
+      formattedSize = sizeArray.first;
     }
-    log('SIZE STRING: $sizeString');
-    return sizeString;
+    if (sizeArray.length == 2) {
+      String firstSize;
+      String secondSize;
+      firstSize = sizeArray.elementAt(0);
+      secondSize = sizeArray.elementAt(1);
+       formattedSize = '$firstSize-$secondSize';
+    }
+    return formattedSize;
   }
   @override
   Widget build(BuildContext context) {
@@ -52,7 +66,7 @@ class SummaryImageWidget extends StatelessWidget {
               StyledHeading('${item.name} from ${item.brand}'),
               const SizedBox(height: 5),
               // TODO Sort this out
-              StyledBody('Size UK ${getSize(item.size[0])}', color: Colors.grey),
+              StyledBody('Size UK ${getSize(item.size)}', color: Colors.grey),
           ],)
         ],
       )

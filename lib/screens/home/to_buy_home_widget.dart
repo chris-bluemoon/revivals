@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/items_grid_page/booking_type_items.dart';
+import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class ToBuyHomeWidget extends StatelessWidget {
@@ -17,14 +17,14 @@ class ToBuyHomeWidget extends StatelessWidget {
           GestureDetector(
             child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const BookingTypeItems('buy'))));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType','buy'))));
             }
           ),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const BookingTypeItems('buy'))));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType','buy'))));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

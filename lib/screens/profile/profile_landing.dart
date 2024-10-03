@@ -267,7 +267,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
   }
 }
 
-// Send a Whatsapp
+// Send a LINE
 void chatWithUsLine(BuildContext context) async {
   log('Tapped LINE send');
   try {

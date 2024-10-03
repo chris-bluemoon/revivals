@@ -14,7 +14,7 @@ class ItemStore extends ChangeNotifier {
 
   final List<Item> _items = [];
   final List<Item> _favourites = [];
-  final List<Item> _settings = [];
+  // final List<Item> _settings = [];
   final List<Renter> _renters = [];
   final List<ItemRenter> _itemRenters = [];
   Map<String, bool> _sizesFilter = {
@@ -53,16 +53,16 @@ class ItemStore extends ChangeNotifier {
   // late final _user;
   Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: [], settings: ['BANGKOK','CM','CM','KG']);
   bool _loggedIn = false;
-  String _region = 'BANGKOK';
+  // String _region = 'BANGKOK';
 
   get items => _items;
   get favourites => _favourites;
-  get settings => _settings;
+  // get settings => _settings;
   get renters => _renters;
   get itemRenters => _itemRenters;
   get renter => _user;
   get loggedIn => _loggedIn;
-  get region => _region;
+  // get region => _region;
   get sizesFilter => _sizesFilter;
   get coloursFilter => _coloursFilter;
   get lengthsFilter => _lengthsFilter;
@@ -219,18 +219,18 @@ class ItemStore extends ChangeNotifier {
       notifyListeners();
     }
 
-    void populateSettings() {
-      List settingsList = _user.settings;
-      _favourites.clear();
-      log('Favourties...');
-      log(settingsList.toString());
-      for (Item d in _items) {
-        if (settingsList.contains(d.id)) {
-          log('Adding a setting');
-          _settings.add(d);
-        }
-      }
-    }
+    // void populateSettings() {
+    //   List settingsList = _user.settings;
+    //   _favourites.clear();
+    //   log('Favourties...');
+    //   log(settingsList.toString());
+    //   for (Item d in _items) {
+    //     if (settingsList.contains(d.id)) {
+    //       log('Adding a setting');
+    //       _settings.add(d);
+    //     }
+    //   }
+    // }
   // initially fetch itemRenters
       Future<dynamic> setCurrentUser() async {
       User? user = FirebaseAuth.instance.currentUser;
@@ -260,11 +260,11 @@ class ItemStore extends ChangeNotifier {
     }
   }
 
-  void setRegion(String region) {
-    log('Set _region to $region');
-    _region = region;
-    notifyListeners();
-  }
+  // void setRegion(String region) {
+  //   log('Set _region to $region');
+  //   _region = region;
+  //   notifyListeners();
+  // }
 
   void fetchItemRentersOnce() async {
     if (itemRenters.length == 0) {

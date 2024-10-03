@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/help_centre/faq_accordion.dart';
+import 'package:unearthed/screens/profile/profile_landing.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class FAQs extends StatelessWidget {
@@ -27,30 +28,36 @@ class FAQs extends StatelessWidget {
         //       icon: Icon(Icons.close, size: width*0.06)),
         // ],
       ),
-      body: Column(
-        children: [
-          // SizedBox(height: width * 0.05),
-          // const FaqExpansionList()
-          FaqAccordion(),
-          SizedBox(height: width * 0.03),
-          const StyledHeading('Still have questions?'),
-          SizedBox(height: width * 0.02),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const StyledHeading('Contact us on LINE'),
-              const SizedBox(width: 10),
-              Image.asset('assets/logos/LINE_logo.png', height: 40),
-            ],
-          ),
-          SizedBox(height: width * 0.05),
-          // const FaqExpansionList()
-          // const ScrollTest(),
-          // const SizedBox(
-          //   height: 900,
-          //   child: AccordionPage()
-          // )
-        ],
+      body: GestureDetector(
+        onTap: () {
+                  // chatWithUsWhatsApp(context);
+                  chatWithUsLine(context);
+        },
+        child: Column(
+          children: [
+            // SizedBox(height: width * 0.05),
+            // const FaqExpansionList()
+            FaqAccordion(),
+            SizedBox(height: width * 0.03),
+            const StyledHeading('Still have questions?'),
+            SizedBox(height: width * 0.02),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const StyledHeading('Contact us on LINE'),
+                const SizedBox(width: 10),
+                Image.asset('assets/logos/LINE_logo.png', height: 40),
+              ],
+            ),
+            SizedBox(height: width * 0.05),
+            // const FaqExpansionList()
+            // const ScrollTest(),
+            // const SizedBox(
+            //   height: 900,
+            //   child: AccordionPage()
+            // )
+          ],
+        ),
       )
     );
   }

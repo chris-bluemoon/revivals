@@ -124,7 +124,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
     // rebuildAllChildren(context);
     String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
     symbol = getCurrencySymbol(country);
-        log('Symbol: $symbol');
+        log('Settings: ${Provider.of<ItemStore>(context, listen: false).renter.settings.toString()}');
         double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -169,7 +169,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
           children: <Widget>[
             // const Text('RENTAL TERM', style: TextStyle(fontSize: 12)),
             const SizedBox(height: 30),
-            ListTile(
+            if (Provider.of<ItemStore>(context, listen: false).renter.settings[0] == 'BANGKOK') ListTile(
                 dense: true,
                 visualDensity: const VisualDensity(vertical: -3),
                 title: StyledHeading('1 Day (${(getPricePerDay(1))}$symbol per day)', weight: FontWeight.normal),

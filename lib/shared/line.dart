@@ -18,10 +18,13 @@ Future<void> openLineApp({
   final String urlAndroid = 'liff.line.me:://send/?phone=$phone$textAndroid';
 
   String effectiveURL = Platform.isIOS ? urlIOS : urlAndroid;
-  String effectiveURL2;
-  effectiveURL = 'https://line.me/R/';
-  effectiveURL2 = 'https://line.me/R/oaMessage/ZnlhXmE';
+  // effectiveURL = 'https://line.me/R/';
+  // effectiveURL2 = 'https://line.me/R/oaMessage/ZnlhXmE';
   // effectiveURL = 'https://liff.line.me/';
+  effectiveURL = 'http://line.me/ti/p/~chris-mbfc';
+  effectiveURL = 'http://line.me/ti/p/~ZnlhXmE';
+  effectiveURL = 'http://line.me/ti/p/~UnearthedCollections';
+  // effectiveURL = 'https://line.me/R/oaMessage/@chris-mbfc/?Hello';
 
   if (await canLaunchUrl(Uri.parse(effectiveURL))) {
     await launchUrl(Uri.parse(effectiveURL));
