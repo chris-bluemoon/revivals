@@ -12,12 +12,12 @@ class HowItWorks extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: width * 0.1,
+          toolbarHeight: width * 0.2,
           title: const StyledTitle("How It Works"),
           centerTitle: true,
           backgroundColor: Colors.white,
           leading: IconButton(
-            icon: Icon(Icons.chevron_left, size: width * 0.06),
+            icon: Icon(Icons.chevron_left, size: width * 0.1),
             onPressed: () {
               Navigator.pop(context);
             },

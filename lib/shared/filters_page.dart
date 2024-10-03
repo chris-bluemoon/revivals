@@ -466,7 +466,7 @@ class _FiltersPage extends State<FiltersPage> {
     // setFilters(Provider.of<ItemStore>(context, listen: false).filters);
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.1,
+        toolbarHeight: width * 0.2,
         title: const StyledTitle('FILTER'),
         centerTitle: true,
         backgroundColor: Colors.white,

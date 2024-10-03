@@ -75,7 +75,7 @@ List<Text> weights = <Text>[
         centerTitle: true,
         title: const StyledTitle('SETTINGS', weight: FontWeight.normal),
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, size: width * 0.06),
+          icon: Icon(Icons.chevron_left, size: width * 0.1),
           onPressed: () {
             Navigator.pop(context);
           },

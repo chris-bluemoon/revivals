@@ -204,7 +204,7 @@ class _ItemCardState extends State<ItemCard> {
             StyledBody('Size UK ${getSize(widget.item.size)}', weight: FontWeight.normal),
             // StyledText('Size: ${item.size.toString()}'),
             // int convertedRentPrice = convertFromTHB(${widget.item.rentPrice}, 'SGD');
-            if (widget.item.bookingType == 'rental') StyledBody('Rent from $convertedRentPrice$symbol per day', weight: FontWeight.normal),
+            if (widget.item.bookingType == 'both' || widget.item.bookingType == 'rental') StyledBody('Rent from $convertedRentPrice$symbol per day', weight: FontWeight.normal),
             if (widget.item.bookingType == 'both' || widget.item.bookingType == 'buy') StyledBody('Buy for $convertedBuyPrice$symbol', weight: FontWeight.normal),
             StyledBodyStrikeout('RRP $convertedRRPPrice$symbol', weight: FontWeight.normal),
           ],

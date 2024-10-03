@@ -113,7 +113,7 @@ class _ToRentState extends State<ToRent> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.1,
+        toolbarHeight: width * 0.2,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/items_grid_page/all_items.dart';
 import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 

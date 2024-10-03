@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pluralize/pluralize.dart';
@@ -105,7 +107,7 @@ class _ItemResultsState extends State<ItemResults> {
       switch (widget.attribute) {
         case 'brand':
           for (Item i in allItems) {
-            if (i.brand.contains(widget.value)) {
+            if (i.brand == widget.value) {
               filteredItems.add(i);
             }
           }
@@ -117,13 +119,14 @@ class _ItemResultsState extends State<ItemResults> {
           }
         case 'type':
           for (Item i in allItems) {
-            if (i.type.contains(widget.value)) {
+            if (i.type == widget.value) {
               filteredItems.add(i);
             }
           }
         case 'bookingType':
           for (Item i in allItems) {
-            if (i.bookingType.contains(widget.value)) {
+            log('bookingType: ${i.bookingType}');
+            if (i.bookingType == widget.value || i.bookingType == 'both') {
               filteredItems.add(i);
             }
           }
@@ -156,7 +159,7 @@ class _ItemResultsState extends State<ItemResults> {
       for (Item i in allItems) {
         switch (widget.attribute) {
           case 'brand':
-            if (i.brand.contains(widget.value)) {
+            if (i.brand == widget.value) {
               finalItems.add(i);
           }
           case 'occasion':
@@ -164,11 +167,11 @@ class _ItemResultsState extends State<ItemResults> {
               finalItems.add(i);
           }
           case 'type':
-            if (i.type.contains(widget.value)) {
+            if (i.type == widget.value) {
               finalItems.add(i);
           }
         case 'bookingType':
-            if (i.bookingType.contains(widget.value)) {
+            if (i.bookingType == widget.value || i.bookingType == 'both') {
               finalItems.add(i);
             }
         case 'dateAdded':
@@ -210,7 +213,7 @@ class _ItemResultsState extends State<ItemResults> {
     }
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: width * 0.1,
+          toolbarHeight: width * 0.2,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -220,7 +223,7 @@ class _ItemResultsState extends State<ItemResults> {
           centerTitle: true,
           backgroundColor: Colors.white,
           leading: IconButton(
-            icon: Icon(Icons.chevron_left, size: width * 0.08),
+            icon: Icon(Icons.chevron_left, size: width * 0.1),
             onPressed: () {
               Provider.of<ItemStore>(context, listen: false).resetFilters();
               Navigator.pop(context);

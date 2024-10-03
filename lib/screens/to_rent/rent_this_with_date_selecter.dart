@@ -128,7 +128,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
         double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.1,
+        toolbarHeight: width * 0.2,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

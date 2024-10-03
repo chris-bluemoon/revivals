@@ -15,7 +15,7 @@ class Browse extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: width * 0.1,
+          toolbarHeight: width * 0.2,
           bottom: TabBar(
             // indicatorColor: Colors.black,
             // labelColor: Colors.black,

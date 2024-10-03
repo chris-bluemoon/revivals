@@ -1,0 +1,7 @@
+1. Check 'both' bookingType
+2. Check space below appBar
+3. DatePicker!
+4. Settings, weight? length etc
+5. Log in cancellation
+6. Apple log in
+7. help text

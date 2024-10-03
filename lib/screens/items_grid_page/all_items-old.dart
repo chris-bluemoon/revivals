@@ -62,7 +62,7 @@ class _AllItemsState extends State<AllItems> {
     // List<Item> itemList = Provider.of<ItemStore>(context, listen: false).items;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: width * 0.1,
+        toolbarHeight: width * 0.2,
         title: const StyledTitle("ALL ITEMS"),
         // Image.asset(
           // 'assets/logos/unearthed_logo_3.png',
