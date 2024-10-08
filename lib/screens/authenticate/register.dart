@@ -9,16 +9,16 @@ import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
 
-  const SignIn({required this.toggleView, super.key});
+  const Register({required this.toggleView, super.key});
 
   @override
-  State<SignIn> createState() => _SignIn();
+  State<Register> createState() => _Register();
 }
 
-class _SignIn extends State<SignIn> {
+class _Register extends State<Register> {
   bool found = false;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -78,8 +78,8 @@ class _SignIn extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: const Text('Sign in to Brew Crew'),
-                actions: [
+        title: const Text('Register with Brew Crew'),
+        actions: [
           IconButton(
             onPressed: () {
               widget.toggleView();
@@ -116,16 +116,15 @@ class _SignIn extends State<SignIn> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                child: const Text('Sign In'),
+                child: const Text('Register'),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    log('valid');
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                     if (result == null) {
-                      setState(() => error = 'Error signing in');
+                      setState(() => error = 'Error registering');
                     } else {
-                      handleNewLogIn(email, password); 
                       log('Popping to first');
+                      handleNewLogIn(email, password); 
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     }
                   }

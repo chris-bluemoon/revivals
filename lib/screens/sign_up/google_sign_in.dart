@@ -7,7 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/authenticate/sign_in.dart';
+import 'package:unearthed/screens/authenticate/authenticate.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
@@ -28,10 +28,11 @@ class GoogleSignInScreen extends StatefulWidget {
 class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
   ValueNotifier userCredential = ValueNotifier('');
 
-  late bool found = false;
-  bool userLoggedIn = false;
+  bool showSignIn = true;
 
-  void handleSubmit(String email, String name) {
+  late bool found = false;
+
+  void handleNewLogIn(String email, String name) {
     log('Adding renter if not exists!');
     Provider.of<ItemStore>(context, listen: false).setLoggedIn(true);
     List<Renter> renters = Provider.of<ItemStore>(context, listen: false).renters;
@@ -61,7 +62,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       settings: ['BANGKOK','CM','CM','KG'],
     ));
     log('Assigning user');
-    userLoggedIn = true;
+    // userLoggedIn = true;
     Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
       id: jointUuid,
       email: email,
@@ -90,142 +91,147 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
         body: ValueListenableBuilder(
                 valueListenable: userCredential,
                 builder: (context, value, child) {
-                  if (userCredential.value == '' ||
-                          userCredential.value == null)
-                      { return Column(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          
-                          const SizedBox(height: 200),
-                          // SignInButton(
-                          //   Buttons.AppleDark,
-                          //   onPressed: () async {
-                          //     log('Apple Login');
-                          //     userCredential.value = await signInWithGoogle();
-                          //     if (userCredential.value != null) {
-                          //       log(userCredential.value.user!.email);
-                          //       log(userCredential.value.user!.displayName);
-                          //       handleSubmit(userCredential.value.user!.email,
-                          //                   userCredential.value.user!.displayName);
-                          //     }
-                          //   },
-                          // ),
-                          SignInButton(
-                            Buttons.Facebook,
-                            onPressed: () async {
-                              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const SignIn()));
-                            },
-                          ),
-                          Center(
-                            child: SignInButton(
-                              Buttons.GoogleDark,
-                              onPressed: () async {
-                                showDialogue(context);
-                                userCredential.value = await signInWithGoogle();
-                                if (userCredential.value != null) {
-                                  hideProgressDialogue(context);
-                                  log(userCredential.value.user!.email);
-                                  log(userCredential.value.user!.displayName);
-                                  handleSubmit(userCredential.value.user!.email,
-                                              userCredential.value.user!.displayName);
-                                  // Navigator.pop(context);
-                                showDialog(
-                                                    barrierDismissible: false,
-                                                    context: context,
-                                                    builder: (_) => AlertDialog(
-                              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(0))
-                              ), 
-                                                      actions: [
-                            // ElevatedButton(
+            if (userCredential.value == '' || userCredential.value == null) {
+              return Column(
+                children: [
+                  const SizedBox(height: 200),
+                  Center(
+                    child: SignInButtonBuilder(
+                      text: 'Sign in/up with Email',
+                      fontSize: width * 0.03,
+                      icon: Icons.email,
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Authenticate()));
+                      },
+                      backgroundColor: Colors.blueGrey[700]!,
+                      width: width * 0.5,
+                    ),
+                  ),
+                  SignInButtonBuilder(
+                    text: 'Sign with Google',
+                    fontSize: width * 0.03,
+                    width: width * 0.5,
+                    image: Image.asset('assets/logos/google.png', height: 30),
+                    backgroundColor: Colors.blue,
+                    icon: Icons.email,
+                    onPressed: () async {
+                      showDialogue(context);
+                      userCredential.value = await signInWithGoogle();
+                      if (userCredential.value != null) {
+                        hideProgressDialogue(context);
+                        log(userCredential.value.user!.email);
+                        log(userCredential.value.user!.displayName);
+                        handleNewLogIn(userCredential.value.user!.email,
+                            userCredential.value.user!.displayName);
+                        // Navigator.pop(context);
+                        showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0))),
+                            actions: [
+                              // ElevatedButton(
                               // onPressed: () {cancelLogOut(context);},
                               // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                               backgroundColor: const WidgetStatePropertyAll<Color>(Colors.black),
-                              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                                const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(0)),
-                                  side: BorderSide(color: Colors.black)
-                                )
-                              )
-                            ),
-                              onPressed: () {
-                                // Navigator.pop(context);
-                                Navigator.of(context).popUntil((route) => route.isFirst);
-                                // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
-                              },
-                              child: const StyledHeading('OK', weight: FontWeight.normal, color: Colors.white),
-                            ),],
-                                                      backgroundColor: Colors.white,
-                                                      title: const Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              // Flexible(child: Text("Successfully logged in", style: TextStyle(fontSize: 22, color: Colors.black))),
-                              Flexible(child: StyledHeading("Successfully logged in", weight: FontWeight.normal)),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        const WidgetStatePropertyAll<Color>(
+                                            Colors.black),
+                                    shape: WidgetStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(0)),
+                                            side: BorderSide(
+                                                color: Colors.black)))),
+                                onPressed: () {
+                                  // Navigator.pop(context);
+                                  Navigator.of(context)
+                                      .popUntil((route) => route.isFirst);
+                                  // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
+                                },
+                                child: const StyledHeading('OK',
+                                    weight: FontWeight.normal,
+                                    color: Colors.white),
+                              ),
                             ],
-                                                      ),
-                                                    ),
-                                                  );
-                                }
-                              },
+                            backgroundColor: Colors.white,
+                            title: const Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                // Flexible(child: Text("Successfully logged in", style: TextStyle(fontSize: 22, color: Colors.black))),
+                                Flexible(
+                                    child: StyledHeading(
+                                        "Successfully logged in",
+                                        weight: FontWeight.normal)),
+                              ],
                             ),
                           ),
-                        ],
-                      ); } else { 
-                        // log('loggin id');
-                        return const Text('');
-                        // showSuccessfulLogin();
+                        );
                       }
-                },
+                    },
+                  ),
+                ],
+              );
+            } else {
+              // log('loggin id');
+              return const Text('');
+              // showSuccessfulLogin();
+            }
+          },
         ));
-  }}
-
-  // showSuccessfulLogin() {
-
-  // }
-  Future<dynamic> signInWithGoogle() async {
-    try {
-      // Commented out below 2 lines and replaced with profile/email googleAuth, seems to work and no longer getting platform exception
-      // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      // final GoogleSignInAuthentication? googleAuth =
-      //     await googleUser?.authentication;
-GoogleSignInAuthentication? googleAuth =
-    await (await GoogleSignIn(
-    scopes: ["profile", "email"],
-).signIn())
-    ?.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      return await FirebaseAuth.instance.signInWithCredential(credential);
-    } on Exception catch (e) {
-      // TODO
-      print('exception->$e');
-      log('exception->$e');
-    }
   }
+}
 
-  Future<bool> signOutFromGoogle() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      return true;
-    } on Exception catch (_) {
-      return false;
-    }
+// showSuccessfulLogin() {
+
+// }
+Future<dynamic> signInWithGoogle() async {
+  try {
+    // Commented out below 2 lines and replaced with profile/email googleAuth, seems to work and no longer getting platform exception
+    // final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // final GoogleSignInAuthentication? googleAuth =
+    //     await googleUser?.authentication;
+    GoogleSignInAuthentication? googleAuth = await (await GoogleSignIn(
+      scopes: ["profile", "email"],
+    ).signIn())
+        ?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  } on Exception catch (e) {
+    // TODO
+    print('exception->$e');
+    log('exception->$e');
   }
+}
 
-  void showDialogue(BuildContext context){
+Future<bool> signOutFromGoogle() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    return true;
+  } on Exception catch (_) {
+    return false;
+  }
+}
+
+void showDialogue(BuildContext context) {
   showDialog(
-  context: context,
-  builder: (BuildContext context) => const Loading(),
-); 
+    context: context,
+    builder: (BuildContext context) => const Loading(),
+  );
 }
 
 void hideProgressDialogue(BuildContext context) {
-Navigator.of(context).pop(const Loading());}
+  Navigator.of(context).pop(const Loading());
+}
 
 class Loading extends StatelessWidget {
   const Loading({super.key});
@@ -235,12 +241,8 @@ class Loading extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: const Center(
-        child: SpinKitChasingDots(
-          color: Colors.black,
-          size: 50
-        ),
+        child: SpinKitChasingDots(color: Colors.black, size: 50),
       ),
     );
   }
 }
-

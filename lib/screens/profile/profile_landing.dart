@@ -257,7 +257,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 SizedBox(width: width * 0.01),
                 Icon(Icons.login_outlined, size: width * 0.05),
                 SizedBox(width: width * 0.01),
-                const StyledBody('SIGN IN', weight: FontWeight.normal),
+                const StyledBody('SIGN IN / CREATE ACCOUNT', weight: FontWeight.normal),
               ],
             ),
           );
