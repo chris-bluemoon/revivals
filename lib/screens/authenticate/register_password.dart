@@ -12,24 +12,24 @@ import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class SignIn extends StatefulWidget {
-  final Function toggleView;
+class RegisterPassword extends StatefulWidget {
 
-  const SignIn({required this.toggleView, super.key});
+  const RegisterPassword({required this.email, required this.name, super.key});
+
+  final String email;
+  final String name;
 
   @override
-  State<SignIn> createState() => _SignIn();
+  State<RegisterPassword> createState() => _RegisterPassword();
 }
 
-class _SignIn extends State<SignIn> {
+class _RegisterPassword extends State<RegisterPassword> {
   bool found = false;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
-  String email = '';
   String password = '';
-  String error = 'Error: ';
 
   @override
   Widget build(BuildContext context) {
@@ -85,31 +85,13 @@ class _SignIn extends State<SignIn> {
       appBar: AppBar(
         toolbarHeight: width * 0.2,
         // centerTitle: true,
-        title: const StyledTitle('SIGN IN'),
+        title: const StyledTitle('REGISTER PASSWORD'),
         leading: IconButton(
           icon: Icon(Icons.chevron_left, size: width * 0.08),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          Padding(
-            padding:
-                EdgeInsets.symmetric(vertical: 0.0, horizontal: width * 0.02),
-            child: GestureDetector(
-              onTap: () {
-                widget.toggleView();
-              },
-              child: Row(
-                children: [
-                  const StyledBody('REGISTER', weight: FontWeight.normal),
-                  SizedBox(width: width * 0.01),
-                  Icon(Icons.person, size: width * 0.05)
-                ],
-              ),
-            ),
-          )
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 0, horizontal: width * 0.04),
@@ -117,7 +99,7 @@ class _SignIn extends State<SignIn> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const StyledHeading(
-              'Enter your email and password',
+              'Create a password (must be more than 6 characters)',
               weight: FontWeight.normal,
             ),
             Container(
@@ -130,30 +112,16 @@ class _SignIn extends State<SignIn> {
                         const SizedBox(height: 20),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
-                            hintText: 'Email',
+                            hintText: 'Password',
                           ),
                           validator: (val) =>
-                              val!.isEmpty ? 'Enter an email' : null,
+                              val!.isEmpty ? 'Enter a valid password' : null,
                           onChanged: (val) {
                             setState(() {
-                              email = val;
+                              password = val;
                             });
                           },
                         ),
-                        const SizedBox(height: 20),
-                        TextFormField(
-                          decoration: textInputDecoration.copyWith(
-                            hintText: 'Password',
-                          ),
-                            validator: (val) => val!.length < 6
-                                ? 'Enter a password at least 6 chars long'
-                                : null,
-                            obscureText: true,
-                            onChanged: (val) {
-                              setState(() {
-                                password = val;
-                              });
-                            }),
                       ],
                     ))),
           ],
@@ -181,7 +149,7 @@ class _SignIn extends State<SignIn> {
                   if (_formKey.currentState!.validate()) {
                     setState(() => loading = true);
                     dynamic result =
-                        await _auth.signInWithEmailAndPassword(email, password);
+                        await _auth.registerWithEmailAndPassword(widget.email, password);
                     if (result == null) {
                       setState(() => loading = false);
                       showDialog(
@@ -224,7 +192,7 @@ class _SignIn extends State<SignIn> {
                           ],
                           backgroundColor: Colors.white,
                           title: const Center(
-                              child: StyledHeading("Error Signing In",
+                              child: StyledHeading("Invalid",
                                   weight: FontWeight.normal)),
                         ),
                       );
@@ -233,7 +201,7 @@ class _SignIn extends State<SignIn> {
                                 _formKey.currentState!.reset();
                               });
                     } else {
-                      handleNewLogIn(email, password);
+                      handleNewLogIn(widget.email, widget.name);
                       log('Popping to first');
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     }
@@ -247,7 +215,7 @@ class _SignIn extends State<SignIn> {
                   ),
                   side: const BorderSide(width: 1.0, color: Colors.black),
                 ),
-                child: const StyledHeading('SIGN IN', color: Colors.white),
+                child: const StyledHeading('CREATE ACCOUNT', color: Colors.white),
               ),
             ),
           ],

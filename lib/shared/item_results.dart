@@ -41,37 +41,6 @@ class _ItemResultsState extends State<ItemResults> {
   late bool filterOn = false;
   late int numOfFilters = 0;
 
-  void handleSubmit() {
-    for (var i = 0; i < allItems.length; i++) {
-      Provider.of<ItemStore>(context, listen: false).addItem(Item(
-        id: uuid.v4(),
-        type: allItems[i].type,
-        bookingType: allItems[i].bookingType,
-        occasion: allItems[i].occasion,
-        dateAdded: allItems[i].dateAdded,
-        style: allItems[i].style,
-        name: allItems[i].name,
-        brand: allItems[i].brand,
-        colour: allItems[i].colour,
-        size: allItems[i].size,
-        length: allItems[i].length,
-        print: allItems[i].print,
-        sleeve: allItems[i].sleeve,
-        rentPrice: allItems[i].rentPrice,
-        buyPrice: allItems[i].buyPrice,
-        rrp: allItems[i].rrp,
-        description: allItems[i].description,
-        bust: allItems[i].bust,
-        waist: allItems[i].waist,
-        hips: allItems[i].hips,
-        longDescription: allItems[i].longDescription,
-        imageId: allItems[i].imageId,
-        // isFav: allItems[i].isFav,
-    ));
-    }
-
-  }
-
   void setValues(
       List<String> filterColours,
       List<String> filterSizes,
@@ -226,9 +195,6 @@ class _ItemResultsState extends State<ItemResults> {
           ),
           actions: [
             GestureDetector(
-              onDoubleTap: () {
-                handleSubmit();
-              },
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>

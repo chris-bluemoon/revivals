@@ -213,7 +213,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                           showConfirm = true;
                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, symbol))
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, 'booked', symbol))
                           )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                           // bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           // loggedIn ? Navigator.of(context).push(
@@ -341,7 +341,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                       showConfirm = true;
                                              bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, symbol))
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, 'booked', symbol))
                           )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                     });
                   }
@@ -389,7 +389,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                       showConfirm = true;
                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, symbol))
+                            MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, 'booked', symbol))
                           )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                     });
                   }

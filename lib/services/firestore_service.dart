@@ -77,4 +77,12 @@ class FirestoreService {
   static Future<QuerySnapshot<ItemRenter>> getItemRentersOnce() {
     return refItemRenter.get();
   }
+  // Update itemrenter
+  static Future<void> updateItemRenter(ItemRenter itemRenter) async {
+    await refItemRenter.doc(itemRenter.id).update(
+      {
+        'status': itemRenter.status,
+     }
+    );
+  }
 }

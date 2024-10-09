@@ -223,7 +223,7 @@ class _ToRentState extends State<ToRent> {
                   child: OutlinedButton(
                     onPressed: () {
                       log('Pushing to SummaryPurchase');
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (SummaryPurchase(widget.item, DateTime.now(), DateTime.now(), 0, widget.item.buyPrice, symbol))));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (SummaryPurchase(widget.item, DateTime.now(), DateTime.now(), 0, widget.item.buyPrice, 'booked', symbol))));
                     },
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.all(10),

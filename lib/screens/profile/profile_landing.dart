@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:provider/provider.dart';
+import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/help_centre/faqs.dart';
+import 'package:unearthed/screens/profile/admin.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
 import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/screens/profile/settings.dart';
@@ -26,6 +28,36 @@ class ProfileLanding extends StatefulWidget {
 }
 
 class _ProfileLandingState extends State<ProfileLanding> {
+    void handleSubmit() {
+    for (var i = 0; i < allItems.length; i++) {
+      Provider.of<ItemStore>(context, listen: false).addItem(Item(
+        id: uuid.v4(),
+        type: allItems[i].type,
+        bookingType: allItems[i].bookingType,
+        occasion: allItems[i].occasion,
+        dateAdded: allItems[i].dateAdded,
+        style: allItems[i].style,
+        name: allItems[i].name,
+        brand: allItems[i].brand,
+        colour: allItems[i].colour,
+        size: allItems[i].size,
+        length: allItems[i].length,
+        print: allItems[i].print,
+        sleeve: allItems[i].sleeve,
+        rentPrice: allItems[i].rentPrice,
+        buyPrice: allItems[i].buyPrice,
+        rrp: allItems[i].rrp,
+        description: allItems[i].description,
+        bust: allItems[i].bust,
+        waist: allItems[i].waist,
+        hips: allItems[i].hips,
+        longDescription: allItems[i].longDescription,
+        imageId: allItems[i].imageId,
+        // isFav: allItems[i].isFav,
+    ));
+    }
+
+  }
   Future<void> shareApp() async {
     log('Sharing a link');
     const String appLink = 'https://my google play link';
@@ -61,6 +93,8 @@ class _ProfileLandingState extends State<ProfileLanding> {
 
   @override
   Widget build(BuildContext context) {
+    List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
+
     double width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20.0, 20.0, 0, 0),
@@ -244,6 +278,33 @@ class _ProfileLandingState extends State<ProfileLanding> {
                   ],
                 ),
               ),
+              SizedBox(height: width * 0.04),
+              Divider(
+                height: width * 0.05,
+                indent: 50,
+                color: Colors.grey[200],
+              ),
+              if (true) GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => (const Admin())));
+                },
+                child: Row(
+                  children: [
+                    SizedBox(width: width * 0.01),
+                    Icon(Icons.description_outlined, size: width * 0.05),
+                    SizedBox(width: width * 0.01),
+                    const StyledBody('ADMIN: CHECK ORDERS', weight: FontWeight.normal),
+                  ],
+                ),
+              ),
+              TextButton (
+                onPressed: () {
+                  handleSubmit();
+                  // addItemsAll();
+                },
+                child: const Text('ADD'),
+              )
             ],
           );
         } else {
@@ -348,4 +409,6 @@ showAlertDialog(BuildContext context) {
     },
   );
 }
+
+
 

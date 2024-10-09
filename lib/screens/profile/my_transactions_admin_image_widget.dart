@@ -5,17 +5,20 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
-class MyPurchasesImageWidget extends StatelessWidget {
-  MyPurchasesImageWidget(this.itemId, this.startDate, this.endDate, this.price,
+class MyTransactionsAdminImageWidget extends StatelessWidget {
+  MyTransactionsAdminImageWidget(this.itemRenter, this.itemId, this.startDate, this.endDate, this.price, this.status,
       {super.key});
 
+  final ItemRenter itemRenter;
   final String itemId;
   final String startDate;
   final String endDate;
   final int price;
+  final String status;
 
   late String itemType;
   late String itemName;
@@ -43,7 +46,7 @@ class MyPurchasesImageWidget extends StatelessWidget {
     // yMMMMd('en_US')
     for (Item d in allItems) {
       if (d.id == itemId) {
-        log('Found purchased item, ${d.id} matches $itemId');
+        log('Found rented item, ${d.id} matches $itemId');
         item = d;
       }
     } 
@@ -69,7 +72,7 @@ class MyPurchasesImageWidget extends StatelessWidget {
       1,
       0,
     ]);
-    if (toDate.isBefore(DateTime.now().add(const Duration(days: 10)))) {
+    if (fromDate.isBefore(DateTime.now().add(const Duration(days: 1)))) {
       greyscale = const ColorFilter.matrix(<double>[
         0.2126,
         0.7152,
@@ -119,19 +122,52 @@ class MyPurchasesImageWidget extends StatelessWidget {
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    const StyledBody('From', color: Colors.grey, weight: FontWeight.normal),
-                    const SizedBox(width: 30),
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('From', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
                     StyledBody(fromDateString, color: Colors.grey, weight: FontWeight.normal),
                   ],
                 ),
                 Row(
                   children: [
-                    const StyledBody('To', color: Colors.grey, weight: FontWeight.normal),
-                    const SizedBox(width: 47),
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('To', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
                     StyledBody(toDateString, color: Colors.grey, weight: FontWeight.normal),
                   ],
                 ),
-                StyledBody('Price ${price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('Price', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
+                    StyledBody('${price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('Status', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
+                    StyledBody(status, color: Colors.grey, weight: FontWeight.normal),
+                  ],
+                ),
+                if (status == 'booked') Row(
+                  children: [
+                    SizedBox(width: width * 0.01),
+                    ElevatedButton(
+                      onPressed: () {
+                        itemRenter.status = 'paid';
+                        Provider.of<ItemStore>(context, listen: false).saveItemRenter(itemRenter);
+                      }, 
+                      child: const Text('MARK AS PAID'))
+                  ],
+                ),
+                // StyledBody('Price ${price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
               ],
             )
           ],

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/authenticate/register_name.dart';
+import 'package:unearthed/screens/authenticate/register_password.dart';
 import 'package:unearthed/services/auth.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/constants.dart';
@@ -13,23 +13,23 @@ import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
-class Register extends StatefulWidget {
-  final Function toggleView;
+class RegisterName extends StatefulWidget {
 
-  const Register({required this.toggleView, super.key});
+  const RegisterName({required this.email, super.key});
+
+  final String email;
 
   @override
-  State<Register> createState() => _Register();
+  State<RegisterName> createState() => _RegisterName();
 }
 
-class _Register extends State<Register> {
+class _RegisterName extends State<RegisterName> {
   bool found = false;
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
-  String email = '';
-  String password = '';
+  String name = '';
   String error = 'Error: ';
 
   @override
@@ -86,31 +86,13 @@ class _Register extends State<Register> {
       appBar: AppBar(
         toolbarHeight: width * 0.2,
         // centerTitle: true,
-        title: const StyledTitle('REGISTER'),
+        title: const StyledTitle('REGISTER NAME'),
         leading: IconButton(
           icon: Icon(Icons.chevron_left, size: width * 0.08),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          Padding(
-            padding:
-                EdgeInsets.symmetric(vertical: 0.0, horizontal: width * 0.02),
-            child: GestureDetector(
-              onTap: () {
-                widget.toggleView();
-              },
-              child: Row(
-                children: [
-                  const StyledBody('SIGN IN', weight: FontWeight.normal),
-                  SizedBox(width: width * 0.01),
-                  Icon(Icons.person, size: width * 0.05)
-                ],
-              ),
-            ),
-          )
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 0, horizontal: width * 0.04),
@@ -118,7 +100,7 @@ class _Register extends State<Register> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const StyledHeading(
-              'Enter your email',
+              'Enter your name',
               weight: FontWeight.normal,
             ),
             Container(
@@ -131,13 +113,13 @@ class _Register extends State<Register> {
                         const SizedBox(height: 20),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
-                            hintText: 'Email',
+                            hintText: 'Name',
                           ),
                           validator: (val) =>
-                              val!.isEmpty ? 'Enter an email' : null,
+                              val!.isEmpty ? 'Enter your name' : null,
                           onChanged: (val) {
                             setState(() {
-                              email = val;
+                              name = val;
                             });
                           },
                         ),
@@ -166,7 +148,7 @@ class _Register extends State<Register> {
               child: OutlinedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RegisterName(email: email))));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RegisterPassword(email: widget.email, name: name))));
                   }
                 },
                 style: OutlinedButton.styleFrom(

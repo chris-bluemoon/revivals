@@ -9,6 +9,7 @@ class ItemRenter {
           required this.startDate, 
           required this.endDate, 
           required this.price,
+          required this.status,
         }); 
 
     String id;
@@ -18,6 +19,7 @@ class ItemRenter {
     String startDate;
     String endDate;
     int price;
+    String status;
 
   // item to firestore (map)
   Map<String, dynamic> toFirestore() {
@@ -28,6 +30,7 @@ class ItemRenter {
       'startDate': startDate,
       'endDate': endDate,
       'price': price,
+      'status': status,
     };
   }
 
@@ -49,6 +52,7 @@ class ItemRenter {
       startDate: data['startDate'],
       endDate: data['endDate'],
       price: data['price'],
+      status: data['status'],
     );
 
     return itemRenter;

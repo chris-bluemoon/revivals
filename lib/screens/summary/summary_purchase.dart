@@ -16,7 +16,7 @@ var uuid = const Uuid();
 
 class SummaryPurchase extends StatefulWidget {
   SummaryPurchase(
-      this.item, this.startDate, this.endDate, this.noOfDays, this.price, this.symbol,
+      this.item, this.startDate, this.endDate, this.noOfDays, this.price, this.status, this.symbol,
       {super.key});
 
   final Item item;
@@ -24,6 +24,7 @@ class SummaryPurchase extends StatefulWidget {
   final DateTime endDate;
   final int noOfDays;
   final int price;
+  final String status;
   final String symbol;
 
   final ValueNotifier<int> deliveryPrice = ValueNotifier<int>(0);
@@ -42,7 +43,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
     // int pricePerDay = widget.price~/widget.noOfDays;
 
     void handleSubmit(String renterId, String itemId, String startDate,
-        String endDate, int price) {
+        String endDate, int price, String status) {
       
       Provider.of<ItemStore>(context, listen: false)
           .addItemRenter(ItemRenter(
@@ -53,7 +54,9 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
         startDate: startDate,
         endDate: endDate,
         price: price,
+        status: status,
       ));
+      log('Added a purchase to ItemRenter as status $status');
     }
 
 
@@ -163,7 +166,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
                     String startDateText = widget.startDate.toString();
                     String endDateText = widget.endDate.toString();
                     handleSubmit(email, widget.item.id, startDateText, endDateText,
-                        widget.item.buyPrice);
+                        widget.item.buyPrice, widget.status);
                     showAlertDialog(context, widget.item.type, width);  
                     // Navigator.of(context).push(MaterialPageRoute(
                         // builder: (context) => (const Congrats())));

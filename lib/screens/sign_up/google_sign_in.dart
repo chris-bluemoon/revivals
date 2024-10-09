@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -81,101 +80,127 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
   Widget build(BuildContext context) {
         double width = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
+        appBar: 
+        AppBar(
+        toolbarHeight: width * 0.2,
+        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.chevron_left, size: width*0.08),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+      ),),
           // title: const Text('', style: TextStyle(fontSize: 22, color: Colors.black)),
-            leading: IconButton(
-    icon: Icon(Icons.chevron_left, color: Colors.black, size: width*0.06),
-    onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst)
-    // onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const HomePage())))
-  )),
         body: ValueListenableBuilder(
                 valueListenable: userCredential,
                 builder: (context, value, child) {
             if (userCredential.value == '' || userCredential.value == null) {
               return Column(
                 children: [
+                  const StyledHeading('Choose a sign in method'),
                   const SizedBox(height: 200),
                   Center(
-                    child: SignInButtonBuilder(
-                      text: 'Sign in/up with Email',
-                      fontSize: width * 0.03,
-                      icon: Icons.email,
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Authenticate()));
-                      },
-                      backgroundColor: Colors.blueGrey[700]!,
-                      width: width * 0.5,
-                    ),
-                  ),
-                  SignInButtonBuilder(
-                    text: 'Sign with Google',
-                    fontSize: width * 0.03,
-                    width: width * 0.5,
-                    image: Image.asset('assets/logos/google.png', height: 30),
-                    backgroundColor: Colors.blue,
-                    icon: Icons.email,
-                    onPressed: () async {
-                      showDialogue(context);
-                      userCredential.value = await signInWithGoogle();
-                      if (userCredential.value != null) {
-                        hideProgressDialogue(context);
-                        log(userCredential.value.user!.email);
-                        log(userCredential.value.user!.displayName);
-                        handleNewLogIn(userCredential.value.user!.email,
-                            userCredential.value.user!.displayName);
-                        // Navigator.pop(context);
-                        showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(0))),
-                            actions: [
-                              // ElevatedButton(
-                              // onPressed: () {cancelLogOut(context);},
-                              // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        const WidgetStatePropertyAll<Color>(
-                                            Colors.black),
-                                    shape: WidgetStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(0)),
-                                            side: BorderSide(
-                                                color: Colors.black)))),
-                                onPressed: () {
-                                  // Navigator.pop(context);
-                                  Navigator.of(context)
-                                      .popUntil((route) => route.isFirst);
-                                  // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
-                                },
-                                child: const StyledHeading('OK',
-                                    weight: FontWeight.normal,
-                                    color: Colors.white),
-                              ),
-                            ],
+            child: SizedBox(
+              width: width * 0.5,
+              child: ElevatedButton.icon(
+                                      style: OutlinedButton.styleFrom(
+                            textStyle: const TextStyle(color: Colors.white),
+                            foregroundColor: Colors.white,//change background color of button
                             backgroundColor: Colors.white,
-                            title: const Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                // Flexible(child: Text("Successfully logged in", style: TextStyle(fontSize: 22, color: Colors.black))),
-                                Flexible(
-                                    child: StyledHeading(
-                                        "Successfully logged in",
-                                        weight: FontWeight.normal)),
-                              ],
-                            ),
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0),
                           ),
-                        );
-                      }
-                    },
-                  ),
-                ],
+                          side: const BorderSide(width: 1.0, color: Colors.black),
+                        ),
+                        icon: const Icon(
+              Icons.email,
+              color: Colors.black,
+              size: 30.0,
+                        ),
+                        label: const StyledBody('Sign in/up with Email', weight: FontWeight.normal),
+                        onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Authenticate()));
+                        }),
+            )),
+                  SizedBox(height: width * 0.05),
+                  Center(
+            child: SizedBox(
+              width: width * 0.5,
+              child: ElevatedButton.icon(
+                                      style: OutlinedButton.styleFrom(
+                            textStyle: const TextStyle(color: Colors.white),
+                            foregroundColor: Colors.white,//change background color of button
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0),
+                          ),
+                          side: const BorderSide(width: 1.0, color: Colors.black),
+                        ),
+                        icon: Image.asset('assets/logos/google.webp', height: 40),
+                        label: const StyledBody('Sign in with Google', weight: FontWeight.normal),
+                      onPressed: () async {
+                        showDialogue(context);
+                        userCredential.value = await signInWithGoogle();
+                        if (userCredential.value != null) {
+                          hideProgressDialogue(context);
+                          log(userCredential.value.user!.email);
+                          log(userCredential.value.user!.displayName);
+                          handleNewLogIn(userCredential.value.user!.email,
+                              userCredential.value.user!.displayName);
+                          // Navigator.pop(context);
+                          showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(0))),
+                              actions: [
+                                // ElevatedButton(
+                                // onPressed: () {cancelLogOut(context);},
+                                // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          const WidgetStatePropertyAll<Color>(
+                                              Colors.black),
+                                      shape: WidgetStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(0)),
+                                              side: BorderSide(
+                                                  color: Colors.black)))),
+                                  onPressed: () {
+                                    // Navigator.pop(context);
+                                    Navigator.of(context)
+                                        .popUntil((route) => route.isFirst);
+                                    // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const Profile()));
+                                  },
+                                  child: const StyledHeading('OK',
+                                      weight: FontWeight.normal,
+                                      color: Colors.white),
+                                ),
+                              ],
+                              backgroundColor: Colors.white,
+                              title: const Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // Flexible(child: Text("Successfully logged in", style: TextStyle(fontSize: 22, color: Colors.black))),
+                                  Flexible(
+                                      child: StyledHeading(
+                                          "Successfully logged in",
+                                          weight: FontWeight.normal)),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+            ),
+              )],
               );
             } else {
               // log('loggin id');

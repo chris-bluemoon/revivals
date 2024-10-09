@@ -67,14 +67,9 @@ class _MyAccountState extends State<MyAccount> {
 // and use it to show a SnackBar.
     return Scaffold(
       appBar: AppBar(
-        // centerTitle: true,
-        title: const Row(
-          mainAxisSize: MainAxisSize.min,
-          // TODO: Image is not centered in appbar with back arrow
-          mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              StyledTitle('ACCOUNT'),
-              ]),
+        toolbarHeight: width * 0.2,
+        centerTitle: true,
+        title: const StyledTitle('ACCOUNT'),
         leading: IconButton(
           icon: Icon(Icons.chevron_left, size: width*0.08),
           onPressed: () {

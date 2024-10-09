@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/screens/profile/my_transactions_image_widget.dart';
+import 'package:unearthed/screens/profile/my_transactions_admin_image_widget.dart';
 import 'package:unearthed/services/class_store.dart';
 
 
-class MyPurchasesList extends StatefulWidget {
-  const MyPurchasesList({super.key});
+class MyPurchasesAdminList extends StatefulWidget {
+  const MyPurchasesAdminList({super.key});
 
   @override
-  State<MyPurchasesList> createState() => _MyPurchasesListState();
+  State<MyPurchasesAdminList> createState() => _MyPurchasesAdminListState();
 }
 
-class _MyPurchasesListState extends State<MyPurchasesList> {
+class _MyPurchasesAdminListState extends State<MyPurchasesAdminList> {
   
 
   List<ItemRenter> myPurchasesList = [];
@@ -24,12 +24,12 @@ class _MyPurchasesListState extends State<MyPurchasesList> {
 
   @override
   void initState() {
-    loadMyPurchasesList();
+    loadMyPurchasesAdminList();
     super.initState();
   }
   
-  void loadMyPurchasesList() {
-    log('Loading loadMyPurchasesList');
+  void loadMyPurchasesAdminList() {
+    log('Loading loadMyPurchasesAdminList');
     // get current user
     String userEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
     // log('User email: $userEmail');
@@ -58,13 +58,16 @@ class _MyPurchasesListState extends State<MyPurchasesList> {
     double width = MediaQuery.of(context).size.width;
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
     return 
-      ListView.builder(
-        padding: EdgeInsets.all(width*0.01),
-        itemCount: myPurchasesList.length,
-        itemBuilder: (BuildContext context, int index) {
-          // return MyPurchasesImageWidget(myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price);
-          return MyTransactionsImageWidget(myPurchasesList[index], myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price, myPurchasesList[index].status);
-      }
-    );
+      Consumer<ItemStore>(
+        builder: (context, value, child) {
+        return ListView.builder(
+          padding: EdgeInsets.all(width*0.01),
+          itemCount: myPurchasesList.length,
+          itemBuilder: (BuildContext context, int index) {
+            // return MyPurchasesAdminImageWidget(myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price);
+            return MyTransactionsAdminImageWidget(myPurchasesList[index], myPurchasesList[index].itemId, myPurchasesList[index].startDate, myPurchasesList[index].endDate, myPurchasesList[index].price, myPurchasesList[index].status);
+        }
+        );}
+      );
 
   }}

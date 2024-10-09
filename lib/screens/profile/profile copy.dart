@@ -49,7 +49,6 @@ class _Profile extends State<Profile> {
   Widget build(BuildContext context) {
             double width = MediaQuery.of(context).size.width;
 
-              final User? user = auth.currentUser;
     return Scaffold(
         appBar: AppBar(
         toolbarHeight: width * 0.2,
@@ -57,8 +56,12 @@ class _Profile extends State<Profile> {
         title: const StyledTitle('PROFILE'),
       ),
         // TODO, is the valuelistener required?
-        body: ProfileLanding(user, signOutFromGoogle)
-    ); 
+        body: ValueListenableBuilder(
+            valueListenable: userCredential,
+            builder: (context, value, child) {
+              final User? user = auth.currentUser;
+              return ProfileLanding(user, signOutFromGoogle);
+            }));
   }
 
 }

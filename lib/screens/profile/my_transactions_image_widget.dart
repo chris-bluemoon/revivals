@@ -5,17 +5,20 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
-class MyRentalsImageWidget extends StatelessWidget {
-  MyRentalsImageWidget(this.itemId, this.startDate, this.endDate, this.price,
+class MyTransactionsImageWidget extends StatelessWidget {
+  MyTransactionsImageWidget(this.itemRenter, this.itemId, this.startDate, this.endDate, this.price, this.status,
       {super.key});
 
+  final ItemRenter itemRenter;
   final String itemId;
   final String startDate;
   final String endDate;
   final int price;
+  final String status;
 
   late String itemType;
   late String itemName;
@@ -119,19 +122,40 @@ class MyRentalsImageWidget extends StatelessWidget {
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    const StyledBody('From', color: Colors.grey, weight: FontWeight.normal),
-                    const SizedBox(width: 30),
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('From', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
                     StyledBody(fromDateString, color: Colors.grey, weight: FontWeight.normal),
                   ],
                 ),
                 Row(
                   children: [
-                    const StyledBody('To', color: Colors.grey, weight: FontWeight.normal),
-                    const SizedBox(width: 47),
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('To', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
                     StyledBody(toDateString, color: Colors.grey, weight: FontWeight.normal),
                   ],
                 ),
-                StyledBody('Price ${price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('Price', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
+                    StyledBody('${price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
+                  ],
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('Status', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
+                    StyledBody(status, color: Colors.grey, weight: FontWeight.normal),
+                  ],
+                ),
               ],
             )
           ],

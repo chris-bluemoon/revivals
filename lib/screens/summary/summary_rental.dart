@@ -17,7 +17,7 @@ var uuid = const Uuid();
 
 class SummaryRental extends StatefulWidget {
   SummaryRental(this.item, this.startDate, this.endDate, this.noOfDays,
-      this.price, this.symbol,
+      this.price, this.status, this.symbol,
       {super.key});
 
   final Item item;
@@ -25,6 +25,7 @@ class SummaryRental extends StatefulWidget {
   final DateTime endDate;
   final int noOfDays;
   final int price;
+  final String status;
   final String symbol;
 
   final ValueNotifier<int> deliveryPrice = ValueNotifier<int>(0);
@@ -40,7 +41,7 @@ class _SummaryRentalState extends State<SummaryRental> {
     int pricePerDay = widget.price ~/ widget.noOfDays;
 
     void handleSubmit(String renterId, String itemId, String startDate,
-        String endDate, int price) {
+        String endDate, int price, String status) {
       Provider.of<ItemStore>(context, listen: false).addItemRenter(ItemRenter(
         id: uuid.v4(),
         renterId: renterId,
@@ -49,6 +50,7 @@ class _SummaryRentalState extends State<SummaryRental> {
         startDate: startDate,
         endDate: endDate,
         price: price,
+        status: status,
       ));
     }
 
@@ -187,7 +189,7 @@ class _SummaryRentalState extends State<SummaryRental> {
                     String startDateText = widget.startDate.toString();
                     String endDateText = widget.endDate.toString();
                     handleSubmit(email, widget.item.id, startDateText,
-                        endDateText, widget.item.rentPrice);
+                        endDateText, widget.item.rentPrice, widget.status);
                     String startDateTextForEmail =
                         DateFormat('yMMMd').format(widget.startDate);
                     String endDateTextForEmail =

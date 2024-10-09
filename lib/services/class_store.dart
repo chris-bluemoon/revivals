@@ -173,6 +173,7 @@ class ItemStore extends ChangeNotifier {
   }
   // add itemRenter
   void addItemRenter(ItemRenter itemRenter) async {
+    log('Adding ItemRenter ${_itemRenters.length}');
     await FirestoreService.addItemRenter(itemRenter);
     _itemRenters.add(itemRenter);
     notifyListeners();
@@ -270,6 +271,7 @@ class ItemStore extends ChangeNotifier {
     if (itemRenters.length == 0) {
       final snapshot = await FirestoreService.getItemRentersOnce();
       for (var doc in snapshot.docs) {
+        log('Adding an ItemRenter from database');
         _itemRenters.add(doc.data());
       }
       notifyListeners();
@@ -291,4 +293,11 @@ class ItemStore extends ChangeNotifier {
       // log("Renters populated with length ${_renters.length}");
       // notifyListeners();
     }
+    void saveItemRenter(ItemRenter itemRenter) async {
+    await FirestoreService.updateItemRenter(itemRenter);
+    // _renters[0].aditem = renter.aditem;
+      // _user.aditem = renter.aditem;
+    notifyListeners();
+    return;
+  }
 }

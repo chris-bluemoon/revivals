@@ -72,8 +72,9 @@ List<Text> weights = <Text>[
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: width * 0.2,
         centerTitle: true,
-        title: const StyledTitle('SETTINGS', weight: FontWeight.normal),
+        title: const StyledTitle('SETTINGS'),
         leading: IconButton(
           icon: Icon(Icons.chevron_left, size: width * 0.1),
           onPressed: () {

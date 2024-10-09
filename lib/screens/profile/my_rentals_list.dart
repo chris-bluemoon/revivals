@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/screens/profile/my_rentals_image_widget.dart';
+import 'package:unearthed/screens/profile/my_transactions_image_widget.dart';
 import 'package:unearthed/services/class_store.dart';
 
 
@@ -63,7 +63,7 @@ class _MyRentalsListState extends State<MyRentalsList> {
         padding: EdgeInsets.all(width*0.01),
         itemCount: myRentalsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return MyRentalsImageWidget(myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price);
+          return MyTransactionsImageWidget(myRentalsList[index], myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price, myRentalsList[index].status);
       }
     );
 
