@@ -90,11 +90,16 @@ class _ProfileLandingState extends State<ProfileLanding> {
     }
     log('Pressed Exit 2');
   }
+  
+  bool admin = false;
 
   @override
   Widget build(BuildContext context) {
-    List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
-
+    // List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
+    String renterEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
+    if (renterEmail == 'chris@unearthedcollections.com') {
+      admin = true;
+    }
     double width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20.0, 20.0, 0, 0),
@@ -284,7 +289,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 indent: 50,
                 color: Colors.grey[200],
               ),
-              if (true) GestureDetector(
+              if (admin) GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => (const Admin())));
@@ -298,7 +303,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
                   ],
                 ),
               ),
-              TextButton (
+              if (admin) TextButton (
                 onPressed: () {
                   handleSubmit();
                   // addItemsAll();

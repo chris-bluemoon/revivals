@@ -31,6 +31,8 @@ class _SignIn extends State<SignIn> {
   String password = '';
   String error = 'Error: ';
 
+  bool ready = false;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -137,6 +139,7 @@ class _SignIn extends State<SignIn> {
                           onChanged: (val) {
                             setState(() {
                               email = val;
+                              ready = true;
                             });
                           },
                         ),
@@ -152,6 +155,7 @@ class _SignIn extends State<SignIn> {
                             onChanged: (val) {
                               setState(() {
                                 password = val;
+                                ready = true;
                               });
                             }),
                       ],
@@ -160,7 +164,6 @@ class _SignIn extends State<SignIn> {
         ),
       ),
       bottomNavigationBar: Container(
-        // height: 300,
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
@@ -172,13 +175,30 @@ class _SignIn extends State<SignIn> {
             )
           ],
         ),
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                if (!ready) Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                    },
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('SIGN IN', weight: FontWeight.bold, color: Colors.grey),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5),
+                if (ready) Expanded(
+                  child: OutlinedButton(
+                    onPressed: () async {
+                                       if (_formKey.currentState!.validate()) {
                     setState(() => loading = true);
                     dynamic result =
                         await _auth.signInWithEmailAndPassword(email, password);
@@ -238,21 +258,118 @@ class _SignIn extends State<SignIn> {
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     }
                   }
-                },
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.all(10),
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(1.0),
+                    ready = false;
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('SIGN IN', color: Colors.white),
+                    ),
                   ),
-                  side: const BorderSide(width: 1.0, color: Colors.black),
                 ),
-                child: const StyledHeading('SIGN IN', color: Colors.white),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),   
+      // bottomNavigationBar: Container(
+      //   decoration: BoxDecoration(
+      //     color: Colors.white,
+      //     border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
+      //     boxShadow: [
+      //       BoxShadow(
+      //         color: Colors.black.withOpacity(0.2),
+      //         blurRadius: 10,
+      //         spreadRadius: 3,
+      //       )
+      //     ],
+      //   ),
+      //   padding: const EdgeInsets.all(10),
+      //   child: Row(
+      //     children: [
+      //       Expanded(
+      //         child: OutlinedButton(
+      //           onPressed: () async {
+      //             if (_formKey.currentState!.validate()) {
+      //               setState(() => loading = true);
+      //               dynamic result =
+      //                   await _auth.signInWithEmailAndPassword(email, password);
+      //               if (result == null) {
+      //                 setState(() => loading = false);
+      //                 showDialog(
+      //                   barrierDismissible: false,
+      //                   context: context,
+      //                   builder: (_) => AlertDialog(
+      //                     shape: const RoundedRectangleBorder(
+      //                         borderRadius:
+      //                             BorderRadius.all(Radius.circular(0))),
+      //                     actions: [
+      //                       // ElevatedButton(
+      //                       // onPressed: () {cancelLogOut(context);},
+      //                       // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
+      //                       ElevatedButton(
+      //                         style: ButtonStyle(
+      //                             foregroundColor:
+      //                                 WidgetStateProperty.all(Colors.white),
+      //                             backgroundColor:
+      //                                 const WidgetStatePropertyAll<Color>(
+      //                                     Colors.black),
+      //                             shape: WidgetStateProperty.all<
+      //                                     RoundedRectangleBorder>(
+      //                                 const RoundedRectangleBorder(
+      //                                     borderRadius: BorderRadius.all(
+      //                                         Radius.circular(0)),
+      //                                     side: BorderSide(
+      //                                         color: Colors.black)))),
+      //                         onPressed: () {
+      //                           setState(() {
+      //                             Navigator.pop(context);
+      //                           });
+      //                           // goBack(context);
+      //                         },
+      //                         child: const StyledHeading(
+      //                           'OK',
+      //                           weight: FontWeight.normal,
+      //                           color: Colors.white,
+      //                         ),
+      //                       ),
+      //                     ],
+      //                     backgroundColor: Colors.white,
+      //                     title: const Center(
+      //                         child: StyledHeading("Error Signing In",
+      //                             weight: FontWeight.normal)),
+      //                   ),
+      //                 );
+      //                         setState(() {
+      //                           log('Setting password to nothing');
+      //                           _formKey.currentState!.reset();
+      //                         });
+      //               } else {
+      //                 handleNewLogIn(email, password);
+      //                 log('Popping to first');
+      //                 Navigator.of(context).popUntil((route) => route.isFirst);
+      //               }
+      //             }
+      //           },
+      //           style: OutlinedButton.styleFrom(
+      //             padding: const EdgeInsets.all(10),
+      //             backgroundColor: Colors.black,
+      //             shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(1.0),
+      //             ),
+      //             side: const BorderSide(width: 1.0, color: Colors.black),
+      //           ),
+      //           child: const StyledHeading('SIGN IN', color: Colors.white),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

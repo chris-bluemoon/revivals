@@ -72,7 +72,7 @@ class MyTransactionsImageWidget extends StatelessWidget {
       1,
       0,
     ]);
-    if (fromDate.isBefore(DateTime.now().add(const Duration(days: 1)))) {
+    if (fromDate.isBefore(DateTime.now().add(const Duration(days: 1))) && item.bookingType == 'rental') {
       greyscale = const ColorFilter.matrix(<double>[
         0.2126,
         0.7152,

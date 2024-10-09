@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/services/auth.dart';
@@ -30,10 +31,12 @@ class _RegisterPassword extends State<RegisterPassword> {
   bool loading = false;
 
   String password = '';
+  bool ready = false;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final passNotifier = ValueNotifier<PasswordStrength?>(null);
 
     void handleNewLogIn(String email, String name) {
       log('Adding renter if not exists!');
@@ -114,21 +117,24 @@ class _RegisterPassword extends State<RegisterPassword> {
                           decoration: textInputDecoration.copyWith(
                             hintText: 'Password',
                           ),
+                          obscureText: true,
                           validator: (val) =>
                               val!.isEmpty ? 'Enter a valid password' : null,
-                          onChanged: (val) {
-                            setState(() {
-                              password = val;
-                            });
+                          onChanged: (value) {
+                              passNotifier.value = PasswordStrength.calculate(text: value);
+                              password = value;
+                              if (PasswordStrength.calculate(text: value) == PasswordStrength.strong) {ready = true;}
                           },
                         ),
+                        SizedBox(height: width * 0.01),
+                        PasswordStrengthChecker(strength: passNotifier),
+
                       ],
                     ))),
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        // height: 300,
+            bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
@@ -140,12 +146,29 @@ class _RegisterPassword extends State<RegisterPassword> {
             )
           ],
         ),
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () async {
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                if (!ready) Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                    },
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('CREATE ACCOUNT', weight: FontWeight.bold, color: Colors.grey),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5),
+                if (ready) Expanded(
+                  child: OutlinedButton(
+                                   onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     setState(() => loading = true);
                     dynamic result =
@@ -207,20 +230,116 @@ class _RegisterPassword extends State<RegisterPassword> {
                     }
                   }
                 },
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.all(10),
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(1.0),
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(1.0),
+                    ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('CREATE ACCOUNT', color: Colors.white),
+                    ),
                   ),
-                  side: const BorderSide(width: 1.0, color: Colors.black),
                 ),
-                child: const StyledHeading('CREATE ACCOUNT', color: Colors.white),
-              ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),   
+      // bottomNavigationBar: Container(
+      //   // height: 300,
+      //   decoration: BoxDecoration(
+      //     color: Colors.white,
+      //     border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
+      //     boxShadow: [
+      //       BoxShadow(
+      //         color: Colors.black.withOpacity(0.2),
+      //         blurRadius: 10,
+      //         spreadRadius: 3,
+      //       )
+      //     ],
+      //   ),
+      //   padding: const EdgeInsets.all(10),
+      //   child: Row(
+      //     children: [
+      //       Expanded(
+      //         child: OutlinedButton(
+      //           onPressed: () async {
+      //             if (_formKey.currentState!.validate()) {
+      //               setState(() => loading = true);
+      //               dynamic result =
+      //                   await _auth.registerWithEmailAndPassword(widget.email, password);
+      //               if (result == null) {
+      //                 setState(() => loading = false);
+      //                 showDialog(
+      //                   barrierDismissible: false,
+      //                   context: context,
+      //                   builder: (_) => AlertDialog(
+      //                     shape: const RoundedRectangleBorder(
+      //                         borderRadius:
+      //                             BorderRadius.all(Radius.circular(0))),
+      //                     actions: [
+      //                       // ElevatedButton(
+      //                       // onPressed: () {cancelLogOut(context);},
+      //                       // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
+      //                       ElevatedButton(
+      //                         style: ButtonStyle(
+      //                             foregroundColor:
+      //                                 WidgetStateProperty.all(Colors.white),
+      //                             backgroundColor:
+      //                                 const WidgetStatePropertyAll<Color>(
+      //                                     Colors.black),
+      //                             shape: WidgetStateProperty.all<
+      //                                     RoundedRectangleBorder>(
+      //                                 const RoundedRectangleBorder(
+      //                                     borderRadius: BorderRadius.all(
+      //                                         Radius.circular(0)),
+      //                                     side: BorderSide(
+      //                                         color: Colors.black)))),
+      //                         onPressed: () {
+      //                           setState(() {
+      //                             Navigator.pop(context);
+      //                           });
+      //                           // goBack(context);
+      //                         },
+      //                         child: const StyledHeading(
+      //                           'OK',
+      //                           weight: FontWeight.normal,
+      //                           color: Colors.white,
+      //                         ),
+      //                       ),
+      //                     ],
+      //                     backgroundColor: Colors.white,
+      //                     title: const Center(
+      //                         child: StyledHeading("Invalid",
+      //                             weight: FontWeight.normal)),
+      //                   ),
+      //                 );
+      //                         setState(() {
+      //                           log('Setting password to nothing');
+      //                           _formKey.currentState!.reset();
+      //                         });
+      //               } else {
+      //                 handleNewLogIn(widget.email, widget.name);
+      //                 log('Popping to first');
+      //                 Navigator.of(context).popUntil((route) => route.isFirst);
+      //               }
+      //             }
+      //           },
+      //           style: OutlinedButton.styleFrom(
+      //             padding: const EdgeInsets.all(10),
+      //             backgroundColor: Colors.black,
+      //             shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(1.0),
+      //             ),
+      //             side: const BorderSide(width: 1.0, color: Colors.black),
+      //           ),
+      //           child: const StyledHeading('CREATE ACCOUNT', color: Colors.white),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

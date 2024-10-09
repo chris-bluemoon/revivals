@@ -31,6 +31,7 @@ class _RegisterName extends State<RegisterName> {
 
   String name = '';
   String error = 'Error: ';
+  bool ready = false;
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +121,7 @@ class _RegisterName extends State<RegisterName> {
                           onChanged: (val) {
                             setState(() {
                               name = val;
+                              ready = true;
                             });
                           },
                         ),
@@ -129,7 +131,6 @@ class _RegisterName extends State<RegisterName> {
         ),
       ),
       bottomNavigationBar: Container(
-        // height: 300,
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
@@ -141,30 +142,87 @@ class _RegisterName extends State<RegisterName> {
             )
           ],
         ),
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RegisterPassword(email: widget.email, name: name))));
-                  }
-                },
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.all(10),
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(1.0),
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                if (!ready) Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                    },
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('CONTINUE', weight: FontWeight.bold, color: Colors.grey),
+                    ),
                   ),
-                  side: const BorderSide(width: 1.0, color: Colors.black),
                 ),
-                child: const StyledHeading('CONTINUE', color: Colors.white),
-              ),
+                const SizedBox(width: 5),
+                if (ready) Expanded(
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RegisterPassword(email: widget.email, name: name))));
+                      }
+                      ready = false;
+                    },
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(1.0),
+                    ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('CONTINUE', color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),   
+      // bottomNavigationBar: Container(
+      //   // height: 300,
+      //   decoration: BoxDecoration(
+      //     color: Colors.white,
+      //     border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
+      //     boxShadow: [
+      //       BoxShadow(
+      //         color: Colors.black.withOpacity(0.2),
+      //         blurRadius: 10,
+      //         spreadRadius: 3,
+      //       )
+      //     ],
+      //   ),
+      //   padding: const EdgeInsets.all(10),
+      //   child: Row(
+      //     children: [
+      //       Expanded(
+      //         child: OutlinedButton(
+      //           onPressed: () async {
+      //             if (_formKey.currentState!.validate()) {
+      //               Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RegisterPassword(email: widget.email, name: name))));
+      //             }
+      //           },
+      //           style: OutlinedButton.styleFrom(
+      //             padding: const EdgeInsets.all(10),
+      //             backgroundColor: Colors.black,
+      //             shape: RoundedRectangleBorder(
+      //               borderRadius: BorderRadius.circular(1.0),
+      //             ),
+      //             side: const BorderSide(width: 1.0, color: Colors.black),
+      //           ),
+      //           child: const StyledHeading('CONTINUE', color: Colors.white),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
