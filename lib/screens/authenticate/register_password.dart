@@ -32,11 +32,11 @@ class _RegisterPassword extends State<RegisterPassword> {
 
   String password = '';
   bool ready = false;
+  final passNotifier = ValueNotifier<PasswordStrength?>(null);
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    final passNotifier = ValueNotifier<PasswordStrength?>(null);
 
     void handleNewLogIn(String email, String name) {
       log('Adding renter if not exists!');
@@ -102,12 +102,23 @@ class _RegisterPassword extends State<RegisterPassword> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const StyledHeading(
-              'Create a password (must be more than 6 characters)',
+              'Create a password that contains:',
               weight: FontWeight.normal,
             ),
+            SizedBox(height: width * 0.01),
+            const StyledHeading(
+              '- At least 8 characters', weight: FontWeight.normal),
+            const StyledHeading(
+              '- At least 1 lowercase letter', weight: FontWeight.normal),
+            const StyledHeading(
+              '- At least 1 uppercase letter', weight: FontWeight.normal),
+            const StyledHeading(
+              '- At least 1 digit', weight: FontWeight.normal),
+            const StyledHeading(
+              '- At least 1 special character', weight: FontWeight.normal),
             Container(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 30, horizontal: 50),
+                    EdgeInsets.symmetric(vertical: width * 0.03, horizontal: width * 0.1),
                 child: Form(
                     key: _formKey,
                     child: Column(
@@ -121,12 +132,19 @@ class _RegisterPassword extends State<RegisterPassword> {
                           validator: (val) =>
                               val!.isEmpty ? 'Enter a valid password' : null,
                           onChanged: (value) {
+                              log('Password value: $value');
+                              log('Password : ${passNotifier.value}');
                               passNotifier.value = PasswordStrength.calculate(text: value);
                               password = value;
-                              if (PasswordStrength.calculate(text: value) == PasswordStrength.strong) {ready = true;}
+                              if (PasswordStrength.calculate(text: value) == PasswordStrength.strong) {
+                                log('Strong password');
+                                ready = true;
+                              } else {
+                                ready = false;
+                              }
                           },
                         ),
-                        SizedBox(height: width * 0.01),
+                        SizedBox(height: width * 0.03),
                         PasswordStrengthChecker(strength: passNotifier),
 
                       ],
@@ -201,10 +219,7 @@ class _RegisterPassword extends State<RegisterPassword> {
                                           side: BorderSide(
                                               color: Colors.black)))),
                               onPressed: () {
-                                setState(() {
                                   Navigator.pop(context);
-                                });
-                                // goBack(context);
                               },
                               child: const StyledHeading(
                                 'OK',
