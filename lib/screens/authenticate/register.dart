@@ -37,7 +37,7 @@ class _Register extends State<Register> {
     final bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailString);
     log('Email valid is $emailValid');
     // return emailValid;
-    return true;
+    return emailValid;
   }
 
   @override
@@ -146,7 +146,11 @@ class _Register extends State<Register> {
                           onChanged: (val) {
                             setState(() {
                               email = val.trim();
-                              ready = true;
+                              if (val.isNotEmpty && isValidEmail(val.trim())) {
+                                log(isValidEmail(val.trim()).toString());
+                                log('Setting ready to true');
+                                ready = true;
+                              }
                             });
                           },
                         ),
@@ -193,7 +197,7 @@ class _Register extends State<Register> {
                       if (_formKey.currentState!.validate()) {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RegisterName(email: email))));
                       }
-                      ready = false;
+                      // ready = false;
                     },
                     style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.black,

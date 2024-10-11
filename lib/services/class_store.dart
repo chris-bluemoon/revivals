@@ -133,6 +133,7 @@ class ItemStore extends ChangeNotifier {
   // add character
   void addItem(Item item) async {
     await FirestoreService.addItem(item);
+    log('Added item!');
     _items.add(item);
     notifyListeners();
   }
@@ -182,6 +183,7 @@ class ItemStore extends ChangeNotifier {
     // initially fetch items
   void fetchItemsOnce() async {
     // List favs = _user.favourites;
+    log('Fethcing Items Once');
     if (items.length == 0) {
       log('Adding Items once');
       // Temporary setting of email password once

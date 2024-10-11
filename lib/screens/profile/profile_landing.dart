@@ -29,6 +29,7 @@ class ProfileLanding extends StatefulWidget {
 
 class _ProfileLandingState extends State<ProfileLanding> {
     void handleSubmit() {
+      log('Size of allItems: ${allItems.length}');
     for (var i = 0; i < allItems.length; i++) {
       Provider.of<ItemStore>(context, listen: false).addItem(Item(
         id: uuid.v4(),
@@ -97,7 +98,8 @@ class _ProfileLandingState extends State<ProfileLanding> {
   Widget build(BuildContext context) {
     // List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     String renterEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
-    if (renterEmail == 'chris@unearthedcollections.com') {
+    if (renterEmail == 'd@d.com') {
+      log('ADMIN user found');
       admin = true;
     }
     double width = MediaQuery.of(context).size.width;

@@ -122,6 +122,7 @@ class _RegisterName extends State<RegisterName> {
                             setState(() {
                               name = val;
                               ready = true;
+                              if (val.isEmpty) {ready = false;}
                             });
                           },
                         ),
@@ -168,7 +169,7 @@ class _RegisterName extends State<RegisterName> {
                       if (_formKey.currentState!.validate()) {
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => (RegisterPassword(email: widget.email, name: name))));
                       }
-                      ready = false;
+                      // ready = false;
                     },
                     style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.black,

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
@@ -30,12 +31,18 @@ class _ItemCardState extends State<ItemCard> {
 
   bool isFav = false;
 
+
+String capitalize(string) {
+  return string.codeUnitAt(0).toUpperCase() + string.substring(1).toLowerCase();
+}
+
   String setItemImage() {
-    itemType = widget.item.type.replaceAll(RegExp(' +'), '_');
+    itemType = toBeginningOfSentenceCase(widget.item.type.replaceAll(RegExp(' +'), '_'));
+    // itemType = widget.item.type.replaceAll(RegExp(' +'), '_');
     itemName = widget.item.name.replaceAll(RegExp(' +'), '_');
     brandName = widget.item.brand.replaceAll(RegExp(' +'), '_');
     imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
-    // log(imageName);
+    log(imageName);
     return imageName;
   }
 
@@ -45,7 +52,7 @@ class _ItemCardState extends State<ItemCard> {
       return true;
     } else {
       return false;
-    }
+    } 
   }
 
     void _toggleFav() {
@@ -160,12 +167,14 @@ class _ItemCardState extends State<ItemCard> {
             Center(child: StyledHeading(widget.item.brand)),
             SizedBox(height: width * 0.02),
             // Image.asset('assets/img/items/${setItemImage()}', width: 200, height: 600),
-            Expanded(child: Center(child: Image.asset('assets/img/items/${setItemImage()}')),),
+            Expanded(child: Center(child: Image.asset('assets/img/items2/${setItemImage()}')),),
             // Image.asset('assets/img/items/${setItemImage()}', fit: BoxFit.fill),
             Row(
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [
-                StyledHeading(widget.item.name),
+                 SizedBox(
+                  width: 300,
+                  child: StyledHeading(widget.item.name)),
                 const Expanded(child: SizedBox()),
                 isFav ?  IconButton(
                   icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,
