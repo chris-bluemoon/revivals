@@ -1,5 +1,8 @@
-3. DatePicker!
+3. DatePicker styling, colour at least
 4. Settings, weight? length etc
 5. Log in cancellation
-6. Apple log in
+5. Replicate for Google log in cancellation
 7. help text
+8. Dress names shorten?
+9. Fitting option
+10.  

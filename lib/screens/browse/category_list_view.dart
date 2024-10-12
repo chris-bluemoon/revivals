@@ -30,7 +30,7 @@ class CategoryListView extends StatelessWidget {
              children: [
                Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: Image.asset('assets/img/items/transparent_dress.webp', height: screenWidth*0.2),
+          child: Image.asset('assets/img/item2/transparent_dress.webp', height: screenWidth*0.2),
                ),
                const Expanded(child: SizedBox(width: 0),),
                const Padding(
@@ -70,7 +70,7 @@ class CategoryListView extends StatelessWidget {
         // const SizedBox(width: 0),
         Padding(
           padding: EdgeInsets.only(right: leftRightPadding),
-          child: Image.asset('assets/img/items/bag_transparent.png', height: screenWidth*0.2),
+          child: Image.asset('assets/img/item2/bag_transparent.png', height: screenWidth*0.2),
         ),
       ],
     )
@@ -98,7 +98,7 @@ class CategoryListView extends StatelessWidget {
              children: [
                Padding(
           padding: EdgeInsets.only(left: leftRightPadding),
-          child: Image.asset('assets/img/items/jacket_transparent2.webp', height: screenWidth*0.2),
+          child: Image.asset('assets/img/item2/jacket_transparent2.webp', height: screenWidth*0.2),
                ),
                const Expanded(child: SizedBox(width: 0),),
                Padding(
@@ -137,7 +137,7 @@ class CategoryListView extends StatelessWidget {
         const Expanded(child: SizedBox()),
         Padding(
           padding: EdgeInsets.only(right: leftRightPadding),
-          child: Image.asset('assets/img/items/pantsuit_transparent.png', height: screenWidth*0.2),
+          child: Image.asset('assets/img/item2/pantsuit_transparent.png', height: screenWidth*0.2),
         ),
       ],
     )

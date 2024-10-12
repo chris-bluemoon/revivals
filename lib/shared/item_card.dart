@@ -166,9 +166,9 @@ String capitalize(string) {
             
             Center(child: StyledHeading(widget.item.brand)),
             SizedBox(height: width * 0.02),
-            // Image.asset('assets/img/items/${setItemImage()}', width: 200, height: 600),
+            // Image.asset('assets/img/item2/${setItemImage()}', width: 200, height: 600),
             Expanded(child: Center(child: Image.asset('assets/img/items2/${setItemImage()}')),),
-            // Image.asset('assets/img/items/${setItemImage()}', fit: BoxFit.fill),
+            // Image.asset('assets/img/item2/${setItemImage()}', fit: BoxFit.fill),
             Row(
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [

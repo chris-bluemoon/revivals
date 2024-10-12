@@ -111,7 +111,7 @@ class MyTransactionsAdminImageWidget extends StatelessWidget {
                 child: ColorFiltered(
                     colorFilter: greyscale,
                     child: Image.asset(
-                        'assets/img/items/${setItemImage()}',
+                        'assets/img/item2/${setItemImage()}',
                         fit: BoxFit.fitHeight,
                         height: width*0.25,
                         width: width*0.2))),
