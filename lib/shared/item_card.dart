@@ -173,7 +173,7 @@ String capitalize(string) {
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [
                  SizedBox(
-                  width: 300,
+                  width: width * 0.3,
                   child: StyledHeading(widget.item.name)),
                 const Expanded(child: SizedBox()),
                 isFav ?  IconButton(
