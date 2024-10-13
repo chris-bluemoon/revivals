@@ -12,9 +12,10 @@ import 'package:unearthed/shared/styled_text.dart';
 
 // ignore: must_be_immutable
 class ItemCard extends StatefulWidget {
-  const ItemCard(this.item, {super.key});
+  const ItemCard(this.item, this.isDesigner, {super.key});
 
   final Item item;
+  final bool isDesigner;
 
   @override
   State<ItemCard> createState() => _ItemCardState();
@@ -41,7 +42,12 @@ String capitalize(string) {
     // itemType = widget.item.type.replaceAll(RegExp(' +'), '_');
     itemName = widget.item.name.replaceAll(RegExp(' +'), '_');
     brandName = widget.item.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
+    try {
+      imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
+    } catch(e) {
+      imageName = 'SUNDRESS_Emilia_Dress_1.jpg';
+      log('IMAGE ERROR');
+    }
     log(imageName);
     return imageName;
   }
@@ -144,7 +150,20 @@ String capitalize(string) {
     }
     return formattedSize;
   }
-
+  // String getImage(String image) {
+  //   String img;
+  //   try {
+  //     img = 'assets/img/items2/${setItemImage()}';
+  //   } catch (e) {
+  //     img = 'assets/img/items2/ZIMMERMANN_High_TIde_Odessey_Midi_Shirt_Dress_1.jpg';
+  //   }
+  //   return img;
+  // }
+Widget createImage(String imageName) {
+  return Image.asset(imageName,
+      errorBuilder: (context, object, stacktrace) =>
+          Image.asset('assets/img/items2/No_Image_Available.jpg'));
+}
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -164,17 +183,20 @@ String capitalize(string) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             
-            Center(child: StyledHeading(widget.item.brand)),
+            if (!widget.isDesigner) Center(child: StyledHeading(widget.item.brand)),
             SizedBox(height: width * 0.02),
             // Image.asset('assets/img/item2/${setItemImage()}', width: 200, height: 600),
-            Expanded(child: Center(child: Image.asset('assets/img/items2/${setItemImage()}')),),
+            Expanded(child: Center(child: createImage('assets/img/items2/${setItemImage()}')),),
             // Image.asset('assets/img/item2/${setItemImage()}', fit: BoxFit.fill),
             Row(
               // mainAxisAlignment: MainAxisAlignment.left,
               children: [
                  SizedBox(
                   width: width * 0.3,
-                  child: StyledHeading(widget.item.name)),
+                  height: width * 0.15,
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: StyledHeading(widget.item.name))),
                 const Expanded(child: SizedBox()),
                 isFav ?  IconButton(
                   icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,

@@ -5,4 +5,4 @@
 7. help text
 8. Dress names shorten?
 9. Fitting option
-10.  
+10.  Add/remove a dress admin function

@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:pluralize/pluralize.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
-import 'package:unearthed/screens/browse/designer_item_card.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/filters_page.dart';
@@ -228,8 +227,8 @@ class _ItemResultsState extends State<ItemResults> {
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, childAspectRatio: 0.5),
                           itemBuilder: (_, index) => GestureDetector(
-                              child: (widget.attribute == 'brand') ? DesignerItemCard(finalItems[index]) :
-                                ItemCard(finalItems[index]),
+                              child: (widget.attribute == 'brand') ? ItemCard(finalItems[index], true) :
+                                ItemCard(finalItems[index], false),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>

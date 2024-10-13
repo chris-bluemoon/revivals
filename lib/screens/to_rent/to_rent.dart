@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/item.dart';
@@ -42,8 +44,10 @@ class ToRent extends StatefulWidget {
 
 class _ToRentState extends State<ToRent> {
   
-  List items = [1, 2, 3];
+  List items = [];
   int currentIndex = 0;
+  bool itemCheckComplete = false;
+  List<Color> dotColours = [];
 
   CarouselController buttonCarouselController = CarouselController();
 
@@ -51,6 +55,8 @@ class _ToRentState extends State<ToRent> {
   String convertedBuyPrice = '-1';
   String convertedRRPPrice = '-1';
   String symbol = '?';
+
+
 
   int getPricePerDay(noOfDays) {
     String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
@@ -86,6 +92,7 @@ class _ToRentState extends State<ToRent> {
   @override
   void initState() {
     setPrice();
+    _initImages();
     super.initState();
   }
 
@@ -107,10 +114,46 @@ class _ToRentState extends State<ToRent> {
     }
   }
 
+    Future _initImages() async {
+      // >> To get paths you need these 2 lines
+      // List<String> someImages = [];
+      final manifestContent = await rootBundle.loadString('AssetManifest.json');
+    
+      final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+      // >> To get paths you need these 2 lines
+
+      final imagePaths = manifestMap.keys
+          .where((String key) => key.contains('items2/'))
+          .toList();
+    
+      int counter = 0;
+      for (String i in imagePaths) {
+        // log('LOGGING IMAGE PATHS: ${i.toString()}');
+        String brand = widget.item.brand.replaceAll(RegExp(' +'), '_');
+        String name = widget.item.name.replaceAll(RegExp(' +'), '_');
+        String toCompare = '${brand}_$name';
+          log(toCompare);
+        if (i.contains(toCompare)) {
+          log('Found an image');
+          counter++;
+          items.add(counter);
+          dotColours.add(Colors.grey);
+        }
+        log(items.toString());
+        setState(() {
+          itemCheckComplete = true;
+        });
+      }
+      // setState(() {
+        // someImages = imagePaths;
+      // });
+    }
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
+    log('Items here is: ${items.toString()}');
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: width * 0.2,
@@ -137,7 +180,10 @@ class _ToRentState extends State<ToRent> {
           IconButton(
               onPressed: () =>
                 {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
+              icon: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, width * 0.01, 0),
+                child: Icon(Icons.close, size: width*0.06),
+              )),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4.0),
@@ -147,12 +193,15 @@ class _ToRentState extends State<ToRent> {
           )
         ),
       ),
-      body: SingleChildScrollView(
+      body: (!itemCheckComplete) ? const Text('Loading') : SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: width * 0.01),
-            CarouselSlider(
+            (items.length == 1) ? SizedBox(
+              height: width,
+              child: Center(child: ItemWidget(item: widget.item, itemNumber: 1)))
+            : CarouselSlider(
               carouselController: buttonCarouselController,
               options: CarouselOptions(
                   onPageChanged: (index, reason) {
@@ -171,12 +220,13 @@ class _ToRentState extends State<ToRent> {
                 );
               }).toList(),
             ),
-            Center(
+            SizedBox(height: width * 0.03),
+            if (items.length > 1) Center(
               child: DotsIndicator(
                 dotsCount: items.length,
                 position: currentIndex.toDouble(),
-                decorator: const DotsDecorator(
-                  colors: [Colors.grey, Colors.grey, Colors.grey],
+                decorator: DotsDecorator(
+                  colors: dotColours,
                   activeColor: Colors.black,
                   // colors: [Colors.grey[300], Colors.grey[600], Colors.grey[900]], // Inactive dot colors
                 ),

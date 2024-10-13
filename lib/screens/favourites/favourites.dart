@@ -56,7 +56,7 @@ class _FavouritesState extends State<Favourites> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: ItemCard(value.favourites[index]),
+                        child: ItemCard(value.favourites[index], true),
                         onTap: () {
                           // if (Provider.of<ItemStore>(context, listen: false).renters.length == 0) {
                           // log('Not logged in, cannot rent, redirecting');

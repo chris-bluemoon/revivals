@@ -93,7 +93,7 @@ class _StyleItemsState extends State<StyleItems> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2, childAspectRatio: 0.5),
                     itemBuilder: (_, index) => GestureDetector(
-                        child: ItemCard(styleItems[index]),
+                        child: ItemCard(styleItems[index], false),
                         onTap: () {
                           log(styleItems[0].toString());
                             // log('About to rent ${value.brandItemes[index].name}');

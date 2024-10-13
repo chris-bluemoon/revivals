@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:unearthed/models/item.dart';
 
 class ItemWidget extends StatefulWidget {
@@ -23,10 +24,10 @@ class _ItemWidgetState extends State<ItemWidget> {
   late String imageName;
 
   String setItemImage() {
-    itemType = widget.item.type.replaceAll(RegExp(' +'), '_');
+    itemType = toBeginningOfSentenceCase(widget.item.type.replaceAll(RegExp(' +'), '_'));
     itemName = widget.item.name.replaceAll(RegExp(' +'), '_');
     brandName = widget.item.brand.replaceAll(RegExp(' +'), '_');
-    imageName = 'assets/img/item2/${brandName}_${itemName}_${itemType}_${widget.itemNumber}.jpg';
+    imageName = 'assets/img/items2/${brandName}_${itemName}_${itemType}_${widget.itemNumber}.jpg';
     return imageName;
   }
 
