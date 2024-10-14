@@ -152,14 +152,17 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
+              icon: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, width * 0.01, 0),
+                child: Icon(Icons.close, size: width*0.06),
+              )),
         ],
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(4.0),
-            child: Container(
-              color: Colors.grey[300],
-              height: 1.0,
-            )),
+        // bottom: PreferredSize(
+        //     preferredSize: const Size.fromHeight(4.0),
+        //     child: Container(
+        //       color: Colors.grey[300],
+        //       height: 1.0,
+        //     )),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(40,10,40,0),
@@ -227,7 +230,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
               visualDensity: const VisualDensity(vertical: -3),
               title: StyledHeading('3 Days (${getPricePerDay(3)}$symbol per day)', weight: FontWeight.normal),
               trailing: Radio<int>(
-                value: 2,
+                value: 1,
                 groupValue: selectedOption,
                 onChanged: (value3) async {
                   setState(() {

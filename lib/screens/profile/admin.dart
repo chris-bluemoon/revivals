@@ -18,7 +18,7 @@ class _AdminState extends State<Admin> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          toolbarHeight: width * 0.2,
           bottom: TabBar(
             // indicatorColor: Colors.black,
             // labelColor: Colors.black,

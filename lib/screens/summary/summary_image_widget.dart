@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
@@ -15,7 +16,7 @@ class SummaryImageWidget extends StatelessWidget {
   late String imageName;
 
   String setItemImage() {
-    itemType = item.type.replaceAll(RegExp(' +'), '_');
+    itemType = toBeginningOfSentenceCase(item.type.replaceAll(RegExp(' +'), '_'));
     itemName = item.name.replaceAll(RegExp(' +'), '_');
     brandName = item.brand.replaceAll(RegExp(' +'), '_');
     imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
@@ -57,8 +58,8 @@ class SummaryImageWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: 
-              Image.asset('assets/img/item2/${setItemImage()}', fit: BoxFit.fitHeight, height: 0.25*width, width: 0.2*width)),
-              // Image.asset('assets/img/item2/${setItemImage()}', fit: BoxFit.fitHeight, height: width*0.125, width: width*0.1)),
+              Image.asset('assets/img/items2/${setItemImage()}', fit: BoxFit.fitHeight, height: 0.25*width, width: 0.2*width)),
+              // Image.asset('assets/img/items2/${setItemImage()}', fit: BoxFit.fitHeight, height: width*0.125, width: width*0.1)),
           const SizedBox(width: 30),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

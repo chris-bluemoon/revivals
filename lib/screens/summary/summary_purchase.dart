@@ -89,14 +89,17 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width*0.06)),
+              icon: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, width * 0.01, 0),
+                child: Icon(Icons.close, size: width*0.06),
+              )),
         ],
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(4.0),
-            child: Container(
-              color: Colors.grey[300],
-              height: 1.0,
-            )),
+        // bottom: PreferredSize(
+        //     preferredSize: const Size.fromHeight(4.0),
+        //     child: Container(
+        //       color: Colors.grey[300],
+        //       height: 1.0,
+        //     )),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

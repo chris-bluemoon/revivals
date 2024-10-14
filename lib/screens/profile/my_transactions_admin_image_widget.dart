@@ -9,6 +9,7 @@ import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
+
 class MyTransactionsAdminImageWidget extends StatelessWidget {
   MyTransactionsAdminImageWidget(this.itemRenter, this.itemId, this.startDate, this.endDate, this.price, this.status,
       {super.key});
@@ -28,7 +29,7 @@ class MyTransactionsAdminImageWidget extends StatelessWidget {
 
 
   String setItemImage() {
-    itemType = item.type.replaceAll(RegExp(' +'), '_');
+    itemType = toBeginningOfSentenceCase(item.type.replaceAll(RegExp(' +'), '_'));
     itemName = item.name.replaceAll(RegExp(' +'), '_');
     brandName = item.brand.replaceAll(RegExp(' +'), '_');
     imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
@@ -111,7 +112,7 @@ class MyTransactionsAdminImageWidget extends StatelessWidget {
                 child: ColorFiltered(
                     colorFilter: greyscale,
                     child: Image.asset(
-                        'assets/img/item2/${setItemImage()}',
+                        'assets/img/items2/${setItemImage()}',
                         fit: BoxFit.fitHeight,
                         height: width*0.25,
                         width: width*0.2))),

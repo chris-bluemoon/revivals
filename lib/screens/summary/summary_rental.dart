@@ -85,12 +85,12 @@ class _SummaryRentalState extends State<SummaryRental> {
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
               icon: Icon(Icons.close, size: width * 0.06)),
         ],
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(4.0),
-            child: Container(
-              color: Colors.grey[300],
-              height: 1.0,
-            )),
+        // bottom: PreferredSize(
+        //     preferredSize: const Size.fromHeight(4.0),
+        //     child: Container(
+        //       color: Colors.grey[300],
+        //       height: 1.0,
+        //     )),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -123,7 +123,6 @@ class _ItemResultsState extends State<ItemResults> {
         }
       }
     } else {
-      // TODO FSDFSDsdfsdfsdfsd
       for (Item i in allItems) {
         switch (widget.attribute) {
           case 'brand':

@@ -28,6 +28,9 @@ class ProfileLanding extends StatefulWidget {
 }
 
 class _ProfileLandingState extends State<ProfileLanding> {
+    void handleDelete() {
+      Provider.of<ItemStore>(context, listen: false).deleteItemRenters();
+    }
     void handleSubmit() {
       log('Size of allItems: ${allItems.length}');
     for (var i = 0; i < allItems.length; i++) {
@@ -97,8 +100,8 @@ class _ProfileLandingState extends State<ProfileLanding> {
   @override
   Widget build(BuildContext context) {
     // List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
-    String renterEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
-    if (renterEmail == 'd@d.com') {
+    String renterName = Provider.of<ItemStore>(context, listen: false).renter.name;
+    if (renterName == 'uneartheduser' ) {
       log('ADMIN user found');
       admin = true;
     }
@@ -311,6 +314,13 @@ class _ProfileLandingState extends State<ProfileLanding> {
                   // addItemsAll();
                 },
                 child: const Text('ADD'),
+              ),
+                            if (admin) TextButton (
+                onPressed: () {
+                  handleDelete();
+                  // addItemsAll();
+                },
+                child: const Text('DELETE ITEMRENTERS'),
               )
             ],
           );

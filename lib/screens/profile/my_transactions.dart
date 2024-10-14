@@ -13,7 +13,8 @@ class MyTransactions extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          toolbarHeight: width * 0.2,
+          // automaticallyImplyLeading: false,
           bottom: TabBar(
             // indicatorColor: Colors.black,
             // labelColor: Colors.black,

@@ -175,9 +175,10 @@ class ItemStore extends ChangeNotifier {
   // add itemRenter
   void addItemRenter(ItemRenter itemRenter) async {
     log('Adding ItemRenter ${_itemRenters.length}');
-    await FirestoreService.addItemRenter(itemRenter);
     _itemRenters.add(itemRenter);
+    await FirestoreService.addItemRenter(itemRenter);
     notifyListeners();
+    log('ItemRenters is now ${_itemRenters.length}');
   }
 
     // initially fetch items
@@ -278,6 +279,12 @@ class ItemStore extends ChangeNotifier {
       }
       notifyListeners();
     }
+  }
+  void deleteItemRenters() async {
+    if (itemRenters.length > 0) {
+      await FirestoreService.deleteItemRenters();
+      _itemRenters.clear();
+  }
   }
 
   // initially fetch renters

@@ -28,20 +28,19 @@ class FAQs extends StatelessWidget {
         //       icon: Icon(Icons.close, size: width*0.06)),
         // ],
       ),
-      body: GestureDetector(
-        onTap: () {
-                  // chatWithUsWhatsApp(context);
-                  chatWithUsLine(context);
-        },
-        child: Column(
-          children: [
-            // SizedBox(height: width * 0.05),
-            // const FaqExpansionList()
-            FaqAccordion(),
-            SizedBox(height: width * 0.03),
-            const StyledHeading('Still have questions?'),
-            SizedBox(height: width * 0.02),
-            Row(
+      body: Column(
+        children: [
+          // SizedBox(height: width * 0.05),
+          // const FaqExpansionList()
+          FaqAccordion(),
+          SizedBox(height: width * 0.03),
+          const StyledHeading('Still have questions?'),
+          SizedBox(height: width * 0.02),
+          GestureDetector(
+            onTap: () {
+              chatWithUsLine(context);
+            },
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const StyledHeading('Contact us on LINE'),
@@ -49,15 +48,15 @@ class FAQs extends StatelessWidget {
                 Image.asset('assets/logos/LINE_logo.png', height: 40),
               ],
             ),
-            SizedBox(height: width * 0.05),
-            // const FaqExpansionList()
-            // const ScrollTest(),
-            // const SizedBox(
-            //   height: 900,
-            //   child: AccordionPage()
-            // )
-          ],
-        ),
+          ),
+          SizedBox(height: width * 0.05),
+          // const FaqExpansionList()
+          // const ScrollTest(),
+          // const SizedBox(
+          //   height: 900,
+          //   child: AccordionPage()
+          // )
+        ],
       )
     );
   }

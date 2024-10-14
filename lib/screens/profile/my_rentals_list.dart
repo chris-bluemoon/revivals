@@ -37,16 +37,12 @@ class _MyRentalsListState extends State<MyRentalsList> {
     List<ItemRenter> allItemRenters = List.from(Provider.of<ItemStore>(context, listen: false).itemRenters);
     // List<Item> allItems = List.from(Provider.of<ItemStore>(context, listen: false).items);
     for (ItemRenter dr in allItemRenters) {
+      log('Checking all itemrenters from allItemRenters');
       if (dr.renterId == userEmail) {
         if (dr.transactionType == 'rental') {
           myRentalsList.add(dr);
           log('Rented: ${dr.itemId}');
         }
-        // for (Item d in allItems) {
-        //   if (d.id == dr.itemId) {
-        //     myItems.add(d);
-        //   }
-        // }
       }
     }
     if (myRentalsList.isEmpty) {
@@ -63,7 +59,8 @@ class _MyRentalsListState extends State<MyRentalsList> {
         padding: EdgeInsets.all(width*0.01),
         itemCount: myRentalsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return MyTransactionsImageWidget(myRentalsList[index], myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price, myRentalsList[index].status);
+          return (myRentalsList.isNotEmpty) ? MyTransactionsImageWidget(myRentalsList[index], myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price, myRentalsList[index].status)
+            : null;
       }
     );
 

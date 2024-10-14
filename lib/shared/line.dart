@@ -22,8 +22,9 @@ Future<void> openLineApp({
   // effectiveURL2 = 'https://line.me/R/oaMessage/ZnlhXmE';
   // effectiveURL = 'https://liff.line.me/';
   effectiveURL = 'http://line.me/ti/p/~chris-mbfc';
-  effectiveURL = 'http://line.me/ti/p/~ZnlhXmE';
-  effectiveURL = 'http://line.me/ti/p/~UnearthedCollections';
+  effectiveURL = 'http://line.me/ti/p/~isabellachsz';
+  effectiveURL = 'http://line.me/ti/p/@447qtapp';
+  // effectiveURL = 'http://line.me/ti/p/~UnearthedCollections';
   // effectiveURL = 'https://line.me/R/oaMessage/@chris-mbfc/?Hello';
 
   if (await canLaunchUrl(Uri.parse(effectiveURL))) {

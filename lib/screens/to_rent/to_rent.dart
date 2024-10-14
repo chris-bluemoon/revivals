@@ -128,20 +128,18 @@ class _ToRentState extends State<ToRent> {
     
       int counter = 0;
       for (String i in imagePaths) {
-        // log('LOGGING IMAGE PATHS: ${i.toString()}');
         String brand = widget.item.brand.replaceAll(RegExp(' +'), '_');
         String name = widget.item.name.replaceAll(RegExp(' +'), '_');
         String toCompare = '${brand}_$name';
-          log(toCompare);
         if (i.contains(toCompare)) {
           log('Found an image');
           counter++;
           items.add(counter);
           dotColours.add(Colors.grey);
         }
-        log(items.toString());
         setState(() {
           itemCheckComplete = true;
+          log('Setting itemCheckComplete to true');
         });
       }
       // setState(() {
@@ -185,13 +183,13 @@ class _ToRentState extends State<ToRent> {
                 child: Icon(Icons.close, size: width*0.06),
               )),
         ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(4.0),
-          child: Container(
-            color: Colors.grey[300],
-            height: 1.0,
-          )
-        ),
+        // bottom: PreferredSize(
+        //   preferredSize: const Size.fromHeight(4.0),
+        //   child: Container(
+        //     color: Colors.grey[300],
+        //     height: 1.0,
+        //   )
+        // ),
       ),
       body: (!itemCheckComplete) ? const Text('Loading') : SingleChildScrollView(
         child: Column(

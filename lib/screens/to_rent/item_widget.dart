@@ -33,7 +33,7 @@ class _ItemWidgetState extends State<ItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-                      // String itemImage = 'assets/img/item2/${widget.item.brand}_${widget.item.name}_Item_${widget.itemNumber}.jpg';
+                      // String itemImage = 'assets/img/items2/${widget.item.brand}_${widget.item.name}_Item_${widget.itemNumber}.jpg';
                       // return FittedBox(
                         
                         return Image.asset(setItemImage(), fit: BoxFit.contain);

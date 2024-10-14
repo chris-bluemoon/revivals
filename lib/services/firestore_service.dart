@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
@@ -85,4 +87,15 @@ class FirestoreService {
      }
     );
   }
+  
+  static deleteItemRenters() {
+  FirebaseFirestore.instance
+    .collection('itemRenter').get().then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        log('DELETED ITEMRENTER');
+        ds.reference.delete();
+      }
+    });
+  }
+  
 }

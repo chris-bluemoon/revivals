@@ -11,7 +11,7 @@ class OfferWidget extends StatelessWidget {
                       decoration: const BoxDecoration(color: Colors.white),
                       // child: StyledHeading('text $i'));
                       child: Image.asset('assets/img/backgrounds/carousel_banner_1.jpeg')
-                      // child: Image.asset('assets/img/item2/LEXI_Dione_Item.webp'),
+                      // child: Image.asset('assets/img/items2/LEXI_Dione_Item.webp'),
                       // child: Image.asset('assets/img/backgrounds/carousel_image_1.jpg'),
                       );
 
