@@ -37,50 +37,46 @@ class _SignIn extends State<SignIn> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-    void handleNewLogIn(String email, String name) {
-      log('Adding renter if not exists!');
+    void handleNewLogIn(String email) {
       Provider.of<ItemStore>(context, listen: false).setLoggedIn(true);
       List<Renter> renters =
           Provider.of<ItemStore>(context, listen: false).renters;
-      log('Current Provider of renters list is: ${renters.toString()}');
       for (Renter r in renters) {
         if (r.email == email) {
           found = true;
-          log('User ${r.email} already found, not adding');
           Provider.of<ItemStore>(context, listen: false).setCurrentUser();
-          break; // fixed this
+          // break; // fixed this
         } else {
           found = false;
+          log('ERROR, WHY HAVE WE NOT FOUND EMAIL IN RENTERS TABLE?');
         }
       }
-      if (found == false) {
-        log('Adding user to DB for first time');
-        String jointUuid = uuid.v4();
-        Provider.of<ItemStore>(context, listen: false).addRenter(Renter(
-          id: jointUuid,
-          email: email,
-          name: name,
-          size: 0,
-          address: '',
-          countryCode: '+66',
-          phoneNum: '',
-          favourites: [''],
-          settings: ['BANGKOK', 'CM', 'CM', 'KG'],
-        ));
-        log('Assigning user');
-        // userLoggedIn = true;
-        Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
-          id: jointUuid,
-          email: email,
-          name: name,
-          size: 0,
-          address: '',
-          countryCode: '+66',
-          phoneNum: '',
-          favourites: [''],
-          settings: ['BANGKOK', 'CM', 'CM', 'KG'],
-        ));
-      }
+      // if (found == false) {
+      //   String jointUuid = uuid.v4();
+      //   log('NAME: $name');
+      //   Provider.of<ItemStore>(context, listen: false).addRenter(Renter(
+      //     id: jointUuid,
+      //     email: email,
+      //     name: name,
+      //     size: 0,
+      //     address: '',
+      //     countryCode: '+66',
+      //     phoneNum: '',
+      //     favourites: [''],
+      //     settings: ['BANGKOK', 'CM', 'CM', 'KG'],
+      //   ));
+      //   Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
+      //     id: jointUuid,
+      //     email: email,
+      //     name: name,
+      //     size: 0,
+      //     address: '',
+      //     countryCode: '+66',
+      //     phoneNum: '',
+      //     favourites: [''],
+      //     settings: ['BANGKOK', 'CM', 'CM', 'KG'],
+      //   ));
+      // }
     }
 
     return loading ? const Loading() : Scaffold(
@@ -158,6 +154,12 @@ class _SignIn extends State<SignIn> {
                                 ready = true;
                               });
                             }),
+            SizedBox(height: width * 0.05),
+            GestureDetector(
+              onTap: () {
+                _auth.sendPasswordReset(email);
+              },
+              child: const StyledBody('Forgotten password?')),
                       ],
                     ))),
           ],
@@ -253,7 +255,7 @@ class _SignIn extends State<SignIn> {
                                 _formKey.currentState!.reset();
                               });
                     } else {
-                      handleNewLogIn(email, password);
+                      handleNewLogIn(email);
                       log('Popping to first');
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     }

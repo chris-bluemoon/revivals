@@ -245,26 +245,14 @@ class _MyAccountState extends State<MyAccount> {
                     onPressed: () {
                     formKey.currentState?.validate();
                     Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
-                    log('toSave renter: ${toSave.name}');
-                    log('Renters current address: ${toSave.address}');
-                    log('Renters current phoneNum: ${toSave.phoneNum}');
-                    log('Renters id: ${toSave.id}');
-                    log(_addressController.value.text);
-                    log(_phoneNumController.value.text);
-                    log('Renters NEW address: ${_addressController.value.text}');
-                    log('Renters NEW phoneNum: ${_phoneNumController.value.text}');
-                    log('Renters NEW countryCode: $tempCountryField');
                     toSave.address = _addressController.value.text;
                     toSave.phoneNum = _phoneNumController.value.text;
                     toSave.countryCode = tempCountryField;
-                    // toSave.phoneNum = tempPhoneField;
-                    log('Showing the id of the user');
-                    log(toSave.id);
-                        Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
+                    Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
                     setState(() {
                       editingMode = false;
                     });
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     },
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,

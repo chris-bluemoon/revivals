@@ -313,6 +313,7 @@ class _RegisterPassword extends State<RegisterPassword> {
                     dynamic result =
                         await _auth.registerWithEmailAndPassword(widget.email, password);
                     if (result == null) {
+                      log(result);
                       setState(() => loading = false);
                       showDialog(
                         barrierDismissible: false,
@@ -361,7 +362,7 @@ class _RegisterPassword extends State<RegisterPassword> {
                               });
                     } else {
                       handleNewLogIn(widget.email, widget.name);
-                      log('Popping to first');
+                      log('handleNewLogIn called');
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     }
                   }

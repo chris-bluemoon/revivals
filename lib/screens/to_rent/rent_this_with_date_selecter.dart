@@ -185,6 +185,47 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                       });
                       noOfDays = 1;
                       final DateTime? pickedDate = await showDatePicker(
+                              currentDate: DateTime.utc(1989, 11, 9),
+                              builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            // TODO: Not working to change texttheme to increase fontsize
+            textTheme: const TextTheme(
+              // headlineSmall: TextStyle(fontSize: 20),
+              // headlineMedium: TextStyle(fontSize: 20),
+              // headlineLarge: TextStyle(fontSize: 20),
+              // labelSmall: TextStyle(fontSize: 40),
+              // labelMedium: TextStyle(fontSize: 40),
+              labelLarge: TextStyle(fontSize: 20),
+              // displaySmall: TextStyle(fontSize: 80),
+              // displayMedium: TextStyle(fontSize: 80),
+              // displayLarge: TextStyle(fontSize: 80),
+              titleSmall: TextStyle(fontSize: 20),
+              // titleMedium: TextStyle(fontSize: 80),
+              // titleLarge: TextStyle(fontSize: 80),
+              // bodySmall: TextStyle(fontSize: 80),
+              // bodyMedium: TextStyle(fontSize: 80),
+              // bodyLarge: TextStyle(fontSize: 80),
+            ),
+            colorScheme: const ColorScheme.light(
+              primary: Colors.black, // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface: Colors.black, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.white),
+                      ),
+            ),
+          ),
+          child: child!,
+        );
+      },
                         helpText: 'SELECT START DATE',
                         context: context,
                         // initialDate: DateTime.now(),
@@ -212,6 +253,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                           log(startDate.toString());
                           log(endDate.toString());
                           log(noOfDays.toString());
+                          selectedOption = -1;
                           showConfirm = true;
                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
@@ -223,6 +265,8 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                           // )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
         
                         });
+                      } else {
+                        setState(() {selectedOption = -1;});
                       }
                     })),
                         ListTile(
@@ -238,6 +282,47 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                   });
                   noOfDays = 3;
                   final DateTime? pickedDate = await showDatePicker(
+                    currentDate: DateTime.utc(1989, 11, 9),
+                              builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            // TODO: Not working to change texttheme to increase fontsize
+            textTheme: const TextTheme(
+              // headlineSmall: TextStyle(fontSize: 20),
+              // headlineMedium: TextStyle(fontSize: 20),
+              // headlineLarge: TextStyle(fontSize: 20),
+              // labelSmall: TextStyle(fontSize: 40),
+              // labelMedium: TextStyle(fontSize: 40),
+              labelLarge: TextStyle(fontSize: 20),
+              // displaySmall: TextStyle(fontSize: 80),
+              // displayMedium: TextStyle(fontSize: 80),
+              // displayLarge: TextStyle(fontSize: 80),
+              titleSmall: TextStyle(fontSize: 20),
+              // titleMedium: TextStyle(fontSize: 80),
+              // titleLarge: TextStyle(fontSize: 80),
+              // bodySmall: TextStyle(fontSize: 80),
+              // bodyMedium: TextStyle(fontSize: 80),
+              // bodyLarge: TextStyle(fontSize: 80),
+            ),
+            colorScheme: const ColorScheme.light(
+              primary: Colors.black, // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface: Colors.black, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.white),
+                      ),
+            ),
+          ),
+          child: child!,
+        );
+      },
                     helpText: 'SELECT START DATE',
                     context: context,
                     // initialDate: DateTime.now(),
@@ -263,12 +348,15 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                       log(startDate.toString());
                       log(endDate.toString());
                       log(noOfDays.toString());
+                      selectedOption = -1;
                       showConfirm = true;
                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
                             MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, 'booked', symbol))
                           )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                     });
+                  } else {
+                    setState(() {selectedOption = -1;});
                   }
                   // if (pickedDate == null) {
                   //   return;
@@ -294,6 +382,47 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                   });
                   noOfDays = 5;
                   final DateTime? pickedDate = await showDatePicker(
+                    currentDate: DateTime.utc(1989, 11, 9),
+                              builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            // TODO: Not working to change texttheme to increase fontsize
+            textTheme: const TextTheme(
+              // headlineSmall: TextStyle(fontSize: 20),
+              // headlineMedium: TextStyle(fontSize: 20),
+              // headlineLarge: TextStyle(fontSize: 20),
+              // labelSmall: TextStyle(fontSize: 40),
+              // labelMedium: TextStyle(fontSize: 40),
+              labelLarge: TextStyle(fontSize: 20),
+              // displaySmall: TextStyle(fontSize: 80),
+              // displayMedium: TextStyle(fontSize: 80),
+              // displayLarge: TextStyle(fontSize: 80),
+              titleSmall: TextStyle(fontSize: 20),
+              // titleMedium: TextStyle(fontSize: 80),
+              // titleLarge: TextStyle(fontSize: 80),
+              // bodySmall: TextStyle(fontSize: 80),
+              // bodyMedium: TextStyle(fontSize: 80),
+              // bodyLarge: TextStyle(fontSize: 80),
+            ),
+            colorScheme: const ColorScheme.light(
+              primary: Colors.black, // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface: Colors.black, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.white),
+                      ),
+            ),
+          ),
+          child: child!,
+        );
+      },
                     helpText: 'SELECT START DATE',
                     context: context,
                     // initialDate: DateTime.now(),
@@ -319,13 +448,16 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
                       log(startDate.toString());
                       log(endDate.toString());
                       log(noOfDays.toString());
+                      selectedOption = -1;
                       showConfirm = true;
                           bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
                           loggedIn ? Navigator.of(context).push(
                             MaterialPageRoute(builder: (context) => (SummaryRental(widget.item, startDate!, endDate!, noOfDays, getPricePerDay(noOfDays)*noOfDays, 'booked', symbol))
                           )) : Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen())));
                     });
-                  }
+                  } else {
+                    setState(() {selectedOption = -1;});
+                  }  
                   // if (pickedDate == null) {
                   //   return;
                   // } else {

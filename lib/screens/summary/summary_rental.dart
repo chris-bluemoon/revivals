@@ -83,7 +83,10 @@ class _SummaryRentalState extends State<SummaryRental> {
           IconButton(
               onPressed: () =>
                   {Navigator.of(context).popUntil((route) => route.isFirst)},
-              icon: Icon(Icons.close, size: width * 0.06)),
+              icon: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, width * 0.01, 0),
+                child: Icon(Icons.close, size: width * 0.06),
+              )),
         ],
         // bottom: PreferredSize(
         //     preferredSize: const Size.fromHeight(4.0),

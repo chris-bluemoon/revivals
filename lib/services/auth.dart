@@ -41,12 +41,25 @@ class AuthService {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
+      log('User creation successful');
+      log('Returning${_userFromFirebaseUser(user)}');
       return _userFromFirebaseUser(user);
     } catch(e) {
       log('User creation error ${e.toString()}');
       return null;
     }
+  }
 
+  // Register with email
+  Future sendPasswordReset(String email) async {
+    log('Sending password reset to email: $email');
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return true;
+    } catch(e) {
+      log('User creation error ${e.toString()}');
+      return null;
+    }
   }
 
   // Sign in email
