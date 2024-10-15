@@ -98,16 +98,16 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
     end: DateTime(2024, 9, 30),
   );
 
-  Future pickDateRange() async {
-    DateTimeRange? newDateRange = await showDateRangePicker(
-      context: context,
-      initialDateRange: dateRange,
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2100),
-    );
-    if (newDateRange == null) return;
-    setState(() => dateRange = newDateRange);
-  }
+  // Future pickDateRange() async {
+  //   DateTimeRange? newDateRange = await showDateRangePicker(
+  //     context: context,
+  //     initialDateRange: dateRange,
+  //     firstDate: DateTime(1900),
+  //     lastDate: DateTime(2100),
+  //   );
+  //   if (newDateRange == null) return;
+  //   setState(() => dateRange = newDateRange);
+  // }
 
   DateRange selectedDateRange = DateRange(DateTime.now(), DateTime.now());
 
