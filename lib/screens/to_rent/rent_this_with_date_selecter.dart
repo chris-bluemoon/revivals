@@ -132,7 +132,7 @@ class _RentThisWithDateSelecterState extends State<RentThisWithDateSelecter> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // StyledTitle(widget.item.name.toUpperCase()),
-            StyledTitle('Select No of Days'),
+            StyledTitle('SELECT NO OF DAYS'),
             // Image.asset(
             //   'assets/logos/unearthed_logo_2.png',
             //   fit: BoxFit.contain,

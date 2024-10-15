@@ -1,12 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:unearthed/screens/fitting/fitting.dart';
 import 'package:unearthed/screens/home/all_items_home_widget.dart';
+import 'package:unearthed/screens/home/fitting_home_widget.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
 import 'package:unearthed/screens/home/new_arrivals_carousel.dart';
 import 'package:unearthed/screens/home/offer_home_widget.dart';
 import 'package:unearthed/screens/home/rentals_home_widget.dart';
 import 'package:unearthed/screens/home/to_buy_home_widget.dart';
+import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class Home extends StatefulWidget {
@@ -90,7 +93,11 @@ class _HomeState extends State<Home> {
                   'ALL ITEMS',
                 ),
               ),
-              const AllItemsHomeWidget(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('occasion', 'party'))));
+                },
+                child: const AllItemsHomeWidget()),
 
               SizedBox(height: width * 0.02),
               const Padding(
@@ -101,7 +108,11 @@ class _HomeState extends State<Home> {
               ),
               // const NewArrivalsHomeWidget(),
               SizedBox(height: width * 0.02),
-              const NewArrivalsCarousel(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('dateAdded', '01-01-2020'))));
+                },
+                child: const NewArrivalsCarousel()),
 
               SizedBox(height: width * 0.03),
               const Padding(
@@ -110,7 +121,11 @@ class _HomeState extends State<Home> {
                   'TO RENT',
                 ),
               ),
-              const RentalHomeWidget(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType','rental'))));
+                },
+                child: const RentalHomeWidget()),
 
               SizedBox(height: width * 0.02),
               const Padding(
@@ -119,7 +134,24 @@ class _HomeState extends State<Home> {
                   'TO BUY',
                 ),
               ),
-              const ToBuyHomeWidget(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType','buy'))));
+                },
+                child: const ToBuyHomeWidget()),
+
+              SizedBox(height: width * 0.02),
+              const Padding(
+                padding: EdgeInsets.only(left: 12.0),
+                child: StyledHeading(
+                  'BOOK A FITTING ',
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Fitting())));
+                },
+                child: const FittingHomeWidget()),
 
               const SizedBox(height: 20),
               const Padding(

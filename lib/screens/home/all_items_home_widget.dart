@@ -14,12 +14,7 @@ class AllItemsHomeWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Stack(
         children: [
-          GestureDetector(
-            child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('occasion','party'))));
-            }
-          ),
+          Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(

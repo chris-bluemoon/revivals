@@ -14,13 +14,7 @@ class RentalHomeWidget extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       child: Stack(
         children: [
-          GestureDetector(
-            child: Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
-            // child: Image.asset('assets/img/backgrounds/to_rent_home_page.png'),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType', 'rental'))));
-            }
-          ),
+          Image.asset('assets/img/backgrounds/new_arrivals_home_page_image.jpg'),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(

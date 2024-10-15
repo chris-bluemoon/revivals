@@ -74,7 +74,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StyledTitle('Review and Pay'),
+            StyledTitle('REVIEW AND PAY'),
           ],
         ),
         centerTitle: true,
