@@ -106,35 +106,37 @@ class _Fitting2State extends State<Fitting2> {
               ),
             ),
           ),
-          Column(
-            children: [
-              IconButton(
-                onPressed: () { 
-                                  for (Map i in newChosenItems) {
-                                    if (i['selected'] == true) {
-                                      chosenItems.remove(i);
+          Center(
+            child: Column(
+              children: [
+                IconButton(
+                  onPressed: () { 
+                                    for (Map i in newChosenItems) {
+                                      if (i['selected'] == true) {
+                                        chosenItems.remove(i);
+                                      }
                                     }
-                                  }
-                                  setState(() {
-                                  });
-                },
-                icon: const Icon(Icons.chevron_left),
-              ),
-              IconButton(
-                onPressed: () {
-                  for (Map i in selectableItems) {
-                    if (i['selected'] == true) {
-                      chosenItems.add({'name': i['name'], 'selected': false});
+                                    setState(() {
+                                    });
+                  },
+                  icon: const Icon(Icons.chevron_left),
+                ),
+                IconButton(
+                  onPressed: () {
+                    for (Map i in selectableItems) {
+                      if (i['selected'] == true) {
+                        chosenItems.add({'name': i['name'], 'selected': false});
+                      }
+            
                     }
-
-                  }
-                                  setState(() {
-                                  });
-                }, 
-                icon: const Icon(Icons.chevron_right),
-              )
-
-          ],),
+                                    setState(() {
+                                    });
+                  }, 
+                  icon: const Icon(Icons.chevron_right),
+                )
+            
+            ],),
+          ),
                     Expanded(
             child: SizedBox(
               height: 200,
