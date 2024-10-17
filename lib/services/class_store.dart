@@ -127,6 +127,7 @@ class ItemStore extends ChangeNotifier {
   }
 
   void saveRenter(Renter renter) async {
+    log(renter.fittings.toString());
     await FirestoreService.updateRenter(renter);
     // _renters[0].aditem = renter.aditem;
       // _user.aditem = renter.aditem;
@@ -159,6 +160,10 @@ class ItemStore extends ChangeNotifier {
         _items.add(doc.data());
       }
 
+      // And populating tables required by Items
+      populateFavourites();
+      populateFittings();
+
       notifyListeners();
       
     }
@@ -168,9 +173,11 @@ class ItemStore extends ChangeNotifier {
     void populateFavourites() {
       List favs = _user.favourites;
       _favourites.clear();
-      log('Favourties...');
-      log(favs.toString());
+      log('CHECKING ITEMS...it has a count ${_items.length}');
       for (Item d in _items) {
+        log('COMPARING');
+        log(d.toString());
+        log(favs.toString());
         if (favs.contains(d.id)) {
           log('Adding a favourite');
           _favourites.add(d);
@@ -190,7 +197,6 @@ class ItemStore extends ChangeNotifier {
     void populateFittings() {
       List fits = _user.fittings;
       _fittings.clear();
-      log('Fittings...');
       log(fits.toString());
       for (Item d in _items) {
         if (fits.contains(d.id)) {

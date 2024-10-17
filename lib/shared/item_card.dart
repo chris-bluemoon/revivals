@@ -50,13 +50,15 @@ String capitalize(string) {
       imageName = 'SUNDRESS_Emilia_Dress_1.jpg';
       log('IMAGE ERROR');
     }
-    log(imageName);
     return imageName;
   }
 
   bool isAFav(Item d, List favs) {
-    // log(favs.toString());
+    log(favs.toString());
+    log('Checking for a fav');
     if (favs.contains(d)) {
+      log('Found a fav');
+      log(d.toString());
       return true;
     } else {
       return false;
@@ -65,21 +67,18 @@ String capitalize(string) {
 
     void _toggleFav() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      log('Toggled Fav');
       if (isFav == true) {
         isFav = false;
       } else {
         isFav = true;
       }
     });}
-  bool isAFit(Item d, List favs) {
-    // log(favs.toString());
-    if (favs.contains(d)) {
+  bool isAFit(Item d, List fits) {
+    log('Checking for a fit');
+    log(fits.toString());
+    if (fits.contains(d)) {
+      log('Found a fit');
+      log(d.toString());
       return true;
     } else {
       return false;
@@ -88,12 +87,6 @@ String capitalize(string) {
 
     void _toggleFit() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      log('Toggled Fit');
       if (isFit == true) {
         isFit = false;
       } else {
@@ -186,7 +179,10 @@ Widget createImage(String imageName) {
     double width = MediaQuery.of(context).size.width;
     List currListOfFavs =
         Provider.of<ItemStore>(context, listen: false).favourites;
+    List currListOfFits =
+        Provider.of<ItemStore>(context, listen: false).fittings;
     isFav = isAFav(widget.item, currListOfFavs);
+    isFit = isAFit(widget.item, currListOfFits);
     setPrice();
     return Card(
       
@@ -215,61 +211,49 @@ Widget createImage(String imageName) {
                     alignment: Alignment.centerLeft,
                     child: StyledHeading(widget.item.name))),
                 const Expanded(child: SizedBox()),
-
-                (widget.isFittingScreen && isFav) ? IconButton(
+                Text(Provider.of<ItemStore>(context, listen: false).renter.fittings.length.toString()),
+                if (!widget.isFittingScreen) (isFav) ? IconButton(
                   icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,
                   onPressed: () {
-                    log('Pressed Fav');
-                      // isFav = false;
                       _toggleFav();
-                      // Provider.of<ItemStore>(context, listen: false)
-                      //   .toggleItemFav(item);
                       Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
-                      log('toSave renter: ${toSave.name}');
                       toSave.favourites.remove(widget.item.id);
                       Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
                       Provider.of<ItemStore>(context, listen: false).removeFavourite(widget.item);
-                      log('Removing Favourite item ${widget.item.name}');
 
                   }) : 
                   IconButton(
                     icon: Icon(Icons.favorite_border_outlined, size: width*0.05),
                     onPressed: () {
-                      log('Pressed empty Fav on item ID: ${widget.item.id}');
                       _toggleFav();
                       Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
-                      log('toSave renter: ${toSave.name}');
                       toSave.favourites.add(widget.item.id);
                       Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
                       Provider.of<ItemStore>(context, listen: false).addFavourite(widget.item);
                     }
                   ),
-                (widget.isFittingScreen && isFav) ? IconButton(
-                  icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,
+                if (widget.isFittingScreen) (isFit) ? IconButton(
+                  icon: Icon(Icons.remove_circle_outline, size: width*0.05), color: Colors.red,
                   onPressed: () {
-                    log('Pressed Fav');
-                      // isFav = false;
-                      _toggleFav();
-                      // Provider.of<ItemStore>(context, listen: false)
-                      //   .toggleItemFav(item);
+                      _toggleFit();
                       Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
-                      log('toSave renter: ${toSave.name}');
-                      toSave.favourites.remove(widget.item.id);
+                      toSave.fittings.remove(widget.item.id);
                       Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
-                      Provider.of<ItemStore>(context, listen: false).removeFavourite(widget.item);
-                      log('Removing Favourite item ${widget.item.name}');
-
+                      Provider.of<ItemStore>(context, listen: false).removeFitting(widget.item);
                   }) : 
                   IconButton(
-                    icon: Icon(Icons.favorite_border_outlined, size: width*0.05),
+                    icon: Icon(Icons.add_circle_outline, size: width*0.05, color: Colors.green),
                     onPressed: () {
-                      log('Pressed empty Fav on item ID: ${widget.item.id}');
-                      _toggleFav();
-                      Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
-                      log('toSave renter: ${toSave.name}');
-                      toSave.favourites.add(widget.item.id);
-                      Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
-                      Provider.of<ItemStore>(context, listen: false).addFavourite(widget.item);
+                      if (Provider.of<ItemStore>(context, listen: false).renter.fittings.length < 6) {
+                        log(Provider.of<ItemStore>(context, listen: false).renter.fittings.length.toString());
+                        _toggleFit();
+                        Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
+                        toSave.fittings.add(widget.item.id);
+                        Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
+                        Provider.of<ItemStore>(context, listen: false).addFitting(widget.item);
+                      } else {
+                        showAlertDialog(context);
+                      }
                     }
                   )
                   
@@ -287,4 +271,29 @@ Widget createImage(String imageName) {
       ),
     );
   }
+  showAlertDialog(BuildContext context) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () { },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("My title"),
+    content: const Text("This is my message."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
 }

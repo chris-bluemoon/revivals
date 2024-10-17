@@ -23,6 +23,9 @@ class StyleItems extends StatefulWidget {
 class _StyleItemsState extends State<StyleItems> {
 
 
+   void updateFittingsCount(fittingsCount) {
+    fittingsCount = fittingsCount;
+  }
  
     List<Item> styleItems = [];
 
@@ -106,7 +109,6 @@ class _StyleItemsState extends State<StyleItems> {
                   ),
                 );
               }),
- 
             ],
           )),
     );

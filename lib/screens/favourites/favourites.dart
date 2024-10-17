@@ -22,8 +22,13 @@ class _FavouritesState extends State<Favourites> {
 
   @override
   initState() {
-    Provider.of<ItemStore>(context, listen: false).populateFavourites();
+    // Provider.of<ItemStore>(context, listen: false).populateFavourites();
     super.initState();
+  }
+
+  // Not needed for this screen but included to satisfy ItemCard
+  void updateFittingsCount(fittingsCount) {
+    fittingsCount = fittingsCount;
   }
 
   @override

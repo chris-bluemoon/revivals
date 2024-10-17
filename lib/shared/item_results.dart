@@ -39,7 +39,13 @@ class _ItemResultsState extends State<ItemResults> {
   late Set sizesSet = <String>{};
   late bool filterOn = false;
   late int numOfFilters = 0;
+  
+  int fittingsCount = 0;
 
+  void updateFittingsCount(count) {
+    fittingsCount = count;
+    // setState(() { });
+  }
   void setValues(
       List<String> filterColours,
       List<String> filterSizes,
@@ -70,6 +76,7 @@ class _ItemResultsState extends State<ItemResults> {
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     List<Item> finalItems = [];
     filteredItems.clear();
+    log('Fittings count $fittingsCount');
 
     if (filterOn == true) {
       switch (widget.attribute) {
@@ -228,7 +235,6 @@ class _ItemResultsState extends State<ItemResults> {
                 child: Column(
                   children: [
                     Consumer<ItemStore>(
-                        // child not required
                         builder: (context, value, child) {
                       return Expanded(
                         child: GridView.builder(
@@ -240,9 +246,11 @@ class _ItemResultsState extends State<ItemResults> {
                                 (widget.attribute == 'fitting') ? ItemCard(finalItems[index], false, true) :
                                 ItemCard(finalItems[index], false, false),
                               onTap: () {
+                                if (widget.attribute != 'fitting') {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>
                                         (ToRent(finalItems[index]))));
+                                }
                               }),
                           itemCount: finalItems.length,
                         ),
@@ -250,6 +258,56 @@ class _ItemResultsState extends State<ItemResults> {
                     }),
                   ],
                 ))
-            : const NoItemsFound());
+            : const NoItemsFound(),
+        bottomNavigationBar: (widget.attribute == 'fitting') ? Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+              spreadRadius: 3,
+            )
+          ],
+        ),
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                (fittingsCount == 0) ? Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                    },
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('CONTINUE', weight: FontWeight.bold, color: Colors.grey),
+                    ),
+                  ),
+                ) : Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                    },
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(1.0),
+                      ),
+                      side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: StyledHeading('CONTINUE', weight: FontWeight.bold, color: Colors.black),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ) : null
+            );
   }
 }
