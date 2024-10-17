@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/fitting/fitting2.dart';
 import 'package:unearthed/screens/home/all_items_home_widget.dart';
 import 'package:unearthed/screens/home/fitting_home_widget.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
@@ -149,7 +148,8 @@ class _HomeState extends State<Home> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Fitting2())));
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Fitting2())));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('fitting','dummy'))));
                 },
                 child: const FittingHomeWidget()),
 

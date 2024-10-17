@@ -101,7 +101,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
   Widget build(BuildContext context) {
     // List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     String renterName = Provider.of<ItemStore>(context, listen: false).renter.name;
-    if (renterName == 'uneartheduser' ) {
+    if (renterName == 'uneartheduser' || renterName == 'CHRIS') {
       log('ADMIN user found');
       admin = true;
     }

@@ -1,11 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:unearthed/models/renter.dart';
 import 'package:unearthed/screens/authenticate/register_password.dart';
 import 'package:unearthed/services/auth.dart';
-import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/constants.dart';
 import 'package:unearthed/shared/loading.dart';
 import 'package:unearthed/shared/styled_text.dart';
@@ -36,52 +31,6 @@ class _RegisterName extends State<RegisterName> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-
-    void handleNewLogIn(String email, String name) {
-      log('Adding renter if not exists!');
-      Provider.of<ItemStore>(context, listen: false).setLoggedIn(true);
-      List<Renter> renters =
-          Provider.of<ItemStore>(context, listen: false).renters;
-      log('Current Provider of renters list is: ${renters.toString()}');
-      for (Renter r in renters) {
-        if (r.email == email) {
-          found = true;
-          log('User ${r.email} already found, not adding');
-          Provider.of<ItemStore>(context, listen: false).setCurrentUser();
-          break; // fixed this
-        } else {
-          found = false;
-        }
-      }
-      if (found == false) {
-        log('Adding user to DB for first time');
-        String jointUuid = uuid.v4();
-        Provider.of<ItemStore>(context, listen: false).addRenter(Renter(
-          id: jointUuid,
-          email: email,
-          name: name,
-          size: 0,
-          address: '',
-          countryCode: '+66',
-          phoneNum: '',
-          favourites: [''],
-          settings: ['BANGKOK', 'CM', 'CM', 'KG'],
-        ));
-        log('Assigning user');
-        // userLoggedIn = true;
-        Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
-          id: jointUuid,
-          email: email,
-          name: name,
-          size: 0,
-          address: '',
-          countryCode: '+66',
-          phoneNum: '',
-          favourites: [''],
-          settings: ['BANGKOK', 'CM', 'CM', 'KG'],
-        ));
-      }
-    }
 
     return loading ? const Loading() : Scaffold(
       appBar: AppBar(

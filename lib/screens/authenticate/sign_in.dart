@@ -41,42 +41,41 @@ class _SignIn extends State<SignIn> {
       Provider.of<ItemStore>(context, listen: false).setLoggedIn(true);
       List<Renter> renters =
           Provider.of<ItemStore>(context, listen: false).renters;
+      found = false;
       for (Renter r in renters) {
         if (r.email == email) {
           found = true;
           Provider.of<ItemStore>(context, listen: false).setCurrentUser();
-          // break; // fixed this
-        } else {
-          found = false;
-          log('ERROR, WHY HAVE WE NOT FOUND EMAIL IN RENTERS TABLE?');
-        }
+        } 
       }
-      // if (found == false) {
-      //   String jointUuid = uuid.v4();
-      //   log('NAME: $name');
-      //   Provider.of<ItemStore>(context, listen: false).addRenter(Renter(
-      //     id: jointUuid,
-      //     email: email,
-      //     name: name,
-      //     size: 0,
-      //     address: '',
-      //     countryCode: '+66',
-      //     phoneNum: '',
-      //     favourites: [''],
-      //     settings: ['BANGKOK', 'CM', 'CM', 'KG'],
-      //   ));
-      //   Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
-      //     id: jointUuid,
-      //     email: email,
-      //     name: name,
-      //     size: 0,
-      //     address: '',
-      //     countryCode: '+66',
-      //     phoneNum: '',
-      //     favourites: [''],
-      //     settings: ['BANGKOK', 'CM', 'CM', 'KG'],
-      //   ));
-      // }
+      if (found == false) {
+        String jointUuid = uuid.v4();
+        log('NAME: ');
+        Provider.of<ItemStore>(context, listen: false).addRenter(Renter(
+          id: jointUuid,
+          email: email,
+          name: 'CHRIS',
+          size: 0,
+          address: '',
+          countryCode: '+66',
+          phoneNum: '',
+          favourites: [''],
+          fittings: [''],
+          settings: ['BANGKOK', 'CM', 'CM', 'KG'],
+        ));
+        Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
+          id: jointUuid,
+          email: email,
+          name: 'CHRIS',
+          size: 0,
+          address: '',
+          countryCode: '+66',
+          phoneNum: '',
+          favourites: [''],
+          fittings: [''],
+          settings: ['BANGKOK', 'CM', 'CM', 'KG'],
+        ));
+      }
     }
 
     return loading ? const Loading() : Scaffold(

@@ -18,6 +18,7 @@ class AuthService {
       countryCode: '+66',
       phoneNum: '',
       favourites: [''],
+      fittings: [''],
       settings: ['BANGKOK','CM','CM','KG'],
     ) : null;
   }

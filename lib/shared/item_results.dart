@@ -107,6 +107,11 @@ class _ItemResultsState extends State<ItemResults> {
               filteredItems.add(i);
             }
           }
+        case 'fitting':
+          for (Item i in allItems) {
+          log('Adding filtered item');
+              filteredItems.add(i);
+          }
       }
       for (Item i in filteredItems) {
         // if (i.filteredItems.contains(widget.value)
@@ -150,6 +155,8 @@ class _ItemResultsState extends State<ItemResults> {
               finalItems.add(i);
             }
           }
+        case 'fitting':
+          finalItems.add(i);
         }
       }
     }
@@ -173,6 +180,9 @@ class _ItemResultsState extends State<ItemResults> {
         }
         case 'bookingType':  {
           title = Pluralize().plural(widget.value).toUpperCase();
+        }
+        case 'fitting':  {
+          title = 'SELECT YOUR ITEMS';
         }
       }
 
@@ -226,8 +236,9 @@ class _ItemResultsState extends State<ItemResults> {
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, childAspectRatio: 0.5),
                           itemBuilder: (_, index) => GestureDetector(
-                              child: (widget.attribute == 'brand') ? ItemCard(finalItems[index], true) :
-                                ItemCard(finalItems[index], false),
+                              child: (widget.attribute == 'brand') ? ItemCard(finalItems[index], true, false) :
+                                (widget.attribute == 'fitting') ? ItemCard(finalItems[index], false, true) :
+                                ItemCard(finalItems[index], false, false),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) =>

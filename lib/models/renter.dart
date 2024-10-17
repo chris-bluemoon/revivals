@@ -10,6 +10,7 @@ class Renter {
           required this.countryCode,
           required this.phoneNum,
           required this.favourites,
+          required this.fittings,
           required this.settings,
         }); 
 
@@ -21,6 +22,7 @@ class Renter {
     String countryCode;
     String phoneNum;
     List favourites;
+    List fittings;
     List settings;
 
   // item to firestore (map)
@@ -33,6 +35,7 @@ class Renter {
       'countryCode': countryCode,
       'phoneNum': phoneNum,
       'favourites': favourites,
+      'fittings': fittings,
       'settings': settings,
     };
   }
@@ -56,6 +59,7 @@ class Renter {
       countryCode: data['countryCode'],
       phoneNum: data['phoneNum'],
       favourites: data['favourites'],
+      fittings: data['fittings'],
       settings: data['settings'],
     );
 
@@ -64,13 +68,3 @@ class Renter {
   
   
 }
-
-// List<Item> items = [
-//   Item(id: 1, name: 'Mathilde Bubble', brand: 'AJE', size: 52, rentPrice: 1200, rrp: 12000, image: 'AJE_Mathilde_Bubble_Item.webp'),
-//   Item(id: 2, name: 'Carla', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000, image: '3_item.jpg'),
-//   Item(id: 3, name: 'Elinor', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000, image: '3_item.jpg'),
-//   Item(id: 4, name: 'Francesca Mini', brand: 'ELIYA', size: 52, rentPrice: 1200, rrp: 12000, image: '3_item.jpg'),
-//   Item(id: 5, name: 'Dione', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000, image: '3_item.jpg'),
-//   Item(id: 6, name: 'Riley Chiffon', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000, image: '3_item.jpg'),
-//   Item(id: 7, name: 'Sheena', brand: 'LEXI', size: 52, rentPrice: 1200, rrp: 12000, image: '3_item.jpg'),
-// ];

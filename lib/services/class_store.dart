@@ -14,6 +14,7 @@ class ItemStore extends ChangeNotifier {
 
   final List<Item> _items = [];
   final List<Item> _favourites = [];
+  final List<Item> _fittings = [];
   // final List<Item> _settings = [];
   final List<Renter> _renters = [];
   final List<ItemRenter> _itemRenters = [];
@@ -51,18 +52,17 @@ class ItemStore extends ChangeNotifier {
   // final List<bool> _sizesFilter = [true, true, false, false];
   // TODO: Revert back to late initialization if get errors with this
   // late final _user;
-  Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: [], settings: ['BANGKOK','CM','CM','KG']);
+  Renter _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, address: '', countryCode: '', phoneNum: '', favourites: [], fittings: [], settings: ['BANGKOK','CM','CM','KG']);
   bool _loggedIn = false;
   // String _region = 'BANGKOK';
 
   get items => _items;
   get favourites => _favourites;
-  // get settings => _settings;
+  get fittings => _fittings;
   get renters => _renters;
   get itemRenters => _itemRenters;
   get renter => _user;
   get loggedIn => _loggedIn;
-  // get region => _region;
   get sizesFilter => _sizesFilter;
   get coloursFilter => _coloursFilter;
   get lengthsFilter => _lengthsFilter;
@@ -104,31 +104,12 @@ class ItemStore extends ChangeNotifier {
     saveRenter(_user);
   }
 
-  // void addAllFavourites() {
-  //   Item d;
-  //   log('_Items size is: ${_Items.length}');
-  //   for (d in _Items) {
-  //     if (d.isFav == true) {
-  //       _favourites.add(d);
-  //     }
-
-  //   }
-  // }
-
   // assign the user
   void assignUser(Renter user) async {
     // await FirestoreService.addItem(item);
     _user = user;
     notifyListeners();
   }
-
-
-  // // remove the user
-  // void unassignUser(Renter user) async {
-  //   // await FirestoreService.addItem(item);
-  //   _user = null;
-  //   notifyListeners();
-  // }
 
   // add character
   void addItem(Item item) async {
@@ -137,22 +118,6 @@ class ItemStore extends ChangeNotifier {
     _items.add(item);
     notifyListeners();
   }
-
-  // add character
-  // void toggleItemFav(Item item) async {
-  //   log('Updating item with new value: ${item.isFav}');
-  //   if (item.isFav == true) {
-  //     _favourites.add(item);
-  //   } else {
-  //     _favourites.remove(item);
-  //   }
-  //   log('List of favourites');
-  //   for (Item d in _favourites) {
-  //     log(d.name);
-  //   }
-  //   await FirestoreService.updateItem(item);
-  //   notifyListeners();
-  // }
 
   void addRenter(Renter renter) async {
     await FirestoreService.addRenter(renter);
@@ -222,19 +187,29 @@ class ItemStore extends ChangeNotifier {
       log('Removing favourite');
       notifyListeners();
     }
+    void populateFittings() {
+      List fits = _user.fittings;
+      _fittings.clear();
+      log('Fittings...');
+      log(fits.toString());
+      for (Item d in _items) {
+        if (fits.contains(d.id)) {
+          log('Adding a favourite');
+          _fittings.add(d);
+        }
+      }
+    }
+    void addFitting(item) {
+      _fittings.add(item);
+      log('Adding fitting');
+      notifyListeners();
+    }
+    void removeFitting(item) {
+      _fittings.remove(item);
+      log('Removing fitting');
+      notifyListeners();
+    }
 
-    // void populateSettings() {
-    //   List settingsList = _user.settings;
-    //   _favourites.clear();
-    //   log('Favourties...');
-    //   log(settingsList.toString());
-    //   for (Item d in _items) {
-    //     if (settingsList.contains(d.id)) {
-    //       log('Adding a setting');
-    //       _settings.add(d);
-    //     }
-    //   }
-    // }
   // initially fetch itemRenters
       Future<dynamic> setCurrentUser() async {
       User? user = FirebaseAuth.instance.currentUser;
@@ -258,7 +233,7 @@ class ItemStore extends ChangeNotifier {
     log('Set _loggedIn to $loggedIn');
     _loggedIn = loggedIn;
     if (loggedIn == false) {
-      _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, countryCode: '', address: '', phoneNum: '', favourites: [], settings: ['BANGKOK','CM','CM','KG']);
+      _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, countryCode: '', address: '', phoneNum: '', favourites: [], fittings: [], settings: ['BANGKOK','CM','CM','KG']);
       log(renter.name);
       notifyListeners();
     }

@@ -12,10 +12,11 @@ import 'package:unearthed/shared/styled_text.dart';
 
 // ignore: must_be_immutable
 class ItemCard extends StatefulWidget {
-  const ItemCard(this.item, this.isDesigner, {super.key});
+  const ItemCard(this.item, this.isDesigner, this.isFittingScreen, {super.key});
 
   final Item item;
   final bool isDesigner;
+  final bool isFittingScreen;
 
   @override
   State<ItemCard> createState() => _ItemCardState();
@@ -31,6 +32,7 @@ class _ItemCardState extends State<ItemCard> {
   late String itemType;
 
   bool isFav = false;
+  bool isFit = false;
 
 
 String capitalize(string) {
@@ -73,6 +75,29 @@ String capitalize(string) {
         isFav = false;
       } else {
         isFav = true;
+      }
+    });}
+  bool isAFit(Item d, List favs) {
+    // log(favs.toString());
+    if (favs.contains(d)) {
+      return true;
+    } else {
+      return false;
+    } 
+  }
+
+    void _toggleFit() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      log('Toggled Fit');
+      if (isFit == true) {
+        isFit = false;
+      } else {
+        isFit = true;
       }
     });}
 
@@ -150,15 +175,7 @@ String capitalize(string) {
     }
     return formattedSize;
   }
-  // String getImage(String image) {
-  //   String img;
-  //   try {
-  //     img = 'assets/img/items2/${setItemImage()}';
-  //   } catch (e) {
-  //     img = 'assets/img/items2/ZIMMERMANN_High_TIde_Odessey_Midi_Shirt_Dress_1.jpg';
-  //   }
-  //   return img;
-  // }
+
 Widget createImage(String imageName) {
   return Image.asset(imageName,
       errorBuilder: (context, object, stacktrace) =>
@@ -198,7 +215,8 @@ Widget createImage(String imageName) {
                     alignment: Alignment.centerLeft,
                     child: StyledHeading(widget.item.name))),
                 const Expanded(child: SizedBox()),
-                isFav ?  IconButton(
+
+                (widget.isFittingScreen && isFav) ? IconButton(
                   icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,
                   onPressed: () {
                     log('Pressed Fav');
@@ -218,10 +236,35 @@ Widget createImage(String imageName) {
                     icon: Icon(Icons.favorite_border_outlined, size: width*0.05),
                     onPressed: () {
                       log('Pressed empty Fav on item ID: ${widget.item.id}');
-                      // isFav = true;
+                      _toggleFav();
+                      Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
+                      log('toSave renter: ${toSave.name}');
+                      toSave.favourites.add(widget.item.id);
+                      Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
+                      Provider.of<ItemStore>(context, listen: false).addFavourite(widget.item);
+                    }
+                  ),
+                (widget.isFittingScreen && isFav) ? IconButton(
+                  icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,
+                  onPressed: () {
+                    log('Pressed Fav');
+                      // isFav = false;
                       _toggleFav();
                       // Provider.of<ItemStore>(context, listen: false)
                       //   .toggleItemFav(item);
+                      Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
+                      log('toSave renter: ${toSave.name}');
+                      toSave.favourites.remove(widget.item.id);
+                      Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
+                      Provider.of<ItemStore>(context, listen: false).removeFavourite(widget.item);
+                      log('Removing Favourite item ${widget.item.name}');
+
+                  }) : 
+                  IconButton(
+                    icon: Icon(Icons.favorite_border_outlined, size: width*0.05),
+                    onPressed: () {
+                      log('Pressed empty Fav on item ID: ${widget.item.id}');
+                      _toggleFav();
                       Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                       log('toSave renter: ${toSave.name}');
                       toSave.favourites.add(widget.item.id);

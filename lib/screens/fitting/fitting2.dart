@@ -39,6 +39,19 @@ class _Fitting2State extends State<Fitting2> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     List newChosenItems = List.from(chosenItems);
+    List newSelectableItems = List.from(selectableItems);
+    // newChosenItems.sort((m1, m2) {
+    //   var r = m1["name"].compareTo(m2["name"]);
+    //   if (r != 0) return r;
+    //   return m1["name"].compareTo(m2["name"]);
+    //   });
+    log('Build - newChosenItems length: ${newChosenItems.length}');
+    newSelectableItems.sort((m1, m2) {
+      var r = m1["name"].compareTo(m2["name"]);
+      if (r != 0) return r;
+      return m1["name"].compareTo(m2["name"]);
+      });
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: width * 0.2,
@@ -68,39 +81,63 @@ class _Fitting2State extends State<Fitting2> {
       ),
   body: Column(
     children: [
+      const Row(children: [
+        SizedBox(width: 48),
+        StyledBody('SELECT FROM', weight: FontWeight.normal),
+        SizedBox(width: 210),
+        StyledBody('ADD TO', weight: FontWeight.normal),
+      ],),
+      const Row(children: [
+        SizedBox(width: 48),
+        StyledBody('OUR COLLECTION'),
+        SizedBox(width: 152),
+        StyledBody('YOUR WARDROBE'),
+      ],),
       Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Container(
+              padding: EdgeInsets.all(width * 0.02),
+              margin: EdgeInsets.fromLTRB(width * 0.05, 0, 0, 0),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black)
+                          image: const DecorationImage(
+            image: AssetImage("assets/img/items2/ALC_Delfina_Pleated_Cutout_Dress_1.jpg"),
+            fit: BoxFit.cover,
+          ),
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(10),
               ),
-              height: 400,
+              height: width * 1,
               child: Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      // padding: const EdgeInsets.all(8),
-                      itemCount: selectableItems.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isSelected = !isSelected;
-                              selectableItems[index]['selected'] = isSelected;
-                            });
-                          },
-                          child: Container(
-                          height: 30,
-                          color: (selectableItems[index]['selected'] == true) ? Colors.green : Colors.white,
-                          child: Center(child: Text(selectableItems[index]['name']))
-                          ),
-                        );
-                      }
-                                ),
+                    child: Scrollbar(
+                      child: ListView.separated(
+                      separatorBuilder: (_, __) => const Divider(height: 0.5),
+                        scrollDirection: Axis.vertical,
+                        // shrinkWrap: true,
+                        // padding: const EdgeInsets.all(8),
+                        itemCount: newSelectableItems.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSelected = !isSelected;
+                                newSelectableItems[index]['selected'] = isSelected;
+                              });
+                            },
+                            child: Container(
+                            height: width * 0.1,
+                            // width: 100,
+                            color: (newSelectableItems[index]['selected'] == true) ? Colors.lightGreen.shade100 : Colors.white,
+                            child: Center(
+                              child: StyledBody(newSelectableItems[index]['name'], weight: FontWeight.normal))
+                            ),
+                          );
+                        }
+                                  ),
+                    ),
                   ),
                 ],
               ),
@@ -108,11 +145,13 @@ class _Fitting2State extends State<Fitting2> {
           ),
           Column(
             children: [
-              IconButton(
+              SizedBox(height: width * 0.17),
+              if (newChosenItems.isNotEmpty) IconButton(
                 onPressed: () { 
                                   for (Map i in newChosenItems) {
                                     if (i['selected'] == true) {
                                       chosenItems.remove(i);
+                                      selectableItems.add({'name': i['name'], 'selected': false});
                                     }
                                   }
                                   setState(() {
@@ -120,31 +159,38 @@ class _Fitting2State extends State<Fitting2> {
                 },
                 icon: const Icon(Icons.chevron_left),
               ),
-              IconButton(
+              if (newChosenItems.length < 6) IconButton(
                 onPressed: () {
-                  for (Map i in selectableItems) {
+                  for (Map i in newSelectableItems) {
                     if (i['selected'] == true) {
                       chosenItems.add({'name': i['name'], 'selected': false});
+                      selectableItems.remove(i);
                     }
-
+          
                   }
                                   setState(() {
                                   });
                 }, 
                 icon: const Icon(Icons.chevron_right),
               )
-
           ],),
                     Expanded(
-            child: SizedBox(
-              height: 200,
+            child: Container(
+              padding: EdgeInsets.all(width * 0.02),
+              margin: EdgeInsets.fromLTRB(0, 0, width * 0.05, 0),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              height: 400,
               child: Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
+                    child: ListView.separated(
+                      separatorBuilder: (_, __) => const Divider(height: 0.5),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
-                      padding: const EdgeInsets.all(8),
+                      // padding: const EdgeInsets.all(8),
                       itemCount: newChosenItems.length,
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
@@ -155,9 +201,9 @@ class _Fitting2State extends State<Fitting2> {
                             });
                           },
                           child: Container(
-                          height: 50,
-                          color: (newChosenItems[index]['selected'] == true) ? Colors.green : Colors.white,
-                          child: Center(child: Text(newChosenItems[index]['name'])),
+                          height: width * 0.1,
+                          color: (newChosenItems[index]['selected'] == true) ? Colors.lightGreen.shade100 : Colors.white,
+                          child: Center(child: StyledBody(newChosenItems[index]['name'], weight: FontWeight.normal,)),
                           ),
                         );
                       }
