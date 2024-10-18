@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:provider/provider.dart';
@@ -48,17 +46,12 @@ String capitalize(string) {
       imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
     } catch(e) {
       imageName = 'SUNDRESS_Emilia_Dress_1.jpg';
-      log('IMAGE ERROR');
     }
     return imageName;
   }
 
   bool isAFav(Item d, List favs) {
-    log(favs.toString());
-    log('Checking for a fav');
     if (favs.contains(d)) {
-      log('Found a fav');
-      log(d.toString());
       return true;
     } else {
       return false;
@@ -74,11 +67,7 @@ String capitalize(string) {
       }
     });}
   bool isAFit(Item d, List fits) {
-    log('Checking for a fit');
-    log(fits.toString());
     if (fits.contains(d)) {
-      log('Found a fit');
-      log(d.toString());
       return true;
     } else {
       return false;
@@ -111,7 +100,6 @@ String capitalize(string) {
     String country = Provider.of<ItemStore>(context, listen: false).renter.settings[0];
     
     int oneDayPrice = widget.item.rentPrice;
-    // log('oneDayPrice: ${widget.item.rentPrice}');
 
     if (country == 'BANGKOK') {
       oneDayPrice = widget.item.rentPrice;
@@ -244,7 +232,6 @@ Widget createImage(String imageName) {
                     icon: Icon(Icons.add_circle_outline, size: width*0.05, color: Colors.green),
                     onPressed: () {
                       if (Provider.of<ItemStore>(context, listen: false).renter.fittings.length < 6) {
-                        log(Provider.of<ItemStore>(context, listen: false).renter.fittings.length.toString());
                         _toggleFit();
                         Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                         toSave.fittings.add(widget.item.id);

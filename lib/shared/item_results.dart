@@ -27,7 +27,7 @@ class ItemResults extends StatefulWidget {
 
 class _ItemResultsState extends State<ItemResults> {
   Badge myBadge = const Badge(child: Icon(Icons.filter));
-   final double _icon_size = 50;
+  bool showCart = false;
 
   List<Item> filteredItems = [];
 
@@ -79,6 +79,14 @@ class _ItemResultsState extends State<ItemResults> {
     filteredItems.clear();
     log('Fittings count $fittingsCount');
 
+    if (Provider.of<ItemStore>(context, listen: false).renter.fittings.length > 0) {
+      log('Setting showCart to true');
+      setState(() {
+        showCart = true;
+      });
+    } else {
+      showCart = false;
+    }
     if (filterOn == true) {
       switch (widget.attribute) {
         case 'brand':
@@ -310,8 +318,8 @@ class _ItemResultsState extends State<ItemResults> {
             ),
               )
             : null,
-        floatingActionButton: (Provider.of<ItemStore>(context, listen: false).renter.fittings.length > 0)
-            ? Consumer<ItemStore>(
+        floatingActionButton: (showCart) ?
+            Consumer<ItemStore>(
                 builder: (context, value, child) {
               return FloatingActionButton(
                   onPressed: () {},
@@ -323,7 +331,7 @@ class _ItemResultsState extends State<ItemResults> {
                     textStyle: const TextStyle(fontSize: 16),
                     child: const Icon(Icons.shopping_cart_outlined, size: 40),
                   ));}
-            )
-            : null);
+            ) : null
+            );
   }
 }
