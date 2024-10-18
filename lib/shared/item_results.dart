@@ -27,6 +27,7 @@ class ItemResults extends StatefulWidget {
 
 class _ItemResultsState extends State<ItemResults> {
   Badge myBadge = const Badge(child: Icon(Icons.filter));
+   final double _icon_size = 50;
 
   List<Item> filteredItems = [];
 
@@ -307,7 +308,22 @@ class _ItemResultsState extends State<ItemResults> {
                 ),
               ],
             ),
-          ) : null
-            );
+              )
+            : null,
+        floatingActionButton: (Provider.of<ItemStore>(context, listen: false).renter.fittings.length > 0)
+            ? Consumer<ItemStore>(
+                builder: (context, value, child) {
+              return FloatingActionButton(
+                  onPressed: () {},
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  child: Badge(
+                    label: Text(Provider.of<ItemStore>(context, listen: false).renter.fittings.length.toString()),
+                    largeSize: 20,
+                    textStyle: const TextStyle(fontSize: 16),
+                    child: const Icon(Icons.shopping_cart_outlined, size: 40),
+                  ));}
+            )
+            : null);
   }
 }

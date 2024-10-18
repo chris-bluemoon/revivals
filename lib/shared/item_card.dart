@@ -211,7 +211,6 @@ Widget createImage(String imageName) {
                     alignment: Alignment.centerLeft,
                     child: StyledHeading(widget.item.name))),
                 const Expanded(child: SizedBox()),
-                Text(Provider.of<ItemStore>(context, listen: false).renter.fittings.length.toString()),
                 if (!widget.isFittingScreen) (isFav) ? IconButton(
                   icon: Icon(Icons.favorite, size: width*0.05), color: Colors.red,
                   onPressed: () {
