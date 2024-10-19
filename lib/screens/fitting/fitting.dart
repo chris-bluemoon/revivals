@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:unearthed/models/item.dart';
-import 'package:unearthed/screens/fitting/booking_calendar.dart';
+import 'package:unearthed/screens/fitting/fitting_summary.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 
@@ -47,7 +47,9 @@ class _FittingState extends State<Fitting> {
     // await Future.delayed(const Duration(seconds: 1));
     converted.add(DateTimeRange(
         start: newBooking.bookingStart, end: newBooking.bookingEnd));
-    log('${newBooking.toJson()} has been uploaded');
+      log('${newBooking.toJson()} has been uploaded');
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (FittingSummary(dateTime: newBooking.toJson()))));
+
   }
 
   List<DateTimeRange> converted = [];
@@ -103,14 +105,13 @@ class _FittingState extends State<Fitting> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    List newChosenItems = List.from(chosenItems);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: width * 0.2,
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            StyledTitle('BOOK A FITTING'),
+            StyledTitle('SELECT A DATE'),
           ],
         ),
         centerTitle: true,
@@ -133,136 +134,13 @@ class _FittingState extends State<Fitting> {
       ),
   body: Column(
     children: [
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: SizedBox(
-              height: 200,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(8),
-                      itemCount: chosenItems.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isSelected = !isSelected;
-                              chosenItems[index]['selected'] = isSelected;
-                            });
-                          },
-                          child: Container(
-                          height: 50,
-                          color: (chosenItems[index]['selected'] == true) ? Colors.green : Colors.white,
-                          child: Center(child: Text(chosenItems[index]['name'])),
-                          ),
-                        );
-                      }
-                                ),
-                  ),
-                              const SizedBox(height: 20),
-                              if (chosenItems.isNotEmpty) ElevatedButton(
-                                onPressed: () {
-                                  for (Map i in newChosenItems) {
-                                    if (i['selected'] == true) {
-                                      chosenItems.remove(i);
-                                    }
-                                  }
-                                  setState(() {
-                                  });
-                                }, 
-                                child: const Text('REMOVE'),
-                                ),
-      //                         if (chosenItems.isNotEmpty) ElevatedButton(
-      //                           onPressed: () async {
-      //                             pickedDate = await showDatePicker(
-      //                         currentDate: DateTime.utc(1989, 11, 9),
-      //                         builder: (context, child) {
-      //   return Theme(
-      //     data: Theme.of(context).copyWith(
-      //       // TODO: Not working to change texttheme to increase fontsize
-      //       textTheme: const TextTheme(
-      //         // headlineSmall: TextStyle(fontSize: 20),
-      //         // headlineMedium: TextStyle(fontSize: 20),
-      //         // headlineLarge: TextStyle(fontSize: 20),
-      //         // labelSmall: TextStyle(fontSize: 40),
-      //         // labelMedium: TextStyle(fontSize: 40),
-      //         labelLarge: TextStyle(fontSize: 20),
-      //         // displaySmall: TextStyle(fontSize: 80),
-      //         // displayMedium: TextStyle(fontSize: 80),
-      //         // displayLarge: TextStyle(fontSize: 80),
-      //         titleSmall: TextStyle(fontSize: 20),
-      //         // titleMedium: TextStyle(fontSize: 80),
-      //         // titleLarge: TextStyle(fontSize: 80),
-      //         // bodySmall: TextStyle(fontSize: 80),
-      //         // bodyMedium: TextStyle(fontSize: 80),
-      //         // bodyLarge: TextStyle(fontSize: 80),
-      //       ),
-      //       colorScheme: const ColorScheme.light(
-      //         primary: Colors.black, // header background color
-      //         onPrimary: Colors.white, // header text color
-      //         onSurface: Colors.black, // body text color
-      //       ),
-      //       textButtonTheme: TextButtonThemeData(
-      //         style: OutlinedButton.styleFrom(
-      //                   foregroundColor: Colors.white,
-      //                   backgroundColor: Colors.black,
-      //                   shape: RoundedRectangleBorder(
-      //                   borderRadius: BorderRadius.circular(30.0),
-      //                 ),
-      //                 side: const BorderSide(width: 1.0, color: Colors.white),
-      //                 ),
-      //       ),
-      //     ),
-      //     child: child!,
-      //   );
-      // },
-      //                   helpText: 'SELECT START DATE',
-      //                   context: context,
-      //                   // initialDate: DateTime.now(),
-      //                   // initialDate: DateTime(2024, 8, 25),
-      //                   // initialDate: DateTime.now().add(const Duration(days: -100)),
-      //                   // firstDate: DateTime.now().add(const Duration(days: -1)),
-      //                   firstDate: DateTime.now(),
-      //                   lastDate: DateTime.now().add(const Duration(days: 60)),
-      //                   // selectableDayPredicate: (DateTime day) =>
-      //                       // !getBlackoutDates(
-      //                               // widget.item.id, noOfDays)
-      //                           // .contains(day),
-      //                   // day.isAfter(DateTime.now()),
-      //                 );
-      //                 setState(() {
-                        
-      //                 });
-      //                           }, 
-      //                           child: const Text('SELECT DATE'),
-      //                           )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-                  const SizedBox(height: 100),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const BookingCalendarDemoApp())));
-                    },
-                    child: Row(
-                      children: [
-                        const Text('Appointment Date: '),
-                        Text(pickedDate.toString()),
-                      ],
-                    ),
-                  ),
-if (chosenItems.isNotEmpty) Center(
+
+
+Center(
             child: SizedBox(
               height: 600,
               child: BookingCalendar(
+                bookingButtonColor: Colors.black,
                 bookingService: mockBookingService,
                 convertStreamResultToDateTimeRanges: convertStreamResultMock,
                 getBookingStream: getBookingStreamMock,

@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:pluralize/pluralize.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
+import 'package:unearthed/screens/fitting/fitting.dart';
 import 'package:unearthed/screens/to_rent/to_rent.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/filters_page.dart';
@@ -27,7 +28,6 @@ class ItemResults extends StatefulWidget {
 
 class _ItemResultsState extends State<ItemResults> {
   Badge myBadge = const Badge(child: Icon(Icons.filter));
-  bool showCart = false;
 
   List<Item> filteredItems = [];
 
@@ -41,12 +41,6 @@ class _ItemResultsState extends State<ItemResults> {
   late bool filterOn = false;
   late int numOfFilters = 0;
   
-  int fittingsCount = 0;
-
-  void updateFittingsCount(count) {
-    fittingsCount = count;
-    // setState(() { });
-  }
   void setValues(
       List<String> filterColours,
       List<String> filterSizes,
@@ -77,16 +71,8 @@ class _ItemResultsState extends State<ItemResults> {
     List<Item> allItems = Provider.of<ItemStore>(context, listen: false).items;
     List<Item> finalItems = [];
     filteredItems.clear();
-    log('Fittings count $fittingsCount');
+    log('Fittings count ${Provider.of<ItemStore>(context, listen: false).renter.fittings.length.toString()}');
 
-    if (Provider.of<ItemStore>(context, listen: false).renter.fittings.length > 0) {
-      log('Setting showCart to true');
-      setState(() {
-        showCart = true;
-      });
-    } else {
-      showCart = false;
-    }
     if (filterOn == true) {
       switch (widget.attribute) {
         case 'brand':
@@ -204,134 +190,87 @@ class _ItemResultsState extends State<ItemResults> {
 
       return title;
     }
-    return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: width * 0.2,
-          title: StyledTitle(setTitle(widget.attribute)),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: Icon(Icons.chevron_left, size: width * 0.1),
-            onPressed: () {
-              Provider.of<ItemStore>(context, listen: false).resetFilters();
-              Navigator.pop(context);
-            },
-          ),
-          actions: [
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        (FiltersPage(setFilter: setFilter, setValues: setValues))));
+    return Consumer<ItemStore>(
+      builder: (context, value, child) {
+      return Scaffold(
+          appBar: AppBar(
+            toolbarHeight: width * 0.2,
+            title: StyledTitle(setTitle(widget.attribute)),
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            leading: IconButton(
+              icon: Icon(Icons.chevron_left, size: width * 0.1),
+              onPressed: () {
+                Provider.of<ItemStore>(context, listen: false).resetFilters();
+                Navigator.pop(context);
               },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(0, width*0.0, width*0.03, 0),
-                child: (numOfFilters == 0) ? Image.asset('assets/img/icons/1.png', height: width * 0.1) :
-                  (numOfFilters == 1) ? Image.asset('assets/img/icons/2.png', height: width * 0.1) :
-                  (numOfFilters == 2 ) ? Image.asset('assets/img/icons/3.png', height: width * 0.1) :
-                  (numOfFilters == 3 ) ? Image.asset('assets/img/icons/4.png', height: width * 0.1) :
-                  (numOfFilters == 4 ) ? Image.asset('assets/img/icons/5.png', height: width * 0.1) :
-                  (numOfFilters == 5 ) ? Image.asset('assets/img/icons/6.png', height: width * 0.1) :
-                  (numOfFilters == 6 ) ? Image.asset('assets/img/icons/7.png', height: width * 0.1) :
-                  Image.asset('assets/img/icons/1.png', width: width * 0.01)
-              ),
             ),
-          ],
-        ),
-        body: (itemsFound)
-            ? Container(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    Consumer<ItemStore>(
-                        builder: (context, value, child) {
-                      return Expanded(
-                        child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2, childAspectRatio: 0.5),
-                          itemBuilder: (_, index) => GestureDetector(
-                              child: (widget.attribute == 'brand') ? ItemCard(finalItems[index], true, false) :
-                                (widget.attribute == 'fitting') ? ItemCard(finalItems[index], false, true) :
-                                ItemCard(finalItems[index], false, false),
-                              onTap: () {
-                                if (widget.attribute != 'fitting') {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        (ToRent(finalItems[index]))));
-                                }
-                              }),
-                          itemCount: finalItems.length,
-                        ),
-                      );
-                    }),
-                  ],
-                ))
-            : const NoItemsFound(),
-        bottomNavigationBar: (widget.attribute == 'fitting') ? Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
-              spreadRadius: 3,
-            )
-          ],
-        ),
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              children: [
-                (fittingsCount == 0) ? Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
-                    },
-                      style: OutlinedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(1.0),
-                      ),
-                      side: const BorderSide(width: 1.0, color: Colors.black),
-                      ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: StyledHeading('CONTINUE', weight: FontWeight.bold, color: Colors.grey),
-                    ),
-                  ),
-                ) : Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
-                    },
-                      style: OutlinedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(1.0),
-                      ),
-                      side: const BorderSide(width: 1.0, color: Colors.black),
-                      ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: StyledHeading('CONTINUE', weight: FontWeight.bold, color: Colors.black),
-                    ),
-                  ),
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          (FiltersPage(setFilter: setFilter, setValues: setValues))));
+                },
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, width*0.0, width*0.03, 0),
+                  child: (numOfFilters == 0) ? Image.asset('assets/img/icons/1.png', height: width * 0.1) :
+                    (numOfFilters == 1) ? Image.asset('assets/img/icons/2.png', height: width * 0.1) :
+                    (numOfFilters == 2 ) ? Image.asset('assets/img/icons/3.png', height: width * 0.1) :
+                    (numOfFilters == 3 ) ? Image.asset('assets/img/icons/4.png', height: width * 0.1) :
+                    (numOfFilters == 4 ) ? Image.asset('assets/img/icons/5.png', height: width * 0.1) :
+                    (numOfFilters == 5 ) ? Image.asset('assets/img/icons/6.png', height: width * 0.1) :
+                    (numOfFilters == 6 ) ? Image.asset('assets/img/icons/7.png', height: width * 0.1) :
+                    Image.asset('assets/img/icons/1.png', width: width * 0.01)
                 ),
-              ],
-            ),
-              )
-            : null,
-        floatingActionButton: (showCart) ?
-            Consumer<ItemStore>(
-                builder: (context, value, child) {
-              return FloatingActionButton(
-                  onPressed: () {},
-                  foregroundColor: Colors.black,
-                  backgroundColor: Colors.white,
-                  child: Badge(
-                    label: Text(Provider.of<ItemStore>(context, listen: false).renter.fittings.length.toString()),
-                    largeSize: 20,
-                    textStyle: const TextStyle(fontSize: 16),
-                    child: const Icon(Icons.shopping_cart_outlined, size: 40),
-                  ));}
-            ) : null
-            );
+              ),
+            ],
+          ),
+          body: (itemsFound)
+              ? Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Consumer<ItemStore>(
+                          builder: (context, value, child) {
+                        return Expanded(
+                          child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2, childAspectRatio: 0.5),
+                            itemBuilder: (_, index) => GestureDetector(
+                                child: (widget.attribute == 'brand') ? ItemCard(finalItems[index], true, false) :
+                                  (widget.attribute == 'fitting') ? ItemCard(finalItems[index], false, true) :
+                                  ItemCard(finalItems[index], false, false),
+                                onTap: () {
+                                  if (widget.attribute != 'fitting') {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          (ToRent(finalItems[index]))));
+                                  }
+                                }),
+                            itemCount: finalItems.length,
+                          ),
+                        );
+                      }),
+                    ],
+                  ))
+              : const NoItemsFound(),
+          floatingActionButton: FloatingActionButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                          (const Fitting())));
+                    },
+                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.white,
+                    child: Badge(
+                      label: Text(Provider.of<ItemStore>(context, listen: false).renter.fittings.length.toString()),
+                      largeSize: 20,
+                      textStyle: const TextStyle(fontSize: 16),
+                      child: const Icon(Icons.shopping_bag_outlined, size: 40),
+                    )));
+      }
+    );
   }
 }

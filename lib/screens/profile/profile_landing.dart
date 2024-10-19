@@ -9,6 +9,7 @@ import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/help_centre/faqs.dart';
 import 'package:unearthed/screens/profile/admin.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
+import 'package:unearthed/screens/profile/my_fittings.dart';
 import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/screens/profile/settings.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
@@ -106,241 +107,262 @@ class _ProfileLandingState extends State<ProfileLanding> {
       admin = true;
     }
     double width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20.0, 20.0, 0, 0),
-      child: Consumer<ItemStore>(builder: (context, value, child) {
-        if (Provider.of<ItemStore>(context, listen: false).loggedIn == true) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              StyledHeading(
-                  'PERSONAL (${Provider.of<ItemStore>(context, listen: false).renter.name})',
-                  weight: FontWeight.normal,
-                  color: Colors.grey),
-              // Text('PERSONAL (${user!.displayName!})', style: const TextStyle(fontSize: 16)),
-              SizedBox(height: width * 0.04),
-              GestureDetector(
-                onTap: () {
-                  String userN = Provider.of<ItemStore>(context, listen: false)
-                      .renter
-                      .name;
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => (MyAccount(userN))));
-                },
-                child: Row(
-                  children: [
-                    SizedBox(width: width * 0.01),
-                    Icon(Icons.account_circle_outlined, size: width * 0.05),
-                    SizedBox(width: width * 0.01),
-                    const StyledBody('MY ACCOUNT', weight: FontWeight.normal),
-                  ],
-                ),
-              ),
-              Divider(
-                height: width * 0.05,
-                indent: 50,
-                color: Colors.grey[200],
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => (const MyTransactions())));
-                },
-                child: Row(
-                  children: [
-                    SizedBox(width: width * 0.01),
-                    Icon(Icons.fact_check_outlined, size: width * 0.05),
-                    SizedBox(width: width * 0.01),
-                    const StyledBody('MY BOOKINGS', weight: FontWeight.normal),
-                  ],
-                ),
-              ),
-              Divider(
-                height: width * 0.05,
-                indent: 50,
-                color: Colors.grey[200],
-              ),
-
-              GestureDetector(
-                onTap: () {
-                  shareApp();
-                },
-                child: Row(
-                  children: [
-                    SizedBox(width: width * 0.01),
-                    Icon(Icons.group_add_outlined, size: width * 0.05),
-                    SizedBox(width: width * 0.01),
-                    const StyledBody('REFER A FRIEND',
-                        weight: FontWeight.normal),
-                  ],
-                ),
-              ),
-              Divider(
-                height: width * 0.05,
-                indent: 50,
-                color: Colors.grey[200],
-              ),
-
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => (const Settings())));
-                },
-                child: Row(
-                  children: [
-                    SizedBox(width: width * 0.01),
-                    Icon(Icons.settings_outlined, size: width * 0.05),
-                    SizedBox(width: width * 0.01),
-                    const StyledBody('SETTINGS', weight: FontWeight.normal),
-                  ],
-                ),
-              ),
-
-              SizedBox(height: width * 0.06),
-              const StyledHeading('SUPPORT',
-                  weight: FontWeight.normal, color: Colors.grey),
-              SizedBox(height: width * 0.04),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => (const FAQs())));
-                },
-                child: Row(
-                  children: [
-                    SizedBox(width: width * 0.01),
-                    Icon(Icons.help_outline, size: width * 0.05),
-                    SizedBox(width: width * 0.01),
-                    const StyledBody('FAQ', weight: FontWeight.normal),
-                  ],
-                ),
-              ),
-              Divider(
-                height: width * 0.05,
-                indent: 50,
-                color: Colors.grey[200],
-              ),
-              GestureDetector(
-                onTap: () {
-                  // chatWithUsWhatsApp(context);
-                  chatWithUsLine(context);
-                },
-                child: Row(
-                  children: [
-                    SizedBox(width: width * 0.01),
-                    Icon(Icons.chat_bubble_outline, size: width * 0.05),
-                    SizedBox(width: width * 0.01),
-                    const StyledBody('CHAT WITH US', weight: FontWeight.normal),
-                  ],
-                ),
-              ),
-              Divider(
-                height: width * 0.05,
-                indent: 50,
-                color: Colors.grey[200],
-              ),
-              GestureDetector(
-                onTap: () => showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (_) => AlertDialog(
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0))),
-                    actions: [
-                      // ElevatedButton(
-                      // onPressed: () {cancelLogOut(context);},
-                      // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                            foregroundColor:
-                                WidgetStateProperty.all(Colors.white),
-                            backgroundColor:
-                                const WidgetStatePropertyAll<Color>(
-                                    Colors.black),
-                            shape: WidgetStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(0)),
-                                    side: BorderSide(color: Colors.black)))),
-                        onPressed: () {
-                          setState(() {});
-                          goBack(context);
-                        },
-                        child: const StyledHeading(
-                          'OK',
-                          weight: FontWeight.normal,
-                          color: Colors.white,
-                        ),
-                      ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20.0, 20.0, 0, 0),
+        child: Consumer<ItemStore>(builder: (context, value, child) {
+          if (Provider.of<ItemStore>(context, listen: false).loggedIn == true) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                StyledHeading(
+                    'PERSONAL (${Provider.of<ItemStore>(context, listen: false).renter.name})',
+                    weight: FontWeight.normal,
+                    color: Colors.grey),
+                // Text('PERSONAL (${user!.displayName!})', style: const TextStyle(fontSize: 16)),
+                SizedBox(height: width * 0.04),
+                GestureDetector(
+                  onTap: () {
+                    String userN = Provider.of<ItemStore>(context, listen: false)
+                        .renter
+                        .name;
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => (MyAccount(userN))));
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.account_circle_outlined, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('MY ACCOUNT', weight: FontWeight.normal),
                     ],
-                    backgroundColor: Colors.white,
-                    title: const Center(
-                        child: StyledHeading("Successfully logged out",
-                            weight: FontWeight.normal)),
                   ),
                 ),
-                child: Row(
-                  children: [
-                    SizedBox(width: width * 0.01),
-                    Icon(Icons.exit_to_app, size: width * 0.05),
-                    SizedBox(width: width * 0.01),
-                    const StyledBody('SIGN OUT', weight: FontWeight.normal),
-                  ],
+                Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
                 ),
-              ),
-              SizedBox(height: width * 0.04),
-              Divider(
-                height: width * 0.05,
-                indent: 50,
-                color: Colors.grey[200],
-              ),
-              if (admin) GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => (const Admin())));
-                },
-                child: Row(
-                  children: [
-                    SizedBox(width: width * 0.01),
-                    Icon(Icons.description_outlined, size: width * 0.05),
-                    SizedBox(width: width * 0.01),
-                    const StyledBody('ADMIN: CHECK ORDERS', weight: FontWeight.normal),
-                  ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => (const MyTransactions())));
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.fact_check_outlined, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('MY BOOKINGS', weight: FontWeight.normal),
+                    ],
+                  ),
                 ),
-              ),
-              if (admin) TextButton (
-                onPressed: () {
-                  handleSubmit();
-                  // addItemsAll();
-                },
-                child: const Text('ADD'),
-              ),
-                            if (admin) TextButton (
-                onPressed: () {
-                  handleDelete();
-                  // addItemsAll();
-                },
-                child: const Text('DELETE ITEMRENTERS'),
-              )
-            ],
-          );
-        } else {
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => (const GoogleSignInScreen())));
-            },
-            child: Row(
-              children: [
-                SizedBox(width: width * 0.01),
-                Icon(Icons.login_outlined, size: width * 0.05),
-                SizedBox(width: width * 0.01),
-                const StyledBody('SIGN IN / CREATE ACCOUNT', weight: FontWeight.normal),
+                Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => (const MyFittings())));
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.fact_check_outlined, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('MY FITTINGS', weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
+                ),
+      
+                GestureDetector(
+                  onTap: () {
+                    shareApp();
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.group_add_outlined, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('REFER A FRIEND',
+                          weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
+                ),
+      
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => (const Settings())));
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.settings_outlined, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('SETTINGS', weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+      
+                SizedBox(height: width * 0.06),
+                const StyledHeading('SUPPORT',
+                    weight: FontWeight.normal, color: Colors.grey),
+                SizedBox(height: width * 0.04),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => (const FAQs())));
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.help_outline, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('FAQ', weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // chatWithUsWhatsApp(context);
+                    chatWithUsLine(context);
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.chat_bubble_outline, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('CHAT WITH US', weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
+                ),
+                GestureDetector(
+                  onTap: () => showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(0))),
+                      actions: [
+                        // ElevatedButton(
+                        // onPressed: () {cancelLogOut(context);},
+                        // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                              foregroundColor:
+                                  WidgetStateProperty.all(Colors.white),
+                              backgroundColor:
+                                  const WidgetStatePropertyAll<Color>(
+                                      Colors.black),
+                              shape: WidgetStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(0)),
+                                      side: BorderSide(color: Colors.black)))),
+                          onPressed: () {
+                            setState(() {});
+                            goBack(context);
+                          },
+                          child: const StyledHeading(
+                            'OK',
+                            weight: FontWeight.normal,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                      backgroundColor: Colors.white,
+                      title: const Center(
+                          child: StyledHeading("Successfully logged out",
+                              weight: FontWeight.normal)),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.exit_to_app, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('SIGN OUT', weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+                SizedBox(height: width * 0.04),
+                Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
+                ),
+                if (admin) GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => (const Admin())));
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.description_outlined, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('ADMIN: CHECK ORDERS', weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+                if (admin) TextButton (
+                  onPressed: () {
+                    handleSubmit();
+                    // addItemsAll();
+                  },
+                  child: const Text('ADD'),
+                ),
+                              if (admin) TextButton (
+                  onPressed: () {
+                    handleDelete();
+                    // addItemsAll();
+                  },
+                  child: const Text('DELETE ITEMRENTERS'),
+                )
               ],
-            ),
-          );
-        }
-      }),
+            );
+          } else {
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => (const GoogleSignInScreen())));
+              },
+              child: Row(
+                children: [
+                  SizedBox(width: width * 0.01),
+                  Icon(Icons.login_outlined, size: width * 0.05),
+                  SizedBox(width: width * 0.01),
+                  const StyledBody('SIGN IN / CREATE ACCOUNT', weight: FontWeight.normal),
+                ],
+              ),
+            );
+          }
+        }),
+      ),
     );
   }
 }
