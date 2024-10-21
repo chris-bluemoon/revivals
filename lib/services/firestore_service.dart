@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:unearthed/models/fitting_renter.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
@@ -26,6 +27,13 @@ class FirestoreService {
     .withConverter(
       fromFirestore: ItemRenter.fromFirestore, 
       toFirestore: (ItemRenter d, _) => d.toFirestore()
+  );
+
+  static final refFittingRenter = FirebaseFirestore.instance
+    .collection('fittingRenter')
+    .withConverter(
+      fromFirestore: FittingRenter.fromFirestore, 
+      toFirestore: (FittingRenter d, _) => d.toFirestore()
   );
 
   // add a new item
@@ -56,16 +64,6 @@ class FirestoreService {
     );
   }
 
-  // Toggle isFav
-  // static Future<void> updateItem(Item item) async {
-  //   log('Firestore service received item id: ${item.id}');
-  //   await refItem.doc(item.id).update(
-  //     {
-  //       'isFav': item.isFav,
-  //     }
-  //   );
-  // }
-
   // get renters once
   static Future<QuerySnapshot<Renter>> getRentersOnce() {
     return refRenter.get();
@@ -76,15 +74,30 @@ class FirestoreService {
     await refItemRenter.doc(itemRenter.id).set(itemRenter);
   }
 
+  static Future<void> addFittingRenter(FittingRenter fittingRenter) async {
+    await refFittingRenter.doc(fittingRenter.id).set(fittingRenter);
+  }
+
   // get itemRenters once
   static Future<QuerySnapshot<ItemRenter>> getItemRentersOnce() {
     return refItemRenter.get();
   }
+  static Future<QuerySnapshot<FittingRenter>> getFittingRentersOnce() {
+    return refFittingRenter.get();
+  }
+  // Update itemrenter
   // Update itemrenter
   static Future<void> updateItemRenter(ItemRenter itemRenter) async {
     await refItemRenter.doc(itemRenter.id).update(
       {
         'status': itemRenter.status,
+     }
+    );
+  }
+  static Future<void> updateFittingRenter(FittingRenter fittingRenter) async {
+    await refItemRenter.doc(fittingRenter.id).update(
+      {
+        'status': fittingRenter.status,
      }
     );
   }
@@ -94,6 +107,15 @@ class FirestoreService {
     .collection('itemRenter').get().then((snapshot) {
       for (DocumentSnapshot ds in snapshot.docs) {
         log('DELETED ITEMRENTER');
+        ds.reference.delete();
+      }
+    });
+  }
+  static deleteFittingRenters() {
+  FirebaseFirestore.instance
+    .collection('fittingRenter').get().then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.docs) {
+        log('DELETED FITTINGRENTER');
         ds.reference.delete();
       }
     });

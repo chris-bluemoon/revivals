@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/screens/profile/my_transactions_image_widget.dart';
+import 'package:unearthed/models/fitting_renter.dart';
+import 'package:unearthed/screens/profile/my_fittings_image_widget.dart';
 import 'package:unearthed/services/class_store.dart';
 
 
@@ -19,8 +19,8 @@ class MyUpcomingFittingsList extends StatefulWidget {
 class _MyUpcomingFittingsListState extends State<MyUpcomingFittingsList> {
   
 
-  List<ItemRenter> myRentalsList = [];
-  List<Item> myItems = [];
+  List<FittingRenter> upcomingFittingsList = [];
+  // List<Item> myItems = [];
 
   @override
   void initState() {
@@ -29,26 +29,25 @@ class _MyUpcomingFittingsListState extends State<MyUpcomingFittingsList> {
   }
   
   void loadMyUpcomingFittingsList() {
-    log('Loading loadMyUpcomingFittingsList');
     // get current user
     String userEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
     // log('User email: $userEmail');
     // List<ItemRenter> myItemRenters = Provider.of<ItemStore>(context, listen: false).itemRenters;
-    List<ItemRenter> allItemRenters = List.from(Provider.of<ItemStore>(context, listen: false).itemRenters);
+    List<FittingRenter> allFittingRenters = List.from(Provider.of<ItemStore>(context, listen: false).fittingRenters);
     // List<Item> allItems = List.from(Provider.of<ItemStore>(context, listen: false).items);
-    for (ItemRenter dr in allItemRenters) {
-      log('Checking all itemrenters from allItemRenters');
-      if (dr.renterId == userEmail) {
-        if (dr.transactionType == 'rental') {
-          myRentalsList.add(dr);
-          log('Rented: ${dr.itemId}');
+    log('Count of fittingRenters is ${allFittingRenters.length.toString()}');
+    for (FittingRenter dr in allFittingRenters) {
+      DateTime convertedDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(dr.bookingDate) ;
+      log('Checking renterId ${dr.renterId} against userEmail $userEmail');
+      if (dr.renterId == userEmail && convertedDate.isAfter(DateTime.now())) {
+          upcomingFittingsList.add(dr);
+          log('Rented: ${dr.renterId}');
         }
       }
-    }
-    if (myRentalsList.isEmpty) {
+    if (upcomingFittingsList.isEmpty) {
       log('You have no rentals!');
     }
-    myRentalsList.sort((a, b) => a.startDate.compareTo(b.startDate));
+    upcomingFittingsList.sort((a, b) => a.bookingDate.compareTo(b.bookingDate));
   }
   @override
   Widget build(BuildContext context) {
@@ -57,10 +56,10 @@ class _MyUpcomingFittingsListState extends State<MyUpcomingFittingsList> {
     return 
       ListView.builder(
         padding: EdgeInsets.all(width*0.01),
-        itemCount: myRentalsList.length,
+        itemCount: upcomingFittingsList.length,
         itemBuilder: (BuildContext context, int index) {
-          return (myRentalsList.isNotEmpty) ? MyTransactionsImageWidget(myRentalsList[index], myRentalsList[index].itemId, myRentalsList[index].startDate, myRentalsList[index].endDate, myRentalsList[index].price, myRentalsList[index].status)
-            : null;
+          return (upcomingFittingsList.isNotEmpty) ? MyFittingsImageWidget(upcomingFittingsList[index], upcomingFittingsList[index].itemArray, upcomingFittingsList[index].bookingDate, upcomingFittingsList[index].price, upcomingFittingsList[index].status)
+            : const Text('NO BOOKINGS');
       }
     );
 

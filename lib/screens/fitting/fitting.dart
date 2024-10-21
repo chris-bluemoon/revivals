@@ -2,8 +2,11 @@ import 'dart:developer';
 
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:unearthed/models/fitting_renter.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/fitting/fitting_summary.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 
@@ -15,6 +18,17 @@ class Fitting extends StatefulWidget {
 }
 
 class _FittingState extends State<Fitting> {
+      void handleSubmit(String renterId, List<String> itemArray, String bookingDate,
+      int price, String status) {
+      Provider.of<ItemStore>(context, listen: false).addFittingRenter(FittingRenter(
+        id: uuid.v4(),
+        renterId: renterId,
+        itemArray: itemArray,
+        bookingDate: bookingDate,
+        price: price,
+        status: status,
+      ));
+    }
   // BC
   final now = DateTime.now();
   late BookingService mockBookingService;
@@ -45,10 +59,19 @@ class _FittingState extends State<Fitting> {
   Future<dynamic> uploadBookingMock(
       {required BookingService newBooking}) async {
     // await Future.delayed(const Duration(seconds: 1));
-    converted.add(DateTimeRange(
-        start: newBooking.bookingStart, end: newBooking.bookingEnd));
-      log('${newBooking.toJson()} has been uploaded');
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => (FittingSummary(dateTime: newBooking.toJson()))));
+    converted.add(DateTimeRange(start: newBooking.bookingStart, end: newBooking.bookingEnd));
+
+    String email = Provider.of<ItemStore>(context, listen: false).renter.email;
+    String bookingDate = newBooking.toJson()['bookingStart'].toString();
+    List<String> fittingIds = [];
+    for (String i in Provider.of<ItemStore>(context, listen: false).fittings) {
+      fittingIds.add(i);
+    }
+    handleSubmit(email, fittingIds, bookingDate, 100, 'booked'); 
+    
+    log('${newBooking.toJson()} has been uploaded');
+    Provider.of<ItemStore>(context, listen: false).clearFittings();
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const FittingSummary())));
 
   }
 

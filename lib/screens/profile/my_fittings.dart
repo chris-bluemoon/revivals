@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unearthed/screens/profile/my_history_fittings_list.dart';
-import 'package:unearthed/screens/profile/my_upconing_fittings_list.dart';
+import 'package:unearthed/screens/profile/my_upcoming_fittings_list.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class MyFittings extends StatelessWidget {

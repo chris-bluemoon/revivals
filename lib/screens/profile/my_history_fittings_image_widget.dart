@@ -6,8 +6,9 @@ import 'package:unearthed/models/item.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 
-class MyFittingsImageWidget extends StatelessWidget {
-  MyFittingsImageWidget(this.fittingRenter, this.itemIds, this.bookingDate, this.price, this.status,
+class MyHistoryFittingsImageWidget extends StatelessWidget {
+
+  MyHistoryFittingsImageWidget(this.fittingRenter, this.itemIds, this.bookingDate, this.price, this.status,
       {super.key});
 
   final FittingRenter fittingRenter;
@@ -99,25 +100,6 @@ class MyFittingsImageWidget extends StatelessWidget {
                     ),
                     SizedBox(height: width * 0.03),
                   ],
-                ),
-              // SizedBox(width: width * 0.05),
-              // SizedBox(
-              //   height: width * 0.08,
-              //   width: width * 0.28,
-                Padding(
-                  padding: EdgeInsets.fromLTRB(width * 0.05,0,0,0),
-                  child: Expanded(
-                    child: ElevatedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(1.0),
-                          ),
-                          side: const BorderSide(width: 1.0, color: Colors.black),
-                        ),
-                      onPressed: () {}, 
-                      child: const StyledBody('CANCEL', color: Colors.white)),
-                  ),
                 ),
               ],
             ),

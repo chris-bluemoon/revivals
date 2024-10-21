@@ -24,19 +24,6 @@ void main() async {
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: primaryTheme,
-      // home: const HomePage(),
-      // home: const HomeTest(),
-
-      // getPages: [
-      //   GetPage(
-      //     name: "/",
-      //     page: ()=>const HomeTest(),
-      //     binding: BindingsBuilder(() {
-      //       Get.put(ItemController());
-      //     })
-      //   )
-      // ],
-      // home: EmailComposer(),
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/': (context) => const HomePage(),

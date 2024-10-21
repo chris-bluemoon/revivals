@@ -66,7 +66,8 @@ String capitalize(string) {
         isFav = true;
       }
     });}
-  bool isAFit(Item d, List fits) {
+
+  bool isAFit(String d, List fits) {
     if (fits.contains(d)) {
       return true;
     } else {
@@ -74,7 +75,7 @@ String capitalize(string) {
     } 
   }
 
-    void _toggleFit() {
+  void _toggleFit() {
     setState(() {
       if (isFit == true) {
         isFit = false;
@@ -170,7 +171,7 @@ Widget createImage(String imageName) {
     List currListOfFits =
         Provider.of<ItemStore>(context, listen: false).fittings;
     isFav = isAFav(widget.item, currListOfFavs);
-    isFit = isAFit(widget.item, currListOfFits);
+    isFit = isAFit(widget.item.id, currListOfFits);
     setPrice();
     return Card(
       
@@ -216,7 +217,7 @@ Widget createImage(String imageName) {
                       Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                       toSave.favourites.add(widget.item.id);
                       Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
-                      Provider.of<ItemStore>(context, listen: false).addFavourite(widget.item);
+                      Provider.of<ItemStore>(context, listen: false).addFavourite(widget.item.id);
                     }
                   ),
                 if (widget.isFittingScreen) (isFit) ? IconButton(
@@ -226,7 +227,7 @@ Widget createImage(String imageName) {
                       Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                       toSave.fittings.remove(widget.item.id);
                       Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
-                      Provider.of<ItemStore>(context, listen: false).removeFitting(widget.item);
+                      Provider.of<ItemStore>(context, listen: false).removeFitting(widget.item.id);
                   }) : 
                   IconButton(
                     icon: Icon(Icons.add_circle_outline, size: width*0.05, color: Colors.green),
@@ -236,7 +237,7 @@ Widget createImage(String imageName) {
                         Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                         toSave.fittings.add(widget.item.id);
                         Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
-                        Provider.of<ItemStore>(context, listen: false).addFitting(widget.item);
+                        Provider.of<ItemStore>(context, listen: false).addFitting(widget.item.id);
                       } else {
                         showAlertDialog(context);
                       }

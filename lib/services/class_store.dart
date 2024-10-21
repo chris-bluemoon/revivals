@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:unearthed/models/fitting_renter.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/models/renter.dart';
@@ -14,10 +15,11 @@ class ItemStore extends ChangeNotifier {
 
   final List<Item> _items = [];
   final List<Item> _favourites = [];
-  final List<Item> _fittings = [];
+  final List<String> _fittings = [];
   // final List<Item> _settings = [];
   final List<Renter> _renters = [];
   final List<ItemRenter> _itemRenters = [];
+  final List<FittingRenter> _fittingRenters = [];
   Map<String, bool> _sizesFilter = {
     '4': false,
     '6': false,
@@ -61,6 +63,7 @@ class ItemStore extends ChangeNotifier {
   get fittings => _fittings;
   get renters => _renters;
   get itemRenters => _itemRenters;
+  get fittingRenters => _fittingRenters;
   get renter => _user;
   get loggedIn => _loggedIn;
   get sizesFilter => _sizesFilter;
@@ -114,7 +117,6 @@ class ItemStore extends ChangeNotifier {
   // add character
   void addItem(Item item) async {
     await FirestoreService.addItem(item);
-    log('Added item!');
     _items.add(item);
     notifyListeners();
   }
@@ -122,7 +124,6 @@ class ItemStore extends ChangeNotifier {
   void addRenter(Renter renter) async {
     await FirestoreService.addRenter(renter);
     _renters.add(renter);
-    log(_renters.toString());
     notifyListeners();
   }
 
@@ -140,19 +141,24 @@ class ItemStore extends ChangeNotifier {
   }
   // add itemRenter
   void addItemRenter(ItemRenter itemRenter) async {
-    log('Adding ItemRenter ${_itemRenters.length}');
     _itemRenters.add(itemRenter);
     await FirestoreService.addItemRenter(itemRenter);
     notifyListeners();
-    log('ItemRenters is now ${_itemRenters.length}');
   }
+
+  // add fittingRenter
+  void addFittingRenter(FittingRenter fittingRenter) async {
+    _fittingRenters.add(fittingRenter);
+    log('Count of fittingRenters is ${fittingRenters.length.toString()}');
+    await FirestoreService.addFittingRenter(fittingRenter);
+    notifyListeners();
+  }
+
 
     // initially fetch items
   void fetchItemsOnce() async {
     // List favs = _user.favourites;
-    log('Fethcing Items Once');
     if (items.length == 0) {
-      log('Adding Items once');
       // Temporary setting of email password once
       MyStore.writeToStore('fkwx gnet sbwl pgjb');
       final snapshot = await FirestoreService.getItemsOnce();
@@ -173,50 +179,45 @@ class ItemStore extends ChangeNotifier {
     void populateFavourites() {
       List favs = _user.favourites;
       _favourites.clear();
-      log('CHECKING ITEMS...it has a count ${_items.length}');
       for (Item d in _items) {
-        log('COMPARING');
-        log(d.toString());
-        log(favs.toString());
         if (favs.contains(d.id)) {
-          log('Adding a favourite');
           _favourites.add(d);
         }
       }
     }
     void addFavourite(item) {
       _favourites.add(item);
-      log('Removing favourite');
       notifyListeners();
     }
     void removeFavourite(item) {
       _favourites.remove(item);
-      log('Removing favourite');
       notifyListeners();
     }
     void populateFittings() {
       List fits = _user.fittings;
       _fittings.clear();
-      log(fits.toString());
       for (Item d in _items) {
         if (fits.contains(d.id)) {
-          log('Adding a favourite');
-          _fittings.add(d);
+          _fittings.add(d.id);
         }
       }
     }
-    void addFitting(item) {
-      _fittings.add(item);
-      log('Adding fitting');
+    void addFitting(itemId) {
+      log('addFitting called');
+      _fittings.add(itemId);
       notifyListeners();
     }
-    void removeFitting(item) {
-      _fittings.remove(item);
-      log('Removing fitting');
+    void removeFitting(itemId) {
+      _fittings.remove(itemId);
+      notifyListeners();
+    }
+    void clearFittings() {
+      fittings.clear();
+      renter.fittings = [];
+      saveRenter(renter);
       notifyListeners();
     }
 
-  // initially fetch itemRenters
       Future<dynamic> setCurrentUser() async {
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
@@ -224,39 +225,40 @@ class ItemStore extends ChangeNotifier {
         for (Renter r in renters) {
           if (r.email == user.email) {
             assignUser(r);
-            log('Setting current user');
             _loggedIn = true;
           }
         }
       } else {
-        log('Not logged in');
         _loggedIn = false;
       }
       return user;
       // return asda;
     }
   void setLoggedIn(bool loggedIn) {
-    log('Set _loggedIn to $loggedIn');
     _loggedIn = loggedIn;
     if (loggedIn == false) {
       _user = Renter(id: '0000', email: 'dummy', name: 'no_user', size: 0, countryCode: '', address: '', phoneNum: '', favourites: [], fittings: [], settings: ['BANGKOK','CM','CM','KG']);
-      log(renter.name);
       notifyListeners();
     }
   }
-
-  // void setRegion(String region) {
-  //   log('Set _region to $region');
-  //   _region = region;
-  //   notifyListeners();
-  // }
 
   void fetchItemRentersOnce() async {
     if (itemRenters.length == 0) {
       final snapshot = await FirestoreService.getItemRentersOnce();
       for (var doc in snapshot.docs) {
-        log('Adding an ItemRenter from database');
         _itemRenters.add(doc.data());
+      }
+      notifyListeners();
+    }
+  }
+  void fetchFittingRentersOnce() async {
+    log('Fetching all FittingRentersOncea');
+    if (fittingRenters.length == 0) {
+    log('Fetching all FittingRentersOnce as current size is 0');
+      final snapshot = await FirestoreService.getFittingRentersOnce();
+      for (var doc in snapshot.docs) {
+      log(doc.toString());
+        _fittingRenters.add(doc.data());
       }
       notifyListeners();
     }
@@ -267,15 +269,18 @@ class ItemStore extends ChangeNotifier {
       _itemRenters.clear();
   }
   }
+  void deleteFittingRenters() async {
+    if (fittingRenters.length > 0) {
+      await FirestoreService.deleteFittingRenters();
+      _fittingRenters.clear();
+  }
+  }
 
   // initially fetch renters
   void fetchRentersOnce() async {
-    log('fetchRentersOnce is being called');
-    log('current length: ${renters.length}');
     if (renters.length == 0) {
       final snapshot = await FirestoreService.getRentersOnce();
       for (var doc in snapshot.docs) {
-        log('Adding ${doc.data().email} to _renters');
         _renters.add(doc.data());
         }
       }
@@ -283,10 +288,13 @@ class ItemStore extends ChangeNotifier {
       // log("Renters populated with length ${_renters.length}");
       // notifyListeners();
     }
-    void saveItemRenter(ItemRenter itemRenter) async {
+  void saveItemRenter(ItemRenter itemRenter) async {
     await FirestoreService.updateItemRenter(itemRenter);
-    // _renters[0].aditem = renter.aditem;
-      // _user.aditem = renter.aditem;
+    notifyListeners();
+    return;
+  }
+  void saveFittingRenter(FittingRenter fittingRenter) async {
+    await FirestoreService.updateFittingRenter(fittingRenter);
     notifyListeners();
     return;
   }

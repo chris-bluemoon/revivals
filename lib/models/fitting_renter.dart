@@ -12,7 +12,7 @@ class FittingRenter {
 
     String id;
     String renterId;
-    String itemArray;
+    List itemArray;
     String bookingDate;
     int price;
     String status;
@@ -38,16 +38,16 @@ class FittingRenter {
     final data = snapshot.data()!;
 
     // make character instance
-    FittingRenter itemRenter = FittingRenter(
+    FittingRenter fittingRenter = FittingRenter(
       id: snapshot.id,
       renterId: data['renterId'],
-      itemArray: data['itemId'],
-      bookingDate: data['startDate'],
+      itemArray: data['itemArray'],
+      bookingDate: data['bookingDate'],
       price: data['price'],
       status: data['status'],
     );
 
-    return itemRenter;
+    return fittingRenter;
   } 
   
   

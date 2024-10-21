@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:unearthed/models/fitting_renter.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
+import 'package:uuid/uuid.dart';
 
-class FittingSummary extends StatelessWidget {
-  const FittingSummary({required this.dateTime, super.key});
+var uuid = const Uuid();
 
-  final Map dateTime;
+
+class FittingSummary extends StatefulWidget {
+  const FittingSummary({super.key});
+
+  @override
+  State<FittingSummary> createState() => _FittingSummaryState();
+}
+
+class _FittingSummaryState extends State<FittingSummary> {
+    void handleSubmit(String renterId, List<String> itemArray, String bookingDate,
+      int price, String status) {
+      Provider.of<ItemStore>(context, listen: false).addFittingRenter(FittingRenter(
+        id: uuid.v4(),
+        renterId: renterId,
+        itemArray: itemArray,
+        bookingDate: bookingDate,
+        price: price,
+        status: status,
+      ));
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +58,14 @@ class FittingSummary extends StatelessWidget {
               )),
         ],
       ),
+      body: Column(
+        children: [
+          ElevatedButton(
+            child: const Text('ADD FITTING RENTER'),
+            onPressed: () {}
+          ),
+        ],
+      )
     );
   }
 }
