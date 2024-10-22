@@ -95,7 +95,7 @@ class FirestoreService {
     );
   }
   static Future<void> updateFittingRenter(FittingRenter fittingRenter) async {
-    await refItemRenter.doc(fittingRenter.id).update(
+    await refFittingRenter.doc(fittingRenter.id).update(
       {
         'status': fittingRenter.status,
      }

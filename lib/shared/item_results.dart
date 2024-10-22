@@ -258,9 +258,13 @@ class _ItemResultsState extends State<ItemResults> {
               : const NoItemsFound(),
           floatingActionButton: FloatingActionButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
+                      if (Provider.of<ItemStore>(context, listen: false).renter.fittings.length != 0) {
+                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>
                           (const Fitting())));
+                      } else {
+                          showAlertDialog(context);
+                      }
                     },
                     foregroundColor: Colors.black,
                     backgroundColor: Colors.white,
@@ -273,4 +277,69 @@ class _ItemResultsState extends State<ItemResults> {
       }
     );
   }
+  
+   showAlertDialog(BuildContext context) {
+    // Create button
+    double width = MediaQuery.of(context).size.width;
+
+    Widget okButton = ElevatedButton(
+      style: OutlinedButton.styleFrom(
+        textStyle: const TextStyle(color: Colors.white),
+        foregroundColor: Colors.white, //change background color of button
+        backgroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(-1.0),
+        ),
+        side: const BorderSide(width: 0.0, color: Colors.black),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        // Navigator.of(context).popUntil((route) => route.isFirst);
+      },
+      child: const Center(child: StyledBody("OK", color: Colors.white)),
+    );
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Center(child: StyledHeading('CHOOSE YOUR STYLE')),
+      content: SizedBox(
+        height: width * 0.1,
+        child: const Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody('Select at least 1 dress',
+                    weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody('and up to 6!',
+                    weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(-1.0)),
+      ),
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
+

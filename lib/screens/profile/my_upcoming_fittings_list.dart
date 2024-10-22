@@ -38,8 +38,7 @@ class _MyUpcomingFittingsListState extends State<MyUpcomingFittingsList> {
     log('Count of fittingRenters is ${allFittingRenters.length.toString()}');
     for (FittingRenter dr in allFittingRenters) {
       DateTime convertedDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(dr.bookingDate) ;
-      log('Checking renterId ${dr.renterId} against userEmail $userEmail');
-      if (dr.renterId == userEmail && convertedDate.isAfter(DateTime.now())) {
+      if (dr.renterId == userEmail && convertedDate.isAfter(DateTime.now()) && dr.status != 'cancelled') {
           upcomingFittingsList.add(dr);
           log('Rented: ${dr.renterId}');
         }
@@ -54,13 +53,16 @@ class _MyUpcomingFittingsListState extends State<MyUpcomingFittingsList> {
     double width = MediaQuery.of(context).size.width;
     // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
     return 
-      ListView.builder(
-        padding: EdgeInsets.all(width*0.01),
-        itemCount: upcomingFittingsList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return (upcomingFittingsList.isNotEmpty) ? MyFittingsImageWidget(upcomingFittingsList[index], upcomingFittingsList[index].itemArray, upcomingFittingsList[index].bookingDate, upcomingFittingsList[index].price, upcomingFittingsList[index].status)
-            : const Text('NO BOOKINGS');
-      }
-    );
+      Consumer<ItemStore>(
+        builder: (context, value, child) {
+        return ListView.builder(
+          padding: EdgeInsets.all(width*0.01),
+          itemCount: upcomingFittingsList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return (upcomingFittingsList.isNotEmpty) ? MyFittingsImageWidget(upcomingFittingsList[index], upcomingFittingsList[index].itemArray, upcomingFittingsList[index].bookingDate, upcomingFittingsList[index].price, upcomingFittingsList[index].status)
+              : const Text('NO BOOKINGS');
+        });
+        }
+      );
 
   }}

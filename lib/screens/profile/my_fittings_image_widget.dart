@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/fitting_renter.dart';
 import 'package:unearthed/models/item.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 
@@ -115,7 +117,10 @@ class MyFittingsImageWidget extends StatelessWidget {
                           ),
                           side: const BorderSide(width: 1.0, color: Colors.black),
                         ),
-                      onPressed: () {}, 
+                      onPressed: () {
+                        fittingRenter.status = 'cancelled';
+                        Provider.of<ItemStore>(context, listen: false).saveFittingRenter(fittingRenter);
+                      },
                       child: const StyledBody('CANCEL', color: Colors.white)),
                   ),
                 ),
