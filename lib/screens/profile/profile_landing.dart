@@ -7,7 +7,8 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/help_centre/faqs.dart';
-import 'package:unearthed/screens/profile/admin.dart';
+import 'package:unearthed/screens/profile/admin_bookings.dart';
+import 'package:unearthed/screens/profile/admin_fittings.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
 import 'package:unearthed/screens/profile/my_fittings.dart';
 import 'package:unearthed/screens/profile/my_transactions.dart';
@@ -165,7 +166,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => (const MyFittings())));
+                        builder: (context) => (const MyFittings(false))));
                   },
                   child: Row(
                     children: [
@@ -318,7 +319,7 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 if (admin) GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => (const Admin())));
+                        builder: (context) => (const AdminBookings())));
                   },
                   child: Row(
                     children: [
@@ -326,6 +327,26 @@ class _ProfileLandingState extends State<ProfileLanding> {
                       Icon(Icons.description_outlined, size: width * 0.05),
                       SizedBox(width: width * 0.01),
                       const StyledBody('ADMIN: CHECK ORDERS', weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+                                SizedBox(height: width * 0.04),
+                Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
+                ),
+                if (admin) GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => (const AdminFittings())));
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.description_outlined, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('ADMIN: CHECK FITTINGS', weight: FontWeight.normal),
                     ],
                   ),
                 ),

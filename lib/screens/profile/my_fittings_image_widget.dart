@@ -18,17 +18,14 @@ class MyFittingsImageWidget extends StatelessWidget {
   final int price;
   final String status;
 
-  late String itemType;
-  late String itemName;
-  late String brandName;
-  late String imageName;
+  String imageName = '';
   late Item item;
 
 
   String setItemImage() {
-    itemType = toBeginningOfSentenceCase(item.type.replaceAll(RegExp(' +'), '_'));
-    itemName = item.name.replaceAll(RegExp(' +'), '_');
-    brandName = item.brand.replaceAll(RegExp(' +'), '_');
+    String itemType = toBeginningOfSentenceCase(item.type.replaceAll(RegExp(' +'), '_'));
+    String itemName = item.name.replaceAll(RegExp(' +'), '_');
+    String brandName = item.brand.replaceAll(RegExp(' +'), '_');
     imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
     return imageName;
   }
@@ -106,23 +103,21 @@ class MyFittingsImageWidget extends StatelessWidget {
               // SizedBox(
               //   height: width * 0.08,
               //   width: width * 0.28,
-                Padding(
+                Container(
                   padding: EdgeInsets.fromLTRB(width * 0.05,0,0,0),
-                  child: Expanded(
-                    child: ElevatedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(1.0),
-                          ),
-                          side: const BorderSide(width: 1.0, color: Colors.black),
+                  child: ElevatedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(1.0),
                         ),
-                      onPressed: () {
-                        fittingRenter.status = 'cancelled';
-                        Provider.of<ItemStore>(context, listen: false).saveFittingRenter(fittingRenter);
-                      },
-                      child: const StyledBody('CANCEL', color: Colors.white)),
-                  ),
+                        side: const BorderSide(width: 1.0, color: Colors.black),
+                      ),
+                    onPressed: () {
+                      fittingRenter.status = 'cancelled';
+                      Provider.of<ItemStore>(context, listen: false).saveFittingRenter(fittingRenter);
+                    },
+                    child: const StyledBody('CANCEL', color: Colors.white)),
                 ),
               ],
             ),

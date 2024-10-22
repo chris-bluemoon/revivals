@@ -4,7 +4,9 @@ import 'package:unearthed/screens/profile/my_upcoming_fittings_list.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class MyFittings extends StatelessWidget {
-  const MyFittings({super.key});
+  const MyFittings(this.isFromABooking, {super.key});
+
+  final bool isFromABooking;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +28,14 @@ class MyFittings extends StatelessWidget {
           ),
           title: const StyledTitle('FITTING SESSIONS'),
                       leading: IconButton(
-          icon: Icon(Icons.chevron_left, size: width*0.08),
+          icon: (isFromABooking) ? Container(
+              padding: EdgeInsets.fromLTRB(width * 0.02, 0, 0, 0),
+              child: Icon(Icons.home_outlined, size: width*0.06),
+          ) 
+            : Icon(Icons.chevron_left, size: width * 0.08),
           onPressed: () {
-            Navigator.pop(context);
+            (isFromABooking) ? Navigator.of(context).popUntil((route) => route.isFirst)
+              : Navigator.pop(context);
           },
         ),
         // actions: [

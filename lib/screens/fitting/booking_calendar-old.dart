@@ -31,11 +31,9 @@ class _BookingCalendarDemoAppState extends State<BookingCalendarDemoApp> {
     return Stream.value([]);
   }
 
-  Future<dynamic> uploadBookingMock(
-      {required BookingService newBooking}) async {
+  Future<dynamic> uploadBookingMock({required BookingService newBooking}) async {
     // await Future.delayed(const Duration(seconds: 1));
-    converted.add(DateTimeRange(
-        start: newBooking.bookingStart, end: newBooking.bookingEnd));
+    converted.add(DateTimeRange(start: newBooking.bookingStart, end: newBooking.bookingEnd));
     log('${newBooking.toJson()} has been uploaded');
   }
 

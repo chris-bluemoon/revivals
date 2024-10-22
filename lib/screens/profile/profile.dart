@@ -92,30 +92,3 @@ Future<bool> signOutFromGoogle() async {
   }
 }
 
-// showAlertDialog(BuildContext context) {  
-//   // Create button  
-//   Widget okButton = ElevatedButton(  
-//     child: const Center(child: Text("OK")),  
-//     onPressed: () {  
-//       // Navigator.of(context).pop();  
-//       Navigator.of(context).popUntil((route) => route.isFirst);
-//     },  
-//   ); 
-//     // Create AlertDialog  
-//   AlertDialog alert = AlertDialog(  
-//     title: const Center(child: Text("SIGNED OUT")),
-//     // content: Text("      Your item is being prepared"),  
-//     actions: [  
-//       okButton,  
-//     ],  
-//                 shape: const RoundedRectangleBorder(
-//               borderRadius: BorderRadius.all(Radius.circular(0.0)),
-//             ),
-//   );  
-//     showDialog(  
-//     context: context,  
-//     builder: (BuildContext context) {  
-//       return alert;  
-//     },  
-//   );
-// }

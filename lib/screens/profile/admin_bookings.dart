@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/profile/my_purchases_admin_list.dart';
-import 'package:unearthed/screens/profile/my_rentals_admin_list.dart';
+import 'package:unearthed/screens/profile/my_purchases_admin_bookings_list.dart';
+import 'package:unearthed/screens/profile/my_rentals_admin_bookings_list.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
-class Admin extends StatefulWidget {
-  const Admin({super.key});
+class AdminBookings extends StatefulWidget {
+  const AdminBookings({super.key});
 
   @override
-  State<Admin> createState() => _AdminState();
+  State<AdminBookings> createState() => _AdminBookingsState();
 }
 
-class _AdminState extends State<Admin> {
+class _AdminBookingsState extends State<AdminBookings> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -44,8 +44,8 @@ class _AdminState extends State<Admin> {
         ),
         body: const TabBarView(
             children: [
-              MyRentalsAdminList(),
-              MyPurchasesAdminList(),
+              MyRentalsAdminBookingsList(),
+              MyPurchasesAdminBookingsList(),
             ],
           )
         ),
