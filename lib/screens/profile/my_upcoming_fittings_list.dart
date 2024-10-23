@@ -44,7 +44,7 @@ class _MyUpcomingFittingsListState extends State<MyUpcomingFittingsList> {
         }
       }
     if (upcomingFittingsList.isEmpty) {
-      log('You have no rentals!');
+      log('You have no fittings!');
     }
     upcomingFittingsList.sort((a, b) => a.bookingDate.compareTo(b.bookingDate));
   }

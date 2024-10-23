@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/models/fitting_renter.dart';
 import 'package:unearthed/models/item.dart';
+import 'package:unearthed/models/item_renter.dart';
 import 'package:unearthed/screens/fitting/fitting_item_image.dart';
 import 'package:unearthed/screens/fitting/fitting_summary.dart';
 import 'package:unearthed/screens/profile/my_fittings.dart';
@@ -74,13 +75,16 @@ class _FittingState extends State<Fitting> {
     mockBookingService = BookingService(
         serviceName: 'Mock Service',
         serviceDuration: 60,
-        bookingEnd: DateTime(now.year, now.month, now.day, 18, 0),
-        bookingStart: DateTime(now.year, now.month, now.day, 8, 0));
+        bookingStart: DateTime(now.year, now.month, now.day, 10, 0),
+        bookingEnd: DateTime(now.year, now.month, now.day, 20, 0));
   }
 
   // BC
   Stream<dynamic>? getBookingStreamMock(
       {required DateTime end, required DateTime start}) {
+        var value;
+        Stream.value([]).listen(value);
+        log(value.toString());
     return Stream.value([]);
   }
 
@@ -96,9 +100,7 @@ class _FittingState extends State<Fitting> {
 
     log('${newBooking.toJson()} has been uploaded');
     Provider.of<ItemStore>(context, listen: false).clearFittings();
-    Navigator.of(context).push(
-        // MaterialPageRoute(builder: (context) => (const FittingSummary())));
-        MaterialPageRoute(builder: (context) => (const MyFittings(true))));
+    showAlertDialog(context);
   }
 
   List<DateTimeRange> converted = [];
@@ -108,23 +110,25 @@ class _FittingState extends State<Fitting> {
     ///take care this is only mock, so if you add today as disabledDays it will still be visible on the first load
     ///disabledDays will properly work with real data
     DateTime first = now;
-    DateTime tomorrow = now.add(const Duration(days: 1));
-    DateTime second = now.add(const Duration(minutes: 55));
-    DateTime third = now.subtract(const Duration(minutes: 240));
-    DateTime fourth = now.subtract(const Duration(minutes: 500));
-    converted.add(
-        DateTimeRange(start: first, end: now.add(const Duration(minutes: 60))));
-    converted.add(DateTimeRange(
-        start: second, end: second.add(const Duration(minutes: 23))));
-    converted.add(DateTimeRange(
-        start: third, end: third.add(const Duration(minutes: 15))));
-    converted.add(DateTimeRange(
-        start: fourth, end: fourth.add(const Duration(minutes: 50))));
+    converted.add(DateTimeRange(start: first, end: now.add(const Duration(minutes: 5))));
+    for (FittingRenter fr in Provider.of<ItemStore>(context, listen: false).fittingRenters) {
+      DateTime startDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(fr.bookingDate);
+      converted.add(DateTimeRange(start: startDate, end: startDate.add(const Duration(minutes: 59))));
+    }
+    for (ItemRenter ir in Provider.of<ItemStore>(context, listen: false).itemRenters) {
+      DateTime startDate = DateFormat('yyyy-MM-dd hh:mm:ss').parse(ir.startDate);
+      DateTime endDate = DateFormat('yyyy-MM-dd hh:mm:ss').parse(ir.endDate);
+      String itemId = ir.itemId;
+      if (now.isBefore(startDate)) {
+        if (Provider.of<ItemStore>(context, listen: false).fittings.contains(itemId)) {
+          converted.add(DateTimeRange(start: startDate, end: endDate));
+        }
+      }
 
-    //book whole day example
-    converted.add(DateTimeRange(
-        start: DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 5, 0),
-        end: DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 23, 0)));
+    }
+    DateTime startTimeToBlock = DateFormat('hh:mm').parse('10:00');
+    DateTime endTimeToBlock = now;
+    converted.add(DateTimeRange(start: startTimeToBlock, end: endTimeToBlock)) ;
     return converted;
   }
 
@@ -182,6 +186,9 @@ class _FittingState extends State<Fitting> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // SizedBox(height: width * 0.1),
+            const StyledHeading('YOUR DRESS SELECTION'),
+            SizedBox(height: width * 0.01),
             SizedBox(
               height: width * 0.3,
               // width: 400,
@@ -211,6 +218,7 @@ class _FittingState extends State<Fitting> {
               child: SizedBox(
                 height: width * 1,
                 child: BookingCalendar(
+                  // disabledDates: [DateTime.now()],
                   bookingButtonColor: Colors.black,
                   bookingService: mockBookingService,
                   convertStreamResultToDateTimeRanges: convertStreamResultMock,
@@ -225,7 +233,7 @@ class _FittingState extends State<Fitting> {
                   loadingWidget: const Text('Fetching data...'),
                   uploadingWidget: const CircularProgressIndicator(),
                   // locale: 'hu_HU',
-                  startingDayOfWeek: StartingDayOfWeek.tuesday,
+                  startingDayOfWeek: StartingDayOfWeek.monday,
                   wholeDayIsBookedWidget:
                       const Text('Sorry, for this day everything is booked'),
                   //disabledDates: [DateTime(2023, 1, 20)],

@@ -33,6 +33,9 @@ class _ProfileLandingState extends State<ProfileLanding> {
     void handleDelete() {
       Provider.of<ItemStore>(context, listen: false).deleteItemRenters();
     }
+    void handleFittingDelete() {
+      Provider.of<ItemStore>(context, listen: false).deleteFittingRenters();
+    }
     void handleSubmit() {
       log('Size of allItems: ${allItems.length}');
     for (var i = 0; i < allItems.length; i++) {
@@ -363,6 +366,13 @@ class _ProfileLandingState extends State<ProfileLanding> {
                     // addItemsAll();
                   },
                   child: const Text('DELETE ITEMRENTERS'),
+                ),
+                                              if (admin) TextButton (
+                  onPressed: () {
+                    handleFittingDelete();
+                    // addItemsAll();
+                  },
+                  child: const Text('DELETE FITTING RENTERS'),
                 )
               ],
             );

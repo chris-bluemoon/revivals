@@ -42,7 +42,7 @@ class _MyFittingsAdminListState extends State<MyFittingsAdminList> {
       }
     }
     if (myFittingsList.isEmpty) {
-      log('You have no purchases!');
+      log('You have no fittings!');
     }
     myFittingsList.sort((a, b) => a.bookingDate.compareTo(b.bookingDate));
   }
