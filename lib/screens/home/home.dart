@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:unearthed/screens/home/all_items_home_widget.dart';
 import 'package:unearthed/screens/home/fitting_home_widget.dart';
 import 'package:unearthed/screens/home/home_page_bottom_card.dart';
@@ -8,6 +9,8 @@ import 'package:unearthed/screens/home/new_arrivals_carousel.dart';
 import 'package:unearthed/screens/home/offer_home_widget.dart';
 import 'package:unearthed/screens/home/rentals_home_widget.dart';
 import 'package:unearthed/screens/home/to_buy_home_widget.dart';
+import 'package:unearthed/screens/sign_up/google_sign_in.dart';
+import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/item_results.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
@@ -149,7 +152,9 @@ class _HomeState extends State<Home> {
               GestureDetector(
                 onTap: () {
                   // Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const Fitting2())));
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('fitting','dummy'))));
+                  bool loggedIn = Provider.of<ItemStore>(context, listen: false).loggedIn;
+                  (loggedIn) ? Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('fitting','dummy')))) 
+                    : showAlertDialog(context);
                 },
                 child: const FittingHomeWidget()),
 
@@ -204,4 +209,69 @@ class _HomeState extends State<Home> {
           ),
         ));
   }
+  showAlertDialog(BuildContext context) {  
+  // Create button  
+  double width = MediaQuery.of(context).size.width;
+
+
+  Widget okButton = ElevatedButton(  
+    style: OutlinedButton.styleFrom(
+                          textStyle: const TextStyle(color: Colors.white),
+                          foregroundColor: Colors.white,//change background color of button
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                        side: const BorderSide(width: 1.0, color: Colors.black),
+      ),
+    onPressed: () {  
+      // Navigator.of(context).pop();  
+      // Navigator.of(context).popUntil((route) => route.isFirst);
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const GoogleSignInScreen()))); 
+
+    },  
+    child: const Center(child: StyledHeading("OK", color: Colors.white)),  
+  ); 
+    // Create AlertDialog  
+  AlertDialog alert = AlertDialog(  
+    title: const Center(child: StyledHeading("NOT LOGGED IN")),
+    content: SizedBox(
+      height: width * 0.2,
+      child: const Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StyledHeading("Please log in"),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StyledHeading("or register to continue"),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StyledHeading("to book a fitting"),
+            ],
+          )
+        ],
+      ),
+    ),  
+    actions: [  
+      okButton,  
+    ],  
+                shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            ),
+  );  
+    showDialog(  
+    context: context,  
+    builder: (BuildContext context) {  
+      return alert;  
+    },  
+  );   
+}
 }

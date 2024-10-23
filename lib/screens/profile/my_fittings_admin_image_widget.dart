@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/fitting_renter.dart';
@@ -35,6 +36,8 @@ class MyFittingsAdminImageWidget extends StatelessWidget {
     // DateTime bookingDate = DateTime.parse(bookingDate);
     // String bookingDateString = DateFormat('d MMMM, y').format(bookingDate);
     // yMMMMd('en_US')
+    DateTime convertedDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(bookingDate) ;
+
     return Card(
       margin: EdgeInsets.only(bottom: width*0.04),
       shape: BeveledRectangleBorder(
@@ -59,9 +62,29 @@ class MyFittingsAdminImageWidget extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: width * 0.2,
-                      child: const StyledBody('From', color: Colors.grey, weight: FontWeight.normal)),
+                      child: StyledBody(fittingRenter.renterId, color: Colors.grey, weight: FontWeight.normal)),
                     SizedBox(width: width * 0.01),
-                    StyledBody(bookingDate, color: Colors.grey, weight: FontWeight.normal),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('Date', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
+                    StyledBody(DateFormat('E, d MMMM y').format(convertedDate), color: Colors.grey, weight: FontWeight.normal),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: width * 0.2,
+                      child: const StyledBody('Time', color: Colors.grey, weight: FontWeight.normal)),
+                    SizedBox(width: width * 0.01),
+                    StyledBody(DateFormat('HH:mm').format(convertedDate), color: Colors.grey, weight: FontWeight.normal),
+
                   ],
                 ),
                 Row(

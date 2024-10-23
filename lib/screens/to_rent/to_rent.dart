@@ -354,6 +354,12 @@ showAlertDialog(BuildContext context) {
               StyledHeading("or register to continue"),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              StyledHeading("to rent a dress"),
+            ],
+          ),
         ],
       ),
     ),  
@@ -372,7 +378,4 @@ showAlertDialog(BuildContext context) {
   );   
 }
 
-class StyledText {
-  const StyledText(String s);
-}
 

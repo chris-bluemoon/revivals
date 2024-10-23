@@ -179,117 +179,192 @@ class _FittingState extends State<Fitting> {
               )),
         ],
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 250,
-            // width: 400,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: dressImages.length,
-              itemBuilder: (context, index) {
-                // return Image.asset('assets/img/items2/${dressImages[index]}');
-                return FittingItemImage(dressImages[index]);
-              },
-            ),
-          ),
-          const SizedBox(height: 40),
-          Divider(
-            indent: width * 0.1,
-            endIndent: width * 0.1,
-          ),
-          const SizedBox(height: 40),
-          Row(
-            children: [
-              SizedBox(width: width * 0.05),
-              const StyledHeading('SELECT A DATE'),
-            ],
-          ),
-          Center(
-            child: SizedBox(
-              height: 600,
-              child: BookingCalendar(
-                bookingButtonColor: Colors.black,
-                bookingService: mockBookingService,
-                convertStreamResultToDateTimeRanges: convertStreamResultMock,
-                getBookingStream: getBookingStreamMock,
-                uploadBooking: uploadBookingMock,
-                // pauseSlots: generatePauseSlots(),
-                pauseSlots: const [],
-                pauseSlotText: 'LUNCH',
-
-                hideBreakTime: true,
-                loadingWidget: const Text('Fetching data...'),
-                uploadingWidget: const CircularProgressIndicator(),
-                // locale: 'hu_HU',
-                startingDayOfWeek: StartingDayOfWeek.tuesday,
-                wholeDayIsBookedWidget:
-                    const Text('Sorry, for this day everything is booked'),
-                //disabledDates: [DateTime(2023, 1, 20)],
-                //disabledDays: [6, 7],
-                bookingGridCrossAxisCount: 6,
-              ),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
-              spreadRadius: 3,
-            )
-          ],
-        ),
-        padding: const EdgeInsets.all(10),
-        child: Row(
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-            if (pickedDate != null)
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(1.0),
-                    ),
-                    side: const BorderSide(width: 1.0, color: Colors.black),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: StyledHeading('CONTINUE',
-                        weight: FontWeight.bold, color: Colors.grey),
-                  ),
+            SizedBox(
+              height: width * 0.3,
+              // width: 400,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: dressImages.length,
+                itemBuilder: (context, index) {
+                  // return Image.asset('assets/img/items2/${dressImages[index]}');
+                  return FittingItemImage(dressImages[index]);
+                },
+              ),
+            ),
+            const SizedBox(height: 40),
+            Divider(
+              indent: width * 0.1,
+              endIndent: width * 0.1,
+            ),
+            const SizedBox(height: 40),
+            Row(
+              children: [
+                SizedBox(width: width * 0.05),
+                const StyledHeading('SELECT A DATE'),
+              ],
+            ),
+            Center(
+              child: SizedBox(
+                height: width * 1,
+                child: BookingCalendar(
+                  bookingButtonColor: Colors.black,
+                  bookingService: mockBookingService,
+                  convertStreamResultToDateTimeRanges: convertStreamResultMock,
+                  getBookingStream: getBookingStreamMock,
+                  uploadBooking: uploadBookingMock,
+                  // pauseSlots: generatePauseSlots(),
+                  pauseSlots: const [],
+                  pauseSlotText: 'LUNCH',
+                  gridScrollPhysics: const NeverScrollableScrollPhysics(), 
+        
+                  hideBreakTime: true,
+                  loadingWidget: const Text('Fetching data...'),
+                  uploadingWidget: const CircularProgressIndicator(),
+                  // locale: 'hu_HU',
+                  startingDayOfWeek: StartingDayOfWeek.tuesday,
+                  wholeDayIsBookedWidget:
+                      const Text('Sorry, for this day everything is booked'),
+                  //disabledDates: [DateTime(2023, 1, 20)],
+                  //disabledDays: [6, 7],
+                  bookedSlotTextStyle: TextStyle(fontSize: width * 0.02),
+                  availableSlotTextStyle: TextStyle(fontSize: width * 0.02),
+                  selectedSlotTextStyle: TextStyle(fontSize: width * 0.02),
+                  bookingGridCrossAxisCount: 5,
                 ),
               ),
-            const SizedBox(width: 5),
-            if (pickedDate == null)
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () async {
-                    log('MOVING ON');
-                    // ready = false;
-                  },
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(1.0),
-                    ),
-                    side: const BorderSide(width: 1.0, color: Colors.black),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: StyledHeading('CONTINUE', color: Colors.white),
-                  ),
-                ),
-              ),
+            ),
           ],
         ),
       ),
+      // bottomNavigationBar: Container(
+      //   decoration: BoxDecoration(
+      //     color: Colors.white,
+      //     border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
+      //     boxShadow: [
+      //       BoxShadow(
+      //         color: Colors.black.withOpacity(0.2),
+      //         blurRadius: 10,
+      //         spreadRadius: 3,
+      //       )
+      //     ],
+      //   ),
+      //   padding: const EdgeInsets.all(10),
+      //   child: Row(
+      //     children: [
+      //       if (pickedDate != null)
+      //         Expanded(
+      //           child: OutlinedButton(
+      //             onPressed: () {},
+      //             style: OutlinedButton.styleFrom(
+      //               shape: RoundedRectangleBorder(
+      //                 borderRadius: BorderRadius.circular(1.0),
+      //               ),
+      //               side: const BorderSide(width: 1.0, color: Colors.black),
+      //             ),
+      //             child: const Padding(
+      //               padding: EdgeInsets.all(8.0),
+      //               child: StyledHeading('CONTINUE',
+      //                   weight: FontWeight.bold, color: Colors.grey),
+      //             ),
+      //           ),
+      //         ),
+      //       const SizedBox(width: 5),
+      //       if (pickedDate == null)
+      //         Expanded(
+      //           child: OutlinedButton(
+      //             onPressed: () async {
+      //               log('MOVING ON');
+      //               // ready = false;
+      //             },
+      //             style: OutlinedButton.styleFrom(
+      //               backgroundColor: Colors.black,
+      //               shape: RoundedRectangleBorder(
+      //                 borderRadius: BorderRadius.circular(1.0),
+      //               ),
+      //               side: const BorderSide(width: 1.0, color: Colors.black),
+      //             ),
+      //             child: const Padding(
+      //               padding: EdgeInsets.all(8.0),
+      //               child: StyledHeading('CONTINUE', color: Colors.white),
+      //             ),
+      //           ),
+      //         ),
+      //     ],
+      //   ),
+      // ),
+    );
+  }
+    showAlertDialog(BuildContext context) {
+    // Create button
+      double width = MediaQuery.of(context).size.width;
+
+    Widget okButton = ElevatedButton(
+      style: OutlinedButton.styleFrom(
+        textStyle: const TextStyle(color: Colors.white),
+        foregroundColor: Colors.white, //change background color of button
+        backgroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0.0),
+        ),
+        side: const BorderSide(width: 1.0, color: Colors.black),
+      ),
+      onPressed: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const MyFittings(true))));
+      },
+      child: const Center(child: StyledBody("OK", color: Colors.white)),
+    );
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Center(child: StyledHeading("Thank You!")),
+      content: SizedBox(
+        height: width * 0.15,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                (Provider.of<ItemStore>(context, listen: false).fittings.length > 1) ? const StyledBody("Your dresses being prepared,",
+                    weight: FontWeight.normal) :
+                    const StyledBody("Your dress is being prepared.", weight: FontWeight.normal)
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody("Please check your", weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody("email for details.", weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(0.0)),
+      ),
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
