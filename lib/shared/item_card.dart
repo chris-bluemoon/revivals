@@ -258,29 +258,66 @@ Widget createImage(String imageName) {
       ),
     );
   }
-  showAlertDialog(BuildContext context) {
+   showAlertDialog(BuildContext context) {
+    // Create button
+    double width = MediaQuery.of(context).size.width;
 
-  // set up the button
-  Widget okButton = TextButton(
-    child: const Text("OK"),
-    onPressed: () { },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("My title"),
-    content: const Text("This is my message."),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
-}
+    Widget okButton = ElevatedButton(
+      style: OutlinedButton.styleFrom(
+        textStyle: const TextStyle(color: Colors.white),
+        foregroundColor: Colors.white, //change background color of button
+        backgroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(-1.0),
+        ),
+        side: const BorderSide(width: 0.0, color: Colors.black),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        // Navigator.of(context).popUntil((route) => route.isFirst);
+      },
+      child: const Center(child: StyledBody("OK", color: Colors.white)),
+    );
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Center(child: StyledHeading('MAXIMUM REACHED')),
+      content: SizedBox(
+        height: width * 0.1,
+        child: const Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody('Maximum number of dresses',
+                    weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody('is 6 for a fitting',
+                    weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(-1.0)),
+      ),
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }

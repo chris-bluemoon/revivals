@@ -36,7 +36,7 @@ class MyFittingsAdminImageWidget extends StatelessWidget {
     // DateTime bookingDate = DateTime.parse(bookingDate);
     // String bookingDateString = DateFormat('d MMMM, y').format(bookingDate);
     // yMMMMd('en_US')
-    DateTime convertedDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(bookingDate) ;
+    DateTime convertedDate = DateFormat('yyyy-MM-ddTHH:mm:ss').parse(bookingDate) ;
 
     return Card(
       margin: EdgeInsets.only(bottom: width*0.04),

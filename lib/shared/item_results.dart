@@ -317,7 +317,7 @@ class _ItemResultsState extends State<ItemResults> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                StyledBody('and up to 6!',
+                StyledBody('before scheduling a fitting',
                     weight: FontWeight.normal),
                 // Text("Your $itemType is being prepared,"),
                 // Text("please check your email for confirmation."),

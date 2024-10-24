@@ -8,8 +8,8 @@ import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 
-class MyFittingsImageWidget extends StatelessWidget {
-  MyFittingsImageWidget(this.fittingRenter, this.itemIds, this.bookingDate, this.price, this.status,
+class MyFittingsImageWidget extends StatefulWidget {
+  const MyFittingsImageWidget(this.fittingRenter, this.itemIds, this.bookingDate, this.price, this.status,
       {super.key});
 
   final FittingRenter fittingRenter;
@@ -18,9 +18,14 @@ class MyFittingsImageWidget extends StatelessWidget {
   final int price;
   final String status;
 
-  String imageName = '';
-  late Item item;
+  @override
+  State<MyFittingsImageWidget> createState() => _MyFittingsImageWidgetState();
+}
 
+class _MyFittingsImageWidgetState extends State<MyFittingsImageWidget> {
+  String imageName = '';
+
+  late Item item;
 
   String setItemImage() {
     String itemType = toBeginningOfSentenceCase(item.type.replaceAll(RegExp(' +'), '_'));
@@ -33,7 +38,7 @@ class MyFittingsImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    DateTime convertedDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(bookingDate) ;
+    DateTime convertedDate = DateFormat('yyyy-MM-ddTHH:mm:ss').parse(widget.bookingDate) ;
     return Card(
       margin: EdgeInsets.only(bottom: width*0.04),
       shape: BeveledRectangleBorder(
@@ -66,7 +71,7 @@ class MyFittingsImageWidget extends StatelessWidget {
                           width: width * 0.2,
                           child: const StyledBody('Time', color: Colors.grey, weight: FontWeight.normal)),
                         SizedBox(width: width * 0.01),
-                        StyledBody(DateFormat('HH:mm').format(convertedDate), color: Colors.grey, weight: FontWeight.normal),
+                        StyledBody(DateFormat('Hm').format(convertedDate), color: Colors.grey, weight: FontWeight.normal),
                       ],
                     ),
                     Row(
@@ -84,7 +89,7 @@ class MyFittingsImageWidget extends StatelessWidget {
                           width: width * 0.2,
                           child: const StyledBody('Price', color: Colors.grey, weight: FontWeight.normal)),
                         SizedBox(width: width * 0.01),
-                        StyledBody('${price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
+                        StyledBody('${widget.price.toString()}${globals.thb}', color: Colors.grey, weight: FontWeight.normal),
                       ],
                     ),
                     Row(
@@ -93,17 +98,13 @@ class MyFittingsImageWidget extends StatelessWidget {
                           width: width * 0.2,
                           child: const StyledBody('Status', color: Colors.grey, weight: FontWeight.normal)),
                         SizedBox(width: width * 0.01),
-                        StyledBody(status, color: Colors.grey, weight: FontWeight.normal),
+                        StyledBody(widget.status, color: Colors.grey, weight: FontWeight.normal),
                       ],
                     ),
                     SizedBox(height: width * 0.03),
                   ],
                 ),
-              // SizedBox(width: width * 0.05),
-              // SizedBox(
-              //   height: width * 0.08,
-              //   width: width * 0.28,
-                Container(
+                if (widget.fittingRenter.status != 'cancelled') Container(
                   padding: EdgeInsets.fromLTRB(width * 0.05,0,0,0),
                   child: ElevatedButton(
                       style: OutlinedButton.styleFrom(
@@ -114,8 +115,10 @@ class MyFittingsImageWidget extends StatelessWidget {
                         side: const BorderSide(width: 1.0, color: Colors.black),
                       ),
                     onPressed: () {
-                      fittingRenter.status = 'cancelled';
-                      Provider.of<ItemStore>(context, listen: false).saveFittingRenter(fittingRenter);
+                      setState(() {
+                        widget.fittingRenter.status = 'cancelled';
+                      });
+                      Provider.of<ItemStore>(context, listen: false).saveFittingRenter(widget.fittingRenter);
                     },
                     child: const StyledBody('CANCEL', color: Colors.white)),
                 ),

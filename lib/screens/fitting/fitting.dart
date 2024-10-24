@@ -113,13 +113,13 @@ class _FittingState extends State<Fitting> {
     converted.add(DateTimeRange(start: first, end: now.add(const Duration(minutes: 5))));
     for (FittingRenter fr in Provider.of<ItemStore>(context, listen: false).fittingRenters) {
       if (fr.status != 'cancelled') {
-        DateTime startDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(fr.bookingDate);
+        DateTime startDate = DateFormat('yyyy-MM-ddTHH:mm:ss').parse(fr.bookingDate);
         converted.add(DateTimeRange(start: startDate, end: startDate.add(const Duration(minutes: 59))));
       }
     }
     for (ItemRenter ir in Provider.of<ItemStore>(context, listen: false).itemRenters) {
-      DateTime startDate = DateFormat('yyyy-MM-dd hh:mm:ss').parse(ir.startDate);
-      DateTime endDate = DateFormat('yyyy-MM-dd hh:mm:ss').parse(ir.endDate);
+      DateTime startDate = DateFormat('yyyy-MM-dd HH:mm:ss').parse(ir.startDate);
+      DateTime endDate = DateFormat('yyyy-MM-dd HH:mm:ss').parse(ir.endDate);
       String itemId = ir.itemId;
       if (now.isBefore(startDate)) {
         if (Provider.of<ItemStore>(context, listen: false).fittings.contains(itemId)) {
@@ -128,7 +128,7 @@ class _FittingState extends State<Fitting> {
       }
 
     }
-    DateTime startTimeToBlock = DateFormat('hh:mm').parse('10:00');
+    DateTime startTimeToBlock = DateFormat('HH:mm').parse('10:00');
     DateTime endTimeToBlock = now;
     converted.add(DateTimeRange(start: startTimeToBlock, end: endTimeToBlock)) ;
     return converted;
@@ -250,62 +250,6 @@ class _FittingState extends State<Fitting> {
           ],
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   decoration: BoxDecoration(
-      //     color: Colors.white,
-      //     border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
-      //     boxShadow: [
-      //       BoxShadow(
-      //         color: Colors.black.withOpacity(0.2),
-      //         blurRadius: 10,
-      //         spreadRadius: 3,
-      //       )
-      //     ],
-      //   ),
-      //   padding: const EdgeInsets.all(10),
-      //   child: Row(
-      //     children: [
-      //       if (pickedDate != null)
-      //         Expanded(
-      //           child: OutlinedButton(
-      //             onPressed: () {},
-      //             style: OutlinedButton.styleFrom(
-      //               shape: RoundedRectangleBorder(
-      //                 borderRadius: BorderRadius.circular(1.0),
-      //               ),
-      //               side: const BorderSide(width: 1.0, color: Colors.black),
-      //             ),
-      //             child: const Padding(
-      //               padding: EdgeInsets.all(8.0),
-      //               child: StyledHeading('CONTINUE',
-      //                   weight: FontWeight.bold, color: Colors.grey),
-      //             ),
-      //           ),
-      //         ),
-      //       const SizedBox(width: 5),
-      //       if (pickedDate == null)
-      //         Expanded(
-      //           child: OutlinedButton(
-      //             onPressed: () async {
-      //               log('MOVING ON');
-      //               // ready = false;
-      //             },
-      //             style: OutlinedButton.styleFrom(
-      //               backgroundColor: Colors.black,
-      //               shape: RoundedRectangleBorder(
-      //                 borderRadius: BorderRadius.circular(1.0),
-      //               ),
-      //               side: const BorderSide(width: 1.0, color: Colors.black),
-      //             ),
-      //             child: const Padding(
-      //               padding: EdgeInsets.all(8.0),
-      //               child: StyledHeading('CONTINUE', color: Colors.white),
-      //             ),
-      //           ),
-      //         ),
-      //     ],
-      //   ),
-      // ),
     );
   }
     showAlertDialog(BuildContext context) {

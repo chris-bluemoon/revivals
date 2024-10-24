@@ -37,7 +37,7 @@ class _MyHistoryFittingsListState extends State<MyHistoryFittingsList> {
     // List<Item> allItems = List.from(Provider.of<ItemStore>(context, listen: false).items);
     log('Count of fittingRenters is ${allFittingRenters.length.toString()}');
     for (FittingRenter dr in allFittingRenters) {
-      DateTime convertedDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(dr.bookingDate) ;
+      DateTime convertedDate = DateFormat('yyyy-MM-ddTHH:mm:ss').parse(dr.bookingDate) ;
       log('Checking renterId ${dr.renterId} against userEmail $userEmail');
       if (dr.renterId == userEmail && convertedDate.isBefore(DateTime.now())) {
           historyFittingsList.add(dr);
