@@ -60,7 +60,7 @@ class _SignIn extends State<SignIn> {
           countryCode: '+66',
           phoneNum: '',
           favourites: [''],
-          fittings: [''],
+          fittings: [],
           settings: ['BANGKOK', 'CM', 'CM', 'KG'],
         ));
         Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
@@ -72,7 +72,7 @@ class _SignIn extends State<SignIn> {
           countryCode: '+66',
           phoneNum: '',
           favourites: [''],
-          fittings: [''],
+          fittings: [],
           settings: ['BANGKOK', 'CM', 'CM', 'KG'],
         ));
       }

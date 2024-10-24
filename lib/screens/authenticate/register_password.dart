@@ -102,7 +102,7 @@ class _RegisterPassword extends State<RegisterPassword> {
           countryCode: '+66',
           phoneNum: '',
           favourites: [''],
-          fittings: [''],
+          fittings: [],
           settings: ['BANGKOK', 'CM', 'CM', 'KG'],
         ));
         log('Assigning user');
@@ -116,7 +116,7 @@ class _RegisterPassword extends State<RegisterPassword> {
           countryCode: '+66',
           phoneNum: '',
           favourites: [''],
-          fittings: [''],
+          fittings: [],
           settings: ['BANGKOK', 'CM', 'CM', 'KG'],
         ));
       }

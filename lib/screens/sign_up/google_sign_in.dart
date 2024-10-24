@@ -58,7 +58,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       countryCode: '+66',
       phoneNum: '',
       favourites: [''],
-      fittings: [''],
+      fittings: [],
       settings: ['BANGKOK','CM','CM','KG'],
     ));
     log('Assigning user');
@@ -72,7 +72,7 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       countryCode: '+66',
       phoneNum: '',
       favourites: [''],
-      fittings: [''],
+      fittings: [],
       settings: ['BANGKOK','CM','CM','KG'],
     ));
     }
