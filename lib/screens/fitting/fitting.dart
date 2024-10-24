@@ -112,8 +112,10 @@ class _FittingState extends State<Fitting> {
     DateTime first = now;
     converted.add(DateTimeRange(start: first, end: now.add(const Duration(minutes: 5))));
     for (FittingRenter fr in Provider.of<ItemStore>(context, listen: false).fittingRenters) {
-      DateTime startDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(fr.bookingDate);
-      converted.add(DateTimeRange(start: startDate, end: startDate.add(const Duration(minutes: 59))));
+      if (fr.status != 'cancelled') {
+        DateTime startDate = DateFormat('yyyy-MM-ddThh:mm:ss').parse(fr.bookingDate);
+        converted.add(DateTimeRange(start: startDate, end: startDate.add(const Duration(minutes: 59))));
+      }
     }
     for (ItemRenter ir in Provider.of<ItemStore>(context, listen: false).itemRenters) {
       DateTime startDate = DateFormat('yyyy-MM-dd hh:mm:ss').parse(ir.startDate);
