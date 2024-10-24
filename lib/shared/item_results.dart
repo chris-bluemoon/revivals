@@ -256,7 +256,7 @@ class _ItemResultsState extends State<ItemResults> {
                     ],
                   ))
               : const NoItemsFound(),
-          floatingActionButton: FloatingActionButton(
+          floatingActionButton: (widget.attribute == 'fitting') ? FloatingActionButton(
                     onPressed: () {
                       if (Provider.of<ItemStore>(context, listen: false).renter.fittings.length != 0) {
                        Navigator.of(context).push(MaterialPageRoute(
@@ -273,7 +273,7 @@ class _ItemResultsState extends State<ItemResults> {
                       largeSize: 20,
                       textStyle: const TextStyle(fontSize: 16),
                       child: const Icon(Icons.shopping_bag_outlined, size: 40),
-                    )));
+                    )) : null);
       }
     );
   }
