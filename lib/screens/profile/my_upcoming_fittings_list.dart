@@ -59,7 +59,7 @@ class _MyUpcomingFittingsListState extends State<MyUpcomingFittingsList> {
           padding: EdgeInsets.all(width*0.01),
           itemCount: upcomingFittingsList.length,
           itemBuilder: (BuildContext context, int index) {
-            return (upcomingFittingsList.isNotEmpty) ? MyFittingsImageWidget(upcomingFittingsList[index], upcomingFittingsList[index].itemArray, upcomingFittingsList[index].bookingDate, upcomingFittingsList[index].price, upcomingFittingsList[index].status)
+            return (upcomingFittingsList.isNotEmpty) ? MyUpcomingFittingsImageWidget(upcomingFittingsList[index], upcomingFittingsList[index].itemArray, upcomingFittingsList[index].bookingDate, upcomingFittingsList[index].price, upcomingFittingsList[index].status)
               : const Text('NO BOOKINGS');
         });
         }

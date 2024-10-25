@@ -263,17 +263,17 @@ class ItemStore extends ChangeNotifier {
       notifyListeners();
     }
   }
+  void deleteItems() async {
+      await FirestoreService.deleteItems();
+      _items.clear();
+  }
   void deleteItemRenters() async {
-    if (itemRenters.length > 0) {
       await FirestoreService.deleteItemRenters();
       _itemRenters.clear();
   }
-  }
   void deleteFittingRenters() async {
-    if (fittingRenters.length > 0) {
       await FirestoreService.deleteFittingRenters();
       _fittingRenters.clear();
-  }
   }
 
   // initially fetch renters

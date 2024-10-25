@@ -25,7 +25,8 @@ class MyTransactionsAdminImageWidget extends StatelessWidget {
   late String itemName;
   late String brandName;
   late String imageName;
-  late Item item;
+  Item item = Item(id: '-', type: 'dress', bookingType: 'rental', dateAdded: '01-01-2023', occasion: ['party'], style: 'classic', name: 'MISSING', brand: 'MISSING', colour: ['Black'], size: ['8'], length: 'midi', print: 'none', sleeve: 'short sleeve', rentPrice: 1200, buyPrice: 0, rrp: 16000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: '', imageId: '', );
+
 
 
   String setItemImage() {
@@ -73,7 +74,7 @@ class MyTransactionsAdminImageWidget extends StatelessWidget {
       1,
       0,
     ]);
-    if (fromDate.isBefore(DateTime.now().add(const Duration(days: 1))) && item.bookingType == 'rental') {
+    if (fromDate.isAfter(DateTime.now().add(const Duration(days: 1))) && item.bookingType == 'rental') {
       greyscale = const ColorFilter.matrix(<double>[
         0.2126,
         0.7152,

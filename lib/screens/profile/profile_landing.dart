@@ -5,11 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/item.dart';
 import 'package:unearthed/screens/help_centre/faqs.dart';
-import 'package:unearthed/screens/profile/admin_bookings.dart';
-import 'package:unearthed/screens/profile/admin_fittings.dart';
 import 'package:unearthed/screens/profile/my_account.dart';
+import 'package:unearthed/screens/profile/my_admin.dart';
 import 'package:unearthed/screens/profile/my_fittings.dart';
 import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/screens/profile/settings.dart';
@@ -30,43 +28,7 @@ class ProfileLanding extends StatefulWidget {
 }
 
 class _ProfileLandingState extends State<ProfileLanding> {
-    void handleDelete() {
-      Provider.of<ItemStore>(context, listen: false).deleteItemRenters();
-    }
-    void handleFittingDelete() {
-      Provider.of<ItemStore>(context, listen: false).deleteFittingRenters();
-    }
-    void handleSubmit() {
-      log('Size of allItems: ${allItems.length}');
-    for (var i = 0; i < allItems.length; i++) {
-      Provider.of<ItemStore>(context, listen: false).addItem(Item(
-        id: uuid.v4(),
-        type: allItems[i].type,
-        bookingType: allItems[i].bookingType,
-        occasion: allItems[i].occasion,
-        dateAdded: allItems[i].dateAdded,
-        style: allItems[i].style,
-        name: allItems[i].name,
-        brand: allItems[i].brand,
-        colour: allItems[i].colour,
-        size: allItems[i].size,
-        length: allItems[i].length,
-        print: allItems[i].print,
-        sleeve: allItems[i].sleeve,
-        rentPrice: allItems[i].rentPrice,
-        buyPrice: allItems[i].buyPrice,
-        rrp: allItems[i].rrp,
-        description: allItems[i].description,
-        bust: allItems[i].bust,
-        waist: allItems[i].waist,
-        hips: allItems[i].hips,
-        longDescription: allItems[i].longDescription,
-        imageId: allItems[i].imageId,
-        // isFav: allItems[i].isFav,
-    ));
-    }
 
-  }
   Future<void> shareApp() async {
     log('Sharing a link');
     const String appLink = 'https://my google play link';
@@ -315,65 +277,25 @@ class _ProfileLandingState extends State<ProfileLanding> {
                 ),
                 SizedBox(height: width * 0.04),
                 Divider(
-                  height: width * 0.05,
+                  height: width * 0.1,
                   indent: 50,
-                  color: Colors.grey[200],
+                  endIndent: 50,
+                  color: Colors.black,
                 ),
                 if (admin) GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => (const AdminBookings())));
+                        builder: (context) => (const MyAdmin())));
                   },
                   child: Row(
                     children: [
                       SizedBox(width: width * 0.01),
                       Icon(Icons.description_outlined, size: width * 0.05),
                       SizedBox(width: width * 0.01),
-                      const StyledBody('ADMIN: CHECK ORDERS', weight: FontWeight.normal),
+                      const StyledBody('ADMIN', weight: FontWeight.normal),
                     ],
                   ),
                 ),
-                                SizedBox(height: width * 0.04),
-                Divider(
-                  height: width * 0.05,
-                  indent: 50,
-                  color: Colors.grey[200],
-                ),
-                if (admin) GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => (const AdminFittings())));
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(width: width * 0.01),
-                      Icon(Icons.description_outlined, size: width * 0.05),
-                      SizedBox(width: width * 0.01),
-                      const StyledBody('ADMIN: CHECK FITTINGS', weight: FontWeight.normal),
-                    ],
-                  ),
-                ),
-                if (admin) TextButton (
-                  onPressed: () {
-                    handleSubmit();
-                    // addItemsAll();
-                  },
-                  child: const Text('ADD'),
-                ),
-                              if (admin) TextButton (
-                  onPressed: () {
-                    handleDelete();
-                    // addItemsAll();
-                  },
-                  child: const Text('DELETE ITEMRENTERS'),
-                ),
-                                              if (admin) TextButton (
-                  onPressed: () {
-                    handleFittingDelete();
-                    // addItemsAll();
-                  },
-                  child: const Text('DELETE FITTING RENTERS'),
-                )
               ],
             );
           } else {

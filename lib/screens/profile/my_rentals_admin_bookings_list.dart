@@ -30,23 +30,14 @@ class _MyRentalsAdminBookingsListState extends State<MyRentalsAdminBookingsList>
   
   void loadMyRentalsAdminBookingsList() {
     log('Loading loadMyRentalsAdminBookingsList');
-    // get current user
     String userEmail = Provider.of<ItemStore>(context, listen: false).renter.email;
-    // log('User email: $userEmail');
-    // List<ItemRenter> myItemRenters = Provider.of<ItemStore>(context, listen: false).itemRenters;
     List<ItemRenter> allItemRenters = List.from(Provider.of<ItemStore>(context, listen: false).itemRenters);
-    // List<Item> allItems = List.from(Provider.of<ItemStore>(context, listen: false).items);
     for (ItemRenter dr in allItemRenters) {
       if (dr.renterId == userEmail) {
         if (dr.transactionType == 'rental') {
           myRentalsList.add(dr);
           log('Rented: ${dr.itemId}');
         }
-        // for (Item d in allItems) {
-        //   if (d.id == dr.itemId) {
-        //     myItems.add(d);
-        //   }
-        // }
       }
     }
     if (myRentalsList.isEmpty) {
@@ -57,7 +48,7 @@ class _MyRentalsAdminBookingsListState extends State<MyRentalsAdminBookingsList>
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    // String address = Provider.of<ItemStore>(context, listen: false).renters[0].address;
+
     return Consumer<ItemStore>(
           builder: (context, value, child) {
       return ListView.builder(

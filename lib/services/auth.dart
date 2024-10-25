@@ -58,8 +58,8 @@ class AuthService {
       await _auth.sendPasswordResetEmail(email: email);
       return true;
     } catch(e) {
-      log('User creation error ${e.toString()}');
-      return null;
+      log('Possible email not found: ${e.toString()}');
+      return false;
     }
   }
 

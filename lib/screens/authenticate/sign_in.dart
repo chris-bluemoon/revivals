@@ -155,8 +155,12 @@ class _SignIn extends State<SignIn> {
                             }),
             SizedBox(height: width * 0.05),
             GestureDetector(
-              onTap: () {
-                _auth.sendPasswordReset(email);
+              onTap: () async {
+                bool res = await _auth.sendPasswordReset(email);
+                log('res is: ${res.toString()}');
+                if (res == false) {
+                  showAlertDialogError(context);
+                }
               },
               child: const StyledBody('Forgotten password?')),
                       ],
@@ -278,99 +282,130 @@ class _SignIn extends State<SignIn> {
               ],
             ),
           ),   
-      // bottomNavigationBar: Container(
-      //   decoration: BoxDecoration(
-      //     color: Colors.white,
-      //     border: Border.all(color: Colors.black.withOpacity(0.3), width: 1),
-      //     boxShadow: [
-      //       BoxShadow(
-      //         color: Colors.black.withOpacity(0.2),
-      //         blurRadius: 10,
-      //         spreadRadius: 3,
-      //       )
-      //     ],
-      //   ),
-      //   padding: const EdgeInsets.all(10),
-      //   child: Row(
-      //     children: [
-      //       Expanded(
-      //         child: OutlinedButton(
-      //           onPressed: () async {
-      //             if (_formKey.currentState!.validate()) {
-      //               setState(() => loading = true);
-      //               dynamic result =
-      //                   await _auth.signInWithEmailAndPassword(email, password);
-      //               if (result == null) {
-      //                 setState(() => loading = false);
-      //                 showDialog(
-      //                   barrierDismissible: false,
-      //                   context: context,
-      //                   builder: (_) => AlertDialog(
-      //                     shape: const RoundedRectangleBorder(
-      //                         borderRadius:
-      //                             BorderRadius.all(Radius.circular(0))),
-      //                     actions: [
-      //                       // ElevatedButton(
-      //                       // onPressed: () {cancelLogOut(context);},
-      //                       // child: const Text('CANCEL', style: TextStyle(color: Colors.black)),),
-      //                       ElevatedButton(
-      //                         style: ButtonStyle(
-      //                             foregroundColor:
-      //                                 WidgetStateProperty.all(Colors.white),
-      //                             backgroundColor:
-      //                                 const WidgetStatePropertyAll<Color>(
-      //                                     Colors.black),
-      //                             shape: WidgetStateProperty.all<
-      //                                     RoundedRectangleBorder>(
-      //                                 const RoundedRectangleBorder(
-      //                                     borderRadius: BorderRadius.all(
-      //                                         Radius.circular(0)),
-      //                                     side: BorderSide(
-      //                                         color: Colors.black)))),
-      //                         onPressed: () {
-      //                           setState(() {
-      //                             Navigator.pop(context);
-      //                           });
-      //                           // goBack(context);
-      //                         },
-      //                         child: const StyledHeading(
-      //                           'OK',
-      //                           weight: FontWeight.normal,
-      //                           color: Colors.white,
-      //                         ),
-      //                       ),
-      //                     ],
-      //                     backgroundColor: Colors.white,
-      //                     title: const Center(
-      //                         child: StyledHeading("Error Signing In",
-      //                             weight: FontWeight.normal)),
-      //                   ),
-      //                 );
-      //                         setState(() {
-      //                           log('Setting password to nothing');
-      //                           _formKey.currentState!.reset();
-      //                         });
-      //               } else {
-      //                 handleNewLogIn(email, password);
-      //                 log('Popping to first');
-      //                 Navigator.of(context).popUntil((route) => route.isFirst);
-      //               }
-      //             }
-      //           },
-      //           style: OutlinedButton.styleFrom(
-      //             padding: const EdgeInsets.all(10),
-      //             backgroundColor: Colors.black,
-      //             shape: RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(1.0),
-      //             ),
-      //             side: const BorderSide(width: 1.0, color: Colors.black),
-      //           ),
-      //           child: const StyledHeading('SIGN IN', color: Colors.white),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+    );
+  }
+  showAlertDialogError(BuildContext context) {
+    // Create button
+    double width = MediaQuery.of(context).size.width;
+
+    Widget okButton = ElevatedButton(
+      style: OutlinedButton.styleFrom(
+        textStyle: const TextStyle(color: Colors.white),
+        foregroundColor: Colors.white, //change background color of button
+        backgroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(-1.0),
+        ),
+        side: const BorderSide(width: 0.0, color: Colors.black),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        // Navigator.of(context).popUntil((route) => route.isFirst);
+      },
+      child: const Center(child: StyledBody("OK", color: Colors.white)),
+    );
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Center(child: StyledHeading('EMAIL NOT FOUND')),
+      content: SizedBox(
+        height: width * 0.1,
+        child: const Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody('Please check email',
+                    weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody('and try again',
+                    weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(-1.0)),
+      ),
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+     showAlertDialog(BuildContext context) {
+    // Create button
+    double width = MediaQuery.of(context).size.width;
+
+    Widget okButton = ElevatedButton(
+      style: OutlinedButton.styleFrom(
+        textStyle: const TextStyle(color: Colors.white),
+        foregroundColor: Colors.white, //change background color of button
+        backgroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(-1.0),
+        ),
+        side: const BorderSide(width: 0.0, color: Colors.black),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        // Navigator.of(context).popUntil((route) => route.isFirst);
+      },
+      child: const Center(child: StyledBody("OK", color: Colors.white)),
+    );
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Center(child: StyledHeading('PASSWORD RESET SENT')),
+      content: SizedBox(
+        height: width * 0.1,
+        child: const Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody('Check your registered',
+                    weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                StyledBody('email to reset password',
+                    weight: FontWeight.normal),
+                // Text("Your $itemType is being prepared,"),
+                // Text("please check your email for confirmation."),
+              ],
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        okButton,
+      ],
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(-1.0)),
+      ),
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

@@ -25,7 +25,7 @@ class MyTransactionsImageWidget extends StatelessWidget {
   late String itemName;
   late String brandName;
   late String imageName;
-  late Item item;
+  Item item = Item(id: '-', type: 'dress', bookingType: 'rental', dateAdded: '01-01-2023', occasion: ['party'], style: 'classic', name: 'MISSING', brand: 'MISSING', colour: ['Black'], size: ['8'], length: 'midi', print: 'none', sleeve: 'short sleeve', rentPrice: 1200, buyPrice: 0, rrp: 16000, description: 'Short Description', bust: '', waist: '', hips: '', longDescription: '', imageId: '', );
 
 
   String setItemImage() {
@@ -73,7 +73,7 @@ class MyTransactionsImageWidget extends StatelessWidget {
       1,
       0,
     ]);
-    if (fromDate.isBefore(DateTime.now().add(const Duration(days: 1))) && item.bookingType == 'rental') {
+    if (fromDate.isAfter(DateTime.now().add(const Duration(days: 1))) && item.bookingType == 'rental') {
       greyscale = const ColorFilter.matrix(<double>[
         0.2126,
         0.7152,
@@ -99,6 +99,8 @@ class MyTransactionsImageWidget extends StatelessWidget {
     } else {
       greyscale = const ColorFilter.mode(Colors.transparent, BlendMode.multiply);
     }
+    // Ignoreing greyscale by adding the below, sort this out later
+    // greyscale = const ColorFilter.mode(Colors.transparent, BlendMode.multiply);
     return Card(
       margin: EdgeInsets.only(bottom: width*0.04),
       shape: BeveledRectangleBorder(

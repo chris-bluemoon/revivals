@@ -61,7 +61,7 @@ class MyFittingsAdminImageWidget extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(
-                      width: width * 0.2,
+                      width: width * 0.6,
                       child: StyledBody(fittingRenter.renterId, color: Colors.grey, weight: FontWeight.normal)),
                     SizedBox(width: width * 0.01),
                   ],

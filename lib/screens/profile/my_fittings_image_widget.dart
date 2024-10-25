@@ -3,13 +3,12 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/fitting_renter.dart';
-import 'package:unearthed/models/item.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 
-class MyFittingsImageWidget extends StatefulWidget {
-  const MyFittingsImageWidget(this.fittingRenter, this.itemIds, this.bookingDate, this.price, this.status,
+class MyUpcomingFittingsImageWidget extends StatefulWidget {
+  const MyUpcomingFittingsImageWidget(this.fittingRenter, this.itemIds, this.bookingDate, this.price, this.status,
       {super.key});
 
   final FittingRenter fittingRenter;
@@ -19,21 +18,11 @@ class MyFittingsImageWidget extends StatefulWidget {
   final String status;
 
   @override
-  State<MyFittingsImageWidget> createState() => _MyFittingsImageWidgetState();
+  State<MyUpcomingFittingsImageWidget> createState() => _MyUpcomingFittingsImageWidgetState();
 }
 
-class _MyFittingsImageWidgetState extends State<MyFittingsImageWidget> {
+class _MyUpcomingFittingsImageWidgetState extends State<MyUpcomingFittingsImageWidget> {
   String imageName = '';
-
-  late Item item;
-
-  String setItemImage() {
-    String itemType = toBeginningOfSentenceCase(item.type.replaceAll(RegExp(' +'), '_'));
-    String itemName = item.name.replaceAll(RegExp(' +'), '_');
-    String brandName = item.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
-    return imageName;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +47,7 @@ class _MyFittingsImageWidgetState extends State<MyFittingsImageWidget> {
                     Row(
                       children: [
                         SizedBox(
-                          width: width * 0.2,
+                          width: width * 0.6,
                           child: const StyledBody('Date', color: Colors.grey, weight: FontWeight.normal)),
                         SizedBox(width: width * 0.01),
                         // StyledBody(DateFormat('yyyy-MM-dd').format(convertedDate), color: Colors.grey, weight: FontWeight.normal),

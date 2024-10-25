@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:unearthed/globals.dart' as globals;
 import 'package:unearthed/models/fitting_renter.dart';
-import 'package:unearthed/models/item.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 
 class MyHistoryFittingsImageWidget extends StatelessWidget {
 
-  MyHistoryFittingsImageWidget(this.fittingRenter, this.itemIds, this.bookingDate, this.price, this.status,
+  const MyHistoryFittingsImageWidget(this.fittingRenter, this.itemIds, this.bookingDate, this.price, this.status,
       {super.key});
 
   final FittingRenter fittingRenter;
@@ -16,21 +15,6 @@ class MyHistoryFittingsImageWidget extends StatelessWidget {
   final String bookingDate;
   final int price;
   final String status;
-
-  late String itemType;
-  late String itemName;
-  late String brandName;
-  late String imageName;
-  late Item item;
-
-
-  String setItemImage() {
-    itemType = toBeginningOfSentenceCase(item.type.replaceAll(RegExp(' +'), '_'));
-    itemName = item.name.replaceAll(RegExp(' +'), '_');
-    brandName = item.brand.replaceAll(RegExp(' +'), '_');
-    imageName = '${brandName}_${itemName}_${itemType}_1.jpg';
-    return imageName;
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -102,6 +102,16 @@ class FirestoreService {
     );
   }
   
+  static deleteItems() {
+  FirebaseFirestore.instance
+    .collection('item').get().then((snapshot) {
+      log('Deleting items firestore service');
+      for (DocumentSnapshot i in snapshot.docs) {
+        log('DELETED ITEMS');
+        i.reference.delete();
+      }
+    });
+  }
   static deleteItemRenters() {
   FirebaseFirestore.instance
     .collection('itemRenter').get().then((snapshot) {
