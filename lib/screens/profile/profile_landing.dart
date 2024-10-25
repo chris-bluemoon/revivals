@@ -11,6 +11,7 @@ import 'package:unearthed/screens/profile/my_admin.dart';
 import 'package:unearthed/screens/profile/my_fittings.dart';
 import 'package:unearthed/screens/profile/my_transactions.dart';
 import 'package:unearthed/screens/profile/settings.dart';
+import 'package:unearthed/screens/profile/verify_id.dart';
 import 'package:unearthed/screens/sign_up/google_sign_in.dart';
 import 'package:unearthed/services/class_store.dart';
 import 'package:unearthed/shared/line.dart';
@@ -179,6 +180,26 @@ class _ProfileLandingState extends State<ProfileLanding> {
                       Icon(Icons.settings_outlined, size: width * 0.05),
                       SizedBox(width: width * 0.01),
                       const StyledBody('SETTINGS', weight: FontWeight.normal),
+                    ],
+                  ),
+                ),
+                      Divider(
+                  height: width * 0.05,
+                  indent: 50,
+                  color: Colors.grey[200],
+                ),
+      
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => (const VerifyId())));
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(width: width * 0.01),
+                      Icon(Icons.verified_user_outlined, size: width * 0.05),
+                      SizedBox(width: width * 0.01),
+                      const StyledBody('VERIFY ID', weight: FontWeight.normal),
                     ],
                   ),
                 ),
