@@ -217,7 +217,7 @@ Widget createImage(String imageName) {
                       Renter toSave = Provider.of<ItemStore>(context, listen: false).renter;
                       toSave.favourites.add(widget.item.id);
                       Provider.of<ItemStore>(context, listen: false).saveRenter(toSave);
-                      Provider.of<ItemStore>(context, listen: false).addFavourite(widget.item.id);
+                      Provider.of<ItemStore>(context, listen: false).addFavourite(widget.item);
                     }
                   ),
                 if (widget.isFittingScreen) (isFit) ? IconButton(

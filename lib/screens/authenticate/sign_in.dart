@@ -76,6 +76,10 @@ class _SignIn extends State<SignIn> {
           settings: ['BANGKOK', 'CM', 'CM', 'KG'],
         ));
       }
+          log('Populating favs');
+    Provider.of<ItemStore>(context, listen: false).populateFavourites();
+    log('Populating fits');
+    Provider.of<ItemStore>(context, listen: false).populateFittings();
     }
 
     return loading ? const Loading() : Scaffold(

@@ -181,6 +181,7 @@ class ItemStore extends ChangeNotifier {
       _favourites.clear();
       for (Item d in _items) {
         if (favs.contains(d.id)) {
+          log('Adding a fav');
           _favourites.add(d);
         }
       }

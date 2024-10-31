@@ -11,6 +11,7 @@ import 'package:unearthed/screens/fitting/fitting_item_image.dart';
 import 'package:unearthed/screens/fitting/fitting_summary.dart';
 import 'package:unearthed/screens/profile/my_fittings.dart';
 import 'package:unearthed/services/class_store.dart';
+import 'package:unearthed/shared/send_email2.dart';
 import 'package:unearthed/shared/styled_text.dart';
 
 class Fitting extends StatefulWidget {
@@ -61,6 +62,22 @@ class _FittingState extends State<Fitting> {
     return imageName;
   }
 
+  String getDressNames() {
+    List<String> allNames = [];
+
+    for (Item dress in allItemsWithID) {
+      for (String fittingId in fittingIds) {
+        log('Checkign IDS $fittingId vs ${dress.id}');
+        if (dress.id == fittingId) {
+          log('Adding dress named ${dress.name}');
+          allNames.add(dress.name);
+        }
+      }
+    }
+
+    return allNames.join(' - ');
+  }
+
   @override
   void initState() {
     super.initState();
@@ -96,10 +113,15 @@ class _FittingState extends State<Fitting> {
 
     String email = Provider.of<ItemStore>(context, listen: false).renter.email;
     String bookingDate = newBooking.toJson()['bookingStart'].toString();
+    DateTime convertedDate = DateFormat('yyyy-MM-ddTHH:mm:ss').parse(bookingDate) ;
+    String dateString1 = DateFormat('E, d MMMM y').format(convertedDate);
+    String dateString2 = DateFormat('HH:ss').format(convertedDate);
+    String uname = Provider.of<ItemStore>(context, listen: false).renter.name;
     handleSubmit(email, fittingIds, bookingDate, 100, 'booked');
 
     log('${newBooking.toJson()} has been uploaded');
     Provider.of<ItemStore>(context, listen: false).clearFittings();
+    EmailComposer2(emailAddress: email, userName: uname, bookingDate: '$dateString1 at $dateString2', dresses: getDressNames()).sendFittingEmail();
     showAlertDialog(context);
   }
 
@@ -217,34 +239,26 @@ class _FittingState extends State<Fitting> {
               ],
             ),
             Center(
-              child: SizedBox(
-                height: width * 1,
-                child: BookingCalendar(
-                  // disabledDates: [DateTime.now()],
-                  bookingButtonColor: Colors.black,
-                  bookingService: mockBookingService,
-                  convertStreamResultToDateTimeRanges: convertStreamResultMock,
-                  getBookingStream: getBookingStreamMock,
-                  uploadBooking: uploadBookingMock,
-                  // pauseSlots: generatePauseSlots(),
-                  pauseSlots: const [],
-                  pauseSlotText: 'LUNCH',
-                  gridScrollPhysics: const NeverScrollableScrollPhysics(), 
-        
-                  hideBreakTime: true,
-                  loadingWidget: const Text('Fetching data...'),
-                  uploadingWidget: const CircularProgressIndicator(),
-                  // locale: 'hu_HU',
-                  startingDayOfWeek: StartingDayOfWeek.monday,
-                  wholeDayIsBookedWidget:
-                      const Text('Sorry, for this day everything is booked'),
-                  //disabledDates: [DateTime(2023, 1, 20)],
-                  //disabledDays: [6, 7],
-                  bookedSlotTextStyle: TextStyle(fontSize: width * 0.02),
-                  availableSlotTextStyle: TextStyle(fontSize: width * 0.02),
-                  selectedSlotTextStyle: TextStyle(fontSize: width * 0.02),
-                  bookingGridCrossAxisCount: 5,
-                ),
+              child: BookingCalendar(
+                bookingButtonColor: Colors.black,
+                bookingService: mockBookingService,
+                convertStreamResultToDateTimeRanges: convertStreamResultMock,
+                getBookingStream: getBookingStreamMock,
+                uploadBooking: uploadBookingMock,
+                pauseSlots: const [],
+                pauseSlotText: 'LUNCH',
+                gridScrollPhysics: const NeverScrollableScrollPhysics(), 
+                hideBreakTime: true,
+                loadingWidget: const Text('Fetching data...'),
+                uploadingWidget: const CircularProgressIndicator(),
+                startingDayOfWeek: StartingDayOfWeek.monday,
+                wholeDayIsBookedWidget:
+                const StyledHeading('Sorry, for this day everything is booked'),
+                bookedSlotTextStyle: TextStyle(fontSize: width * 0.03),
+                availableSlotTextStyle: TextStyle(fontSize: width * 0.03),
+                selectedSlotTextStyle: TextStyle(fontSize: width * 0.03),
+                bookingGridCrossAxisCount: 4,
+                bookingGridChildAspectRatio: 1.5,
               ),
             ),
           ],

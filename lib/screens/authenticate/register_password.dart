@@ -120,6 +120,10 @@ class _RegisterPassword extends State<RegisterPassword> {
           settings: ['BANGKOK', 'CM', 'CM', 'KG'],
         ));
       }
+        log('Populating favs');
+        Provider.of<ItemStore>(context, listen: false).populateFavourites();
+        log('Populating fits');
+        Provider.of<ItemStore>(context, listen: false).populateFittings();
     }
 
     // NEW PASSWORD CODE

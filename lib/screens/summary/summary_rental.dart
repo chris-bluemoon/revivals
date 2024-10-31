@@ -198,17 +198,17 @@ class _SummaryRentalState extends State<SummaryRental> {
                     String endDateTextForEmail =
                         DateFormat('yMMMd').format(widget.endDate);
                     EmailComposer2(
-                            email,
-                            widget.item.type,
-                            name,
-                            widget.item.name,
-                            widget.item.brand,
-                            startDateTextForEmail,
-                            endDateTextForEmail,
-                            widget.deliveryPrice.value,
-                            widget.price.toString(),
-                            widget.item.rentPrice.toString(),
-                            widget.item.imageId)
+                            emailAddress: email,
+                            itemType: widget.item.type,
+                            userName: name,
+                            itemName: widget.item.name,
+                            itemBrand: widget.item.brand,
+                            startDate: startDateTextForEmail,
+                            endDate: endDateTextForEmail,
+                            deliveryPrice: widget.deliveryPrice.value,
+                            price: widget.price.toString(),
+                            deposit: widget.item.rentPrice.toString(),
+                            gd_image_id: widget.item.imageId)
                         .sendEmail2();
                     showAlertDialog(context, widget.item.type, width);
                     // Navigator.of(context).push(MaterialPageRoute(

@@ -76,6 +76,10 @@ class _GoogleSignInScreenState extends State<GoogleSignInScreen> {
       settings: ['BANGKOK','CM','CM','KG'],
     ));
     }
+    log('Populating favs');
+    Provider.of<ItemStore>(context, listen: false).populateFavourites();
+    log('Populating fits');
+    Provider.of<ItemStore>(context, listen: false).populateFittings();
   }
 
   @override

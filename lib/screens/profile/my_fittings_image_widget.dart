@@ -47,10 +47,11 @@ class _MyUpcomingFittingsImageWidgetState extends State<MyUpcomingFittingsImageW
                     Row(
                       children: [
                         SizedBox(
-                          width: width * 0.6,
+                          width: width * 0.2,
                           child: const StyledBody('Date', color: Colors.grey, weight: FontWeight.normal)),
                         SizedBox(width: width * 0.01),
                         // StyledBody(DateFormat('yyyy-MM-dd').format(convertedDate), color: Colors.grey, weight: FontWeight.normal),
+                        // const StyledBody('TEST'),
                         StyledBody(DateFormat('E, d MMMM y').format(convertedDate), color: Colors.grey, weight: FontWeight.normal),
                       ],
                     ),
