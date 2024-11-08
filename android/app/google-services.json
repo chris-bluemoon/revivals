@@ -14,11 +14,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "532886439020-6b830pq75fngj19rtk0k2jsae9qvqdkm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sg.bluemoon.unearthed",
+            "certificate_hash": "32862912dc818dedf47401d4c47f7f4b5542ebc2"
+          }
+        },
+        {
           "client_id": "532886439020-au4f5r1p71ve1cf99fh2ph2mkahvdc57.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "sg.bluemoon.unearthed",
             "certificate_hash": "ee789ff5fd22c10ced39e0e498c4558265853510"
+          }
+        },
+        {
+          "client_id": "532886439020-d16voulava7s349mlg4rohrmg568qu9b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sg.bluemoon.unearthed",
+            "certificate_hash": "c531ecff87eb1171222bba6f76097e50bbd89f35"
           }
         },
         {
@@ -37,6 +53,13 @@
             {
               "client_id": "532886439020-oek3eib37q6u3n7b9f2rc3a48a5st30o.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "532886439020-52h926mukuq19kdo645c6qgn4vfdt14k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sg.bluemoon.unearthed"
+              }
             }
           ]
         }
