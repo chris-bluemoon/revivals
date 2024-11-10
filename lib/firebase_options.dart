@@ -59,13 +59,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCo_erOILlJmrIfAUoipR1VoYSLyxukE8k',
-    appId: '1:532886439020:ios:3198a3e9443f5809c58449',
+    appId: '1:532886439020:ios:faf1483c71519899c58449',
     messagingSenderId: '532886439020',
     projectId: 'unearthed2-5343a',
     storageBucket: 'unearthed2-5343a.appspot.com',
-    androidClientId: '532886439020-au4f5r1p71ve1cf99fh2ph2mkahvdc57.apps.googleusercontent.com',
-    iosClientId: '532886439020-n067nc99esfalbn0nqi8ivimjf3nmpus.apps.googleusercontent.com',
-    iosBundleId: 'com.example.unearthed',
+    androidClientId: '532886439020-6b830pq75fngj19rtk0k2jsae9qvqdkm.apps.googleusercontent.com',
+    iosClientId: '532886439020-52h926mukuq19kdo645c6qgn4vfdt14k.apps.googleusercontent.com',
+    iosBundleId: 'sg.bluemoon.unearthed',
   );
 
 }
