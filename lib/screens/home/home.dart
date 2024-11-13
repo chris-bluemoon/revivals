@@ -87,21 +87,35 @@ class _HomeState extends State<Home> {
                 ),
               ),
 
-              // Now display the first home page widget, for now a simple icon button
+              // // Now display the first home page widget, for now a simple icon button
+              // SizedBox(height: width * 0.02),
+              // const Padding(
+              //   padding: EdgeInsets.only(left: 12.0),
+              //   child: StyledHeading(
+              //     'ALL ITEMS',
+              //   ),
+              // ),
+              // GestureDetector(
+              //   onTap: () {
+              //     Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('occasion', 'party'))));
+              //   },
+              //   child: const AllItemsHomeWidget()),
+
+ 
+
               SizedBox(height: width * 0.02),
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: StyledHeading(
-                  'ALL ITEMS',
+                  'TO RENT',
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('occasion', 'party'))));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType','rental'))));
                 },
-                child: const AllItemsHomeWidget()),
-
-              SizedBox(height: width * 0.02),
+                child: const RentalHomeWidget()),
+             SizedBox(height: width * 0.02),
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: StyledHeading(
@@ -116,20 +130,7 @@ class _HomeState extends State<Home> {
                 },
                 child: const NewArrivalsCarousel()),
 
-              SizedBox(height: width * 0.03),
-              const Padding(
-                padding: EdgeInsets.only(left: 12.0),
-                child: StyledHeading(
-                  'TO RENT',
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (const ItemResults('bookingType','rental'))));
-                },
-                child: const RentalHomeWidget()),
-
-              SizedBox(height: width * 0.02),
+              SizedBox(height: width * 0.05),
               const Padding(
                 padding: EdgeInsets.only(left: 12.0),
                 child: StyledHeading(
