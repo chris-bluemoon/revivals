@@ -37,7 +37,7 @@ class _SignIn extends State<SignIn> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-    void handleNewLogIn(String email) {
+    void handleFoundLogIn(String email) {
       Provider.of<ItemStore>(context, listen: false).setLoggedIn(true);
       List<Renter> renters =
           Provider.of<ItemStore>(context, listen: false).renters;
@@ -45,40 +45,42 @@ class _SignIn extends State<SignIn> {
       for (Renter r in renters) {
         if (r.email == email) {
           found = true;
+          log('Found email in renters: $email');
           Provider.of<ItemStore>(context, listen: false).setCurrentUser();
         } 
       }
       if (found == false) {
-        String jointUuid = uuid.v4();
-        log('NAME: ');
-        Provider.of<ItemStore>(context, listen: false).addRenter(Renter(
-          id: jointUuid,
-          email: email,
-          name: 'CHRIS',
-          size: 0,
-          address: '',
-          countryCode: '+66',
-          phoneNum: '',
-          favourites: [''],
-          fittings: [],
-          settings: ['BANGKOK', 'CM', 'CM', 'KG'],
-        ));
-        Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
-          id: jointUuid,
-          email: email,
-          name: 'CHRIS',
-          size: 0,
-          address: '',
-          countryCode: '+66',
-          phoneNum: '',
-          favourites: [''],
-          fittings: [],
-          settings: ['BANGKOK', 'CM', 'CM', 'KG'],
-        ));
+        log('User found in Google but not in database! Fix!');
       }
-          log('Populating favs');
+      // if (found == false) {
+      //   log('Did not find an existing user, adding');
+      //   String jointUuid = uuid.v4();
+      //   Provider.of<ItemStore>(context, listen: false).addRenter(Renter(
+      //     id: jointUuid,
+      //     email: email,
+      //     name: 'CHRIS',
+      //     size: 0,
+      //     address: '',
+      //     countryCode: '+66',
+      //     phoneNum: '',
+      //     favourites: [''],
+      //     fittings: [],
+      //     settings: ['BANGKOK', 'CM', 'CM', 'KG'],
+      //   ));
+      //   Provider.of<ItemStore>(context, listen: false).assignUser(Renter(
+      //     id: jointUuid,
+      //     email: email,
+      //     name: 'CHRIS',
+      //     size: 0,
+      //     address: '',
+      //     countryCode: '+66',
+      //     phoneNum: '',
+      //     favourites: [''],
+      //     fittings: [],
+      //     settings: ['BANGKOK', 'CM', 'CM', 'KG'],
+      //   ));
+      // }
     Provider.of<ItemStore>(context, listen: false).populateFavourites();
-    log('Populating fits');
     Provider.of<ItemStore>(context, listen: false).populateFittings();
     }
 
@@ -211,6 +213,7 @@ class _SignIn extends State<SignIn> {
                     setState(() => loading = true);
                     dynamic result =
                         await _auth.signInWithEmailAndPassword(email, password);
+                    log('RESULT: ${result.toString()}');
                     if (result == null) {
                       setState(() => loading = false);
                       showDialog(
@@ -262,8 +265,7 @@ class _SignIn extends State<SignIn> {
                                 _formKey.currentState!.reset();
                               });
                     } else {
-                      handleNewLogIn(email);
-                      log('Popping to first');
+                      handleFoundLogIn(email);
                       Navigator.of(context).popUntil((route) => route.isFirst);
                     }
                   }
