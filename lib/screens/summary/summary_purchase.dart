@@ -50,6 +50,7 @@ class _SummaryPurchaseState extends State<SummaryPurchase> {
         id: uuid.v4(),
         renterId: renterId,
         itemId: itemId,
+        renteeId: '0',
         transactionType: 'purchase',
         startDate: startDate,
         endDate: endDate,

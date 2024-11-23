@@ -5,6 +5,7 @@ class ItemRenter {
   ItemRenter({required this.id, 
           required this.renterId, 
           required this.itemId,
+          required this.renteeId,
           required this.transactionType, 
           required this.startDate, 
           required this.endDate, 
@@ -15,6 +16,7 @@ class ItemRenter {
     String id;
     String renterId;
     String itemId;
+    String renteeId;
     String transactionType;
     String startDate;
     String endDate;
@@ -26,6 +28,7 @@ class ItemRenter {
     return {
       'renterId': renterId,
       'itemId': itemId,
+      'renteeId': renteeId,
       'transactionType': transactionType,
       'startDate': startDate,
       'endDate': endDate,
@@ -48,6 +51,7 @@ class ItemRenter {
       id: snapshot.id,
       renterId: data['renterId'],
       itemId: data['itemId'],
+      renteeId: data['renteeId'],
       transactionType: data['transactionType'],
       startDate: data['startDate'],
       endDate: data['endDate'],

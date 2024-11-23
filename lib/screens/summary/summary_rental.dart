@@ -46,6 +46,7 @@ class _SummaryRentalState extends State<SummaryRental> {
         id: uuid.v4(),
         renterId: renterId,
         itemId: itemId,
+        renteeId: '0',
         transactionType: 'rental',
         startDate: startDate,
         endDate: endDate,
