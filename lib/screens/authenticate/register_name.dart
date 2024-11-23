@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/authenticate/register_password.dart';
-import 'package:unearthed/services/auth.dart';
-import 'package:unearthed/shared/constants.dart';
-import 'package:unearthed/shared/loading.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/screens/authenticate/register_password.dart';
+import 'package:revivals/services/auth.dart';
+import 'package:revivals/shared/constants.dart';
+import 'package:revivals/shared/loading.dart';
+import 'package:revivals/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();

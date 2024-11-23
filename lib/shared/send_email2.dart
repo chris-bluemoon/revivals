@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:unearthed/shared/booked_html_template.dart';
-import 'package:unearthed/shared/fitting_session_html_template.dart';
-import 'package:unearthed/shared/secure_repo.dart';
+import 'package:revivals/shared/booked_html_template.dart';
+import 'package:revivals/shared/fitting_session_html_template.dart';
+import 'package:revivals/shared/secure_repo.dart';
 
 class EmailComposer2 {
   EmailComposer2(

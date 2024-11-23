@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
-import 'package:unearthed/models/item.dart';
+import 'package:revivals/models/item.dart';
 
 class ItemWidget extends StatefulWidget {
   const ItemWidget({super.key, required this.item, required this.itemNumber});

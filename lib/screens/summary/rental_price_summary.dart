@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class RentalPriceSummary extends StatelessWidget {
   const RentalPriceSummary(this.price, this.noOfDays, this.deliveryPrice, this.symbol, {super.key});

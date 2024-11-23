@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:unearthed/shared/secure_repo.dart';
+import 'package:revivals/shared/secure_repo.dart';
 
 class EmailComposer extends StatefulWidget {
   EmailComposer({super.key});

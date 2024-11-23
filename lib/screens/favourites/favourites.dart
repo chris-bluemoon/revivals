@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/screens/to_rent/to_rent.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/shared/item_card.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/screens/to_rent/to_rent.dart';
+import 'package:revivals/services/class_store.dart';
+import 'package:revivals/shared/item_card.dart';
+import 'package:revivals/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();

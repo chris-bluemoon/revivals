@@ -2,14 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/globals.dart' as globals;
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/screens/summary/delivery_radio_widget.dart';
-import 'package:unearthed/screens/summary/purchase_price_summary.dart';
-import 'package:unearthed/screens/summary/summary_image_widget.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/globals.dart' as globals;
+import 'package:revivals/models/item.dart';
+import 'package:revivals/models/item_renter.dart';
+import 'package:revivals/screens/summary/delivery_radio_widget.dart';
+import 'package:revivals/screens/summary/purchase_price_summary.dart';
+import 'package:revivals/screens/summary/summary_image_widget.dart';
+import 'package:revivals/services/class_store.dart';
+import 'package:revivals/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();

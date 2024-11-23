@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:unearthed/models/renter.dart';
+import 'package:revivals/models/renter.dart';
 
 
 class AuthService {

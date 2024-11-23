@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/screens/authenticate/authenticate.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/models/renter.dart';
+import 'package:revivals/screens/authenticate/authenticate.dart';
+import 'package:revivals/services/class_store.dart';
+import 'package:revivals/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 // Join millions of Happy Users

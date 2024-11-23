@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:unearthed/globals.dart' as globals;
-import 'package:unearthed/models/fitting_renter.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/globals.dart' as globals;
+import 'package:revivals/models/fitting_renter.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 
 class MyHistoryFittingsImageWidget extends StatelessWidget {

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>962384191254-hm413sgcmr8e79l0cfhl6eq34sp7n900.apps.googleusercontent.com</string>
+	<string>962384191254-plkmc7o1cq5ij3m9s890ig0g0bnar53g.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.962384191254-hm413sgcmr8e79l0cfhl6eq34sp7n900</string>
+	<string>com.googleusercontent.apps.962384191254-plkmc7o1cq5ij3m9s890ig0g0bnar53g</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCO7Gx3VEkWh-ZuJR_EYPgjPIPmxutOSGI</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>sg.bluemoon.revivals</string>
+	<string>com.example.unearthed</string>
 	<key>PROJECT_ID</key>
 	<string>revivals-7697a</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:962384191254:ios:9b44a79920adfe6167ba37</string>
+	<string>1:962384191254:ios:e8dfc22ecb3ef2e067ba37</string>
 </dict>
 </plist>

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/screens/browse/browse.dart';
-import 'package:unearthed/screens/favourites/favourites.dart';
-import 'package:unearthed/screens/home/home.dart';
-import 'package:unearthed/screens/profile/profile.dart';
-import 'package:unearthed/services/class_store.dart';
+import 'package:revivals/screens/browse/browse.dart';
+import 'package:revivals/screens/favourites/favourites.dart';
+import 'package:revivals/screens/home/home.dart';
+import 'package:revivals/screens/profile/profile.dart';
+import 'package:revivals/services/class_store.dart';
 
 double? screenWidth;
 double? screenHeight;

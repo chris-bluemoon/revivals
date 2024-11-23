@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/help_centre/faq_accordion.dart';
-import 'package:unearthed/screens/profile/profile_landing.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/screens/help_centre/faq_accordion.dart';
+import 'package:revivals/screens/profile/profile_landing.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class FAQs extends StatelessWidget {
   const FAQs({super.key});

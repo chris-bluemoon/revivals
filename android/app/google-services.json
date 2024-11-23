@@ -1,64 +1,112 @@
 {
   "project_info": {
-    "project_number": "532886439020",
-    "project_id": "unearthed2-5343a",
-    "storage_bucket": "unearthed2-5343a.appspot.com"
+    "project_number": "962384191254",
+    "project_id": "revivals-7697a",
+    "storage_bucket": "revivals-7697a.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:532886439020:android:c57833641d5fefcec58449",
+        "mobilesdk_app_id": "1:962384191254:android:595a485be2d271a167ba37",
         "android_client_info": {
-          "package_name": "sg.bluemoon.unearthed"
+          "package_name": "revivals.bluemoon.sg"
         }
       },
       "oauth_client": [
         {
-          "client_id": "532886439020-6b830pq75fngj19rtk0k2jsae9qvqdkm.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "sg.bluemoon.unearthed",
-            "certificate_hash": "32862912dc818dedf47401d4c47f7f4b5542ebc2"
-          }
-        },
-        {
-          "client_id": "532886439020-au4f5r1p71ve1cf99fh2ph2mkahvdc57.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "sg.bluemoon.unearthed",
-            "certificate_hash": "ee789ff5fd22c10ced39e0e498c4558265853510"
-          }
-        },
-        {
-          "client_id": "532886439020-d16voulava7s349mlg4rohrmg568qu9b.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "sg.bluemoon.unearthed",
-            "certificate_hash": "c531ecff87eb1171222bba6f76097e50bbd89f35"
-          }
-        },
-        {
-          "client_id": "532886439020-97ienokf40tips820glak1gg5prefvrv.apps.googleusercontent.com",
+          "client_id": "962384191254-vkmcfu7t0v6hvcm8ftkm65nftr1fjtl0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAUL3f4EWrs0PeFt6EAB7TuuBYqJ9GDymI"
+          "current_key": "AIzaSyAmH_YuLFWduaMJ8e0Ggbr1RmnynGbN2mo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "532886439020-97ienokf40tips820glak1gg5prefvrv.apps.googleusercontent.com",
+              "client_id": "962384191254-vkmcfu7t0v6hvcm8ftkm65nftr1fjtl0.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "532886439020-52h926mukuq19kdo645c6qgn4vfdt14k.apps.googleusercontent.com",
+              "client_id": "962384191254-hm413sgcmr8e79l0cfhl6eq34sp7n900.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "sg.bluemoon.unearthed"
+                "bundle_id": "sg.bluemoon.revivals"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962384191254:android:a1eecb9356f5740b67ba37",
+        "android_client_info": {
+          "package_name": "sg.bluemoon.revivals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962384191254-vkmcfu7t0v6hvcm8ftkm65nftr1fjtl0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmH_YuLFWduaMJ8e0Ggbr1RmnynGbN2mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962384191254-vkmcfu7t0v6hvcm8ftkm65nftr1fjtl0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "962384191254-hm413sgcmr8e79l0cfhl6eq34sp7n900.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sg.bluemoon.revivals"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962384191254:android:bde8a80173e0038a67ba37",
+        "android_client_info": {
+          "package_name": "sg.bluemoon.unearthed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962384191254-vkmcfu7t0v6hvcm8ftkm65nftr1fjtl0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmH_YuLFWduaMJ8e0Ggbr1RmnynGbN2mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962384191254-vkmcfu7t0v6hvcm8ftkm65nftr1fjtl0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "962384191254-hm413sgcmr8e79l0cfhl6eq34sp7n900.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sg.bluemoon.revivals"
               }
             }
           ]

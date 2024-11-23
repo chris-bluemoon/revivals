@@ -1,4 +1,4 @@
-package sg.bluemoon.unearthed
+package sg.bluemoon.revivals
 
 import io.flutter.embedding.android.FlutterActivity
 

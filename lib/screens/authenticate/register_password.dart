@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:password_strength_checker/password_strength_checker.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/services/auth.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/shared/loading.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/models/renter.dart';
+import 'package:revivals/services/auth.dart';
+import 'package:revivals/services/class_store.dart';
+import 'package:revivals/shared/loading.dart';
+import 'package:revivals/shared/styled_text.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();

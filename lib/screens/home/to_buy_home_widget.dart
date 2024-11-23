@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/shared/item_results.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/shared/item_results.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class ToBuyHomeWidget extends StatelessWidget {
   const ToBuyHomeWidget({super.key});

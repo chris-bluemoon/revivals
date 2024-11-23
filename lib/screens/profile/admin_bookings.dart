@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/profile/my_purchases_admin_bookings_list.dart';
-import 'package:unearthed/screens/profile/my_rentals_admin_bookings_list.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/screens/profile/my_purchases_admin_bookings_list.dart';
+import 'package:revivals/screens/profile/my_rentals_admin_bookings_list.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class AdminBookings extends StatefulWidget {
   const AdminBookings({super.key});

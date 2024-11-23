@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:unearthed/models/fitting_renter.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
+import 'package:revivals/models/fitting_renter.dart';
+import 'package:revivals/models/item.dart';
+import 'package:revivals/models/item_renter.dart';
+import 'package:revivals/models/renter.dart';
 
 class FirestoreService {
 

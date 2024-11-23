@@ -4,15 +4,15 @@ import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/fitting_renter.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/screens/fitting/fitting_item_image.dart';
-import 'package:unearthed/screens/fitting/fitting_summary.dart';
-import 'package:unearthed/screens/profile/my_fittings.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/shared/send_email2.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/models/fitting_renter.dart';
+import 'package:revivals/models/item.dart';
+import 'package:revivals/models/item_renter.dart';
+import 'package:revivals/screens/fitting/fitting_item_image.dart';
+import 'package:revivals/screens/fitting/fitting_summary.dart';
+import 'package:revivals/screens/profile/my_fittings.dart';
+import 'package:revivals/services/class_store.dart';
+import 'package:revivals/shared/send_email2.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class Fitting extends StatefulWidget {
   const Fitting({super.key});

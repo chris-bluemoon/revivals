@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/shared/line.dart';
+import 'package:revivals/shared/line.dart';
 
 
 class SendLine extends StatelessWidget {

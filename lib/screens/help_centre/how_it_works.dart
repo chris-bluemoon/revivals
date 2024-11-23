@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class HowItWorks extends StatelessWidget {
   const HowItWorks({super.key});

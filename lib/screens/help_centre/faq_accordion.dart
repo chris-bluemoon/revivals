@@ -1,7 +1,7 @@
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 
 

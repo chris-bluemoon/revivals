@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/globals.dart' as globals;
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/services/class_store.dart';
-import 'package:unearthed/shared/get_country_price.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/globals.dart' as globals;
+import 'package:revivals/models/item.dart';
+import 'package:revivals/models/renter.dart';
+import 'package:revivals/services/class_store.dart';
+import 'package:revivals/shared/get_country_price.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 // ignore: must_be_immutable
 class DesignerItemCard extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/globals.dart' as globals;
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/globals.dart' as globals;
+import 'package:revivals/shared/styled_text.dart';
 
 class PurchasePriceSummary extends StatelessWidget {
   const PurchasePriceSummary(this.price, this.deliveryPrice, {super.key});

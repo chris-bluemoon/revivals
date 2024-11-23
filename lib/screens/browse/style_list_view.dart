@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/browse/style_items.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/screens/browse/style_items.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class StyleListView extends StatelessWidget {
   const StyleListView({super.key});

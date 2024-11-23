@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/models/item.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class SummaryImageWidget extends StatelessWidget {
   SummaryImageWidget(this.item, {super.key});

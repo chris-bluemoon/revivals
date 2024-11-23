@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/profile/my_purchases_list.dart';
-import 'package:unearthed/screens/profile/my_rentals_list.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/screens/profile/my_purchases_list.dart';
+import 'package:revivals/screens/profile/my_rentals_list.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class MyTransactions extends StatelessWidget {
   const MyTransactions({super.key});

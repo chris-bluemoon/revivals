@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/shared/send_sms.dart';
+import 'package:revivals/shared/send_sms.dart';
 
 class Sms extends StatelessWidget {
   const Sms({super.key});

@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/models/fitting_renter.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/models/renter.dart';
-import 'package:unearthed/services/firestore_service.dart';
-import 'package:unearthed/shared/secure_repo.dart';
+import 'package:revivals/models/fitting_renter.dart';
+import 'package:revivals/models/item.dart';
+import 'package:revivals/models/item_renter.dart';
+import 'package:revivals/models/renter.dart';
+import 'package:revivals/services/firestore_service.dart';
+import 'package:revivals/shared/secure_repo.dart';
 
 class ItemStore extends ChangeNotifier {
 

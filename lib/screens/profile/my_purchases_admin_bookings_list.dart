@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/models/item_renter.dart';
-import 'package:unearthed/screens/profile/my_transactions_admin_image_widget.dart';
-import 'package:unearthed/services/class_store.dart';
+import 'package:revivals/models/item.dart';
+import 'package:revivals/models/item_renter.dart';
+import 'package:revivals/screens/profile/my_transactions_admin_image_widget.dart';
+import 'package:revivals/services/class_store.dart';
 
 
 class MyPurchasesAdminBookingsList extends StatefulWidget {

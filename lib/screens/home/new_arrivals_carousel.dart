@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/shared/item_results.dart';
+import 'package:revivals/shared/item_results.dart';
 
 class NewArrivalsCarousel extends StatefulWidget {
   const NewArrivalsCarousel({super.key});

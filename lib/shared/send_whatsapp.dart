@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:unearthed/shared/whatsapp.dart';
+import 'package:revivals/shared/whatsapp.dart';
 
 
 class SendWhatsapp extends StatelessWidget {

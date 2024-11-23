@@ -2,8 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:unearthed/models/item.dart';
-import 'package:unearthed/services/class_store.dart';
+import 'package:revivals/models/item.dart';
+import 'package:revivals/services/class_store.dart';
 
 class ConfirmRentWidget extends StatefulWidget {
   const ConfirmRentWidget(this.item, {super.key});

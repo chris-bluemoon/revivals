@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -50,22 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAUL3f4EWrs0PeFt6EAB7TuuBYqJ9GDymI',
-    appId: '1:532886439020:android:c57833641d5fefcec58449',
-    messagingSenderId: '532886439020',
-    projectId: 'unearthed2-5343a',
-    storageBucket: 'unearthed2-5343a.appspot.com',
+    apiKey: 'AIzaSyAmH_YuLFWduaMJ8e0Ggbr1RmnynGbN2mo',
+    appId: '1:962384191254:android:a1eecb9356f5740b67ba37',
+    messagingSenderId: '962384191254',
+    projectId: 'revivals-7697a',
+    storageBucket: 'revivals-7697a.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCo_erOILlJmrIfAUoipR1VoYSLyxukE8k',
-    appId: '1:532886439020:ios:faf1483c71519899c58449',
-    messagingSenderId: '532886439020',
-    projectId: 'unearthed2-5343a',
-    storageBucket: 'unearthed2-5343a.appspot.com',
-    androidClientId: '532886439020-6b830pq75fngj19rtk0k2jsae9qvqdkm.apps.googleusercontent.com',
-    iosClientId: '532886439020-52h926mukuq19kdo645c6qgn4vfdt14k.apps.googleusercontent.com',
-    iosBundleId: 'sg.bluemoon.unearthed',
+    apiKey: 'AIzaSyCO7Gx3VEkWh-ZuJR_EYPgjPIPmxutOSGI',
+    appId: '1:962384191254:ios:9b44a79920adfe6167ba37',
+    messagingSenderId: '962384191254',
+    projectId: 'revivals-7697a',
+    storageBucket: 'revivals-7697a.firebasestorage.app',
+    iosClientId: '962384191254-hm413sgcmr8e79l0cfhl6eq34sp7n900.apps.googleusercontent.com',
+    iosBundleId: 'sg.bluemoon.revivals',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDvxh6PnMiP6owgZDRr_6aIvtx8E7_Gxjs',
+    appId: '1:962384191254:web:0ae28600c4ef2c7f67ba37',
+    messagingSenderId: '962384191254',
+    projectId: 'revivals-7697a',
+    authDomain: 'revivals-7697a.firebaseapp.com',
+    storageBucket: 'revivals-7697a.firebasestorage.app',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCO7Gx3VEkWh-ZuJR_EYPgjPIPmxutOSGI',
+    appId: '1:962384191254:ios:e8dfc22ecb3ef2e067ba37',
+    messagingSenderId: '962384191254',
+    projectId: 'revivals-7697a',
+    storageBucket: 'revivals-7697a.firebasestorage.app',
+    iosClientId: '962384191254-plkmc7o1cq5ij3m9s890ig0g0bnar53g.apps.googleusercontent.com',
+    iosBundleId: 'com.example.unearthed',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDvxh6PnMiP6owgZDRr_6aIvtx8E7_Gxjs',
+    appId: '1:962384191254:web:6437b8f1a4a82e2067ba37',
+    messagingSenderId: '962384191254',
+    projectId: 'revivals-7697a',
+    authDomain: 'revivals-7697a.firebaseapp.com',
+    storageBucket: 'revivals-7697a.firebasestorage.app',
   );
 
 }

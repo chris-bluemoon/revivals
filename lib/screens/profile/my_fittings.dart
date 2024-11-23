@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:unearthed/screens/profile/my_history_fittings_list.dart';
-import 'package:unearthed/screens/profile/my_upcoming_fittings_list.dart';
-import 'package:unearthed/shared/styled_text.dart';
+import 'package:revivals/screens/profile/my_history_fittings_list.dart';
+import 'package:revivals/screens/profile/my_upcoming_fittings_list.dart';
+import 'package:revivals/shared/styled_text.dart';
 
 class MyFittings extends StatelessWidget {
   const MyFittings(this.isFromABooking, {super.key});
